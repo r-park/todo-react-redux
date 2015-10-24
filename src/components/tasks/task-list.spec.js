@@ -1,4 +1,4 @@
-import { scryRenderedComponentsWithType }  from 'react-addons-test-utils';
+import { scryRenderedComponentsWithType } from 'react-addons-test-utils';
 import { createTestComponent } from 'test/utils';
 import { TaskList } from './task-list';
 import { TaskItem } from './task-item';

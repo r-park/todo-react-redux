@@ -5,15 +5,9 @@ import {
 } from 'react-addons-test-utils';
 
 
-export function createTestComponent(TargetComponent, props) {
-  class TestComponent extends Component {
-    render() {
-      return <TargetComponent {...props}/>;
-    }
-  }
-
+export function createTestComponent(TestComponent, props) {
   return findRenderedComponentWithType(
-    renderIntoDocument(<TestComponent/>),
-    TargetComponent
+    renderIntoDocument(<TestComponent {...props}/>),
+    TestComponent
   );
 }
