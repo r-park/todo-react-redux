@@ -1,3 +1,4 @@
+import assign from 'object-assign';
 import { SIGN_OUT_SUCCESS } from 'core/auth';
 
 import {
@@ -57,7 +58,7 @@ describe('Tasks reducer', () => {
 
   describe('UPDATE_TASK_SUCCESS', () => {
     it('should update task', () => {
-      let changedTask2 = Object.assign({}, task2, {title: 'changed'});
+      let changedTask2 = assign({}, task2, {title: 'changed'});
 
       let state = tasksReducer([task1, task2], {
         type: UPDATE_TASK_SUCCESS,

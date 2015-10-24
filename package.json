@@ -50,6 +50,7 @@
     "karma-sourcemap-loader": "~0.3.6",
     "karma-webpack": "~1.7.0",
     "minx": "~0.4.14",
+    "object-assign": "~4.0.1",
     "react-addons-test-utils": "~0.14.0",
     "react-transform-catch-errors": "~1.0.0",
     "react-transform-hmr": "~1.0.1",
