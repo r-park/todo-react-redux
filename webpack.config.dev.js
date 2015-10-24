@@ -44,6 +44,9 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],
@@ -52,17 +55,5 @@ module.exports = {
     extensions: ['', '.js'],
     modulesDirectories: ['node_modules'],
     root: path.resolve('./src')
-  },
-
-  stats: {
-    cached: true,
-    cachedAssets: true,
-    chunks: true,
-    chunkModules: false,
-    colors: true,
-    hash: false,
-    reasons: true,
-    timings: true,
-    version: false
   }
 };
