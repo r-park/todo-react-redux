@@ -1,0 +1,36 @@
+//===================================================================
+//  SIGN-IN
+//===================================================================
+
+.sign-in {
+  margin-top: 90px;
+  max-width: 300px;
+}
+
+.sign-in__heading {
+  margin-bottom: 36px;
+  font-size: 30px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.sign-in__button {
+  @include button-base;
+  margin-bottom: 10px;
+  outline: none;
+  border: 1px solid #555;
+  padding: 0;
+  width: 100%;
+  height: 48px;
+  font-family: inherit;
+  font-size: rem(18px);
+  line-height: 48px;
+  color: #999;
+  background: transparent;
+
+  &:hover {
+    border: 2px solid #aaa;
+    line-height: 46px;
+    //border-color: #aaa;
+  }
+}

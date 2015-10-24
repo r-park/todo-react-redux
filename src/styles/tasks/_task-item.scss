@@ -1,0 +1,152 @@
+//===================================================================
+//  TASK-ITEM
+//===================================================================
+
+.task-item {
+  display: flex;
+  outline: none;
+  border-bottom: 1px dotted #666;
+  height: 60px;
+  overflow: hidden;
+  color: #fff;
+  font-size: rem(18px);
+  font-weight: 300;
+
+  @include media-query(540) {
+    font-size: rem(24px);
+  }
+}
+
+.task-item--editing {
+  border-bottom: 1px dotted #ccc;
+}
+
+
+//=====================================
+//  CELLS
+//-------------------------------------
+.cell {
+  &:first-child,
+  &:last-child {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+  }
+
+  &:first-child {
+    padding-right: 20px;
+  }
+
+  &:nth-child(2) {
+    flex: 1;
+    padding-right: 30px;
+    overflow: hidden;
+  }
+}
+
+
+//=====================================
+//  ICON BUTTONS
+//-------------------------------------
+.task-item__button {
+  @include button-base;
+  margin-left: 5px;
+  outline: none;
+  border: 0;
+  border-radius: 100px;
+  padding: 3px 0 0 0;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  background: #2a2a2a;
+
+  &:first-child {
+    margin: 0;
+  }
+}
+
+.icon {
+  fill: #555;
+  transform: translate(0, 0);
+
+  .task-item__button:hover & {
+    fill: #999;
+  }
+}
+
+.icon--active {
+  &, .task-item__button:hover & {
+    fill: #85bf6b;
+  }
+}
+
+
+//=====================================
+//  TITLE : STATIC
+//-------------------------------------
+@keyframes fade-title {
+  from { color: #fff; }
+  to { color: #666; }
+}
+
+@keyframes strike-title {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+.task-item__title {
+  display: inline-block;
+  position: relative;
+  max-width: 100%;
+  line-height: 60px;
+  outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &:after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-top: 2px solid #85bf6b;
+    width: 0;
+    height: 46%;
+    content: '';
+  }
+
+  .task-item--completed & {
+    color: #666;
+  }
+
+  .task-item--completed &:after {
+    width: 100%;
+  }
+
+  .task-item--completed.task-item--status-updated & {
+    animation: fade-title 120ms ease-in-out;
+  }
+
+  .task-item--completed.task-item--status-updated &:after {
+    animation: strike-title 180ms ease-in-out;
+  }
+}
+
+
+//=====================================
+//  TITLE : INPUT
+//-------------------------------------
+.task-item__input {
+  outline: none;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  height: 60px;
+  color: inherit;
+  font: inherit;
+  background: transparent;
+
+  // remove `x`
+  &::-ms-clear {
+    display: none;
+  }
+}

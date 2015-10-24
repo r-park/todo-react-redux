@@ -1,0 +1,44 @@
+//===================================================================
+//  HEADER
+//===================================================================
+
+.header {
+  padding: 10px 0;
+  height: 60px;
+  overflow: hidden;
+  line-height: 40px;
+}
+
+
+.header__title {
+  @include fa-icon(circle-o);
+  float: left;
+  font-size: rem(14px);
+  font-weight: 400;
+  text-rendering: auto;
+  transform: translate(0,0);
+
+  &:before {
+    padding-right: 5px;
+    color: #fff;
+    font-family: 'FontAwesome';
+    line-height: 20px;
+  }
+}
+
+
+.header__link {
+  @include fa-icon(github);
+  display: block;
+  float: right;
+  color: inherit;
+  font-size: rem(24px);
+  text-decoration: none;
+  text-rendering: auto;
+  transform: translate(0,0);
+
+  &:before {
+    font-family: 'FontAwesome';
+    line-height: 24px;
+  }
+}

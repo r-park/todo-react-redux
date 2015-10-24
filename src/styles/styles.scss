@@ -1,0 +1,29 @@
+@import
+"settings";
+
+@import
+"../../node_modules/minx/src/settings",
+"../../node_modules/minx/src/functions",
+"../../node_modules/minx/src/mixins",
+"../../node_modules/minx/src/reset",
+"../../node_modules/minx/src/elements";
+
+@import
+"grid",
+"app/footer",
+"app/header",
+"app/main",
+"sign-in/sign-in",
+"tasks/task-filters",
+"tasks/task-form",
+"tasks/task-item",
+"tasks/task-list";
+
+
+.hide {
+  display: none !important;
+}
+
+::selection {
+  background: rgba(200,200,255,.1);
+}
