@@ -1,3 +1,5 @@
+import assign from 'object-assign';
+
 import {
   SIGN_OUT_SUCCESS
 } from 'core/auth';
@@ -22,7 +24,7 @@ export function tasksReducer(state = [], action) {
     case UPDATE_TASK_SUCCESS:
       return state.map(task => {
         return task.key === action.task.key ?
-          Object.assign({}, task, action.task) : task;
+          assign({}, task, action.task) : task;
       });
 
     case SIGN_OUT_SUCCESS:
