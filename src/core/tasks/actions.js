@@ -11,6 +11,7 @@ import {
 export function createTask(title) {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
+
     firebase.child(`tasks/${auth.id}`)
       .push({completed: false, title}, error => {
         if (error) {

@@ -12,17 +12,19 @@ export const initialState = {
 
 
 export function authReducer(state = initialState, action) {
+  const { authData } = action;
+
   switch (action.type) {
     case INIT_AUTH:
       return {
-        authenticated: action.authData !== null,
-        id: action.authData ? action.authData.uid : null
+        authenticated: authData !== null,
+        id: authData ? authData.uid : null
       };
 
     case SIGN_IN_SUCCESS:
       return {
         authenticated: true,
-        id: action.authData.uid
+        id: authData.uid
       };
 
     case SIGN_OUT_SUCCESS:

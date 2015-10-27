@@ -55,5 +55,17 @@ module.exports = {
     extensions: ['', '.js'],
     modulesDirectories: ['node_modules'],
     root: path.resolve('./src')
+  },
+
+  stats: {
+    cached: true,
+    cachedAssets: true,
+    chunks: true,
+    chunkModules: false,
+    colors: true,
+    hash: false,
+    reasons: true,
+    timings: true,
+    version: false
   }
 };
