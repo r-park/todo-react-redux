@@ -44,6 +44,21 @@ export function deleteTask(task) {
 }
 
 
+export function undeleteTask() {
+  return (dispatch, getState) => {
+    const { auth, firebase, tasks } = getState();
+    const task = tasks.deleted;
+
+    firebase.child(`tasks/${auth.id}/${task.key}`)
+      .set({completed: task.completed, title: task.title}, error => {
+        if (error) {
+          console.error('ERROR @ undeleteTask :', error); // eslint-disable-line no-console
+        }
+      });
+  };
+}
+
+
 export function updateTask(task, changes) {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
