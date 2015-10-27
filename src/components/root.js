@@ -3,6 +3,9 @@ import { Provider } from 'react-redux';
 import { Route } from 'react-router';
 import { ReduxRouter } from 'redux-router';
 
+// Config
+import { SIGN_IN_PATH, TASKS_PATH } from 'config';
+
 // Components
 import { App } from './app/app';
 import { SignIn } from './sign-in/sign-in';
@@ -22,8 +25,8 @@ export class Root extends Component {
       <Provider store={store}>
         <ReduxRouter>
           <Route path="/" component={App} onEnter={onEnter}>
-            <Route path="sign-in" component={SignIn}/>
-            <Route path="tasks" component={Tasks}/>
+            <Route path={SIGN_IN_PATH} component={SignIn}/>
+            <Route path={TASKS_PATH} component={Tasks}/>
           </Route>
         </ReduxRouter>
       </Provider>

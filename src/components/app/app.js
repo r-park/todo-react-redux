@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { routePaths } from 'config';
+import { POST_SIGN_IN_PATH, POST_SIGN_OUT_PATH } from 'config';
 import { authActions } from 'core/auth';
 
 
@@ -20,10 +20,10 @@ export class App extends Component {
     const { auth, history } = this.props;
 
     if (auth.authenticated && !nextProps.auth.authenticated) {
-      history.replaceState(null, routePaths.POST_SIGN_OUT);
+      history.replaceState(null, POST_SIGN_OUT_PATH);
     }
     else if (!auth.authenticated && nextProps.auth.authenticated) {
-      history.replaceState(null, routePaths.POST_SIGN_IN);
+      history.replaceState(null, POST_SIGN_IN_PATH);
     }
   }
 

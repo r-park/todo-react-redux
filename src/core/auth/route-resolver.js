@@ -1,4 +1,7 @@
-import { routePaths } from 'config';
+import {
+  POST_SIGN_IN_PATH,
+  SIGN_IN_PATH
+} from 'config';
 
 
 export function authRouteResolver(dispatch, getState) {
@@ -6,11 +9,11 @@ export function authRouteResolver(dispatch, getState) {
     const { auth } = getState();
     const { pathname } = nextState.location;
 
-    if (!auth.authenticated && pathname !== routePaths.SIGN_IN) {
-      replaceState(null, routePaths.SIGN_IN);
+    if (!auth.authenticated && pathname !== SIGN_IN_PATH) {
+      replaceState(null, SIGN_IN_PATH);
     }
-    else if (auth.authenticated && pathname !== routePaths.POST_SIGN_IN) {
-      replaceState(null, routePaths.POST_SIGN_IN);
+    else if (auth.authenticated && pathname !== POST_SIGN_IN_PATH) {
+      replaceState(null, POST_SIGN_IN_PATH);
     }
   };
 }
