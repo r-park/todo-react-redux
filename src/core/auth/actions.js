@@ -36,17 +36,17 @@ export function initAuth() {
 
 
 export function signInWithGithub() {
-  return dispatch => dispatch(authenticate('github'));
+  return authenticate('github');
 }
 
 
 export function signInWithGoogle() {
-  return dispatch => dispatch(authenticate('google'));
+  return authenticate('google');
 }
 
 
 export function signInWithTwitter() {
-  return dispatch => dispatch(authenticate('twitter'));
+  return authenticate('twitter');
 }
 
 
