@@ -27,15 +27,42 @@
 }
 
 
-.header__link {
-  @include fa-icon(github);
-  display: block;
+.header__links {
+  @include clearfix;
   float: right;
+  padding: 8px 0;
+  line-height: 24px;
+
+  li {
+    float: left;
+    list-style: none;
+
+    &:last-child {
+      margin-left: 12px;
+      padding-left: 12px;
+      border-left: 1px solid #333;
+    }
+
+    &:first-child {
+      border: none;
+    }
+  }
+}
+
+
+.header__link {
+  display: block;
   color: inherit;
-  font-size: rem(24px);
+  font-size: rem(14px);
   text-decoration: none;
   text-rendering: auto;
   transform: translate(0,0);
+}
+
+
+.header__link--github {
+  @include fa-icon(github);
+  font-size: rem(24px);
 
   &:before {
     font-family: 'FontAwesome';
