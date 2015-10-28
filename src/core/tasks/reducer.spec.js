@@ -7,7 +7,7 @@ import {
   UPDATE_TASK_SUCCESS
 } from './action-types';
 
-import { tasksReducer } from './reducer';
+import { initialState, tasksReducer } from './reducer';
 
 
 describe('Tasks reducer', () => {
@@ -20,61 +20,86 @@ describe('Tasks reducer', () => {
   });
 
 
+  function getInitialState() {
+    return assign({}, initialState);
+  }
+
+
   it('should return the initial state when action.type is not found', () => {
-    expect(tasksReducer(undefined, {})).toEqual([]);
+    expect(tasksReducer(undefined, {})).toEqual(getInitialState());
   });
 
 
   describe('CREATE_TASK_SUCCESS', () => {
-    it('should prepend new task', () => {
-      let state = tasksReducer([], {
-        type: CREATE_TASK_SUCCESS,
-        task: task1
-      });
+    it('should prepend new task to list', () => {
+      let state = getInitialState();
+      state.list = [ task1 ];
 
-      expect(state).toEqual([ task1 ]);
-
-      state = tasksReducer([ task1 ], {
+      let nextState = tasksReducer(state, {
         type: CREATE_TASK_SUCCESS,
         task: task2
       });
 
-      expect(state).toEqual([ task2, task1 ]);
+      expect(nextState).toEqual({
+        deleted: null,
+        list: [ task2, task1 ],
+        previous: []
+      });
     });
   });
 
 
   describe('DELETE_TASK_SUCCESS', () => {
-    it('should remove task', () => {
-      let state = tasksReducer([task1, task2], {
+    it('should remove task from list', () => {
+      let state = getInitialState();
+      state.list = [task1, task2];
+
+      let nextState = tasksReducer(state, {
         type: DELETE_TASK_SUCCESS,
         task: task2
       });
 
-      expect(state).toEqual([task1]);
+      expect(nextState).toEqual({
+        deleted: task2,
+        list: [task1],
+        previous: [task1, task2]
+      });
     });
   });
 
 
   describe('UPDATE_TASK_SUCCESS', () => {
     it('should update task', () => {
+      let state = getInitialState();
+      state.list = [task1, task2];
+
       let changedTask2 = assign({}, task2, {title: 'changed'});
 
-      let state = tasksReducer([task1, task2], {
+      let nextState = tasksReducer(state, {
         type: UPDATE_TASK_SUCCESS,
         task: changedTask2
       });
 
-      expect(state[1].title).toEqual(changedTask2.title);
+      expect(nextState).toEqual({
+        deleted: null,
+        list: [task1, changedTask2],
+        previous: []
+      });
     });
   });
 
 
   describe('SIGN_OUT_SUCCESS', () => {
     it('should reset state', () => {
-      expect(tasksReducer([{}], {
+      let state = {
+        deleted: true,
+        list: [{}],
+        previous: [{}, {}]
+      };
+
+      expect(tasksReducer(state, {
         type: SIGN_OUT_SUCCESS
-      })).toEqual([]);
+      })).toEqual(getInitialState());
     });
   });
 });
