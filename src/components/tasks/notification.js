@@ -6,8 +6,8 @@ export class Notification extends Component {
     action: PropTypes.func.isRequired,
     actionLabel: PropTypes.string.isRequired,
     dismiss: PropTypes.func.isRequired,
-    duration: PropTypes.number,
     display: PropTypes.bool.isRequired,
+    duration: PropTypes.number,
     message: PropTypes.string.isRequired
   };
 
