@@ -16,6 +16,11 @@ export class App extends Component {
     signOut: PropTypes.func.isRequired
   };
 
+  constructor(props, context) {
+    super(props, context);
+    this.signOut = this.signOut.bind(this);
+  }
+
   componentWillReceiveProps(nextProps) {
     const { auth, history } = this.props;
 
@@ -27,8 +32,13 @@ export class App extends Component {
     }
   }
 
+  signOut() {
+    this.props.signOut();
+    window.location.replace('/');
+  }
+
   render() {
-    const { auth, children, signOut } = this.props;
+    const { auth, children } = this.props;
 
     return (
       <div>
@@ -38,7 +48,7 @@ export class App extends Component {
               <h1 className="header__title">Todo React Redux</h1>
 
               <ul className="header__links">
-                {auth.authenticated ? <li><a className="header__link" onClick={signOut} href="javascript:">Sign out</a></li> : null}
+                {auth.authenticated ? <li><a className="header__link" onClick={this.signOut} href="javascript:">Sign out</a></li> : null}
                 <li><a className="header__link header__link--github" href="https://github.com/r-park/todo-react-redux"></a></li>
               </ul>
             </div>

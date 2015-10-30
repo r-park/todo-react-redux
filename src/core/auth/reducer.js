@@ -28,6 +28,7 @@ export function authReducer(state = initialState, action) {
       };
 
     case SIGN_OUT_SUCCESS:
+      console.log('SIGN_OUT_SUCCESS');
       return {
         authenticated: false,
         id: null
