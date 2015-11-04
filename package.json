@@ -1,6 +1,6 @@
 {
   "name": "todo-react-redux",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Todo app with React, Redux, and Firebase",
   "homepage": "https://github.com/r-park/todo-react-redux",
   "repository": "https://github.com/r-park/todo-react-redux.git",
