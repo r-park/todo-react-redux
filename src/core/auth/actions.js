@@ -16,7 +16,10 @@ function authenticate(provider) {
       else {
         dispatch({
           type: SIGN_IN_SUCCESS,
-          authData
+          payload: authData,
+          meta: {
+            timestamp: Date.now()
+          }
         });
       }
     });
@@ -29,7 +32,10 @@ export function initAuth() {
     const { firebase } = getState();
     dispatch({
       type: INIT_AUTH,
-      authData: firebase.getAuth()
+      payload: firebase.getAuth(),
+      meta: {
+        timestamp: Date.now()
+      }
     });
   };
 }
