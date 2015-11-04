@@ -22,17 +22,17 @@ import {
 
 describe('Auth actions', () => {
   describe('initAuth', () => {
-    it('should create INIT_AUTH when authenticted', (done) => {
+    it('should create INIT_AUTH when authenticated', (done) => {
       const authData = {uid: '123'};
       const firebase = new MockFirebase();
 
-      const expectedActions = [
-        {type: INIT_AUTH, authData}
-      ];
+      const expectedActions = [(action) => {
+        return action.type === INIT_AUTH &&
+          action.payload === authData &&
+          typeof action.meta.timestamp === 'number';
+      }];
 
-      const store = createMockStore({
-        firebase
-      }, expectedActions, [thunk], done);
+      const store = createMockStore({firebase}, expectedActions, [thunk], done);
 
       // call with params to change auth state to `authenticated`
       firebase.changeAuthState(authData);
@@ -42,16 +42,15 @@ describe('Auth actions', () => {
     });
 
     it('should create INIT_AUTH when not authenticted', (done) => {
-      const authData = null;
       const firebase = new MockFirebase();
 
-      const expectedActions = [
-        {type: INIT_AUTH, authData}
-      ];
+      const expectedActions = [(action) => {
+        return action.type === INIT_AUTH &&
+          action.payload === null &&
+          typeof action.meta.timestamp === 'number';
+      }];
 
-      const store = createMockStore({
-        firebase
-      }, expectedActions, [thunk], done);
+      const store = createMockStore({firebase}, expectedActions, [thunk], done);
 
       store.dispatch(initAuth());
     });
@@ -72,13 +71,13 @@ describe('Auth actions', () => {
       const authData = {uid: '123'};
       const firebase = new MockFirebase();
 
-      const expectedActions = [
-        {type: SIGN_IN_SUCCESS, authData}
-      ];
+      const expectedActions = [(action) => {
+        return action.type === SIGN_IN_SUCCESS &&
+          action.payload.uid === authData.uid &&
+          typeof action.meta.timestamp === 'number';
+      }];
 
-      const store = createMockStore({
-        firebase
-      }, expectedActions, [thunk], done);
+      const store = createMockStore({firebase}, expectedActions, [thunk], done);
 
       // call with params to change auth state to `authenticated`
       firebase.changeAuthState(authData);
@@ -103,13 +102,13 @@ describe('Auth actions', () => {
       const authData = {uid: '123'};
       const firebase = new MockFirebase();
 
-      const expectedActions = [
-        {type: SIGN_IN_SUCCESS, authData}
-      ];
+      const expectedActions = [(action) => {
+        return action.type === SIGN_IN_SUCCESS &&
+          action.payload.uid === authData.uid &&
+          typeof action.meta.timestamp === 'number';
+      }];
 
-      const store = createMockStore({
-        firebase
-      }, expectedActions, [thunk], done);
+      const store = createMockStore({firebase}, expectedActions, [thunk], done);
 
       // call with params to change auth state to `authenticated`
       firebase.changeAuthState(authData);
@@ -134,13 +133,13 @@ describe('Auth actions', () => {
       const authData = {uid: '123'};
       const firebase = new MockFirebase();
 
-      const expectedActions = [
-        {type: SIGN_IN_SUCCESS, authData}
-      ];
+      const expectedActions = [(action) => {
+        return action.type === SIGN_IN_SUCCESS &&
+          action.payload.uid === authData.uid &&
+          typeof action.meta.timestamp === 'number';
+      }];
 
-      const store = createMockStore({
-        firebase
-      }, expectedActions, [thunk], done);
+      const store = createMockStore({firebase}, expectedActions, [thunk], done);
 
       // call with params to change auth state to `authenticated`
       firebase.changeAuthState(authData);
@@ -168,9 +167,7 @@ describe('Auth actions', () => {
         {type: SIGN_OUT_SUCCESS}
       ];
 
-      const store = createMockStore({
-        firebase
-      }, expectedActions, [thunk], done);
+      const store = createMockStore({firebase}, expectedActions, [thunk], done);
 
       store.dispatch(signOut());
       firebase.flush();
