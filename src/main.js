@@ -40,5 +40,5 @@ store.dispatch(authActions.initAuth());
 
 
 ReactDOM.render((
-  <Root onEnter={authRouteResolver(store.dispatch, store.getState)} store={store}/>
+  <Root onEnter={authRouteResolver(store.getState)} store={store}/>
 ), document.querySelector('.app-root'));
