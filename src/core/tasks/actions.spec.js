@@ -21,7 +21,7 @@ describe('Tasks actions', () => {
     it('should create CREATE_TASK_SUCCESS', (done) => {
       const expectedActions = [(action) => {
         return action.type === CREATE_TASK_SUCCESS &&
-               action.task.title === 'create task';
+               action.payload.title === 'create task';
       }];
 
       const firebase = new MockFirebase();
@@ -47,8 +47,8 @@ describe('Tasks actions', () => {
       const task = addDataToFirebase({title: 'delete task'}, firebase, `tasks/${auth.id}`);
 
       const expectedActions = [
-        {type: CREATE_TASK_SUCCESS, task: task},
-        {type: DELETE_TASK_SUCCESS, task: task}
+        {type: CREATE_TASK_SUCCESS, payload: task},
+        {type: DELETE_TASK_SUCCESS, payload: task}
       ];
 
       const store = createMockStore({
@@ -73,8 +73,8 @@ describe('Tasks actions', () => {
       const task = addDataToFirebase({title: 'update task'}, firebase, `tasks/${auth.id}`);
 
       const expectedActions = [
-        {type: CREATE_TASK_SUCCESS, task: task},
-        {type: UPDATE_TASK_SUCCESS, task: assign({}, task, changes)}
+        {type: CREATE_TASK_SUCCESS, payload: task},
+        {type: UPDATE_TASK_SUCCESS, payload: assign({}, task, changes)}
       ];
 
       const store = createMockStore({

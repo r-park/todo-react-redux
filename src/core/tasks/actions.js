@@ -18,7 +18,7 @@ export function createTask(title) {
           console.error('ERROR @ createTask :', error); // eslint-disable-line no-console
           dispatch({
             type: CREATE_TASK_ERROR,
-            error
+            payload: error
           });
         }
       });
@@ -36,7 +36,7 @@ export function deleteTask(task) {
           console.error('ERROR @ deleteTask :', error); // eslint-disable-line no-console
           dispatch({
             type: DELETE_TASK_ERROR,
-            error
+            payload: error
           });
         }
       });
@@ -69,7 +69,7 @@ export function updateTask(task, changes) {
           console.error('ERROR @ updateTask :', error); // eslint-disable-line no-console
           dispatch({
             type: UPDATE_TASK_ERROR,
-            error
+            payload: error
           });
         }
       });
@@ -82,31 +82,26 @@ export function registerListeners() {
     const { auth, firebase } = getState();
     const ref = firebase.child(`tasks/${auth.id}`);
 
-    ref.on('child_added', snapshot => {
-      const task = snapshot.val();
-      task.key = snapshot.key();
-      dispatch({
-        type: CREATE_TASK_SUCCESS,
-        task
-      });
-    });
+    ref.on('child_added', snapshot => dispatch({
+      type: CREATE_TASK_SUCCESS,
+      payload: recordFromSnapshot(snapshot)
+    }));
 
-    ref.on('child_changed', snapshot => {
-      const task = snapshot.val();
-      task.key = snapshot.key();
-      dispatch({
-        type: UPDATE_TASK_SUCCESS,
-        task
-      });
-    });
+    ref.on('child_changed', snapshot => dispatch({
+      type: UPDATE_TASK_SUCCESS,
+      payload: recordFromSnapshot(snapshot)
+    }));
 
-    ref.on('child_removed', snapshot => {
-      const task = snapshot.val();
-      task.key = snapshot.key();
-      dispatch({
-        type: DELETE_TASK_SUCCESS,
-        task
-      });
-    });
+    ref.on('child_removed', snapshot => dispatch({
+      type: DELETE_TASK_SUCCESS,
+      payload: recordFromSnapshot(snapshot)
+    }));
   };
+}
+
+
+function recordFromSnapshot(snapshot) {
+  let record = snapshot.val();
+  record.key = snapshot.key();
+  return record;
 }
