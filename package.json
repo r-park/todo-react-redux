@@ -17,25 +17,25 @@
     "react": "~0.14.2",
     "react-dom": "~0.14.2",
     "react-redux": "~4.0.0",
-    "react-router": "1.0.0-rc4",
+    "react-router": "1.0.0",
     "redux": "~3.0.4",
-    "redux-router": "1.0.0-beta3",
+    "redux-router": "1.0.0-beta4",
     "redux-thunk": "~1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "~6.1.0",
-    "babel-core": "~5.8.33",
-    "babel-eslint": "~4.1.4",
+    "babel-core": "~5.8.34",
+    "babel-eslint": "~4.1.5",
     "babel-loader": "~5.3.3",
     "babel-plugin-react-transform": "~1.1.1",
-    "browser-sync": "~2.9.12",
+    "browser-sync": "~2.10.0",
     "connect-history-api-fallback": "~1.1.0",
     "del": "~2.0.2",
     "eslint": "~1.9.0",
-    "eslint-plugin-react": "~3.7.1",
+    "eslint-plugin-react": "~3.8.0",
     "gulp": "gulpjs/gulp.git#4.0",
     "gulp-coveralls": "~0.1.4",
-    "gulp-eslint": "~1.0.0",
+    "gulp-eslint": "~1.1.0",
     "gulp-header": "~1.7.1",
     "gulp-inject": "~3.0.0",
     "gulp-postcss": "~6.0.1",
@@ -56,8 +56,8 @@
     "react-transform-catch-errors": "~1.0.0",
     "react-transform-hmr": "~1.0.1",
     "sinon": "~1.17.2",
-    "webpack": "~1.12.3",
+    "webpack": "~1.12.4",
     "webpack-dev-middleware": "~1.2.0",
-    "webpack-hot-middleware": "~2.4.1"
+    "webpack-hot-middleware": "~2.5.0"
   }
 }
