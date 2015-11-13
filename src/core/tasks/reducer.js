@@ -21,11 +21,11 @@ export function tasksReducer(state = initialState, action) {
     case CREATE_TASK_SUCCESS:
       let list;
 
-      if (state.deleted && state.deleted.key === action.task.key) {
+      if (state.deleted && state.deleted.key === action.payload.key) {
         list = [ ...state.previous ];
       }
       else {
-        list = [ action.task, ...state.list ];
+        list = [ action.payload, ...state.list ];
       }
 
       return {
@@ -36,9 +36,9 @@ export function tasksReducer(state = initialState, action) {
 
     case DELETE_TASK_SUCCESS:
       return {
-        deleted: action.task,
+        deleted: action.payload,
         list: state.list.filter(task => {
-          return task.key !== action.task.key;
+          return task.key !== action.payload.key;
         }),
         previous: [ ...state.list ]
       };
@@ -47,7 +47,7 @@ export function tasksReducer(state = initialState, action) {
       return {
         deleted: null,
         list: state.list.map(task => {
-          return task.key === action.task.key ? action.task : task;
+          return task.key === action.payload.key ? action.payload : task;
         }),
         previous: []
       };

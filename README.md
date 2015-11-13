@@ -13,13 +13,13 @@ A simple Todo app example with `undelete` capability — built with React, Redux
   - JSON Datastore
   - OAuth authentication with GitHub, Google, and Twitter
   - Hosting
-- Babel `~5.8.33`
+- Babel `~5.8.34`
   - Transpiles ES6
-  - Hot-reloading with `babel-plugin-react-transform`
 - BrowserSync
 - Gulp `4.0.0-alpha.1`
 - SASS
 - Webpack
+  - Hot-reloading with `react-transform-hmr` and `babel-plugin-react-transform`
 
 ## Installing dependencies
 ```bash

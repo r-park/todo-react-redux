@@ -37,7 +37,7 @@ describe('Tasks reducer', () => {
 
       let nextState = tasksReducer(state, {
         type: CREATE_TASK_SUCCESS,
-        task: task2
+        payload: task2
       });
 
       expect(nextState).toEqual({
@@ -56,7 +56,7 @@ describe('Tasks reducer', () => {
 
       let nextState = tasksReducer(state, {
         type: DELETE_TASK_SUCCESS,
-        task: task2
+        payload: task2
       });
 
       expect(nextState).toEqual({
@@ -77,7 +77,7 @@ describe('Tasks reducer', () => {
 
       let nextState = tasksReducer(state, {
         type: UPDATE_TASK_SUCCESS,
-        task: changedTask2
+        payload: changedTask2
       });
 
       expect(nextState).toEqual({
