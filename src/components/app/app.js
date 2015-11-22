@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { POST_SIGN_IN_PATH, POST_SIGN_OUT_PATH } from 'config';
-import { authActions } from 'core/auth';
+import { authActions } from 'modules/auth';
 
 
 @connect(state => ({

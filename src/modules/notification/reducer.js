@@ -1,6 +1,6 @@
 import {
   DELETE_TASK_SUCCESS
-} from 'core/tasks';
+} from 'modules/tasks';
 
 import {
   DISMISS_NOTIFICATION

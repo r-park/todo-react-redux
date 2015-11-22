@@ -2,9 +2,9 @@ import assign from 'object-assign';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-// Core
-import { notificationActions } from 'core/notification';
-import { tasksActions } from 'core/tasks';
+// Modules
+import { notificationActions } from 'modules/notification';
+import { tasksActions } from 'modules/tasks';
 
 // Components
 import { Notification } from './notification';

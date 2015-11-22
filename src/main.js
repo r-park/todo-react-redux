@@ -9,11 +9,11 @@ import thunk from 'redux-thunk';
 // Config
 import { FIREBASE_URL } from 'config';
 
-// Core
-import { authActions, authReducer, authRouteResolver } from 'core/auth';
-import { firebaseReducer } from 'core/firebase';
-import { notificationReducer } from 'core/notification';
-import { tasksReducer } from 'core/tasks';
+// Modules
+import { authActions, authReducer, authRouteResolver } from 'modules/auth';
+import { firebaseReducer } from 'modules/firebase';
+import { notificationReducer } from 'modules/notification';
+import { tasksReducer } from 'modules/tasks';
 
 // Components
 import { Root } from 'components/root';
