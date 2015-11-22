@@ -3,7 +3,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import { reduxReactRouter, routerStateReducer } from 'redux-router';
+import { routeReducer, syncReduxAndRouter } from 'redux-simple-router';
 import thunk from 'redux-thunk';
 
 // Config
@@ -19,18 +19,20 @@ import { tasksReducer } from 'modules/tasks';
 import { Root } from 'components/root';
 
 
+const history = createBrowserHistory();
+
+
 const reducer = combineReducers({
   auth: authReducer,
   firebase: firebaseReducer,
   notification: notificationReducer,
-  router: routerStateReducer,
+  routing: routeReducer,
   tasks: tasksReducer
 });
 
 
 const store = compose(
-  applyMiddleware(thunk),
-  reduxReactRouter({createHistory: createBrowserHistory})
+  applyMiddleware(thunk)
 )(createStore)(reducer, {
   firebase: new Firebase(FIREBASE_URL)
 });
@@ -38,7 +40,9 @@ const store = compose(
 
 store.dispatch(authActions.initAuth());
 
+syncReduxAndRouter(history, store);
+
 
 ReactDOM.render((
-  <Root onEnter={authRouteResolver(store.getState)} store={store}/>
+  <Root history={history} onEnter={authRouteResolver(store.getState)} store={store}/>
 ), document.querySelector('.app-root'));

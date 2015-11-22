@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Provider } from 'react-redux';
-import { Route } from 'react-router';
-import { ReduxRouter } from 'redux-router';
+import { Route, Router } from 'react-router';
 
 // Config
 import { SIGN_IN_PATH, TASKS_PATH } from 'config';
@@ -19,16 +18,16 @@ export class Root extends Component {
   };
 
   render() {
-    const { onEnter, store } = this.props;
+    const { history, onEnter, store } = this.props;
 
     return (
       <Provider store={store}>
-        <ReduxRouter>
-          <Route path="/" component={App} onEnter={onEnter}>
-            <Route path={SIGN_IN_PATH} component={SignIn}/>
-            <Route path={TASKS_PATH} component={Tasks}/>
+        <Router history={history}>
+          <Route component={App} onEnter={onEnter} path="/">
+            <Route component={SignIn} path={SIGN_IN_PATH}/>
+            <Route component={Tasks} path={TASKS_PATH}/>
           </Route>
-        </ReduxRouter>
+        </Router>
       </Provider>
     );
   }
