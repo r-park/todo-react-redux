@@ -1,44 +1,45 @@
+import 'styles/styles.scss';
+
 import Firebase from 'firebase';
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import { reduxReactRouter, routerStateReducer } from 'redux-router';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { syncReduxAndRouter } from 'redux-simple-router';
 import thunk from 'redux-thunk';
 
 // Config
 import { FIREBASE_URL } from 'config';
 
-// Core
-import { authActions, authReducer, authRouteResolver } from 'core/auth';
-import { firebaseReducer } from 'core/firebase';
-import { notificationReducer } from 'core/notification';
-import { tasksReducer } from 'core/tasks';
+// Modules
+import { authActions, authRouteResolver } from 'modules/auth';
+import { reducer } from 'modules/reducers';
 
 // Components
 import { Root } from 'components/root';
 
 
-const reducer = combineReducers({
-  auth: authReducer,
-  firebase: firebaseReducer,
-  notification: notificationReducer,
-  router: routerStateReducer,
-  tasks: tasksReducer
-});
-
+const history = createBrowserHistory();
 
 const store = compose(
-  applyMiddleware(thunk),
-  reduxReactRouter({createHistory: createBrowserHistory})
+  applyMiddleware(thunk)
 )(createStore)(reducer, {
   firebase: new Firebase(FIREBASE_URL)
 });
 
 
+if (module.hot) {
+  module.hot.accept('./modules/reducers', () => {
+    store.replaceReducer(reducer);
+  });
+}
+
+
 store.dispatch(authActions.initAuth());
+
+syncReduxAndRouter(history, store);
 
 
 ReactDOM.render((
-  <Root onEnter={authRouteResolver(store.getState)} store={store}/>
+  <Root history={history} onEnter={authRouteResolver(store.getState)} store={store}/>
 ), document.querySelector('.app-root'));

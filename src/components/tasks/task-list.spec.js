@@ -5,6 +5,7 @@ import { TaskItem } from './task-item';
 
 
 describe('TaskList', () => {
+  let props;
   let tasks;
   let taskList;
 
@@ -15,7 +16,13 @@ describe('TaskList', () => {
       {completed: true, title: 'completed task'}
     ];
 
-    taskList = createTestComponent(TaskList, {tasks});
+    props = {
+      tasks,
+      deleteTask: sinon.spy(),
+      updateTask: sinon.spy()
+    };
+
+    taskList = createTestComponent(TaskList, props);
   });
 
 
@@ -33,7 +40,7 @@ describe('TaskList', () => {
     });
 
     it('should render active tasks', () => {
-      taskList = createTestComponent(TaskList, {filter: 'active', tasks});
+      taskList = createTestComponent(TaskList, {filter: 'active', ...props});
       let taskItems = scryRenderedComponentsWithType(taskList, TaskItem);
 
       expect(taskItems.length).toEqual(1);
@@ -41,7 +48,7 @@ describe('TaskList', () => {
     });
 
     it('should render completed tasks', () => {
-      taskList = createTestComponent(TaskList, {filter: 'completed', tasks});
+      taskList = createTestComponent(TaskList, {filter: 'completed', ...props});
       let taskItems = scryRenderedComponentsWithType(taskList, TaskItem);
 
       expect(taskItems.length).toEqual(1);

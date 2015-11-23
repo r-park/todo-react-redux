@@ -4,58 +4,54 @@
 # Todo app with React, Redux, and Firebase
 A simple Todo app example with `undelete` capability — built with React, Redux, and Firebase. Try the demo at <a href="https://todo-react-redux.firebaseapp.com" target="_blank">todo-react-redux.firebaseapp.com</a>.
 
-- React `~0.14.2`
+- React `~0.14.3`
+- React-Redux `~4.0.0`
 - React-Router `1.0.0`
 - Redux `~3.0.4`
-  - React-Redux `~4.0.0`
-  - Redux-Router `1.0.0-beta4`
+- Redux-Simple-Router `~0.0.8`
+- Babel `~5.8.34`
 - Firebase
   - JSON Datastore
   - OAuth authentication with GitHub, Google, and Twitter
   - Hosting
-- Babel `~5.8.34`
-  - Transpiles ES6
-- BrowserSync
 - Gulp `4.0.0-alpha.1`
 - SASS
 - Webpack
+  - Webpack dev server
   - Hot-reloading with `react-transform-hmr` and `babel-plugin-react-transform`
+  - Compile SASS
+  - Inject css and js dependencies into html
+
 
 ## Installing dependencies
 ```bash
-npm install
+$ npm install
 ```
 
 #### Gulp v4 (optional)
 ```bash
-npm install -g gulpjs/gulp-cli#4.0
+$ npm install -g gulpjs/gulp-cli#4.0
 ```
 The gulp tasks for this project require gulp v4-alpha. If you don't wish to globally install the v4 gulp-cli, you can run the gulp tasks using the locally installed gulp under `./node_modules/.bin` — for example:
 ```bash
-./node_modules/.bin/gulp run
+$ ./node_modules/.bin/gulp run
 ```
 
-## Running the app
-```bash
-gulp run
-```
-Executing `gulp run` will:
-- Build the project
-- Start the server at <a href="http://localhost:7000" target="_blank">localhost:7000</a>
 
 ## Developing
 ```bash
-gulp
+$ gulp
 ```
 Executing the default `gulp` command will:
 - Build the project
-- Start the server at <a href="http://localhost:7000" target="_blank">localhost:7000</a>
+- Start the Webpack dev server at <a href="http://localhost:3000" target="_blank">localhost:3000</a>
 - Watch for changes to the source files and process changes
 - Live-reload the browser
 
+
 ## Testing
 ```bash
-gulp test.watch
+$ gulp test.watch
 ```
 Executing `gulp test.watch` will:
 - Run the test suites

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { authActions } from 'core/auth';
+import { authActions } from 'modules/auth';
 
 
 @connect(null, authActions)
