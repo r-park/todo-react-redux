@@ -1,6 +1,6 @@
 {
   "name": "todo-react-redux",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Todo app with React, Redux, and Firebase",
   "homepage": "https://github.com/r-park/todo-react-redux",
   "repository": "https://github.com/r-park/todo-react-redux.git",
@@ -8,7 +8,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "./scripts/run.sh"
+    "start": "./node_modules/.bin/gulp",
+    "test": "./node_modules/.bin/gulp test"
   },
   "dependencies": {
     "classnames": "~2.2.0",
