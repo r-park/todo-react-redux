@@ -7,11 +7,11 @@ module.exports = function(config) {
     files: [
       'node_modules/sinon/pkg/sinon.js',
       'test/lib/mockfirebase.js',
-      'webpack.test.js'
+      'karma.entry.js'
     ],
 
     preprocessors: {
-      'webpack.test.js': ['webpack', 'sourcemap']
+      'karma.entry.js': ['webpack', 'sourcemap']
     },
 
     // webpack config
@@ -24,7 +24,6 @@ module.exports = function(config) {
 
     reporters: ['dots'],
 
-    // config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
     autoWatch: true,

@@ -11,15 +11,10 @@ module.exports = {
 
   module: {
     loaders: [
-      { exclude: /node_modules/, loader: 'babel', test: /\.js$/ }
+      {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
+      {test: /\.scss/, loader: 'style!css!autoprefixer-loader?{browsers:["last 3 versions", "Firefox ESR"]}!sass'}
     ]
   },
-
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('test')
-    })
-  ],
 
   resolve: {
     alias: {

@@ -1,10 +1,12 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 var webpack = require('webpack');
 
 
 module.exports = {
   cache: false,
-  debug: false,
+  debug: true,
   devtool: 'source-map',
 
   entry: {
@@ -18,14 +20,8 @@ module.exports = {
       'react-redux',
       'react-router',
       'redux',
-      'redux-router',
+      'redux-simple-router',
       'redux-thunk'
-    ]
-  },
-
-  module: {
-    loaders: [
-      { exclude: /node_modules/, loader: 'babel', test: /\.js$/ }
     ]
   },
 
@@ -35,11 +31,24 @@ module.exports = {
     publicPath: '/'
   },
 
+  resolve: {
+    extensions: ['', '.js'],
+    modulesDirectories: ['node_modules'],
+    root: path.resolve('./src')
+  },
+
+  module: {
+    loaders: [
+      {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
+      {test: /\.scss/, loader: ExtractTextPlugin.extract(
+        'css!autoprefixer-loader?{browsers:["last 3 versions", "Firefox ESR"]}!sass'
+      )}
+    ]
+  },
+
   plugins: [
+    new ExtractTextPlugin('styles.css'),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.CommonsChunkPlugin('vendor', '[name].js'),
@@ -50,14 +59,14 @@ module.exports = {
         unused: true,
         warnings: false
       }
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      hash: true,
+      inject: 'body',
+      template: 'src/index.html'
     })
   ],
-
-  resolve: {
-    extensions: ['', '.js'],
-    modulesDirectories: ['node_modules'],
-    root: path.resolve('./src')
-  },
 
   stats: {
     cached: true,

@@ -13,6 +13,7 @@ import { Tasks } from './tasks/tasks';
 
 export class Root extends Component {
   static propTypes = {
+    history: PropTypes.object.isRequired,
     onEnter: PropTypes.func.isRequired,
     store: PropTypes.object.isRequired
   };
