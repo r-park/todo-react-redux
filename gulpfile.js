@@ -1,21 +1,22 @@
-var browserSync   = require('browser-sync'),
-    coveralls     = require('gulp-coveralls'),
-    del           = require('del'),
-    eslint        = require('gulp-eslint'),
-    gulp          = require('gulp'),
-    gutil         = require('gulp-util'),
-    header        = require('gulp-header'),
-    historyApi    = require('connect-history-api-fallback'),
-    karma         = require('karma'),
-    path          = require('path'),
-    webpack       = require('webpack'),
-    WebpackServer = require("webpack-dev-server");
+'use strict';
+
+const browserSync   = require('browser-sync');
+const del           = require('del');
+const eslint        = require('gulp-eslint');
+const gulp          = require('gulp');
+const gutil         = require('gulp-util');
+const header        = require('gulp-header');
+const historyApi    = require('connect-history-api-fallback');
+const karma         = require('karma');
+const path          = require('path');
+const webpack       = require('webpack');
+const WebpackServer = require("webpack-dev-server");
 
 
 //=========================================================
 //  PATHS
 //---------------------------------------------------------
-var paths = {
+const paths = {
   src: {
     root: 'src',
     html: 'src/*.html',
@@ -29,7 +30,7 @@ var paths = {
 //=========================================================
 //  CONFIG
 //---------------------------------------------------------
-var config = {
+const config = {
   browserSync: {
     files: [paths.target + '/**'],
     notify: false,
@@ -38,10 +39,6 @@ var config = {
     server: {
       baseDir: paths.target
     }
-  },
-
-  coveralls: {
-    src: 'tmp/coverage/**/lcov.info'
   },
 
   eslint: {
@@ -67,26 +64,12 @@ var config = {
 //=========================================================
 //  TASKS
 //---------------------------------------------------------
-gulp.task('clean.target', function(){
-  return del(paths.target);
-});
+gulp.task('clean.target', () => del(paths.target));
 
 
-gulp.task('copy.html', function(){
-  return gulp.src(paths.src.html)
-    .pipe(gulp.dest(paths.target));
-});
-
-
-gulp.task('coveralls', function(){
-  return gulp.src(config.coveralls.src)
-    .pipe(coveralls());
-});
-
-
-gulp.task('headers', function(){
-  var pkg = require('./package.json');
-  var headerContent = {date: (new Date()).toISOString(), name: pkg.name, version: pkg.version, url: pkg.homepage};
+gulp.task('headers', () => {
+  let pkg = require('./package.json');
+  let headerContent = {date: (new Date()).toISOString(), name: pkg.name, version: pkg.version, url: pkg.homepage};
 
   return gulp.src(config.header.src)
     .pipe(header(config.header.template, headerContent))
@@ -94,9 +77,9 @@ gulp.task('headers', function(){
 });
 
 
-gulp.task('js', function(done){
-  var conf = require(config.webpack.prod);
-  webpack(conf).run(function(error, stats){
+gulp.task('js', done => {
+  let conf = require(config.webpack.prod);
+  webpack(conf).run((error, stats) => {
     if (error) throw new gutil.PluginError('webpack', error);
     gutil.log(stats.toString(conf.stats));
     done();
@@ -104,7 +87,7 @@ gulp.task('js', function(done){
 });
 
 
-gulp.task('lint', function(){
+gulp.task('lint', () => {
   return gulp.src(config.eslint.src)
     .pipe(eslint())
     .pipe(eslint.format())
@@ -112,18 +95,18 @@ gulp.task('lint', function(){
 });
 
 
-gulp.task('serve', function(done){
+gulp.task('serve', done => {
   config.browserSync.server.middleware = [historyApi()];
   browserSync.create()
     .init(config.browserSync, done);
 });
 
 
-gulp.task('serve.dev', function(done){
-  var conf = require(config.webpack.dev);
-  var compiler = webpack(conf);
+gulp.task('serve.dev', done => {
+  let conf = require(config.webpack.dev);
+  let compiler = webpack(conf);
 
-  var server = new WebpackServer(compiler, {
+  let server = new WebpackServer(compiler, {
     contentBase: paths.src.root,
     historyApiFallback: true,
     hot: true,
@@ -131,7 +114,7 @@ gulp.task('serve.dev', function(done){
     stats: conf.stats
   });
 
-  server.listen(3000, 'localhost', function(){
+  server.listen(3000, 'localhost', () => {
     gutil.log(gutil.colors.gray('-------------------------------------------'));
     gutil.log('WebpackDevServer:', gutil.colors.magenta('http://localhost:3000'));
     gutil.log(gutil.colors.gray('-------------------------------------------'));
@@ -141,16 +124,25 @@ gulp.task('serve.dev', function(done){
 
 
 //===========================
+//  BUILD
+//---------------------------
+gulp.task('build', gulp.series(
+  'clean.target',
+  'js'
+));
+
+
+//===========================
 //  DEVELOP
 //---------------------------
-gulp.task('default', gulp.parallel('serve.dev'));
+gulp.task('default', gulp.task('serve.dev'));
 
 
 //===========================
 //  TEST
 //---------------------------
 function karmaServer(options, done) {
-  var server = new karma.Server(options, function(error){
+  let server = new karma.Server(options, error => {
     if (error) process.exit(error);
     done();
   });
@@ -158,13 +150,13 @@ function karmaServer(options, done) {
 }
 
 
-gulp.task('test', function(done){
+gulp.task('test', done => {
   config.karma.singleRun = true;
   karmaServer(config.karma, done);
 });
 
 
-gulp.task('test.watch', function(done){
+gulp.task('test.watch', done => {
   karmaServer(config.karma, done);
 });
 
@@ -176,7 +168,6 @@ gulp.task('dist', gulp.series(
   'lint',
   'test',
   'clean.target',
-  'copy.html',
   'js',
   'headers'
 ));
