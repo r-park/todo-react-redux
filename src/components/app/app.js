@@ -4,10 +4,6 @@ import { POST_SIGN_IN_PATH, POST_SIGN_OUT_PATH } from 'config';
 import { authActions } from 'modules/auth';
 
 
-@connect(state => ({
-  auth: state.auth
-}), authActions)
-
 export class App extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
@@ -60,3 +56,7 @@ export class App extends Component {
     );
   }
 }
+
+export default connect(state => ({
+  auth: state.auth
+}), authActions)(App);

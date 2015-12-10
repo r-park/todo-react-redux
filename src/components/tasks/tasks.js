@@ -13,11 +13,6 @@ import { TaskForm } from './task-form';
 import { TaskList } from './task-list';
 
 
-@connect(state => ({
-  notification: state.notification,
-  tasks: state.tasks.list
-}), assign({}, tasksActions, notificationActions))
-
 export class Tasks extends Component {
   static propTypes = {
     createTask: PropTypes.func.isRequired,
@@ -82,3 +77,8 @@ export class Tasks extends Component {
     );
   }
 }
+
+export default connect(state => ({
+  notification: state.notification,
+  tasks: state.tasks.list
+}), assign({}, tasksActions, notificationActions))(Tasks);
