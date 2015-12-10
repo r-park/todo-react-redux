@@ -6,24 +6,24 @@ A simple Todo app example with `undelete` capability — built with React, Redux
 
 - React `~0.14.3`
 - React-Redux `~4.0.0`
-- React-Router `1.0.0`
+- React-Router `~1.0.2`
 - Redux `~3.0.4`
-- Redux-Simple-Router `~0.0.8`
-- Babel `~5.8.34`
+- Redux-Simple-Router `~1.0.0`
+- Babel `~6.3.15`
 - Firebase
   - JSON Datastore
   - OAuth authentication with GitHub, Google, and Twitter
   - Hosting
-- Gulp `4.0.0-alpha.1`
+- Gulp `4.0.0-alpha.2`
 - SASS
 - Webpack
   - Webpack dev server
-  - Hot-reloading with `react-transform-hmr` and `babel-plugin-react-transform`
+  - Hot-reloading
   - Compile SASS
   - Inject css and js dependencies into html
 
 
-## Installing dependencies
+## Installing Dependencies
 ```bash
 $ npm install
 ```
@@ -59,3 +59,11 @@ Executing `gulp test.watch` will:
 - Re-run the tests whenever the sources are modified
 
 For a single test run without auto-watch, execute `gulp test` instead.
+
+
+## Release Builds
+```bash
+$ gulp dist
+```
+- Generate bundled and minified artifacts and deposit into `/target` directory
+- Inject style and script tags into index.html

@@ -1,12 +1,17 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+
+// plugins
+const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NoErrorsPlugin = webpack.NoErrorsPlugin;
+const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 
 
 module.exports = {
   cache: true,
   debug: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
 
   entry: {
     main: [
@@ -25,25 +30,24 @@ module.exports = {
   resolve: {
     extensions: ['', '.js'],
     modulesDirectories: ['node_modules'],
-    root: path.resolve('src')
+    root: path.resolve('./src')
   },
 
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: {
-        plugins: ['react-transform'],
-        extra: {
-          'react-transform': {
+        plugins: [
+          ['react-transform', {
             transforms: [{
               transform: 'react-transform-hmr',
               imports: ['react'],
               locals: ['module']
             }]
-          }
-        }
+          }]
+        ]
       }},
 
-      {test: /\.scss/, loader: 'style!css!autoprefixer-loader?{browsers:["last 3 versions", "Firefox ESR"]}!sass'}
+      {test: /\.scss$/, loader: 'style!css!autoprefixer-loader?{browsers:["last 3 versions", "Firefox ESR"]}!sass'}
     ]
   },
 
@@ -54,14 +58,14 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new OccurenceOrderPlugin(),
+    new HotModuleReplacementPlugin(),
+    new NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       hash: true,
       inject: 'body',
-      template: 'src/index.html'
+      template: './src/index.html'
     })
   ],
 

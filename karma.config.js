@@ -1,12 +1,10 @@
-module.exports = function(config) {
-  var options = {
-    frameworks: [
-      'jasmine'
-    ],
+module.exports = (config) => {
+  config.set({
+    frameworks: ['jasmine'],
 
     files: [
       'node_modules/sinon/pkg/sinon.js',
-      'test/lib/mockfirebase.js',
+      'node_modules/mockfirebase/browser/mockfirebase.js',
       'karma.entry.js'
     ],
 
@@ -30,8 +28,6 @@ module.exports = function(config) {
 
     singleRun: false,
 
-    browserNoActivityTimeout: 180000, // 3 mins
-
     customLaunchers: {
       TRAVIS_CHROME: {
         base: 'Chrome',
@@ -40,24 +36,5 @@ module.exports = function(config) {
     },
 
     browsers: process.env.TRAVIS ? ['TRAVIS_CHROME'] : ['Chrome']
-  };
-
-
-  // additional options for coverage
-  if (process.argv.indexOf('--coverage') !== -1) {
-    options.singleRun = true;
-    options.reporters.push('coverage');
-
-    options.coverageReporter = {
-      type : 'lcov',
-      dir  : 'tmp/coverage'
-    };
-
-    options.webpack.module.preLoaders = [
-      { exclude: /(karma|node_modules|spec|vendor)/, loader: 'isparta', test: /\.js$/ }
-    ];
-  }
-
-
-  config.set(options);
+  });
 };

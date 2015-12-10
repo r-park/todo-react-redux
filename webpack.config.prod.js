@@ -1,7 +1,14 @@
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
+
+// plugins
+const AggressiveMergingPlugin = webpack.optimize.AggressiveMergingPlugin;
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const DedupePlugin = webpack.optimize.DedupePlugin;
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
+const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 
 module.exports = {
@@ -40,7 +47,7 @@ module.exports = {
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
-      {test: /\.scss/, loader: ExtractTextPlugin.extract(
+      {test: /\.scss$/, loader: ExtractTextPlugin.extract(
         'css!autoprefixer-loader?{browsers:["last 3 versions", "Firefox ESR"]}!sass'
       )}
     ]
@@ -48,23 +55,23 @@ module.exports = {
 
   plugins: [
     new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('vendor', '[name].js'),
-    new webpack.optimize.UglifyJsPlugin({
+    new OccurenceOrderPlugin(),
+    new DedupePlugin(),
+    new AggressiveMergingPlugin(),
+    new CommonsChunkPlugin('vendor', '[name].js'),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      hash: true,
+      inject: 'body',
+      template: './src/index.html'
+    }),
+    new UglifyJsPlugin({
       compress: {
         dead_code: true,
         screw_ie8: true,
         unused: true,
         warnings: false
       }
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      hash: true,
-      inject: 'body',
-      template: 'src/index.html'
     })
   ],
 

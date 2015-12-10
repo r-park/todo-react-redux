@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { authActions } from 'modules/auth';
 
 
-@connect(null, authActions)
-
 export class SignIn extends Component {
   static propTypes = {
     signInWithGithub: PropTypes.func.isRequired,
@@ -31,3 +29,5 @@ export class SignIn extends Component {
     );
   }
 }
+
+export default connect(null, authActions)(SignIn);

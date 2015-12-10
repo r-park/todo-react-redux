@@ -6,9 +6,9 @@ import { Route, Router } from 'react-router';
 import { SIGN_IN_PATH, TASKS_PATH } from 'config';
 
 // Components
-import { App } from './app/app';
-import { SignIn } from './sign-in/sign-in';
-import { Tasks } from './tasks/tasks';
+import App from './app/app';
+import SignIn from './sign-in/sign-in';
+import Tasks from './tasks/tasks';
 
 
 export class Root extends Component {
