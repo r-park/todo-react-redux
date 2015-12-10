@@ -5,10 +5,6 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'inline-source-map',
 
-  externals: {
-    firebase: 'MockFirebase'
-  },
-
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
