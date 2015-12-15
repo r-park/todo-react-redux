@@ -18,7 +18,6 @@ const WebpackServer = require("webpack-dev-server");
 //---------------------------------------------------------
 const paths = {
   src: {
-    root: 'src',
     html: 'src/*.html',
     js: 'src/**/*.js'
   },
@@ -55,8 +54,8 @@ const config = {
   },
 
   webpack: {
-    dev: './webpack.config.dev',
-    prod: './webpack.config.prod'
+    dev: './webpack.dev',
+    dist: './webpack.dist'
   }
 };
 
@@ -78,7 +77,7 @@ gulp.task('headers', () => {
 
 
 gulp.task('js', done => {
-  let conf = require(config.webpack.prod);
+  let conf = require(config.webpack.dist);
   webpack(conf).run((error, stats) => {
     if (error) throw new gutil.PluginError('webpack', error);
     gutil.log(stats.toString(conf.stats));
@@ -106,17 +105,11 @@ gulp.task('serve.dev', done => {
   let conf = require(config.webpack.dev);
   let compiler = webpack(conf);
 
-  let server = new WebpackServer(compiler, {
-    contentBase: paths.src.root,
-    historyApiFallback: true,
-    hot: true,
-    publicPath: conf.output.publicPath,
-    stats: conf.stats
-  });
+  let server = new WebpackServer(compiler, conf.devServer);
 
-  server.listen(3000, 'localhost', () => {
+  server.listen(conf.devServer.port, 'localhost', () => {
     gutil.log(gutil.colors.gray('-------------------------------------------'));
-    gutil.log('WebpackDevServer:', gutil.colors.magenta('http://localhost:3000'));
+    gutil.log('WebpackDevServer:', gutil.colors.magenta(`http://localhost:${conf.devServer.port}`));
     gutil.log(gutil.colors.gray('-------------------------------------------'));
     done();
   });
