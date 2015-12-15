@@ -69,15 +69,22 @@ module.exports = {
     })
   ],
 
-  stats: {
-    cached: true,
-    cachedAssets: true,
-    chunks: true,
-    chunkModules: false,
-    colors: true,
-    hash: false,
-    reasons: true,
-    timings: true,
-    version: false
+  devServer: {
+    contentBase: './src',
+    historyApiFallback: true,
+    hot: true,
+    port: 3000,
+    publicPath: '/',
+    stats: {
+      cached: true,
+      cachedAssets: true,
+      chunks: true,
+      chunkModules: false,
+      colors: true,
+      hash: false,
+      reasons: true,
+      timings: true,
+      version: false
+    }
   }
 };

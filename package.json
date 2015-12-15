@@ -11,7 +11,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "./node_modules/.bin/gulp",
+    "build": "npm test && ./node_modules/.bin/gulp clean.target && webpack --config webpack.dist.js --progress",
+    "dev": "webpack-dev-server --config webpack.dev.js --progress",
+    "start": "npm run dev",
     "test": "./node_modules/.bin/gulp test"
   },
   "dependencies": {

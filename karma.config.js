@@ -13,7 +13,7 @@ module.exports = (config) => {
     },
 
     // webpack config
-    webpack: require('./webpack.config.test'),
+    webpack: require('./webpack.test'),
 
     // webpack server config
     webpackServer: {
