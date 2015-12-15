@@ -8,7 +8,7 @@ import { notificationReducer } from 'modules/notification';
 import { tasksReducer } from 'modules/tasks';
 
 
-export const reducer = combineReducers({
+export default combineReducers({
   auth: authReducer,
   firebase: firebaseReducer,
   notification: notificationReducer,
