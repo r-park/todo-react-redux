@@ -19,15 +19,15 @@ module.exports = {
   entry: {
     main: './src/main.js',
     vendor: [
+      'babel-polyfill',
       'classnames',
       'firebase',
-      'history',
       'react',
       'react-dom',
       'react-redux',
       'react-router',
+      'react-router-redux',
       'redux',
-      'redux-simple-router',
       'redux-thunk'
     ]
   },
