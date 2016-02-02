@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const AggressiveMergingPlugin = webpack.optimize.AggressiveMergingPlugin;
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const DedupePlugin = webpack.optimize.DedupePlugin;
+const DefinePlugin = webpack.DefinePlugin;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
@@ -57,6 +58,9 @@ module.exports = {
   ],
 
   plugins: [
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
     new ExtractTextPlugin('styles.css'),
     new OccurenceOrderPlugin(),
     new DedupePlugin(),
