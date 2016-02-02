@@ -1,17 +1,10 @@
+sudo: required
+dist: trusty
+
 language: node_js
 
 node_js:
   - 5.1
-
-env:
-  - CXX=g++-4.8
-
-addons:
-  apt:
-    packages:
-      - g++-4.8
-    sources:
-      - ubuntu-toolchain-r-test
 
 before_install:
   - export CHROME_BIN=chromium-browser

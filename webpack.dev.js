@@ -1,3 +1,4 @@
+const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -18,6 +19,18 @@ module.exports = {
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/dev-server',
       './src/main.js'
+    ],
+    vendor: [
+      'babel-polyfill',
+      'classnames',
+      'firebase',
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'react-router-redux',
+      'redux',
+      'redux-thunk'
     ]
   },
 
@@ -47,9 +60,13 @@ module.exports = {
         ]
       }},
 
-      {test: /\.scss$/, loader: 'style!css!autoprefixer-loader?{browsers:["last 3 versions", "Firefox ESR"]}!sass'}
+      {test: /\.scss$/, loader: 'style!css!postcss-loader!sass'}
     ]
   },
+
+  postcss: [
+    autoprefixer({ browsers: ['last 3 versions', 'Firefox ESR'] })
+  ],
 
   sassLoader: {
     outputStyle: 'nested',
@@ -62,6 +79,7 @@ module.exports = {
     new HotModuleReplacementPlugin(),
     new NoErrorsPlugin(),
     new HtmlWebpackPlugin({
+      chunksSortMode: 'none',
       filename: 'index.html',
       hash: true,
       inject: 'body',

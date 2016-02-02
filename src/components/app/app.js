@@ -5,6 +5,10 @@ import { authActions } from 'modules/auth';
 
 
 export class App extends Component {
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
+
   static propTypes = {
     auth: PropTypes.object.isRequired,
     children: PropTypes.object.isRequired,
@@ -18,13 +22,14 @@ export class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { auth, history } = this.props;
+    const { router } = this.context;
+    const { auth } = this.props;
 
     if (auth.authenticated && !nextProps.auth.authenticated) {
-      history.replaceState(null, POST_SIGN_OUT_PATH);
+      router.replace(POST_SIGN_OUT_PATH);
     }
     else if (!auth.authenticated && nextProps.auth.authenticated) {
-      history.replaceState(null, POST_SIGN_IN_PATH);
+      router.replace(POST_SIGN_IN_PATH);
     }
   }
 
