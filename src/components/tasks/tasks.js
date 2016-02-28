@@ -3,8 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 // Modules
-import { notificationActions } from 'modules/notification';
-import { tasksActions } from 'modules/tasks';
+import { notificationActions } from 'core/notification';
+import { tasksActions } from 'core/tasks';
 
 // Components
 import { Notification } from './notification';

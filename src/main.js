@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 
 import { FIREBASE_URL } from 'config';
-import { authActions, authRouteResolver } from 'modules/auth';
+import { authActions, authRouteResolver } from 'core/auth';
 import { Root } from 'components/root';
 import createStore from './store';
 

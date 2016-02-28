@@ -1,6 +1,6 @@
 import {
   SIGN_OUT_SUCCESS
-} from 'modules/auth';
+} from 'core/auth';
 
 import {
   CREATE_TASK_SUCCESS,
