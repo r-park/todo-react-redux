@@ -121,7 +121,7 @@ describe('TaskItem', () => {
       it('should call #toggleStatus()', () => {
         taskItem.toggleStatus = sinon.spy();
         taskItem.setState({editing: true});
-        Simulate.click(taskItem.refs.toggleStatusButton);
+        Simulate.click(taskItem.toggleStatusButton);
         expect(taskItem.toggleStatus.callCount).toEqual(1);
       });
     });
@@ -130,13 +130,13 @@ describe('TaskItem', () => {
     describe('title', () => {
       it('should be rendered as a text input field when editing', () => {
         taskItem.setState({editing: true});
-        let element = taskItem.refs.titleInput;
+        let element = taskItem.titleInput;
         expect(element.tagName).toEqual('INPUT');
       });
 
       it('should be rendered as text when not editing', () => {
         taskItem.setState({editing: false});
-        let element = taskItem.refs.titleText;
+        let element = taskItem.titleText;
         expect(element.innerText).toEqual(task.title);
       });
     });
@@ -146,15 +146,15 @@ describe('TaskItem', () => {
       it('should call #saveTitle()', () => {
         taskItem.saveTitle = sinon.spy();
         taskItem.setState({editing: true});
-        Simulate.blur(taskItem.refs.titleInput);
+        Simulate.blur(taskItem.titleInput);
         expect(taskItem.saveTitle.callCount).toEqual(1);
       });
 
       it('should toggle visibility of text field and task title', () => {
         taskItem.setState({editing: true});
-        Simulate.blur(taskItem.refs.titleInput);
-        expect(taskItem.refs.titleInput).not.toBeDefined();
-        expect(taskItem.refs.titleText).toBeDefined();
+        Simulate.blur(taskItem.titleInput);
+        expect(taskItem.titleInput).toBe(null);
+        expect(taskItem.titleText).toBeDefined();
       });
     });
 
@@ -163,15 +163,15 @@ describe('TaskItem', () => {
       it('should call #saveTitle()', () => {
         taskItem.saveTitle = sinon.spy();
         taskItem.setState({editing: true});
-        Simulate.keyUp(taskItem.refs.titleInput, {keyCode: 13});
+        Simulate.keyUp(taskItem.titleInput, {keyCode: 13});
         expect(taskItem.saveTitle.callCount).toEqual(1);
       });
 
       it('should toggle visibility of text field and task title', () => {
         taskItem.setState({editing: true});
-        Simulate.keyUp(taskItem.refs.titleInput, {keyCode: 13});
-        expect(taskItem.refs.titleInput).not.toBeDefined();
-        expect(taskItem.refs.titleText).toBeDefined();
+        Simulate.keyUp(taskItem.titleInput, {keyCode: 13});
+        expect(taskItem.titleInput).toBe(null);
+        expect(taskItem.titleText).toBeDefined();
       });
     });
 
@@ -180,28 +180,28 @@ describe('TaskItem', () => {
       it('should call #stopEditing()', () => {
         taskItem.stopEditing = sinon.spy();
         taskItem.setState({editing: true});
-        Simulate.keyUp(taskItem.refs.titleInput, {keyCode: 27});
+        Simulate.keyUp(taskItem.titleInput, {keyCode: 27});
         expect(taskItem.stopEditing.callCount).toEqual(1);
       });
 
       it('should toggle visibility of text field and task title', () => {
         taskItem.setState({editing: true});
-        Simulate.keyUp(taskItem.refs.titleInput, {keyCode: 27});
-        expect(taskItem.refs.titleInput).not.toBeDefined();
-        expect(taskItem.refs.titleText).toBeDefined();
+        Simulate.keyUp(taskItem.titleInput, {keyCode: 27});
+        expect(taskItem.titleInput).toBe(null);
+        expect(taskItem.titleText).toBeDefined();
       });
     });
 
 
     describe('`click` event triggered on edit button', () => {
       it('should display text field', () => {
-        Simulate.click(taskItem.refs.editButton);
-        expect(taskItem.refs.titleInput).toBeDefined();
+        Simulate.click(taskItem.editButton);
+        expect(taskItem.titleInput).toBeDefined();
       });
 
       it('should hide task title', () => {
-        Simulate.click(taskItem.refs.editButton);
-        expect(taskItem.refs.titleText).not.toBeDefined();
+        Simulate.click(taskItem.editButton);
+        expect(taskItem.titleText).toBe(null);
       });
     });
 
@@ -210,7 +210,7 @@ describe('TaskItem', () => {
       it('should call #delete()', () => {
         taskItem.delete = sinon.spy();
         taskItem.setState({editing: true});
-        Simulate.click(taskItem.refs.deleteButton);
+        Simulate.click(taskItem.deleteButton);
         expect(taskItem.delete.callCount).toEqual(1);
       });
     });

@@ -104,19 +104,19 @@ describe('Notification', () => {
     describe('message', () => {
       it('should display `props.message`', () => {
         notification = createTestComponent(Notification, props);
-        expect(notification.refs.message.innerText).toEqual(props.message);
+        expect(notification.message.innerText).toEqual(props.message);
       });
     });
 
     describe('button', () => {
       it('should be labeled with `props.actionLabel`', () => {
         notification = createTestComponent(Notification, props);
-        expect(notification.refs.button.innerText).toEqual(props.actionLabel);
+        expect(notification.button.innerText).toEqual(props.actionLabel);
       });
 
       it('should invoke `props.action` onClick', () => {
         notification = createTestComponent(Notification, props);
-        Simulate.click(notification.refs.button);
+        Simulate.click(notification.button);
         expect(notification.props.action.callCount).toBe(1);
       });
     });

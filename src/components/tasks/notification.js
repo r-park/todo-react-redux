@@ -47,11 +47,11 @@ export class Notification extends Component {
 
     return (
       <div className="notification">
-        <p className="notification__message" ref="message">{message}</p>
+        <p className="notification__message" ref={c => this.message = c}>{message}</p>
         <button
           className="notification__button"
           onClick={action}
-          ref="button"
+          ref={c => this.button = c}
           type="button">{actionLabel}</button>
       </div>
     );

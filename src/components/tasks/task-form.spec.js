@@ -101,23 +101,23 @@ describe('TaskForm', () => {
     describe('`keyup` event triggered on text field with escape key', () => {
       it('should set #state.title with an empty string', () => {
         taskForm.setState({title: 'foo'});
-        Simulate.keyUp(taskForm.refs.titleInput, {keyCode: 27});
+        Simulate.keyUp(taskForm.titleInput, {keyCode: 27});
         expect(taskForm.state.title).toEqual('');
       });
 
       it('should set text field value with an empty string', () => {
         taskForm.setState({title: 'foo'});
-        Simulate.keyUp(taskForm.refs.titleInput, {keyCode: 27});
-        expect(taskForm.refs.titleInput.value).toEqual('');
+        Simulate.keyUp(taskForm.titleInput, {keyCode: 27});
+        expect(taskForm.titleInput.value).toEqual('');
       });
     });
 
 
     describe('`change` event triggered on text field', () => {
       it('should set #state.title with the value from the text field', () => {
-        taskForm.refs.titleInput.value = 'foo';
+        taskForm.titleInput.value = 'foo';
         expect(taskForm.state.title).toEqual('');
-        Simulate.change(taskForm.refs.titleInput);
+        Simulate.change(taskForm.titleInput);
         expect(taskForm.state.title).toEqual('foo');
       });
     });
@@ -134,7 +134,7 @@ describe('TaskForm', () => {
         const event = {preventDefault: sinon.spy()};
         taskForm.setState({title: 'foo'});
         Simulate.submit(findDOMNode(taskForm), event);
-        expect(taskForm.refs.titleInput.value).toEqual('');
+        expect(taskForm.titleInput.value).toEqual('');
       });
     });
   });

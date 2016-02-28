@@ -1,6 +1,6 @@
 import assign from 'object-assign';
 
-import { DELETE_TASK_SUCCESS } from 'modules/tasks';
+import { DELETE_TASK_SUCCESS } from 'core/tasks';
 
 import {
   DISMISS_NOTIFICATION

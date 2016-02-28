@@ -1,5 +1,5 @@
 import assign from 'object-assign';
-import { SIGN_OUT_SUCCESS } from 'modules/auth';
+import { SIGN_OUT_SUCCESS } from 'core/auth';
 
 import {
   CREATE_TASK_SUCCESS,
