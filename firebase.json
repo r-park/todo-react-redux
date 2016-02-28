@@ -24,5 +24,7 @@
   "rewrites": [{
     "source": "**",
     "destination": "/index.html"
-  }]
+  }],
+
+  "rules": "./firebase-rules.json"
 }
