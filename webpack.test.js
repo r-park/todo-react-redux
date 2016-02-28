@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 
+// plugins
+const DefinePlugin = webpack.DefinePlugin;
+
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -17,5 +20,11 @@ module.exports = {
       test: path.resolve('./test')
     },
     root: path.resolve('./src')
-  }
+  },
+
+  plugins: [
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('test')
+    })
+  ]
 };

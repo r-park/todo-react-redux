@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 // plugins
+const DefinePlugin = webpack.DefinePlugin;
 const HotModuleReplacementPlugin = webpack.HotModuleReplacementPlugin;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NoErrorsPlugin = webpack.NoErrorsPlugin;
@@ -75,6 +76,9 @@ module.exports = {
   },
 
   plugins: [
+    new DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    }),
     new OccurenceOrderPlugin(),
     new HotModuleReplacementPlugin(),
     new NoErrorsPlugin(),
