@@ -48,9 +48,9 @@ export class TaskForm extends Component {
           onChange={this.onChange}
           onKeyUp={this.onKeyUp}
           placeholder="What needs to be done?"
-          ref="titleInput"
+          ref={c => this.titleInput = c}
           type="text"
-          value={this.state.title}/>
+          value={this.state.title} />
       </form>
     );
   }

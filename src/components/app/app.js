@@ -49,7 +49,7 @@ export class App extends Component {
               <h1 className="header__title">Todo React Redux</h1>
 
               <ul className="header__links">
-                {auth.authenticated ? <li><a className="header__link" onClick={this.signOut} href="javascript:">Sign out</a></li> : null}
+                {auth.authenticated ? <li><a className="header__link" onClick={this.signOut} href="#">Sign out</a></li> : null}
                 <li><a className="header__link header__link--github" href="https://github.com/r-park/todo-react-redux"></a></li>
               </ul>
             </div>

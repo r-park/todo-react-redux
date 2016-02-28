@@ -41,7 +41,7 @@ export class Tasks extends Component {
       <Notification
         action={undeleteTask}
         dismiss={dismissNotification}
-        {...notification}/>
+        {...notification} />
     );
   }
 
@@ -60,16 +60,16 @@ export class Tasks extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-          <TaskForm createTask={createTask}/>
+          <TaskForm createTask={createTask} />
         </div>
 
         <div className="g-col">
-          <TaskFilters filter={filter}/>
+          <TaskFilters filter={filter} />
           <TaskList
             deleteTask={deleteTask}
             filter={filter}
             tasks={tasks}
-            updateTask={updateTask}/>
+            updateTask={updateTask} />
         </div>
 
         {notification.display ? this.renderNotification() : null}
