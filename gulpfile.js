@@ -50,7 +50,7 @@ const config = {
   },
 
   karma: {
-    configFile: path.resolve('./karma.config.js')
+    configFile: path.resolve('./karma.conf.js')
   },
 
   webpack: {

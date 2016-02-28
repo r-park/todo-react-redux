@@ -11,10 +11,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "npm test && ./node_modules/.bin/gulp clean.target && webpack --config webpack.dist.js --progress",
-    "dev": "webpack-dev-server --config webpack.dev.js --progress",
-    "start": "npm run dev",
-    "test": "./node_modules/.bin/gulp test"
+    "build": "npm run lint && npm test && npm run clean && webpack --config webpack.dist.js --progress",
+    "clean": "del-cli ./target",
+    "lint": "eslint -c .eslintrc ./src",
+    "start": "webpack-dev-server --config webpack.dev.js --progress",
+    "test": "karma start --single-run"
   },
   "dependencies": {
     "babel-polyfill": "~6.5.0",
