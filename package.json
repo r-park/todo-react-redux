@@ -21,6 +21,7 @@
     "babel-polyfill": "~6.5.0",
     "classnames": "~2.2.3",
     "firebase": "~2.3.2",
+    "object-assign": "~4.0.1",
     "react": "~0.14.7",
     "react-dom": "~0.14.7",
     "react-redux": "~4.4.0",
