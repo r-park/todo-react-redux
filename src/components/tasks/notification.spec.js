@@ -88,7 +88,7 @@ describe('Notification', () => {
 
 
   describe('Expired timer', () => {
-    it('should invoke `props.dismiss()`', (done) => {
+    it('should invoke `props.dismiss()`', done => {
       props.duration = 10;
       notification = createTestComponent(Notification, props);
 

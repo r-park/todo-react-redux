@@ -1,4 +1,3 @@
-import assign from 'object-assign';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
@@ -81,4 +80,4 @@ export class Tasks extends Component {
 export default connect(state => ({
   notification: state.notification,
   tasks: state.tasks.list
-}), assign({}, tasksActions, notificationActions))(Tasks);
+}), Object.assign({}, tasksActions, notificationActions))(Tasks);

@@ -23,7 +23,11 @@ A simple Todo app example with `undelete` capability — built with React, Redux
   - Inject css and js dependencies into html
 
 
-## Installing Dependencies
+## Developing
+### Prerequisites
+`node >= 5.2`
+
+### Installing Dependencies
 ```bash
 $ npm install
 ```
@@ -38,18 +42,23 @@ $ ./node_modules/.bin/gulp run
 ```
 
 
-## Developing
+## Commands
+### Develop
 ```bash
 $ gulp
 ```
-Executing the default `gulp` command will:
-- Build the project
-- Start the Webpack dev server at <a href="http://localhost:3000" target="_blank">localhost:3000</a>
-- Watch for changes to the source files and process changes
-- Live-reload the browser
+or
+```bash
+$ npm start
+```
+
+- Builds the project
+- Starts the Webpack dev server at <a href="http://localhost:3000" target="_blank">localhost:3000</a>
+- Watches for changes to the source files and process changes
+- Live-reloads the browser
 
 
-## Testing
+### Testing
 ```bash
 $ gulp test.watch
 ```
@@ -61,7 +70,7 @@ Executing `gulp test.watch` will:
 For a single test run without auto-watch, execute `gulp test` instead.
 
 
-## Release Builds
+### Release Builds
 ```bash
 $ gulp dist
 ```

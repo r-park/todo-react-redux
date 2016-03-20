@@ -1,4 +1,4 @@
-import assign from 'object-assign';
+/* eslint-disable no-undefined */
 import { SIGN_OUT_SUCCESS } from 'core/auth';
 
 import {
@@ -21,7 +21,7 @@ describe('Tasks reducer', () => {
 
 
   function getInitialState() {
-    return assign({}, initialState);
+    return Object.assign({}, initialState);
   }
 
 
@@ -73,7 +73,7 @@ describe('Tasks reducer', () => {
       let state = getInitialState();
       state.list = [task1, task2];
 
-      let changedTask2 = assign({}, task2, {title: 'changed'});
+      let changedTask2 = Object.assign({}, task2, {title: 'changed'});
 
       let nextState = tasksReducer(state, {
         type: UPDATE_TASK_SUCCESS,

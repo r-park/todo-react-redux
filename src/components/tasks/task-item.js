@@ -81,7 +81,8 @@ export class TaskItem extends Component {
         onBlur={this.saveTitle}
         onKeyUp={this.onKeyUp}
         ref={c => this.titleInput = c}
-        type="text" />
+        type="text"
+      />
     );
   }
 
