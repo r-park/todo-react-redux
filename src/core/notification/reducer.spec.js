@@ -1,6 +1,4 @@
 /* eslint-disable no-undefined */
-import assign from 'object-assign';
-
 import { DELETE_TASK_SUCCESS } from 'core/tasks';
 
 import {
@@ -12,7 +10,7 @@ import { initialState, notificationReducer } from './reducer';
 
 describe('Notification reducer', () => {
   function getInitialState() {
-    return assign({}, initialState);
+    return Object.assign({}, initialState);
   }
 
 

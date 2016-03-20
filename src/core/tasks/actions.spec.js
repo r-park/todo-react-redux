@@ -1,4 +1,3 @@
-import assign from 'object-assign';
 import thunk from 'redux-thunk';
 import { addDataToFirebase, createMockStore } from 'test/utils';
 
@@ -74,7 +73,7 @@ describe('Tasks actions', () => {
 
       const expectedActions = [
         {type: CREATE_TASK_SUCCESS, payload: task},
-        {type: UPDATE_TASK_SUCCESS, payload: assign({}, task, changes)}
+        {type: UPDATE_TASK_SUCCESS, payload: Object.assign({}, task, changes)}
       ];
 
       const store = createMockStore({

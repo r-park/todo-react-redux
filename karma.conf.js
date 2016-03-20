@@ -3,6 +3,7 @@ module.exports = config => {
     frameworks: ['jasmine'],
 
     files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
       'node_modules/sinon/pkg/sinon.js',
       'node_modules/mockfirebase/browser/mockfirebase.js',
       'karma.entry.js'
