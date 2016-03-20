@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-spaces, no-process-exit, strict */
 'use strict';
 
 const browserSync   = require('browser-sync');
@@ -10,7 +11,7 @@ const historyApi    = require('connect-history-api-fallback');
 const karma         = require('karma');
 const path          = require('path');
 const webpack       = require('webpack');
-const WebpackServer = require("webpack-dev-server");
+const WebpackServer = require('webpack-dev-server');
 
 
 //=========================================================
@@ -88,6 +89,14 @@ gulp.task('js', done => {
 
 gulp.task('lint', () => {
   return gulp.src(config.eslint.src)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+
+gulp.task('lint.tools', () => {
+  return gulp.src('*.js')
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());

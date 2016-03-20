@@ -22,11 +22,11 @@ import {
 
 describe('Auth actions', () => {
   describe('initAuth', () => {
-    it('should create INIT_AUTH when authenticated', (done) => {
+    it('should create INIT_AUTH when authenticated', done => {
       const authData = {uid: '123'};
       const firebase = new MockFirebase();
 
-      const expectedActions = [(action) => {
+      const expectedActions = [action => {
         return action.type === INIT_AUTH &&
           action.payload === authData &&
           typeof action.meta.timestamp === 'number';
@@ -41,10 +41,10 @@ describe('Auth actions', () => {
       store.dispatch(initAuth());
     });
 
-    it('should create INIT_AUTH when not authenticted', (done) => {
+    it('should create INIT_AUTH when not authenticted', done => {
       const firebase = new MockFirebase();
 
-      const expectedActions = [(action) => {
+      const expectedActions = [action => {
         return action.type === INIT_AUTH &&
           action.payload === null &&
           typeof action.meta.timestamp === 'number';
@@ -67,11 +67,11 @@ describe('Auth actions', () => {
       expect(firebase.authWithOAuthPopup.calledWith('github')).toBe(true);
     });
 
-    it('should create SIGN_IN_SUCCESS', (done) => {
+    it('should create SIGN_IN_SUCCESS', done => {
       const authData = {uid: '123'};
       const firebase = new MockFirebase();
 
-      const expectedActions = [(action) => {
+      const expectedActions = [action => {
         return action.type === SIGN_IN_SUCCESS &&
           action.payload.uid === authData.uid &&
           typeof action.meta.timestamp === 'number';
@@ -98,11 +98,11 @@ describe('Auth actions', () => {
       expect(firebase.authWithOAuthPopup.calledWith('google')).toBe(true);
     });
 
-    it('should create SIGN_IN_SUCCESS', (done) => {
+    it('should create SIGN_IN_SUCCESS', done => {
       const authData = {uid: '123'};
       const firebase = new MockFirebase();
 
-      const expectedActions = [(action) => {
+      const expectedActions = [action => {
         return action.type === SIGN_IN_SUCCESS &&
           action.payload.uid === authData.uid &&
           typeof action.meta.timestamp === 'number';
@@ -129,11 +129,11 @@ describe('Auth actions', () => {
       expect(firebase.authWithOAuthPopup.calledWith('twitter')).toBe(true);
     });
 
-    it('should create SIGN_IN_SUCCESS', (done) => {
+    it('should create SIGN_IN_SUCCESS', done => {
       const authData = {uid: '123'};
       const firebase = new MockFirebase();
 
-      const expectedActions = [(action) => {
+      const expectedActions = [action => {
         return action.type === SIGN_IN_SUCCESS &&
           action.payload.uid === authData.uid &&
           typeof action.meta.timestamp === 'number';
@@ -160,7 +160,7 @@ describe('Auth actions', () => {
       expect(firebase.unauth.callCount).toBe(1);
     });
 
-    it('should create SIGN_OUT_SUCCESS', (done) => {
+    it('should create SIGN_OUT_SUCCESS', done => {
       const firebase = new MockFirebase();
 
       const expectedActions = [

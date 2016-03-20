@@ -1,3 +1,4 @@
+/* eslint-disable no-undefined */
 import assign from 'object-assign';
 
 import { DELETE_TASK_SUCCESS } from 'core/tasks';

@@ -50,7 +50,8 @@ export class TaskForm extends Component {
           placeholder="What needs to be done?"
           ref={c => this.titleInput = c}
           type="text"
-          value={this.state.title} />
+          value={this.state.title}
+        />
       </form>
     );
   }

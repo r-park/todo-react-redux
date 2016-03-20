@@ -47,8 +47,8 @@ module.exports = {
     }),
     new UglifyJsPlugin({
       compress: {
-        dead_code: true,
-        screw_ie8: true,
+        dead_code: true, // eslint-disable-line camelcase
+        screw_ie8: true, // eslint-disable-line camelcase
         unused: true,
         warnings: false
       }

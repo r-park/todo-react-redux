@@ -1,3 +1,4 @@
+/* eslint-disable no-undefined */
 import assign from 'object-assign';
 import { SIGN_OUT_SUCCESS } from 'core/auth';
 
