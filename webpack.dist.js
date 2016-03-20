@@ -1,6 +1,5 @@
-const autoprefixer = require('autoprefixer');
-const path = require('path');
 const webpack = require('webpack');
+const config = require('./webpack.base');
 
 // plugins
 const AggressiveMergingPlugin = webpack.optimize.AggressiveMergingPlugin;
@@ -17,34 +16,11 @@ module.exports = {
   cache: false,
   debug: true,
   devtool: 'source-map',
-
-  entry: {
-    main: './src/main.js',
-    vendor: [
-      'babel-polyfill',
-      'classnames',
-      'firebase',
-      'react',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'react-router-redux',
-      'redux',
-      'redux-thunk'
-    ]
-  },
-
-  output: {
-    filename: '[name].js',
-    path: path.resolve('./target'),
-    publicPath: '/'
-  },
-
-  resolve: {
-    extensions: ['', '.js'],
-    modulesDirectories: ['node_modules'],
-    root: path.resolve('./src')
-  },
+  entry: config.entry,
+  output: config.output,
+  resolve: config.resolve,
+  postcss: config.postcss,
+  sassLoader: config.sassLoader,
 
   module: {
     loaders: [
@@ -52,10 +28,6 @@ module.exports = {
       {test: /\.scss$/, loader: ExtractTextPlugin.extract('css!postcss-loader!sass')}
     ]
   },
-
-  postcss: [
-    autoprefixer({ browsers: ['last 3 versions', 'Firefox ESR'] })
-  ],
 
   plugins: [
     new DefinePlugin({

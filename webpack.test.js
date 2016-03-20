@@ -1,5 +1,5 @@
-const path = require('path');
 const webpack = require('webpack');
+const config = require('./webpack.base');
 
 // plugins
 const DefinePlugin = webpack.DefinePlugin;
@@ -7,19 +7,13 @@ const DefinePlugin = webpack.DefinePlugin;
 
 module.exports = {
   devtool: 'inline-source-map',
+  resolve: config.resolve,
 
   module: {
     loaders: [
       {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
-      {test: /\.scss$/, loader: 'style!css!autoprefixer-loader?{browsers:["last 3 versions", "Firefox ESR"]}!sass'}
+      {test: /\.scss$/, loader: 'style!css!postcss-loader!sass'}
     ]
-  },
-
-  resolve: {
-    alias: {
-      test: path.resolve('./test')
-    },
-    root: path.resolve('./src')
   },
 
   plugins: [
