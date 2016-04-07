@@ -4,7 +4,10 @@ import reducer from './reducer';
 
 export default (initialState = {}) => {
   let finalCreateStore;
+
   if (process.env.NODE_ENV !== 'production') {
+    // configure redux-devtools-extension
+    // @see https://github.com/zalmoxisus/redux-devtools-extension
     finalCreateStore = compose(
       applyMiddleware(thunk),
       window.devToolsExtension ? window.devToolsExtension() : f => f,
