@@ -2,10 +2,19 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import reducer from './reducer';
 
-
 export default (initialState = {}) => {
-  const enhancer = compose(applyMiddleware(thunk));
-  const store = createStore(reducer, initialState, enhancer);
+  let finalCreateStore;
+  if (process.env.NODE_ENV !== 'production') {
+    finalCreateStore = compose(
+      applyMiddleware(thunk),
+      window.devToolsExtension ? window.devToolsExtension() : f => f,
+    )(createStore);
+  }
+  else {
+    finalCreateStore = applyMiddleware(thunk)(createStore);
+  }
+
+  const store = finalCreateStore(reducer, initialState);
 
   if (module.hot) {
     module.hot.accept('./reducer', () => {
