@@ -8,6 +8,7 @@ A simple Todo app example with `undelete` capability — built with React, Redux
 - React-Redux
 - React-Router
 - Redux
+- Redux-Devtools-Extension for Chrome
 - Redux-Simple-Router
 - Babel
 - Firebase
@@ -40,6 +41,9 @@ The gulp tasks for this project require gulp v4-alpha. If you don't wish to glob
 ```bash
 $ ./node_modules/.bin/gulp run
 ```
+
+### Redux DevTools extension for Chrome (optional)
+This project is configured to take advantage of the [Redux DevTools extension](https://github.com/zalmoxisus/redux-devtools-extension) for Chrome. Get the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)</a>.
 
 
 ## Commands
