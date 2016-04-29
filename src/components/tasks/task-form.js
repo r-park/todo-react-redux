@@ -52,56 +52,92 @@ export class TaskForm extends Component {
     this.props.createTask(this.state);
     this.clearInput();
   }
+  mappedInputs(object){
+      return Object.keys(object).map((obj,k)=>{
+          var objRef = object[obj];
+          return (
+            <input
+              autoComplete="off"
+              autoFocus
+              className="task-form__input"
+              maxLength="64"
+              onChange={this.onChange.bind(this,objRef )}
+              onKeyUp={this.onKeyUp}
+              placeholder={objRef} 
+              ref={c => objRef  = c}
+              type="text"
+              value={this.state[objRef]}
+              key={k}
+            />
+          )
+      });
+  }
 
   render() {
-      var object ={
-              1:'firstName',
-              2:'LastName',
-              3:'emailAthlete',
-              4:'phoneAthelete',
-              5:'email',
-              6:'address',
-              7:'cityStateZip',
-              8:'aauCoachName',
-              9:'aauCoachEmail',
-              10:'aauCoachPhone',
-              11:'hsCoachName',
-              12:'hsCoachEmail',
-              13:'hsCoachPhone',
-              14:'gradeClass',
-              15:'height',
-              16:'weight',
-              17:'vertJump',
-              18:'posistion',
-              19:'aauProgram',
-              20:'aauJersey',
-              21:'highSchool',
-              22:'hudlProfile',
-              23:'gpa',
-              24:'act',
-              25:'classRank',
-          },
-          mapppedThings = Object.keys(object).map((obj,k)=>{
-              var objRef = object[obj];
-              return (
-                <input
-                  autoComplete="off"
-                  autoFocus
-                  className="task-form__input"
-                  maxLength="64"
-                  onChange={this.onChange.bind(this,objRef )}
-                  onKeyUp={this.onKeyUp}
-                  placeholder={objRef} 
-                  ref={c => objRef  = c}
-                  type="text"
-                  value={this.state[objRef]}
-                  key={k}
-                />
-                  )
-          });
+              debugger;
+      var genInfo={
+              contactInfo: {
+                  1:'firstName',
+                  2:'LastName',
+                  3:'emailAthlete',
+                  4:'phoneAthelete',
+                  5:'email',
+                  6:'address',
+                  7:'cityStateZip',
+                  8:'aauCoachName',
+                  9:'aauCoachEmail',
+                  10:'aauCoachPhone',
+                  11:'hsCoachName',
+                  12:'hsCoachEmail',
+                  13:'hsCoachPhone',
+              },
+              athleteInfo:{
+                  14:'gradeClass',
+                  15:'height',
+                  16:'weight',
+                  17:'vertJump',
+                  18:'posistion',
+                  19:'aauProgram',
+                  20:'aauJersey',
+                  21:'highSchool',
+                  22:'hudlProfile',
+              },
+              academicInfo:{
+                  23:'gpa',
+                  24:'act',
+                  25:'classRank',
+              }
+          };
+
     return (
       <form className="task-form" onSubmit={this.onSubmit} noValidate>
-          {mapppedThings}
+      <div style={{
+        display: 'inline-block',
+        width: 400,
+        float: 'left',
+        padding: 10,
+      }}>
+          <h1>Contact Information :</h1>
+              {this.mappedInputs(genInfo.contactInfo)}
+      </div>
+      <div style={{
+        display: 'inline-block',
+        width: 366,
+        float: 'left',
+        padding: 10,
+      }}>
+      <h1>Athletic Information :</h1>
+          {this.mappedInputs(genInfo.athleteInfo)}
+      </div>
+      <div style={{
+        display: 'inline-block',
+        width: 400,
+        float: 'left',
+        padding: 10,
+      }}>
+      <h1>Academic Information :</h1>
+          {this.mappedInputs(genInfo.academicInfo)}
+      </div>
         <button onClick={this.onSubmit} >Submit</button>
       </form>
     );

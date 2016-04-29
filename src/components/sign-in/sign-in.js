@@ -18,7 +18,7 @@ export class SignIn extends Component {
     } = this.props;
 
     return (
-      <div className="g-row sign-in">
+      <div className="g-row sign-in" >
         <div className="g-col">
           <h1 className="sign-in__heading">Sign in</h1>
           <button className="sign-in__button" onClick={signInWithFacebook} type="button">Facebook</button>
