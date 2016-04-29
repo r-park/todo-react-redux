@@ -46,7 +46,7 @@ export class App extends Component {
         <header className="header">
           <div className="g-row">
             <div className="g-col">
-              <h1 className="header__title">Todo React Redux</h1>
+              <h1 className="header__title">Prospect Source</h1>
 
               <ul className="header__links">
                 {auth.authenticated ? <li><a className="header__link" onClick={this.signOut} href="#">Sign out</a></li> : null}

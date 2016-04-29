@@ -54,6 +54,9 @@ export function signInWithGoogle() {
 export function signInWithTwitter() {
   return authenticate('twitter');
 }
+export function signInWithFacebook() {
+  return authenticate('facebook');
+}
 
 
 export function signOut() {

@@ -1,4 +1,4 @@
-export const FIREBASE_URL = 'https://todo-react-redux.firebaseio.com';
+export const FIREBASE_URL = 'https://prospect-source.firebaseio.com/';
 
 // Route paths
 export const SIGN_IN_PATH = '/sign-in';

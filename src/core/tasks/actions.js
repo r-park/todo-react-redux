@@ -8,12 +8,12 @@ import {
 } from './action-types';
 
 
-export function createTask(title) {
+export function createTask(t) {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
 
     firebase.child(`tasks/${auth.id}`)
-      .push({completed: false, title}, error => {
+      .push(t, error => {
         if (error) {
           console.error('ERROR @ createTask :', error); // eslint-disable-line no-console
           dispatch({

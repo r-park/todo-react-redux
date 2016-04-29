@@ -66,7 +66,7 @@ export class TaskItem extends Component {
       <div
         className="task-item__title"
         ref={c => this.titleText = c}
-        tabIndex="0">{task.title}</div>
+        tabIndex="0">Name: {task.firstName}  Title: {task.title}</div>
     );
   }
 
