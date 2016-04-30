@@ -135,7 +135,6 @@ export class TaskItem extends Component {
     const { editing } = this.state;
     const { task } = this.props;
 
-      debugger;
     return (
       <div className={classNames('task-item', {'task-item--completed': task.completed, 'task-item--editing': editing})} tabIndex="0">
         <div className="cell">

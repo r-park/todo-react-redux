@@ -18,6 +18,7 @@ export class TaskList extends Component {
       updateTask
     } = this.props;
 
+      debugger;
     return tasks
       .filter(task => {
         if (filter === 'active') return !task.completed;
