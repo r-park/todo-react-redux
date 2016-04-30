@@ -61,12 +61,57 @@ export class TaskItem extends Component {
     }
   }
 
+
+          // First Name       : {task.firstName} 
+          // Last Name        : {task.lastName}
+          // Email (Athlete)  : {task.emailAthlete}
+          // Phone (Athlete)  : {task.phoneAthelete}
+          // Adress           : {task.addressAthelete}
+          // City             : {task.cityAthelete}
+          // State            : {task.stateAthelete}
+          // Zip              : {task.zipAthelete}
+          // Coach Name (AAU) : {task.aauCoachName}
+          // Coach Email (AAU): {task.aauCoachEmail}
+          // Coach Phone (AAU): {task.aauCoachPhone}
+          // Coach Name (HS)  : {task.hsCoachName}
+          // Coach Email (HS) : {task.hsCoachEmail}
+          // Coach Phone (HS) : {task.hsCoachPhone}
+          // GradeClass       : {task.gradeClass}
+          // Height           : {task.height}
+          // Weight           : {task.weight}
+          // Vertical Jump    : {task.vertJump}
+          // Posistion        : {task.posistion}
+          // Program (AAU)    : {task.aauProgram}
+          // Jersey (AAU)     : {task.aauJersey}
+          // High School      : {task.highSchool}
+          // HUDL Profile     : {task.hudlProfile}
+          // GPA              : {task.gpa}
+          // ACT              : {task.act}
+          // Class Rank       : {task.classRank}
   renderTitle(task) {
     return (
-      <div
-        className="task-item__title"
-        ref={c => this.titleText = c}
-        tabIndex="0">Name: {task.firstName}  Title: {task.title}</div>
+          <div
+            className="task-item__title"
+            ref={c => this.titleText = c}
+            tabIndex="0">
+            {task.firstName}    {task.lastName}      ({task.gradeClass}/{task.posistion})      {task.stateAthelete}
+
+           First Name       : {task.firstName} 
+           Last Name        : {task.lastName}
+
+           Email (Athlete)  : {task.emailAthlete}
+           Phone (Athlete)  : {task.phoneAthelete}
+           Adress           : {task.addressAthelete}
+           City             : {task.cityAthelete}
+           State            : {task.stateAthelete}
+           Zip              : {task.zipAthelete}
+           Coach Name (AAU) : {task.aauCoachName}
+           Coach Email (AAU): {task.aauCoachEmail}
+           Coach Phone (AAU): {task.aauCoachPhone}
+           Coach Name (HS)  : {task.hsCoachName}
+
+
+       </div> 
     );
   }
 
@@ -90,6 +135,7 @@ export class TaskItem extends Component {
     const { editing } = this.state;
     const { task } = this.props;
 
+      debugger;
     return (
       <div className={classNames('task-item', {'task-item--completed': task.completed, 'task-item--editing': editing})} tabIndex="0">
         <div className="cell">
@@ -108,6 +154,7 @@ export class TaskItem extends Component {
 
         <div className="cell">
           {editing ? this.renderTitleInput(task) : this.renderTitle(task)}
+
         </div>
 
         <div className="cell">

@@ -9,7 +9,7 @@ export class TaskForm extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {title: ''};
+    this.state = {title: 'true'};
 
     this.onChange = this.onChange.bind(this);
     this.onKeyUp = this.onKeyUp.bind(this);
@@ -17,20 +17,32 @@ export class TaskForm extends Component {
   }
 
   clearInput() {
-    this.setState({title: ''});
-    this.setState({firstName: ''});
-    this.setState({lastName: ''});
-    this.setState({phoneAthlete: ''});
-    this.setState({email: ''});
-    this.setState({address: ''});
-    this.setState({cityStateZipAthelete: ''});
-    this.setState({aauCoachName: ''});
-    this.setState({aauCoachEmail: ''});
-    this.setState({aauCoachPhone: ''});
-    this.setState({hsCoachName: ''});
-    this.setState({hsCoachEmail: ''});
-    this.setState({hsCoachPhone: ''});
-    this.setState({completed: false}); 
+      this.setState({'firstName':''});
+      this.setState({'lastName':''}); 
+      this.setState({'emailAthlete':''});
+      this.setState({'phoneAthelete':''});
+      this.setState({'addressAthelete':''});
+      this.setState({'cityAthelete':''});
+      this.setState({'stateAthelete':''});
+      this.setState({'zipAthelete':''});
+      this.setState({'aauCoachName':''});
+      this.setState({'aauCoachEmail':''});
+      this.setState({'aauCoachPhone':''});
+      this.setState({'hsCoachName':''});
+      this.setState({'hsCoachEmail':''});
+      this.setState({'hsCoachPhone':''});
+      this.setState({'gradeClass':''});
+      this.setState({'height':''});
+      this.setState({'weight':''});
+      this.setState({'vertJump':''});
+      this.setState({'posistion':''});
+      this.setState({'aauProgram':''});
+      this.setState({'aauJersey':''});
+      this.setState({'highSchool':''});
+      this.setState({'hudlProfile':''});
+      this.setState({'gpa':''});
+      this.setState({'act':''});
+      this.setState({'classRank':''});
   }
 
   onChange(title, event) {
@@ -46,7 +58,6 @@ export class TaskForm extends Component {
   }
 
   onSubmit(event) {
-      debugger;
     event.preventDefault();
     const title = this.state.title.trim();
     this.props.createTask(this.state);
@@ -54,91 +65,84 @@ export class TaskForm extends Component {
   }
   mappedInputs(object){
       return Object.keys(object).map((obj,k)=>{
-          var objRef = object[obj];
+          var objRef = object[obj]['ref'],
+          objDisplay = object[obj]['display'];
           return (
-            <input
-              autoComplete="off"
-              autoFocus
-              className="task-form__input"
-              maxLength="64"
-              onChange={this.onChange.bind(this,objRef )}
-              onKeyUp={this.onKeyUp}
-              placeholder={objRef} 
-              ref={c => objRef  = c}
-              type="text"
-              value={this.state[objRef]}
-              key={k}
-            />
+                <input
+                  autoComplete="off"
+                  autoFocus
+                  className="task-form__input"
+                  maxLength="64"
+                  onChange={this.onChange.bind(this,objRef )}
+                  onKeyUp={this.onKeyUp}
+                  placeholder={objDisplay} 
+                  ref={c => objRef  = c}
+                  type="text"
+                  value={this.state[objRef]}
+                  key={k}
+                />
           )
       });
   }
 
   render() {
-              debugger;
       var genInfo={
               contactInfo: {
-                  1:'firstName',
-                  2:'LastName',
-                  3:'emailAthlete',
-                  4:'phoneAthelete',
-                  5:'email',
-                  6:'address',
-                  7:'cityStateZip',
-                  8:'aauCoachName',
-                  9:'aauCoachEmail',
-                  10:'aauCoachPhone',
-                  11:'hsCoachName',
-                  12:'hsCoachEmail',
-                  13:'hsCoachPhone',
+                   1:{ ref:'firstName',       display: 'First Name'       },
+                   2:{ ref:'lastName',        display: 'Last Name'        },
+                   3:{ ref:'emailAthlete',    display: 'Email (Athlete)'  },
+                   4:{ ref:'phoneAthelete',   display: 'Phone (Athlete)'  },
+                   6:{ ref:'addressAthelete', display: 'Adress'           },
+                   7:{ ref:'cityAthelete',    display: 'City'             }, 
+                   8:{ ref:'stateAthelete',   display: 'State'            },
+                   9:{ ref:'zipAthelete',     display: 'Zip'              }, 
+                  10:{ ref:'aauCoachName',    display: 'Coach Name (AAU)' },
+                  11:{ ref:'aauCoachEmail',   display: 'Coach Email (AAU)'},
+                  12:{ ref:'aauCoachPhone',   display: 'Coach Phone (AAU)'},
+                  13:{ ref:'hsCoachName',     display: 'Coach Name (HS)'  },
+                  14:{ ref:'hsCoachEmail',    display: 'Coach Email (HS)' },
+                  15:{ ref:'hsCoachPhone',    display: 'Coach Phone (HS)' }
               },
               athleteInfo:{
-                  14:'gradeClass',
-                  15:'height',
-                  16:'weight',
-                  17:'vertJump',
-                  18:'posistion',
-                  19:'aauProgram',
-                  20:'aauJersey',
-                  21:'highSchool',
-                  22:'hudlProfile',
+                  16:{ ref:'gradeClass',    display: 'GradeClass'        },
+                  17:{ ref:'height',        display: 'Height'            },
+                  18:{ ref:'weight',        display: 'Weight'            },
+                  19:{ ref:'vertJump',      display: 'Vertical Jump'     },
+                  20:{ ref:'posistion',     display: 'Posistion'         },
+                  21:{ ref:'aauProgram',    display: 'Program (AAU)'     },
+                  22:{ ref:'aauJersey',     display: 'Jersey (AAU)'      },
+                  23:{ ref:'highSchool',    display: 'High School'       },
+                  24:{ ref:'hudlProfile',   display: 'HUDL Profile'      },
               },
               academicInfo:{
-                  23:'gpa',
-                  24:'act',
-                  25:'classRank',
+                  25:{ ref:'gpa',           display: 'GPA'               },
+                  26:{ ref:'act',           display: 'ACT'               },
+                  27:{ ref:'classRank',     display: 'Class Rank'        },
               }
           };
 
+        var divStyle = { display: 'inline-block', width: '33%', float: 'left', padding: 10, };
     return (
-      <form className="task-form" onSubmit={this.onSubmit} noValidate>
-      <div style={{
-        display: 'inline-block',
-        width: 400,
-        float: 'left',
-        padding: 10,
-      }}>
-          <h1>Contact Information :</h1>
-              {this.mappedInputs(genInfo.contactInfo)}
-      </div>
-      <div style={{
-        display: 'inline-block',
-        width: 366,
-        float: 'left',
-        padding: 10,
-      }}>
-      <h1>Athletic Information :</h1>
-          {this.mappedInputs(genInfo.athleteInfo)}
-      </div>
-      <div style={{
-        display: 'inline-block',
-        width: 400,
-        float: 'left',
-        padding: 10,
-      }}>
-      <h1>Academic Information :</h1>
-          {this.mappedInputs(genInfo.academicInfo)}
-      </div>
-        <button onClick={this.onSubmit} >Submit</button>
+          <form className="task-form" onSubmit={this.onSubmit} noValidate>
+            <div className="g-row">
+                <div style={divStyle} className="g-col">
+                    <h1>Contact Information :</h1>
+                    {this.mappedInputs(genInfo.contactInfo)} 
+                </div>
+                <div style={divStyle} className="g-col">
+                    <h1>Athlete Information:</h1>
+                    {this.mappedInputs(genInfo.athleteInfo)}
+                </div>
+                <div style={divStyle} className="g-col">
+                    <h1>Academic Information :</h1>
+                    {this.mappedInputs(genInfo.academicInfo)}
+                </div>
+            </div>
+            <div className="g-row">
+                <div className="g-col">
+                    <button onClick={this.onSubmit} >Submit</button>
+                </div>
+            </div>
       </form>
     );
   }

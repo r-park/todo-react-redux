@@ -59,10 +59,12 @@ export class Tasks extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
+          <h1 style={{margin:'100px'}}> Prospect: General Information </h1>
           <TaskForm createTask={createTask} />
         </div>
 
         <div className="g-col">
+          <h1 style={{margin:'100px'}}> College Coach : Prospect Database</h1>
           <TaskFilters filter={filter} />
           <TaskList
             deleteTask={deleteTask}
