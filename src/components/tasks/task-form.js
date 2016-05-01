@@ -16,40 +16,53 @@ export class TaskForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  clearInput() {
-      this.setState({'firstName':''});
-      this.setState({'lastName':''}); 
-      this.setState({'emailAthlete':''});
-      this.setState({'phoneAthelete':''});
-      this.setState({'addressAthelete':''});
-      this.setState({'cityAthelete':''});
-      this.setState({'stateAthelete':''});
-      this.setState({'zipAthelete':''});
-      this.setState({'aauCoachName':''});
-      this.setState({'aauCoachEmail':''});
-      this.setState({'aauCoachPhone':''});
-      this.setState({'hsCoachName':''});
-      this.setState({'hsCoachEmail':''});
-      this.setState({'hsCoachPhone':''});
-      this.setState({'gradeClass':''});
-      this.setState({'height':''});
-      this.setState({'weight':''});
-      this.setState({'vertJump':''});
-      this.setState({'posistion':''});
-      this.setState({'aauProgram':''});
-      this.setState({'aauJersey':''});
-      this.setState({'highSchool':''});
-      this.setState({'hudlProfile':''});
-      this.setState({'gpa':''});
-      this.setState({'act':''});
-      this.setState({'classRank':''});
+  firstSubmit(key,value) {
+      this.state['firstName'       ]='';
+      this.state['lastName'        ]=''; 
+      this.state['emailAthlete'    ]='';
+      this.state['phoneAthelete'   ]='';
+      this.state['addressAthelete' ]='';
+      this.state['cityAthelete'    ]='';
+      this.state['stateAthelete'   ]='';
+      this.state['zipAthelete'     ]='';
+      this.state['aauCoachName'    ]='';
+      this.state['aauCoachEmail'   ]='';
+      this.state['aauCoachPhone'   ]='';
+      this.state['hsCoachName'     ]='';
+      this.state['hsCoachEmail'    ]='';
+      this.state['hsCoachPhone'    ]='';
+      this.state['gradeClass'      ]='';
+      this.state['height'          ]='';
+      this.state['weight'          ]='';
+      this.state['vertJump'        ]='';
+      this.state['posistion'       ]='';
+      this.state['aauProgram'      ]='';
+      this.state['aauJersey'       ]='';
+      this.state['highSchool'      ]='';
+      this.state['hudlProfile'     ]='';
+      this.state['gpa'             ]='';
+      this.state['act'             ]='';
+      this.state['classRank'       ]='';
+      debugger;
+      this.state[key]=value;
+
+console.log('State : '+this.state);
+//debugger;
+      this.props.createTask(this.state)
   }
 
   onChange(title, event) {
-    const obj = {};
-    obj[title]= event.target.value;
-    this.setState(obj);
+      const {tasks} = this.props;
+    //const obj = {};
+    tasks.length ? this.state[title]= event.target.value: this.firstSubmit(title,event.target.value);
+    debugger;
+    //obj[title]= event.target.value;
+    //this.setState(obj);
+//debugger;
+    //this.props.tasks && this.props.tasks[0]['key'] ? this.state[title]= event.target.value: this.firstSubmit(title, event.target.value);
+    
   }
+
 
   onKeyUp(event) {
     if (event.keyCode === 27) {
@@ -60,13 +73,26 @@ export class TaskForm extends Component {
   onSubmit(event) {
     event.preventDefault();
     const title = this.state.title.trim();
-    this.props.createTask(this.state);
-    this.clearInput();
+    //this.props.createTask(this.state);
+
+      const {tasks} = this.props;
+    debugger;
+    // tasks.length ? this.props.updateTask(this.props.tasks[0], this.state): this.firstSubmit(title, event.target.value);
+    this.props.updateTask(this.props.tasks[0], this.state)
+    //this.clearInput();
   }
+                  //value={tasks.length && tasks[0][objRef] != "" && tasks[0][objRef] == this.state[objRef]  ? tasks[0][objRef] : ""}
   mappedInputs(object){
+
+// Set state = Tasks !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      this.state = Object.assign({}, this.state, tasks);
+
+      debugger;
+      const {tasks} = this.props;
       return Object.keys(object).map((obj,k)=>{
           var objRef = object[obj]['ref'],
           objDisplay = object[obj]['display'];
+          tasks.length ? console.log(JSON.stringify(tasks[0],null,2)): console.log('nothing here');
           return (
                 <input
                   autoComplete="off"
@@ -75,10 +101,11 @@ export class TaskForm extends Component {
                   maxLength="64"
                   onChange={this.onChange.bind(this,objRef )}
                   onKeyUp={this.onKeyUp}
-                  placeholder={objDisplay} 
+                  
+                  placeholder={tasks.length && tasks[0][objRef] != "" ? tasks[0][objRef] :objDisplay} 
                   ref={c => objRef  = c}
                   type="text"
-                  value={this.state[objRef]}
+                  value={tasks.length && tasks[objRef] != "" ? tasks[objRef]: this.state[objRef]  }
                   key={k}
                 />
           )

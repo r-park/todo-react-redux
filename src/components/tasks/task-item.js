@@ -27,7 +27,9 @@ export class TaskItem extends Component {
   }
 
   editTitle() {
+      debugger;
     this.setState({editing: true});
+      debugger;
   }
 
   saveTitle(event) {

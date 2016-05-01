@@ -11,7 +11,7 @@ import {
 export function createTask(t) {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
-
+debugger;
     firebase.child(`prospects/${auth.id}`)
       .push(t, error => {
         if (error) {

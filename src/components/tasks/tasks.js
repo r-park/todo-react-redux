@@ -61,7 +61,9 @@ export class Tasks extends Component {
       <div className="g-row">
         <div className="g-col">
           <h1 style={{margin:'100px'}}> Prospect: General Information </h1>
-          <TaskForm createTask={createTask} />
+          <TaskForm createTask={createTask} 
+            {...this.props}
+          />
         </div>
 
         <div className="g-col">
@@ -71,7 +73,9 @@ export class Tasks extends Component {
             deleteTask={deleteTask}
             filter={filter}
             tasks={tasks}
-            updateTask={updateTask} />
+            updateTask={updateTask} 
+
+            />
         </div>
 
         {notification.display ? this.renderNotification() : null}
