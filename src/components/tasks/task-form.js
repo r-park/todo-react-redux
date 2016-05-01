@@ -54,7 +54,7 @@ console.log('State : '+this.state);
   onChange(title, event) {
       const {tasks} = this.props;
     //const obj = {};
-    tasks.length ? this.state[title]= event.target.value: this.firstSubmit(title,event.target.value);
+    tasks.length ? this.state[title]= event.target.value.trim(): this.firstSubmit(title,event.target.value.trim());
     debugger;
     //obj[title]= event.target.value;
     //this.setState(obj);
