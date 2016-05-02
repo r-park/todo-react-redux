@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import 'styles/styles.scss';  
+import 'styles/styles.scss';
 import { Root } from 'components/root';
 import { authActions, authRouteResolver } from 'core/auth';
 import { FIREBASE_URL } from './config';

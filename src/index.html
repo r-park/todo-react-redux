@@ -13,11 +13,1024 @@
 
   <script src="https://use.typekit.net/kmv5qdr.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
+<!-- Latest compiled and minified Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<style type="text/css">
+	
+	
+	* {
+    box-sizing: border-box;
+	}
+
+	html, body {
+    width: 100%;
+    height: 100%;
+	}
+
+	//@font-face {
+    //font-family: Venera100;
+    //src: url(fonts/Venera-100.otf);
+	//}
+
+	//@font-face {
+    //font-family: Venera300;
+    //src: url(fonts/Venera-300.otf);
+	//}
+	//
+	//@font-face {
+    //font-family: Venera500;
+    //src: url(fonts/Venera-500.otf);
+	//}
+
+	//@font-face {
+    //font-family: Venera700;
+    //src: url(fonts/Venera-700.otf);
+	//}
+	//
+	//@font-face {
+    //font-family: Venera900;
+    //src: url(fonts/Venera-900.otf);
+	//}
+
+    //body {
+    //background-color: white;
+	//font-size: 16px;
+	////font-family: 'Venera300';
+	//color: #4e4f51;
+	//}
+    
+     @media (min-width: 768px)  {
+	.container {
+    width: 97%;
+    }
+}
+    
+    a 	{
+	text-decoration: none;
+	color: #5ccae6;
+	}
+    
+    a:active {
+    text-decoration: none;
+    color: #939598;
+	}
+    
+    a:focus, a:hover {
+    text-decoration: none;
+    color: #939598;
+	}
+    
+    h1, h2, h3, h4, h5 {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    //font-family: "Venera700";
+    }
+    
+    
+    hr   {
+    color: #939598;
+	width: 75%;  
+	margin-top: 50px;
+	margin-bottom: 50px;  
+    }
+    
+    header {
+    padding: 50px 0px 50px 0px;
+    }
+    
+    section {
+    padding: 50px 0px 50px 0px;
+    border-top: 2px solid #5ccae6;
+    }
+    
+    .btn-default {
+    color: #333;
+    background-color: #5ccae6;
+    border-color: #939598;
+    border-radius: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    width: 75%;
+    padding: 10px;
+    //font-family: Venera700;
+    /*font-size: 25px;*/
+	}
+	
+	
+	
+	.btn-default:hover,  .btn-default:focus {
+    color: #333;
+    background-color: #939598;
+    border-color: #939598;
+	}
+	
+	.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+    outline: none;
+	border: 2px solid #5ccae6;    
+	}
+	
+	.navbar-default {
+    background-color: rgba(255,255,255,.90);
+    border-color: #939598;
+	}
+    
+    .navbar-default .navbar-nav>li>a {
+    color: #5ccae6;
+    font-size: 14px;
+	}
+    
+    .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: #939598;
+    background-color: transparent;
+	}
+    
+    .navbar-toggle {
+    font-size: 14px;
+	}
+    
+    .navbar-brand {
+	padding: 8px 20px;
+	}
+	
+    .navbar-brand img {
+    height: 35px;
+    width: 35px;
+    margin-right: 10px;
+    display: inline;
+	}
+    
+    #mainNav .name {
+    display: none;
+    }
+    
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+    background-color: white;
+	}
+	
+	@media(min-width:768px) {
+	
+	#mainNav .name {
+    display: inline;
+    }
+}
+
+	#data-collection  {
+	padding: 0px;
+	margin: 70px 15px;
+	border: 4px solid #5ccae6;
+	border-radius: 100px;
+	}
+	
+	.page {
+	padding: 0% 0% 2% 0%;
+	margin: 70px 15px;
+	border: 4px solid #5ccae6;
+	border-radius: 75px;
+	}
+	
+	input {
+    width: 100%;
+	}
+	
+	.input-container h4 {
+	text-align: center;
+	margin: 10px 5px 30px 5px; 
+	font-size: 16px;
+	}
+
+	.input-container  {
+	margin: 0px 5px;
+	border: 4px solid #5ccae6;
+	border-radius: 50px;
+	font-size: 14px;
+	padding: 10px 5px 35px 5px;
+	}
+	
+	.timeline-image1 {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f1f1f1;
+    border-radius: 100%;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.background-blue {
+    background-color: #5ccae6;
+	}
+	
+	.background-gray {
+    background-color: #939598;
+	}
+	
+	.background-light-gray {
+    background-color: #e7e7e7;
+	}
+	
+	.timeline-image1 h2 {
+    margin: 6px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.timeline-heading1, .timeline-heading2, .timeline-heading3 {
+    margin-left: 10%;
+	}
+	
+	.timeline-image2 {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f1f1f1;
+    border-radius: 100%;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.timeline-image2 h2 {
+    margin: 6px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.timeline-image3 {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f1f1f1;
+    border-radius: 100%;
+    text-align: center;
+    color: #fff;
+	}
+
+	.timeline-image3 h2 {
+    margin: 6px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.hr {
+    height: 2px;
+    background-color: #93959B;
+    position: absolute;
+	width: 75%;
+    top: 32%;
+    left: 12%;
+	}
+	
+	.center-button {
+	margin-left: 12.5%;
+	}
+
+	@media(max-width:768px) {
+	
+	.timeline-image1 {
+    float:left;
+	}
+	
+	.timeline-image2 {
+   	float:left;
+	}
+	
+	.timeline-image3 { 
+    float:left;
+	}
+	
+	.timeline-heading1 {
+    padding-top: 18px;
+	padding-left: 25px;
+    text-align: left;
+	}
+	.timeline-heading2 {
+    padding-top: 18px;
+	padding-left: 25px;
+    text-align: left;
+	}
+	.timeline-heading3 {
+    padding-top: 18px;
+	padding-left: 25px;
+	text-align: left;
+	}
+
+}
+
+	@media(min-width:768px) {
+	
+	.timeline-heading1, .timeline-heading2, .timeline-heading3 {
+    text-align: center;
+    margin-left: 0%;
+	}
+	
+	.timeline-image1 {
+    margin: 8% 0% 8% 40%;
+	}
+	
+	.timeline-image2 {
+    margin: 8% auto;
+	}
+	
+	.timeline-image3 { 
+    margin: 8% 0% 8% 46%;
+	}
+	
+	.timeline-heading3 {
+    margin-left: 10%;
+	}
+	
+	.receive  {
+	margin-left: 0px;
+	margin-right: 0px;
+	}
+}
+
+	@media(max-width:1000px) {
+
+	.input-box  {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	}
+}
+
+ /*---------CSS for club-admin-registration-react.js HTML-----------------------------------*/ 
+
+
+	#club-admin {
+ 	border-radius: 25px;
+ 	padding: 5%;
+    text-align: center;
+    margin-bottom: 20px;
+ 	}
+
+	.receive  {
+	background-color: #e7e7e7;
+	border-radius: 25px;
+	padding-top: .25%;
+	padding-bottom: .25%;
+	margin-left: 15px;
+	margin-right: 15px;
+	}
+ 	
+ 	.receive h5 {
+	margin-top: 6%;
+	margin-bottom: 6%;
+	}
+ 	
+ 	.receive span  {
+	//font-family: Venera500;
+	}
+ 	
+ 	@media(min-width:768px) {
+ 	
+ 	.receive  {
+	    width: 73%;
+	margin-left: 0px;
+	margin-right: 0px;
+	}
+
+}
+ /*---------CSS for college-coaches-signin-react.js HTML-----------------------------------*/ 
+
+	#logo img{
+	width: 100%;
+	margin-bottom: 30px;
+	}
+	
+	#signin .btn-default {
+    margin: 10px;
+    width: 35%;
+    padding: 10px;
+	}
+	
+	#signin input {
+    margin: 10px;
+    width: 75%;
+    padding: 10px;
+	}
+	
+	#question {
+	background-color: #e7e7e7;
+	}
+	
+	#question:hover {
+	background-color: #939598;
+	}
+	
+	#links  {
+	border: none;
+	}
+	
+	#links h5 {
+	margin: 5% 0% 5% 0%;
+	font-size: 11px;
+	}
+
+ /*---------CSS for profile-view-react.js HTML-----------------------------------*/ 
+
+	#profile {
+	background-color: #e7e7e7;
+ 	}
+	
+	#profile-top-row {
+	margin-top: 2%;
+ 	}
+ 	
+	#profile-picture {
+    background-color: #5ccae6;
+ 	border-radius: 25px;
+ 	padding: 5%;
+    text-align: center;
+    margin-bottom: 20px;
+	margin-top: 20px;
+ 	}
+	
+	#notifications {
+    background-color: #5ccae6;
+ 	border-radius: 25px;
+ 	padding: 2%;
+    text-align: center;
+    margin-bottom: 20px;
+	margin-top: 20px;
+ 	}
+	
+	#notifications:hover {
+    background-color: #939598;
+ 	}
+	
+	
+	
+	#profile-basics {
+ 	background-color: #e7e7e7;
+ 	border-radius: 25px;
+ 	padding: .5%;
+    margin-bottom: 20px;
+	margin-top: 20px;
+	}
+	
+	#notifications p {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 13px;
+	}
+ 	
+ 	#athlete-info-container {
+ 	
+ 	}
+ 	
+ 	#profile-basics h3 {
+ 	margin-top: 0px;
+ 	margin-bottom:5%;
+ 	}
+ 	
+ 	#profile-contact-info {
+ 	background-color: #fff;
+ 	border-radius: 50px;
+ 	padding: 5%;
+    margin-bottom: 20px;
+	margin-top: 20px;
+	}
+	
+	#profile-contact-info  h3, #profile-athletic-info  h3{
+ 	margin-top: 0px;
+ 	margin-bottom:5%;
+ 	text-align: center;
+	}
+	
+	#profile-athletic-info  h4, #profile-contact-info  h4, #profile-basics h4{
+ 	display: inline;
+	}
+	
+	#profile-contact-info  p{
+ 	margin-top: 1.2%;
+ 	margin-bottom:1.2%;
+	}
+ 	
+ 	#profile-athletic-info div, #profile-contact-info div, #profile-basics  div{
+ 	margin-top: 1.5%;
+ 	margin-bottom:1.5%;
+	}
+ 	
+ 	#profile-athletic-info {
+ 	display: none;
+ 	background-color: #fff;
+ 	border-radius: 50px;
+ 	padding: 5%;
+    margin-bottom: 20px;
+	margin-top: 20px;
+	}
+ 	
+ 	.data-cat-btn  {
+ 	color: #fff;
+ 	border-radius: 25px;
+ 	padding: 5%;
+    text-align: center;
+    margin-bottom: 10px;
+	margin-top: 10px;
+	clear: left;
+ 	}
+ 	
+ 	.data-cat-btn:hover {
+ 	background-color: #5ccae6;
+ 	}
+ 	
+ 	.data-cat-btn h5 {
+    margin-bottom: 0px;
+	margin-top: 0px;
+ 	}
+
+/*---------CSS for coach-registration-react.js HTML-----------------------------------*/ 
+
+	.coach-registration {
+	border-radius: 25px;
+ 	padding: 2%;
+    text-align: left;
+    margin-bottom: 5%;
+	margin-top: 5px;
+	overflow: auto; 	
+	}
+	
+	.coach-registration h4 {
+	margin-top: 9%;
+	}
+	
+ 	
+ 	.register-btn {
+ 	border-radius: 25px;
+ 	padding: 2%;
+    text-align: center;
+ 	margin: 0px 0px 0px 0px;
+ 	}
+ 	
+ 	.register-btn:hover {
+ 	background-color: #e7e7e7;
+ 	}
+ 	
+ 	.register-btn h5 {
+ 	margin: 5% 0% 5% 0%;
+ 	}
+ 	
+ 	.men-women-coach  {
+ 	text-align: center;
+ 	}
+ 	
+ 	.page2 {
+	padding: 0% 2% 2% 2%;
+	margin: 70px 15px;
+	border: 4px solid #5ccae6;
+	border-radius: 75px;
+	}
+ 	
+ 	@media(min-width:768) {
+ 	.coach-registration {
+ 	width: 100%;
+ 	}
+ }
+ 
+ 	
+	#registration-sized {
+    	width: 97%;
+		margin-bottom: 20px;
+	}
+ 
+ 	@media(min-width:1100px) {
+ 	
+ 	.coach-registration {
+ 	width: 100%;
+ 	}
+ }
+ 	
+ 	#upload-logo {
+ 	//font-family: Venera300;
+ 	}
+ 	
+ 	#gender-info input {
+	width: 20px;
+	height: 20px;	 	
+	margin-left:15%;
+	margin-right:5%;
+	}
+ 	
+ 	.custom-file-input {
+  	color: transparent;
+	}
+
+	.custom-file-input::-webkit-file-upload-button {
+  	display: none;
+	}
+	
+	.custom-file-input::before {
+  	content: 'Choose File';
+  	color: black;
+  	display: inline-block;
+  	background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+  	border: 1px solid #999;
+  	border-radius: 15px;
+    padding: 5px;
+  	outline: none;
+  	white-space: nowrap;
+  	-webkit-user-select: none;
+  	cursor: pointer;
+  	font-weight: 700;
+  	font-size: 10pt;
+  	width: 50%;
+  	margin-left: 25%;
+  	text-align: center;
+	}
+	.custom-file-input:hover::before {
+  	border-color: black;
+  	background-color: #5ccae6;
+	}
+	.custom-file-input:active {
+	outline: 0;
+	}
+	.custom-file-input:active::before {
+  	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+	}
+ 	
+ 	.program-button	h2{
+ 	margin-top: 1%;
+    margin-bottom: 1%;
+ 	}
+ 
+ /*---------CSS for prospects-react.js HTML-----------------------------------*/ 
+	
+	@media(max-width: 612px) {
+  	h2  {
+    font-size: 25px;
+ 	}
+ 	
+ 	.program-button h2  {
+    font-size: 18px;
+ 	}
+ }
+ 
+ 	.panel-container {
+    background-color: #e7e7e7;
+    margin: 10px 0px;
+    border: 4px solid #5ccae6;
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 10px 10px 35px 10px;
+    }
+    
+    .prospect-container {
+    margin: 10px 0px;
+    border: 4px solid #5ccae6;
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 10px 5px 35px 5px;
+    clear: left;
+    }
+ 	
+ 	#club-logo  {
+    background-color: #5ccae6;
+ 	border-radius: 25px;
+ 	border: 3px solid #939598;
+ 	padding: 5%;
+    text-align: center;
+    margin: 10px 10px 20px 10px;
+	width: 35%;
+	height: 100px;
+	float: left;
+ 	}
+ 	
+ 	@media(min-width: 768px) {
+  	#club-logo  {
+    background-color: #5ccae6;
+ 	border-radius: 25px;
+ 	border: 3px solid #939598;
+ 	padding: 5%;
+    text-align: center;
+    margin: 10px 10px 20px 10px;
+	width: 80%;
+	height: 100px;
+	margin-left: 10%;
+ 	}
+ }
+ 	#program-name h5 {
+	margin-top: 25px;
+	margin-left: 0px;
+	margin-bottom: 24px;
+ 	}
+ 	
+
+ 	.panel-cat-name {
+ 	float: left;
+ 	clear: left;
+ 	}
+ 	
+ 	.prospect-categories {
+    padding-left: 0;
+    margin-left: 0px;
+    list-style: none;
+    margin-bottom: 30px;
+    margin-top: 20px;
+	}
+	
+	.prospect-categories>li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-left: .9%;
+    width: 19%
+	}
+	
+	.prospect-categories input {
+	display: block;
+	width: 20px;
+	height: 20px;	 	
+	margin: 0px 10px;
+	}
+	
+	.prospect-categories input:hover {
+    cursor:pointer;
+    }
+	
+	.cat-btn  {
+ 	border-radius: 25px;
+ 	padding: 1%;
+    text-align: center;
+    margin-bottom: 1px;
+	margin-top: 1px;
+	clear: left;
+ 	}
+ 	
+ 	.prospect-list {
+	margin-left: 1%;
+ 	}
+ 	
+ 	.prospect-summary {
+ 	position: relative;
+ 	border-radius: 25px;
+ 	padding: 2%;
+    text-align: left;
+    margin-bottom: 5px;
+	margin-top: 0px;
+ 	}
+ 	
+ 	@media(min-width:902px) {
+ 	.prospect-summary {
+ 	position: relative;
+ 	border-radius: 25px;
+ 	padding: -9%;
+    text-align: left;
+ 	}
+ 	}
+ 	
+ 	.prospect-update {
+ 	width: 73%;
+ 	}
+ 	
+ 	
+ 	.prospect-update i {
+ 	//font-family: Venera900;
+ 	}
+ 	
+ 	.profile-link-button {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	display: inline;
+	color: #333;
+    border-radius: 25px;
+    width: 15%;
+    padding: 10px;
+    //font-family: Venera700;
+    min-width: 100px;
+	}
+ 	
+ 	#prospect-clubname  {
+ 	display: inline;
+ 	float: left;
+  	}
+ 	
+ 	#prospect-account  {
+ 	display: inline;
+ 	float: right;
+ 	}
+ 	
+ 	#prospect-interest   {
+ 	background-color: #e7e7e7;
+ 	padding-top: 9px;
+ 	}
+ 	
+ 	#recruiting-tracking .row {
+ 	margin-left: 0px;
+ 	margin-right: 0px;
+ 	}
+ 	
+ 	#recruiting-tracking h5 {
+ 	margin-top: 10px;
+ 	margin-bottom: 10px;
+ 	}
+ 	
+ 	.recruiting-tracking-btn  {
+ 	border-radius: 25px;
+ 	padding: 1%;
+    text-align: center;
+    margin-bottom: 1px;
+	margin-top: 1px;
+	color: #fff;
+	height: 68px;
+ 	}
+ 	
+ 	.recruiting-tracking-btn:hover  {
+ 	background-color: #939598;
+ 	}
+ 	
+ 	.recruit-update-container  {
+ 	display: none;
+ 	position: absolute;
+ 	top: 30%;
+ 	left:20%;
+ 	margin: 10px 0px;
+    border: 4px solid #939598;
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 10px 5px 35px 5px;
+    width: 65%;
+    background-color: #fff;
+ 	}
+ 	
+ 	
+ 	.recruit-update-container input {
+ 	display:inline;
+    width: 65%;
+    margin: 10px;
+ 	}
+ 	
+ 	.recruit-update-container .btn-default {
+ 	display:inline;
+    width: 25%;
+ 	}
+ 	
+ 	.letter-attributes  {
+ 	border: 4px solid #5ccae6;
+    border-radius: 25px;
+    font-size: 14px;
+    padding: 10px 5px 35px 5px;
+    margin-left: 10%;
+    width: 80%;
+ 	}
+ 	
+ 	.letter-attributes input {
+ 	width: 20px;
+	height: 20px;	 	
+	margin-left:15%;
+	margin-right:5%;
+ 	}
+ 	
+ 	#video-description  {
+ 	height: 550px;
+ 	position: relative;
+ 	}
+ 	
+ 	.prospect-container h5 {
+ 	margin-top: 10px;
+ 	margin-bottom: 10px;
+ 	}
+ 	
+ 	.prospect-container .btn {
+ 	margin-bottom: 13px;
+ 	}
+ 	
+ 	.prospect-container h5, .prospect-container input {
+ 	display: inline;
+ 	}
+ 	
+ 	.video-upload-container {
+ 	margin-top: 3%;
+ 	margin-left: 2%;
+ 	}
+ 	
+ 	.marketing-add-container {
+ 	display: none;
+ 	position: absolute;
+ 	top: 110%;
+ 	left:20%;
+ 	margin: 10px 0px;
+    border: 4px solid #939598;
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 10px 5px 35px 5px;
+    width: 65%;
+    background-color: #fff;
+ 	}
+ 	
+ 	.marketing-attributes  {
+ 	border: 4px solid #5ccae6;
+    border-radius: 25px;
+    font-size: 14px;
+    padding: 10px 5px 35px 5px;
+    margin-left: 10%;
+    width: 80%;
+ 	}
+ 	
+ 	.marketing-attributes input {
+    width: 20px;
+    height: 20px;
+    margin-left: 0%;
+    margin-right: 5%;
+    }
+ 
+ 	
+ 	.marketing-attributes p {
+    margin-left: 2%;
+	margin-right: 2%;
+    }
+ 	
+ 	.marketing-confirm-container {
+ 	display: none;
+ 	position: absolute;
+ 	top: 210%;
+ 	left:20%;
+ 	margin: 10px 0px;
+    border: 4px solid #939598;
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 10px 5px 35px 5px;
+    width: 65%;
+    background-color: #fff;
+    z-index: 1001;
+ 	}
+ 	
+ 	.marketing-confirm  {
+ 	border: 4px solid #5ccae6;
+    border-radius: 25px;
+    font-size: 14px;
+    padding: 10px 5px 35px 5px;
+    margin-left: 10%;
+    margin-top: 3%;
+    width: 80%;
+ 	}
+ 	
+ 	.marketing-confirm input {
+    width: 20px;
+    height: 20px;
+    margin-left: 0%;
+    margin-right: 5%;
+    }
+ 
+ 	
+ 	.marketing-confirm p {
+    margin-left: 2%;
+	margin-right: 2%;
+    }
+ 	
+</style>
 </head>
 
 
 <body>
   <div class="app-root"></div>
+
+
+ <div id="prospect-dashboard"></div>
+ <div id="video-service"></div> 
+ <div id="marketing-service"></div>
+ <div id=""></div>
+ <div id=""></div>
+ <div id=""></div>
+    <div id="playerRegistration"></div>
+    <div id="selectClub"></div>
+	<div id="generalInformation"></div>
+	<div id="plansFeatures"></div>
+	<div id="billing"></div>
+	<div id="completedRegistration"></div>
+ 
+ 
+ <!-- React JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+	<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+
+
+	<!-- React JS with Addons for playerFilter -->
+	<script src="https://fb.me/react-with-addons-0.14.3.js"></script>
+	
+
+	<!-- Firebase -->
+	<script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+
+	<!-- ReactFire -->
+	<script src="https://cdn.firebase.com/libs/reactfire/0.5.1/reactfire.min.js"></script>
+
+	<!-- Browser.js for playerFilter -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.js"></script>
+
+	<!--<script type="text/jsx" src="js/player-registration-react.js"></script>
+	<script type="text/jsx" src="js/completed-registration-react.js"></script>
+	<script type="text/jsx" src="js/video-service-react.js"></script>
+	<script type="text/jsx" src="js/select-club-react.js"></script>
+	<script type="text/jsx" src="js/ps-data-collection-react.js"></script>
+	<script type="text/jsx" src="js/billing-react.js"></script>
+	<script type="text/jsx" src="js/completed-registration-react.js"></script>
+	<script type="text/jsx" src="js/plans-features-react.js"></script>
+ 	 files for React Components 
+	<script type="text/jsx" src="js/prospect-dashboard-react.js"></script>
+	<script type="text/jsx" src="js/marketing-service-react.js"></script>
+	<script type="text/jsx" src="js/completed-program-registration-react.js"></script>
+	<script type="text/jsx" src="js/club-invite-prospects-react.js"></script>
+	<script type="text/jsx" src="js/my-prospects-react.js"></script>
+	-->
 
 </body>
 </html>

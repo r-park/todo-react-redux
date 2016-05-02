@@ -41,23 +41,42 @@ export class App extends Component {
   render() {
     const { auth, children } = this.props;
 
+      //  <header className="header">
+      //    <div className="g-row">
+      //      <div className="g-col">
+      //        <h1 className="header__title">Prospect Source</h1>
+
+      //        <ul className="header__links">
+      //          {auth.authenticated ? <li><a className="header__link" onClick={this.signOut} href="#">Sign out</a></li> : null}
+      //          <li><a className="header__link header__link--github" href="https://github.com/r-park/todo-react-redux"></a></li>
+      //        </ul>
+      //      </div>
+      //    </div>
+      //  </header>
+
+      //  <main className="main">{children}</main>
+      //</div>
     return (
       <div>
-        <header className="header">
-          <div className="g-row">
-            <div className="g-col">
-              <h1 className="header__title">Prospect Source</h1>
+        <nav id="mainNav" className="navbar navbar-default navbar-fixed-top">
+            <div className="container-fluid">
+                <div className="navbar-header">
+                    <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span className="sr-only">Toggle navigation</span>
+                    </button>
+                    <a className="navbar-brand page-scroll" href="index"><img src="img/ps-icon.png" /><span className="name">Prospect Source</span></a>
+                </div>
 
-              <ul className="header__links">
-                {auth.authenticated ? <li><a className="header__link" onClick={this.signOut} href="#">Sign out</a></li> : null}
-                <li><a className="header__link header__link--github" href="https://github.com/r-park/todo-react-redux"></a></li>
-              </ul>
+                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul className="nav navbar-nav navbar-right">
+                        {auth.authenticated ? <li><a className="header__link" onClick={this.signOut} href="#">Sign out</a></li> : null}
+                    </ul>
+                </div>
             </div>
-          </div>
-        </header>
-
+        </nav>
         <main className="main">{children}</main>
       </div>
+
     );
   }
 }

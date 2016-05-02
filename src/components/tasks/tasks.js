@@ -10,6 +10,7 @@ import { Notification } from './notification';
 import { TaskFilters } from './task-filters';
 import { TaskForm } from './task-form';
 import { TaskList } from './task-list';
+import { ProspectList } from './prospect-list';
 
 
 export class Tasks extends Component {
@@ -57,19 +58,19 @@ export class Tasks extends Component {
 
     const { filter } = location.query;
 
+          //<TaskFilters filter={filter} />
     return (
       <div className="g-row">
         <div className="g-col">
-          <h1 style={{margin:'100px'}}> Prospect: General Information </h1>
+          <h1 style={{marginTop:'100px',marginLeft:'100px'}}> Prospect: General Information </h1>
           <TaskForm createTask={createTask} 
             {...this.props}
           />
         </div>
 
         <div className="g-col">
-          <h1 style={{margin:'100px'}}> College Coach : Prospect Database</h1>
-          <TaskFilters filter={filter} />
-          <TaskList
+          <h1 style={{marginLeft:'100px'}}> Prospect: Prospect Dashboard</h1>
+          <ProspectList
             deleteTask={deleteTask}
             filter={filter}
             tasks={tasks}
