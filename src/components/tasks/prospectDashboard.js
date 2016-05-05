@@ -136,7 +136,7 @@ export class ProspectDashboard extends Component {
     						<h2 id="prospect-interest" className="text-center" >My Recruiting Interest</h2>
 							<div id="recruiting-tracking">    						
 								<div className="row">
-									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>RECEIVED A LETTER</h5></div>
+									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>RECEIVED</h5><h5>A LETTER</h5></div>
 									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>RECEIVED A TEXT</h5></div>
 									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>RECEIVED AN EMAIL</h5></div>
 								</div>
@@ -194,6 +194,35 @@ export class ProspectDashboard extends Component {
     );
   }
 
+   handleContactClick() {
+    document.getElementById('profile-contact-info').style.display='block';
+    document.getElementById('profile-athletic-info').style.display='none';
+    document.getElementById('profile-academic-info').style.display='none';
+    document.getElementById('player-recruiting-interest').style.display='none';
+  }
+  
+   handleAthleticClick(event) {
+    document.getElementById('profile-contact-info').style.display='none';
+    document.getElementById('profile-athletic-info').style.display='block';
+    document.getElementById('profile-academic-info').style.display='none';
+    document.getElementById('player-recruiting-interest').style.display='none';
+  }
+
+   handleAcademicClick(event) {
+    document.getElementById('profile-contact-info').style.display='none';
+    document.getElementById('profile-athletic-info').style.display='none';
+    document.getElementById('profile-academic-info').style.display='block';
+    document.getElementById('player-recruiting-interest').style.display='none';
+  }
+  
+   handleRecruitingClick(event) {
+    document.getElementById('profile-contact-info').style.display='none';
+    document.getElementById('profile-athletic-info').style.display='none';
+    document.getElementById('profile-academic-info').style.display='none';
+    document.getElementById('player-recruiting-interest').style.display='block';
+  }
+
+
   render() {
     const { editing } = this.state;
     const { task } = this.props;
@@ -231,6 +260,9 @@ export class ProspectDashboard extends Component {
                                     <div id="" className="data-cat-btn background-gray">
                                         <h5>Dashboard</h5>
                                     </div>
+                                    <div id="" className="data-cat-btn background-gray">
+                                        <h5>Summary</h5>
+                                    </div>
                                     <div className="panel-cat-name">
                                         <h5>Edit Information</h5>
                                     </div>
@@ -255,31 +287,31 @@ export class ProspectDashboard extends Component {
                                 </div>    				
                             </div>
                     <div className="col-sm-9">
-                        <div id="prospect-clubname"><u><h5>{task.aauProgram}</h5></u></div>
-                        <div id="prospect-account"><u><h5>Account</h5></u></div>
+                        <div><u><h5 id="prospect-clubname">{task.aauProgram}</h5></u><u><h5 id="prospect-coach-view" className="text-right">View What Coaches See</h5></u></div>
+                        
                         <div className="prospect-container">
                             <ul className="prospect-categories list-inline">
-                                <li className="cat-btn background-blue"><input type="checkbox" onChange={this.handleUserInput} value={ this.state } />D1</li>
-                                <li className="cat-btn background-blue"><input type="checkbox" onChange={this.handleUserInput} value={ this.state } />D2</li>
-                                <li className="cat-btn background-blue"><input type="checkbox" onChange={this.handleUserInput} value={ this.state } />D3</li>
-                                <li className="cat-btn background-blue"><input type="checkbox" onChange={this.handleUserInput} value={ this.state } />NAIA</li>
-                                <li className="cat-btn background-blue"><input type="checkbox" onChange={this.handleUserInput} value={ this.state } />JUCO</li>
+                                <li className="cat-btn background-blue">D1</li>
+                                <li className="cat-btn background-blue">D2</li>
+                                <li className="cat-btn background-blue">D3</li>
+                                <li className="cat-btn background-blue">NAIA</li>
+                                <li className="cat-btn background-blue">JUCO</li>
                             </ul>
                             <h2 id="prospect-interest" className="text-center" >My Recruiting Interest</h2>
                             <div id="recruiting-tracking">    						
                                 <div className="row">
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleLetterClick}><h5>RECEIVED A LETTER</h5></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleTextClick}><h5>RECEIVED A TEXT</h5></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleEmailClick}><h5>RECEIVED AN EMAIL</h5></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleLetterClick}><p>RECEIVED A LETTER</p></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleTextClick}><p>RECEIVED A TEXT</p></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleEmailClick}><p>RECEIVED AN EMAIL</p></div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><h5>RECEIVED A PHONECALL</h5></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCampClick}><h5>WAS INVITED TO A CAMP</h5></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><h5>HAD A PRIVATE WORKOUT</h5></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><p>RECEIVED A PHONECALL</p></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCampClick}><p>WAS INVITED TO A CAMP</p></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><p>HAD A PRIVATE WORKOUT</p></div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleCampusClick}><h5>WAS INVITED TO CAMPUS</h5></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleOfferedClick}><h5>WAS OFFERED</h5></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleCampusClick}><p>WAS INVITED TO CAMPUS</p></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleOfferedClick}><p>WAS OFFERED</p></div>
                                 </div>
                             </div>
                         </div>
@@ -314,6 +346,224 @@ export class ProspectDashboard extends Component {
                     </div>
                     
             </section>
+    
+    
+    <h1> Coaches Signin</h1>
+    
+    <section className="page">
+       	<form onSubmit={ this.handleSubmit }>
+    		<div className="container">
+    			<div className="row">
+    				<div className="col-sm-4">
+    					<div className="timeline-image1 background-gray">
+    						<h2>1</h2>
+    					</div>
+    					<h5 className="timeline-heading1">SIGN IN</h5>
+    				</div>
+    				<div className="col-sm-4">
+    					<div className="timeline-image2 background-blue">
+    						<h2>2</h2>
+    					</div>
+    					<h5 className="timeline-heading2">GENERAL INFORMATION</h5>
+    				</div>
+    				<div className="col-sm-4">
+    					<div className="timeline-image3 background-gray">
+    						<h2>3</h2>
+    					</div>
+	    				<h5 className="timeline-heading3">BILLING</h5>
+    				</div>
+    			</div>
+    			<div className="row">
+    				<div className="col-md-offset-2 col-md-4 input-box">
+    					<div className="input-container program-info">
+    						<h4>Coach Information</h4>
+    						<div>Name<input onChange={this.handleUserInput} value={ this.state.ccNumber } /></div>
+          					<div>Position<input onChange={this.handleUserInput} value={ this.state.ccCode } /></div>
+          					<div>Email<input onChange={this.handleUserInput} value={ this.state.ccExpiration } /></div>
+          					<div>Phone Number<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
+          					<div>Head Coach Email<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
+          					<div>Head Coach Phone<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
+    					</div>
+    				</div>
+    				<div className="col-md-4 input-box">
+    					<div id="gender-info" className="input-container">
+    						<h4>Coach Verification</h4>
+    						<div>IN ORDER TO VERIFY YOUR EMAIL ADDRESS AS A
+								COLLEGE COACH, PLEASE MAKE SURE THE EMAIL
+								ADDRESS SEEN BELOW IS CORRECT SO WE CAN
+								SEND AN EMAIL TO VERIFY IT IS A UNIVERSITY
+								EMAIL.</div>
+							<h4>Email just entered</h4>
+          				</div>
+    				</div>
+    			</div>
+    	  	</div>
+          	<button onClick={this.handleButtonClick} className="btn btn-default btn-large center-button">View Prospects</button>
+    	</form>
+    </section>
+    
+    
+    <h1> Coaches Dashboard</h1>
+    
+    
+    <section id="profile" className="page">
+    	<div className="container">
+    		<div id="profile-top-row" className="row profile-top-row">
+    			<div className="col-sm-3">
+    				<div id="club-logo" className="background-blue">
+    					<h5>{task.aauProgram}</h5>
+    				</div>
+    			</div>
+    			<div className="col-sm-6">
+    				<div id="" className="">
+    					<div id="profile-basics">
+							<h3>{ task.firstName}  {task.lastName} ({ task.gradeClass })</h3>
+							<div><h4>Position:</h4>  { task.position}</div>
+							<div><h4>Height:</h4>  { task.height}</div>
+							<div><h4>State:</h4>  { task.stateAthlete}</div>
+						</div>
+    				</div>
+    			</div>
+    		</div>
+    		<div className="row">
+    			<div className="col-sm-3">
+    				<div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
+    					<h5>Contact Information</h5>
+    				</div>
+    				<div id="" className="data-cat-btn background-gray" onClick={this.handleAthleticClick}>
+    					<h5>Athletic Information</h5>
+    				</div>
+    				<div id="" className="data-cat-btn background-gray" onClick={this.handleAcademicClick}>
+    					<h5>Academic Information</h5>
+    				</div>
+    				<div id="" className="data-cat-btn background-blue" onClick={this.handleRecruitingClick}>
+    					<h5>Recruiting Interest</h5>
+    				</div>
+    				<div id="" className="data-cat-btn background-gray" >
+    					<h5>Back To Dashboard</h5>
+    				</div>
+    			</div>
+    			<div id="athlete-info-container" className="col-sm-9">
+      				<div>
+			      		<div id="profile-contact-info">
+							<h3>Contact Information</h3>
+							<div><h4>Phone:</h4>  { task.phoneAthlete}</div>
+							<div><h4>Email:</h4>  { task.emailAthlete}</div>
+							<div><h4>AAU Coach Name:</h4>  { task.aauCoachName}</div>
+							<div><h4>AAU Coach Email:</h4>    { task.aauCoachEmail}</div>
+							<div><h4>AAU Coach Phone:</h4>    { task.aauCoachPhone}</div>
+							<div><h4>HS Coach Name:</h4>     {task.hsCoachName}</div>
+							<div><h4>HS Coach Email:</h4>    { task.hsCoachEmail}</div>
+						</div>
+						<div id="profile-athletic-info">
+							<h3>Athletic Information</h3>
+							<div><h4>Grade/Class:</h4>  { task.gradeClass}</div>
+							<div><h4>Height:</h4>  { task.height}</div>
+							<div><h4>Weight:</h4>  { task.weight}</div>
+							<div><h4>Vertical Jump:</h4>    { task.vertJump}</div>
+							<div><h4>Position:</h4>    { task.position}</div>
+							<div><h4>AAU Program:</h4>     {task.aauProgram}</div>
+							<div><h4>AAU Jersey:</h4>    { task.aauJersey}</div>
+							<div><h4>High School:</h4>    { task.highSchool}</div>
+							<div><h4>HUDL Profile:</h4>    { task.hudlProfile}</div>
+						</div>
+						<div id="profile-academic-info">
+							<h3>Academic Information</h3>
+							<div><h4>GPA:</h4>  { task.gpa}</div>
+							<div><h4>ACT:</h4>  { task.act}</div>
+							<div><h4>Class Rank:</h4>  { task.classRank}</div>
+						</div>
+						<div id="player-recruiting-interest" className="">
+    					
+							<ul className="prospect-categories list-inline">
+								<li className="cat-btn background-blue">D1</li>
+								<li className="cat-btn background-blue">D2</li>
+								<li className="cat-btn background-blue">D3</li>
+								<li className="cat-btn background-blue">NAIA</li>
+								<li className="cat-btn background-blue">JUCO</li>
+							</ul>
+							<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
+							<div id="recruiting-interest-cats">   
+								<ul>
+									<li className="btn btn-default">High Major</li>
+									<li className="btn btn-default">High Major - / Mid-Major +</li>
+									<li className="btn btn-default">Mid-Major</li>
+									<li className="btn btn-default">Mid-Major - / Low Major +</li>
+									<li className="btn btn-default">Low Major</li>
+								</ul>						
+							</div>
+							<div id="recruiting-activity-feed" >
+								<ul className="prospect-activity background-light-gray list-inline" onClick={this.handleSummaryClick}>
+									<li className="prospect-update">Southwest Minnesota</li>
+								</ul>
+							</div>
+    					
+    					</div>
+			      	</div>	
+      			</div>
+      		</div>
+      	</div>
+      	
+      </section> 
+      
+      
+      
+      
+      <section className="">
+    		<div className="container">
+    			<div className="row">
+    				<div className="col-sm-3">
+    					<div className="panel-container">
+    						<div id="program-name" ><h5>School Name</h5></div>
+    						<div id="" className="data-cat-btn background-gray">
+    							<h5>Dashboard</h5>
+							</div>
+    						<div className="panel-cat-name">
+    							<h5>Edit Information</h5>
+    						</div>
+    						<div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
+    							<h5>School Information</h5>
+							</div>
+							<div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
+								<h5>Coach Information</h5>
+							</div>
+							<div className="panel-cat-name">
+								<h5>Recruiting Feeds</h5>
+							</div>
+							<div id="" className="data-cat-btn background-blue" onClick={this.handleContactClick}>
+								<h5>D1 Recruiting</h5>
+							</div>
+							<div id="" className="data-cat-btn background-blue" onClick={this.handleContactClick}>
+								<h5>D2 Recruiting</h5>
+							</div>
+							<div id="" className="data-cat-btn background-blue" onClick={this.handleContactClick}>
+								<h5>D3 Recruiting</h5>
+							</div>
+							<div id="" className="data-cat-btn background-blue" onClick={this.handleContactClick}>
+								<h5>NAIA Recruiting</h5>
+							</div>
+							<div id="" className="data-cat-btn background-blue" onClick={this.handleContactClick}>
+								<h5>JUCO Recruiting</h5>
+							</div>
+						</div>    				
+    				</div>
+    				<div className="col-sm-9">
+    					<div className="prospect-container">
+    						<h2 id="" className="text-center" >Prospect Source Recruits</h2>
+    						<ul className="recruiting-feed-categories list-inline">
+    							<li className="cat-btn background-blue">Level</li>
+    							<li className="cat-btn background-blue">Class</li>
+    							<li className="cat-btn background-blue">State</li>
+    							<li className="cat-btn background-blue">Position</li>
+    							<li className="cat-btn background-blue">ACT</li>
+    							<li className="cat-btn background-blue">GPA</li>    							
+    						</ul>
+    					
+    					</div>
+    				</div>
+    			</div>
+    	  	</div>
+    </section>
 
         </div>
     );

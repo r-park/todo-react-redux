@@ -15,6 +15,8 @@
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
 <!-- Latest compiled and minified Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+
 <style type="text/css">
 	
 	
@@ -27,37 +29,37 @@
     height: 100%;
 	}
 
-	//@font-face {
-    //font-family: Venera100;
-    //src: url(fonts/Venera-100.otf);
-	//}
+	@font-face {
+    font-family: Venera100;
+    src: url(fonts/Venera-100.otf);
+	}
 
-	//@font-face {
-    //font-family: Venera300;
-    //src: url(fonts/Venera-300.otf);
-	//}
-	//
-	//@font-face {
-    //font-family: Venera500;
-    //src: url(fonts/Venera-500.otf);
-	//}
+	@font-face {
+    font-family: Venera300;
+    src: url(fonts/Venera-300.otf);
+	}
+	
+	@font-face {
+    font-family: Venera500;
+    src: url(fonts/Venera-500.otf);
+	}
 
-	//@font-face {
-    //font-family: Venera700;
-    //src: url(fonts/Venera-700.otf);
-	//}
-	//
-	//@font-face {
-    //font-family: Venera900;
-    //src: url(fonts/Venera-900.otf);
-	//}
+	@font-face {
+    font-family: Venera700;
+    src: url(fonts/Venera-700.otf);
+	}
+	
+	@font-face {
+    font-family: Venera900;
+    src: url(fonts/Venera-900.otf);
+	}
 
-    //body {
-    //background-color: white;
-	//font-size: 16px;
-	////font-family: 'Venera300';
-	//color: #4e4f51;
-	//}
+    body {
+    background-color: white;
+	font-size: 16px;
+	font-family: 'Questrial', sans-serif;
+	color: #4e4f51;
+	}
     
      @media (min-width: 768px)  {
 	.container {
@@ -83,7 +85,7 @@
     h1, h2, h3, h4, h5 {
     margin-top: 40px;
     margin-bottom: 40px;
-    //font-family: "Venera700";
+    font-family: "Venera700";
     }
     
     
@@ -161,6 +163,7 @@
     
     #mainNav .name {
     display: none;
+    font-family: "Venera300";
     }
     
     .navbar-default .navbar-collapse, .navbar-default .navbar-form {
@@ -174,6 +177,10 @@
     display: inline;
     }
 }
+
+	#sign-in  {
+	font-family: "Venera300";
+	}
 
 	#data-collection  {
 	padding: 0px;
@@ -207,15 +214,6 @@
 	padding: 10px 5px 35px 5px;
 	}
 	
-	.timeline-image1 {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f1f1f1;
-    border-radius: 100%;
-    text-align: center;
-    color: #fff;
-	}
-	
 	.background-blue {
     background-color: #5ccae6;
 	}
@@ -226,46 +224,6 @@
 	
 	.background-light-gray {
     background-color: #e7e7e7;
-	}
-	
-	.timeline-image1 h2 {
-    margin: 6px 0px 0px 0px;
-    text-align: center;
-    color: #fff;
-	}
-	
-	.timeline-heading1, .timeline-heading2, .timeline-heading3 {
-    margin-left: 10%;
-	}
-	
-	.timeline-image2 {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f1f1f1;
-    border-radius: 100%;
-    text-align: center;
-    color: #fff;
-	}
-	
-	.timeline-image2 h2 {
-    margin: 6px 0px 0px 0px;
-    text-align: center;
-    color: #fff;
-	}
-	
-	.timeline-image3 {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #f1f1f1;
-    border-radius: 100%;
-    text-align: center;
-    color: #fff;
-	}
-
-	.timeline-image3 h2 {
-    margin: 6px 0px 0px 0px;
-    text-align: center;
-    color: #fff;
 	}
 	
 	.hr {
@@ -313,6 +271,79 @@
 
 }
 
+
+	.timeline-heading1, .timeline-heading2, .timeline-heading3 {
+    margin-left: 10%;
+	}
+	
+	.timeline-image1 {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f1f1f1;
+    border-radius: 100%;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.timeline-image1 h2 {
+    margin: 8px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+	
+	
+	.timeline-image2 {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f1f1f1;
+    border-radius: 100%;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.timeline-image2 h2 {
+    margin: 8px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.timeline-image3 {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f1f1f1;
+    border-radius: 100%;
+    text-align: center;
+    color: #fff;
+	}
+
+	.timeline-image3 h2 {
+    margin: 8px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+	 
+	@media (min-height: 600px) {
+	
+	.timeline-image1 h2 {
+    margin: 6px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+	
+	.timeline-image2 h2 {
+    margin: 6px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+
+	.timeline-image3 h2 {
+    margin: 6px 0px 0px 0px;
+    text-align: center;
+    color: #fff;
+	}
+	
+	}
+	
 	@media(min-width:768px) {
 	
 	.timeline-heading1, .timeline-heading2, .timeline-heading3 {
@@ -342,6 +373,7 @@
 	}
 }
 
+	
 	@media(max-width:1000px) {
 
 	.input-box  {
@@ -477,24 +509,16 @@
  	
  	#profile-basics h3 {
  	margin-top: 0px;
- 	margin-bottom:5%;
+ 	margin-bottom: 3%;
  	}
- 	
- 	#profile-contact-info {
- 	background-color: #fff;
- 	border-radius: 50px;
- 	padding: 5%;
-    margin-bottom: 20px;
-	margin-top: 20px;
-	}
 	
-	#profile-contact-info  h3, #profile-athletic-info  h3{
+	#profile-contact-info  h3, #profile-athletic-info  h3, #profile-academic-info  h3{
  	margin-top: 0px;
- 	margin-bottom:5%;
+ 	margin-bottom: 10px;
  	text-align: center;
 	}
 	
-	#profile-athletic-info  h4, #profile-contact-info  h4, #profile-basics h4{
+	#profile-athletic-info  h4, #profile-contact-info  h4, #profile-basics h4, #profile-academic-info h4 {
  	display: inline;
 	}
 	
@@ -503,22 +527,90 @@
  	margin-bottom:1.2%;
 	}
  	
- 	#profile-athletic-info div, #profile-contact-info div, #profile-basics  div{
+ 	#profile-athletic-info div, #profile-contact-info div, #profile-basics  div, #profile-academic-info div{
  	margin-top: 1.5%;
  	margin-bottom:1.5%;
 	}
  	
- 	#profile-athletic-info {
- 	display: none;
+ 	#profile-contact-info, #profile-athletic-info, #profile-academic-info, #player-recruiting-interest {
  	background-color: #fff;
  	border-radius: 50px;
- 	padding: 5%;
+    padding: 20px 5% 20px 5%;
     margin-bottom: 20px;
-	margin-top: 20px;
+	margin-top: 10px;
+	word-wrap: break-word;
 	}
  	
- 	.data-cat-btn  {
- 	color: #fff;
+ 	#profile-athletic-info {
+ 	display: none;
+	}
+ 	
+ 	#profile-academic-info {
+ 	display: none;
+	}
+ 	
+ 	#player-recruiting-interest {
+ 	display: none;
+ 	}
+ 	
+ 	#recruiting-interest-cats  {
+ 	display:inline-block;
+ 	width: 111%;
+ 	}
+ 	
+ 	@media screen and (min-width:768px)  {
+ 	#recruiting-interest-cats  {
+ 	width: 40%;
+ 	}
+ 	}
+ 	
+ 	#recruiting-interest-cats ul {
+ 	padding-left: 0px;
+ 	}
+ 	
+ 	#recruiting-interest-cats .btn {
+ 	margin: 5px 0px 5px 0px;
+ 	width: 90%;
+ 	font-size: 10px;
+ 	}
+ 	
+ 	@media screen and (min-width:768px)  {
+ 	#recruiting-interest-cats .btn {
+ 	font-size: 12px;
+ 	}
+ 	}
+ 	
+ 	@media screen and (min-width:1000px)  {
+ 	#recruiting-interest-cats .btn {
+ 	font-size: 10px;
+ 	}
+ 	}
+ 	
+ 	#recruiting-activity-feed  {
+ 	display:inline-block;
+	width: 100%;
+ 	}
+ 	
+ 	@media screen and (min-width:768px) {
+ 	#recruiting-activity-feed  {
+	width: 60%;
+ 	}
+ 	}
+ 	
+ 	#recruiting-activity-feed .btn {
+ 	margin: 2px 0px 2px 0px;
+ 	}
+ 	
+ 	.prospect-activity {
+ 	border-radius: 25px;
+ 	padding: 2%;
+    text-align: left;
+    margin-bottom: 1px;
+	margin-top: 1px;
+ 	}
+ 	
+
+	.data-cat-btn  {
  	border-radius: 25px;
  	padding: 5%;
     text-align: center;
@@ -527,13 +619,28 @@
 	clear: left;
  	}
  	
- 	.data-cat-btn:hover {
- 	background-color: #5ccae6;
+ 	.data-cat-btn:hover, .data-cat-btn:active {
+ 	background-color: #fff;
+ 	cursor:pointer
  	}
  	
  	.data-cat-btn h5 {
     margin-bottom: 0px;
 	margin-top: 0px;
+ 	}
+ 	
+ 	.cat-btn  {
+ 	border-radius: 25px;
+ 	padding: 1%;
+    text-align: center;
+    margin-bottom: 1px;
+	margin-top: 1px;
+	clear: left;
+	width: 20%;
+ 	}
+
+	.cat-btn:hover, .cat-btn:active  {
+ 	background-color:  #939598;
  	}
 
 /*---------CSS for coach-registration-react.js HTML-----------------------------------*/ 
@@ -667,8 +774,10 @@
     margin: 10px 0px;
     border: 4px solid #5ccae6;
     border-radius: 50px;
-    font-size: 14px;
     padding: 10px 10px 35px 10px;
+    }
+    .panel-container h5 {
+    font-size: 12px;
     }
     
     .prospect-container {
@@ -684,12 +793,15 @@
     background-color: #5ccae6;
  	border-radius: 25px;
  	border: 3px solid #939598;
- 	padding: 5%;
     text-align: center;
-    margin: 10px 10px 20px 10px;
-	width: 35%;
+    margin: 10px auto;
+	width: 80%;
 	height: 100px;
-	float: left;
+	
+ 	}
+ 	
+ 	#club-logo H5  {
+    margin-top: 40px;
  	}
  	
  	@media(min-width: 768px) {
@@ -703,6 +815,11 @@
 	width: 80%;
 	height: 100px;
 	margin-left: 10%;
+	float: left;
+ 	}
+ 	
+ 	#club-logo H5  {
+    margin-top: 24px;
  	}
  }
  	#program-name h5 {
@@ -717,12 +834,38 @@
  	clear: left;
  	}
  	
+ 	.panel-cat-name h5 {
+    margin: 15px auto 15px auto;
+    }
+    
+    .recruiting-feed-categories {
+    padding-left: 0;
+    margin-left: 0px;
+    list-style: none;
+    margin-bottom: 30px;
+	}
+	
+	.recruiting-feed-categories>li {
+    display: inline-block;
+    padding: 10px 0px 10px 0px;
+    margin-left: 2.5%;
+    width: 30%;
+	}
+	
+	@media screen and (min-width: 1000px){
+	.recruiting-feed-categories>li {
+    display: inline-block;
+    margin-left: 1%;
+    width: 15.45%;
+	}
+	}
+    
  	.prospect-categories {
     padding-left: 0;
     margin-left: 0px;
     list-style: none;
     margin-bottom: 30px;
-    margin-top: 20px;
+    margin-top: 10px;
 	}
 	
 	.prospect-categories>li {
@@ -775,14 +918,6 @@
  	}
  	}
  	
- 	.prospect-update {
- 	width: 73%;
- 	}
- 	
- 	
- 	.prospect-update i {
- 	//font-family: Venera900;
- 	}
  	
  	.profile-link-button {
 	position: absolute;
@@ -797,9 +932,31 @@
     min-width: 100px;
 	}
  	
- 	#prospect-clubname  {
- 	display: inline;
+ 	#prospect-clubname {
  	float: left;
+  	}
+  	
+  	#prospect-coach-view {
+	float: right;
+  	}
+  	
+  	#prospect-coach-view:hover {
+	color: #5ccae6;
+	cursor: pointer;
+  	}
+  	
+  	@media screen and (max-width: 500px)  {
+  	
+  	#prospect-clubname {
+ 	float: left;
+ 	width: 43%;
+  	}
+  	
+  	#prospect-coach-view {
+	float: right;
+	width: 43%;
+  	}
+  	
   	}
  	
  	#prospect-account  {
@@ -809,7 +966,8 @@
  	
  	#prospect-interest   {
  	background-color: #e7e7e7;
- 	padding-top: 9px;
+ 	padding: 9px 0px 9px 0px;
+    margin: 10px auto 10px auto;
  	}
  	
  	#recruiting-tracking .row {
@@ -824,12 +982,18 @@
  	
  	.recruiting-tracking-btn  {
  	border-radius: 25px;
- 	padding: 1%;
+ 	padding-top: 25px;
     text-align: center;
     margin-bottom: 1px;
 	margin-top: 1px;
 	color: #fff;
 	height: 68px;
+ 	}
+ 	
+ 	@media screen and (min-width: 768px) {
+ 	.recruiting-tracking-btn  {
+ 	padding-top: 2%;
+ 	}
  	}
  	
  	.recruiting-tracking-btn:hover  {
@@ -974,6 +1138,89 @@
     margin-left: 2%;
 	margin-right: 2%;
     }
+    
+     /*---------CSS for completed plans-features-react.js HTML-----------------------------------*/ 
+
+ 	
+ 	#plans-features-table  {
+  		width: 100%;
+  		font-size: 12px;
+  		margin-bottom: 30px;
+  	}
+  
+  	@media screen and (max-width: 990px) {
+
+	#plans-features-table h5 {
+  	font-size: 35px;
+  	}
+  	}
+  	
+  	#plans-features-table h5 {
+  		margin: 10px auto 10px auto;
+  	}
+
+  
+  	#plans-features-table td, th {
+    	padding: 5px;
+    	border: 1px solid #93959B;
+	}
+  
+  	.features  {
+  	padding-top: 5px;
+  	}
+  
+  	#table-logo  {
+  		margin: 30px auto;
+  	}
+ 
+ 	.cost {
+ 	color: white;
+ 	margin: 0px auto 3px auto;
+ 	}
+ 	
+ 	.cost-month {
+ 	color:  #e7e7e7;
+ 	margin: 0px auto 5px auto;
+ 	}
+ 	
+ 	#table-header-row {
+	background-color: 	#5ccae6	;
+ 	}
+ 	
+ 	#table-header-row th {
+ 		text-align: center;
+ 		height: 175px;
+ 	}
+ 	
+ 	.x {
+ 	font-family: Venera900;
+ 	font-size: 18px;
+ 	}
+ 	
+ 	tfoot {
+ 	border: none;
+ 	font-family: Venera900;
+ 	}
+ 	
+ 	tfoot input {
+    width: 20px;
+    height: 20px;
+    margin-left: 0%;
+    margin-right: 5%;
+    }
+	
+	tfoot input:hover {
+    cursor:pointer;
+    }
+	 	
+ 	.no-border {
+ 	border: none !important;
+ 	}
+ 	
+ 	#price-plan-dropdown {
+    margin: 20px auto !important;
+    width: 85% !important;
+	}
  	
 </style>
 </head>

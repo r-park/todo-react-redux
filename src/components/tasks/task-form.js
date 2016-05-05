@@ -20,11 +20,11 @@ export class TaskForm extends Component {
       this.state['firstName'       ]='';
       this.state['lastName'        ]=''; 
       this.state['emailAthlete'    ]='';
-      this.state['phoneAthelete'   ]='';
-      this.state['addressAthelete' ]='';
-      this.state['cityAthelete'    ]='';
-      this.state['stateAthelete'   ]='';
-      this.state['zipAthelete'     ]='';
+      this.state['phoneAthlete'   ]='';
+      this.state['addressAthlete' ]='';
+      this.state['cityAthlete'    ]='';
+      this.state['stateAthlete'   ]='';
+      this.state['zipAthlete'     ]='';
       this.state['aauCoachName'    ]='';
       this.state['aauCoachEmail'   ]='';
       this.state['aauCoachPhone'   ]='';
@@ -35,7 +35,7 @@ export class TaskForm extends Component {
       this.state['height'          ]='';
       this.state['weight'          ]='';
       this.state['vertJump'        ]='';
-      this.state['posistion'       ]='';
+      this.state['position'        ]='';
       this.state['aauProgram'      ]='';
       this.state['aauJersey'       ]='';
       this.state['highSchool'      ]='';
@@ -127,11 +127,11 @@ console.log('State : '+this.state);
                    1:{ ref:'firstName',       display: 'First Name'       },
                    2:{ ref:'lastName',        display: 'Last Name'        },
                    3:{ ref:'emailAthlete',    display: 'Email (Athlete)'  },
-                   4:{ ref:'phoneAthelete',   display: 'Phone (Athlete)'  },
-                   6:{ ref:'addressAthelete', display: 'Adress'           },
-                   7:{ ref:'cityAthelete',    display: 'City'             }, 
-                   8:{ ref:'stateAthelete',   display: 'State'            },
-                   9:{ ref:'zipAthelete',     display: 'Zip'              }, 
+                   4:{ ref:'phoneAthlete',    display: 'Phone (Athlete)'  },
+                   6:{ ref:'addressAthlete',  display: 'Address'           },
+                   7:{ ref:'cityAthlete',     display: 'City'             }, 
+                   8:{ ref:'stateAthlete',    display: 'State'            },
+                   9:{ ref:'zipAthlete',      display: 'Zip'              }, 
                   10:{ ref:'aauCoachName',    display: 'Coach Name (AAU)' },
                   11:{ ref:'aauCoachEmail',   display: 'Coach Email (AAU)'},
                   12:{ ref:'aauCoachPhone',   display: 'Coach Phone (AAU)'},
@@ -140,12 +140,12 @@ console.log('State : '+this.state);
                   15:{ ref:'hsCoachPhone',    display: 'Coach Phone (HS)' }
               },
               athleteInfo:{
-                  16:{ ref:'gradeClass',    display: 'GradeClass'        },
+                  16:{ ref:'gradeClass',    display: 'Grade/Class'        },
                   17:{ ref:'height',        display: 'Height'            },
                   18:{ ref:'weight',        display: 'Weight'            },
                   19:{ ref:'vertJump',      display: 'Vertical Jump'     },
-                  20:{ ref:'posistion',     display: 'Posistion'         },
-                  21:{ ref:'aauProgram',    display: 'Program (AAU)'     },
+                  20:{ ref:'position',      display: 'position'          },
+                  
                   22:{ ref:'aauJersey',     display: 'Jersey (AAU)'      },
                   23:{ ref:'highSchool',    display: 'High School'       },
                   24:{ ref:'hudlProfile',   display: 'HUDL Profile'      },
@@ -190,7 +190,7 @@ console.log('State : '+this.state);
     				<div className="timeline-image1 background-gray">
     					<h2>1</h2>
     				</div>
-    				<h5 className="timeline-heading1">Sign In</h5>
+    				<h5 className="timeline-heading1">SIGN IN</h5>
     			</div>
     			<div className="col-sm-4">
     				<div className="timeline-image2 background-blue">
@@ -217,11 +217,11 @@ console.log('State : '+this.state);
             			<h4>ATHLETIC INFORMATION</h4>
                             {this.mappedInputs(genInfo.athleteInfo)}
           					<select id="aauClub" style={{margin:'20px', width:'85%'}} onChange={ this.onChangeAAUCLUB.bind(this)} value={this.state.aauProgram} id="aau-club" name="aau-club" className="form-control standalone" type="select">
-								<option value="none" defaultValue>Select Your AAU Club</option>
+								<option value="none" defaultValue>Select AAU Club</option>
 								<option value="Kingdom Hoops">Kingdom Hoops</option>
 								<option value="Rusty's Rascals">Rustys Rascals</option>
 								<option value="McCall MadMen">McCall MadMen</option>
-								<option value="Alex's Angels">Maschoff Monsters</option>
+								<option value="Maschoff Monsters">Maschoff Monsters</option>
 							</select>
        				 </div>
     			</div>
@@ -237,6 +237,173 @@ console.log('State : '+this.state);
           <button onClick={this.onSubmit} id="prospect-data-button" className="btn btn-default btn-large center-button">NEXT</button>
         </form>
       </section>
+        
+       <section className="page">
+        <form className="text-center" onSubmit={ this.handleSubmit }>
+    	<div className="container">
+    		<div className="row">
+    			<div className="col-xs-12">
+    				<div className="header text-center">
+    					<img id="table-logo" src="img/ps-logo-sm.png" className="img-responsive" alt=""/>
+    					<h2>Plans & Features</h2>
+    				</div>
+    			</div>
+    		</div>
+    		<div className="row">
+    		  <div className="col-md-offset-1 col-md-2">
+    			<table id="plans-features-table" className="text-center">
+					<thead>	  
+					  <tr id="table-header-row">
+						<th className="features"><h5>Basic</h5> <div className="cost" >Free</div> <div>Showcase & track your recruiting</div></th>		
+						</tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td className="" >Showcase Contact, Athletic, & Academic Information to College Coaches</td>
+					  </tr>
+					  <tr>
+						<td className="" >Showcase Recruiting Interest To College Coaches</td>
+					  </tr>
+					</tbody>
+					<tfoot>
+					  <tr>	
+						
+					  </tr>
+					</tfoot>
+				</table>
+    		  </div>
+    		  <div className="col-md-2">
+    			<table id="plans-features-table" className="text-center">
+					
+					<thead>	  
+					  <tr id="table-header-row">
+						<th className="features"><h5>Plus</h5> <div className="cost" >$60/year</div> <div className="cost-month" >($5/month)</div> <div>Showcase Your Information & Store Highlight</div></th>
+						</tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td className="" >Showcase Contact, Athletic, & Academic Information to College Coaches</td>
+					  </tr>
+					  <tr>
+						<td className="" >Showcase Recruiting Interest To College Coaches</td>
+					  </tr>
+					  
+					  <tr>
+						<td className=" background-gray" >Store Highlight Video</td>
+					  </tr>
+					</tbody>
+					<tfoot>
+					  <tr>	
+						
+					  </tr>
+					</tfoot>
+				</table>
+    		  </div>
+    		  <div className="col-md-2">
+    			<table id="plans-features-table" className="text-center">
+					<thead>	  
+					  <tr id="table-header-row">
+						<th className="features"><h5>Premium 1</h5> <div className="cost">$160/year</div> <div className="cost-month" >($13.33/month)</div> <div>Let us send out your highlight video</div></th>
+						</tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td className="" >Showcase Contact, Athletic, & Academic Information to College Coaches</td>
+					  </tr>
+					  <tr>
+						<td className="" >Showcase Recruiting Interest To College Coaches</td>
+					  </tr>
+					  
+					  <tr>
+						<td className=" background-gray" >Highlight Distributed To College Coaches</td>
+					  </tr>
+					</tbody>
+					<tfoot>
+					  <tr>
+						
+					  </tr>
+					</tfoot>
+				</table>
+    		  </div>
+    		  <div className="col-md-2">
+    			<table id="plans-features-table" className="text-center">
+					<thead>	  
+					  <tr id="table-header-row">
+						<th className="features"><h5>Premium 2</h5> <div className="cost" >$260/year</div> <div className="cost-month" >($21.67/month)</div> <div>Let us create and send one video/year</div></th>		
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td className="" >Showcase Contact, Athletic, & Academic Information to College Coaches</td>
+					  </tr>
+					  <tr>
+						<td className="" >Showcase Recruiting Interest To College Coaches</td>
+					  </tr>
+					  
+					  <tr>
+						<td className=" background-gray" >Highlight Distributed To College Coaches</td>
+					  </tr>
+					  <tr>
+						<td className=" background-blue" >Highlight Produced & Distributed To College Coaches (Once)</td>
+					  </tr>
+					</tbody>
+					<tfoot>
+					  <tr>
+						
+					  </tr>
+					</tfoot>
+				</table>
+    		  </div>
+    		  <div className="col-md-2">
+    			<table id="plans-features-table" className="text-center">
+					<thead>	  
+					  <tr id="table-header-row">
+						<th className="features"><h5>Premium 3</h5> <div className="cost" >$460/year</div> <div className="cost-month" >($38.33/month)</div> <div>Let us create and send two video/year</div></th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td className="" >Showcase Contact, Athletic, & Academic Information to College Coaches</td>
+					  </tr>
+					  <tr>
+						<td className="" >Showcase Recruiting Interest To College Coaches</td>
+					  </tr>
+					  
+					  <tr>
+						<td className=" background-gray" >Highlight Distributed To College Coaches</td>
+					  </tr>
+					  <tr>
+						<td className=" background-blue" >Highlight Produced & Distributed To College Coaches (Once)</td>
+					  </tr>
+					  <tr>
+						<td className=" background-blue" >Highlight Produced & Distributed To College Coaches (Twice)</td>
+					  </tr>
+					</tbody>
+					<tfoot>
+					  <tr>
+						
+					  </tr>
+					</tfoot>
+					
+				</table>
+    		  </div>
+    		  <select id="price-plan-dropdown" style={{margin:'20px', width:'85%'}} name="price-plan" className="form-control standalone" type="select">
+					<option value="none" defaultValue>Select Price Plan</option>
+					<option value="basic">Basic - Free</option>
+					<option value="plus">Plus - $5/month or $54/year(10% off)</option>
+					<option value="Premium 1">Premium 1 - $13.33/month or $144/year(10% off)</option>
+					<option value="Premium 2">Premium 2 - $21.67/month or $234/year(10% off)</option>
+					<option value="Premium 3">Premium 2 - $38.33/month or $414/year(10% off)</option>
+				</select>
+    		</div>
+    	</div>
+    	
+        
+          
+          	<button className="btn btn-default btn-large">Finish</button>
+       
+        </form>
+      </section> 
         
         </div>
     );
