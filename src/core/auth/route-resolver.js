@@ -1,7 +1,7 @@
 import {
   POST_SIGN_IN_PATH,
   SIGN_IN_PATH
-} from 'config';
+} from 'src/config';
 
 
 export function authRouteResolver(getState) {

@@ -1,11 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-// Modules
-import { notificationActions } from 'core/notification';
-import { tasksActions } from 'core/tasks';
-
-// Components
+import { notificationActions } from 'src/core/notification';
+import { tasksActions } from 'src/core/tasks';
 import { Notification } from './notification';
 import { TaskFilters } from './task-filters';
 import { TaskForm } from './task-form';
@@ -40,7 +37,8 @@ export class Tasks extends Component {
       <Notification
         action={undeleteTask}
         dismiss={dismissNotification}
-        {...notification} />
+        {...notification}
+      />
     );
   }
 
@@ -68,7 +66,8 @@ export class Tasks extends Component {
             deleteTask={deleteTask}
             filter={filter}
             tasks={tasks}
-            updateTask={updateTask} />
+            updateTask={updateTask}
+          />
         </div>
 
         {notification.display ? this.renderNotification() : null}

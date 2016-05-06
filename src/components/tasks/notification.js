@@ -39,12 +39,7 @@ export class Notification extends Component {
   }
 
   render() {
-    const {
-      action,
-      actionLabel,
-      message
-    } = this.props;
-
+    const { action, actionLabel, message } = this.props;
     return (
       <div className="notification">
         <p className="notification__message" ref={c => this.message = c}>{message}</p>

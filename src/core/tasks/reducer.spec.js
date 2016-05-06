@@ -1,5 +1,5 @@
 /* eslint-disable no-undefined */
-import { SIGN_OUT_SUCCESS } from 'core/auth';
+import { SIGN_OUT_SUCCESS } from 'src/core/auth';
 
 import {
   CREATE_TASK_SUCCESS,
