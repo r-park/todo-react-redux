@@ -141,7 +141,7 @@ export class ProspectDashboard extends Component {
 									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>RECEIVED AN EMAIL</h5></div>
 								</div>
 								<div className="row">
-									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>RECEIVED A PHONECALL</h5></div>
+									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>RECEIVED A PHONE CALL</h5></div>
 									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>WAS INVITED TO A CAMP</h5></div>
 									<div className="col-sm-4 recruiting-tracking-btn background-blue"      style={divStyle}><h5>HAD A PRIVATE WORKOUT</h5></div>
 								</div>
@@ -228,6 +228,92 @@ export class ProspectDashboard extends Component {
     document.getElementById('player-recruiting-interest').style.display='block';
   }
 
+  handleLetterClick(event) {
+    document.getElementById("letter-update").style.display='block';
+  }
+  
+  handleTextClick(event) {
+    document.getElementById("text-update").style.display='block';
+  }
+  
+  handleEmailClick(event) {
+    document.getElementById("email-update").style.display='block';
+  }
+  
+  handleCallClick(event) {
+    document.getElementById("call-update").style.display='block';
+  }
+  
+  handleCampClick(event) {
+    document.getElementById("camp-update").style.display='block';
+  }
+  
+  handleWorkoutClick(event) {
+    document.getElementById("workout-update").style.display='block';
+  }
+  
+  handleCampusClick(event) {
+    document.getElementById("campus-update").style.display='block';
+  }
+  
+  handleOfferedClick(event) {
+    document.getElementById("offered-update").style.display='block';
+  }
+
+  handleConfirmClick(event) {
+	document.getElementById('prospect-confirmation').style.display='none';
+	document.getElementById('prospect-dashboard').style.display='block';
+	window.scrollTo(0, 0);
+  } 
+
+  handleEditProfileClick(event)  {
+  	document.getElementById('prospect-dashboard').style.display='none';
+  	document.getElementById('general-info').style.display='block';
+  }
+  
+  handleEditPricingPlanClick(event)  {
+    document.getElementById('prospect-dashboard').style.display='none';
+  	document.getElementById('prospect-plans-features').style.display='block';
+  }
+ 
+   
+  handleVideoServiceClick(event)  {
+  		debugger;
+  	if (this.props.task.pricePlan == "Basic Plan") {
+	    document.getElementById("upgrade-price-plan").style.display='block';
+	} else {
+  	document.getElementById('prospect-dashboard').style.display='none';
+  	document.getElementById('video-upload').style.display='block';
+  	}
+  }
+
+  handleMarketingServiceClick(event)  {
+  	if (this.props.task.pricePlan == "Basic Plan" 
+  	|| this.props.task.pricePlan == "Plus Monthly Plan" 
+  	|| this.props.task.pricePlan == "Plus Yearly Plan") {
+		document.getElementById("upgrade-price-plan").style.display='block';	
+	} else  {
+  	document.getElementById('prospect-dashboard').style.display='none';
+  	document.getElementById('marketing-service').style.display='block';
+  	}
+  } 
+  
+
+  submitUpdate(event) {
+    document.getElementById("upgrade-price-plan").style.display='none';
+	document.getElementById("marketing-confirm").style.display='none';
+  }
+  
+  closeVideoUpload(event) {
+	document.getElementById("video-upload").style.display='none';
+    document.getElementById("prospect-dashboard").style.display='block';
+  }
+  
+  submitMarketingOrder(event) {
+    document.getElementById("marketing-service").style.display='none';
+    document.getElementById("marketing-confirm").style.display='block';
+    document.getElementById("prospect-dashboard").style.display='block';
+  }
 
   render() {
     const { editing } = this.state;
@@ -237,8 +323,10 @@ export class ProspectDashboard extends Component {
     //debugger;
     return (
         <div >
-              <section className="page">
-                <form onSubmit={ this.handleSubmit }>
+              
+              
+              <section id="prospect-confirmation" className="page">
+
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-12">
@@ -251,13 +339,15 @@ export class ProspectDashboard extends Component {
                                 <p>In addition to adding recruiting interest to your profile, you can order 
                                 premium video and marketing service to get your information in front of more 
                                 coaches.</p>
+                                <p>We will email you a bill summarizing all selected services in the next 3-5 days.
+                                </p>
                             </div>
                         </div>
                     </div>
-                    <button className="btn btn-default btn-large center-button">View Profile</button>
-                </form>
+                    <button onClick={this.handleConfirmClick} className="btn btn-default btn-large center-button">View Profile</button>
+                
             </section>
-            <section className="">
+            <section id="prospect-dashboard" className="">
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-3">
@@ -270,30 +360,28 @@ export class ProspectDashboard extends Component {
                                         <h5>Summary</h5>
                                     </div>
                                     <div className="panel-cat-name">
-                                        <h5>Edit Information</h5>
+                                        <h5>Edit Profile</h5>
                                     </div>
-                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
-                                        <h5>Contact Information</h5>
+                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleEditProfileClick}>
+                                        <h5>Prospect Information</h5>
                                     </div>
-                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
-                                        <h5>Athletic Information</h5>
+                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleEditPricingPlanClick}>
+                                        <h5>Pricing Plan</h5>
                                     </div>
-                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
-                                        <h5>Academic Information</h5>
-                                    </div>
+                    
                                     <div className="panel-cat-name">
-                                        <h5 >Order Premium Service</h5>
+                                        <h5>Premium Service</h5>
                                     </div>
-                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
+                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleVideoServiceClick.bind(this)}>
                                         <h5>Video Service</h5>
                                     </div>
-                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
+                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleMarketingServiceClick.bind(this)}>
                                         <h5>Marketing Service</h5>
                                     </div>
                                 </div>    				
                             </div>
                     <div className="col-sm-9">
-                        <div><u><h5 id="prospect-clubname">{task.aauProgram}</h5></u><u><h5 id="prospect-coach-view" className="text-right">View What Coaches See</h5></u></div>
+                        <div><u><h5 id="prospect-clubname">{task.pricePlan}</h5></u><u><h5 id="prospect-coach-view" className="text-right">View What Coaches See</h5></u></div>
                         
                         <div className="prospect-container">
                             <ul className="prospect-categories list-inline">
@@ -311,7 +399,7 @@ export class ProspectDashboard extends Component {
                                     <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleEmailClick}><p>RECEIVED AN EMAIL</p></div>
                                 </div>
                                 <div className="row">
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><p>RECEIVED A PHONECALL</p></div>
+                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><p>RECEIVED A PHONE CALL</p></div>
                                     <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCampClick}><p>WAS INVITED TO A CAMP</p></div>
                                     <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><p>HAD A PRIVATE WORKOUT</p></div>
                                 </div>
@@ -321,11 +409,20 @@ export class ProspectDashboard extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div id="upgrade-price-plan" className="recruit-update-container text-center">
+						  <u><h3>Premium Services</h3></u>
+						  <div className="letter-attributes background-light-gray text-left">
+			 				<p>To access these services please upgrade your pricing plan.</p>
+						  </div>
+						  <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Close</button>        
+						</div>
                     </div>
                 </div>
             </div>
             </section>
-            <section className="">
+            
+            
+            <section id="video-upload" className="">
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-4 col-md-3">
@@ -337,7 +434,7 @@ export class ProspectDashboard extends Component {
                             </div>
                             <div className="col-sm-8 col-md-9">
                                 <div className="prospect-container">
-                                    <button className="btn btn-default btn-large center-button background-light-gray"><h5>View Uploaded Video Files</h5></button>
+                                    <button id="video-files-button" className="btn btn-default btn-large center-button background-light-gray"><h5>View Uploaded Video Files</h5></button>
                                     <ul className="video-upload-container list-unstyled">
                                         <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
                                         <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
@@ -345,7 +442,7 @@ export class ProspectDashboard extends Component {
                                         <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
                                         <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>    							
                                     </ul>
-                                    <button className="btn btn-default btn-large center-button" onClick={this.handleVideoClick}>Submit Video Order</button>
+                                    <button className="btn btn-default btn-large center-button" onClick={this.closeVideoUpload}>Submit Video Order</button>
                                 </div>
                             </div>
                         </div>
@@ -387,15 +484,48 @@ export class ProspectDashboard extends Component {
     </div>
                     
             </section>
+            
+             <section id="marketing-service" className="">
+					<div className="container">
+						<div className="row">
+							<div className="col-sm-4 col-md-3">
+								<div id="video-description" className="panel-container">
+									<div className="text-center" ><h3>Marketing Service</h3></div>
+									<p id="video-paragraph" >When you upload your highlight video to our Premium
+									 Marketing Service, we will send it out to coaches for you!</p>
+								</div>    				
+							</div>
+							<div className="col-sm-8 col-md-9">
+								<div className="prospect-container">
+									<ul className="video-upload-container list-unstyled">
+										<li>Upload Highlight Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
+										<li>Hudl Highlight URL<input className="custom-file-input" type="text" name="hudl-url" /></li>
+										</ul>
+									<button className="btn btn-default btn-large center-button" onClick={this.submitMarketingOrder}>Submit Marketing Order</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="marketing-confirm" className="marketing-confirm-container text-center">
+					  <div className="marketing-confirm background-light-gray">
+						<h4>Thanks for submitting your highlight video!</h4>
+						<p className="text-left" >Thanks for submitting a highlight video. Our team will post this video to our YouTube channel and/or distribute it directly to college
+						coaches within your rating. If you only submitted your Hudl highlight URL, we will send this directly to college coaches and push
+						them towards your Hudl profile. </p>
+						<p className="text-left">Your CC on file will be charged accordingly for this service.</p>
+						<button className="btn btn-default btn-large center-button" onClick={this.submitUpdate}>Submit Marketing Order</button>
+					  </div>        
+					</div>
+			</section>
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//apis.google.com/js/client:plusone.js"></script>
     <script src="cors_upload.js"></script>
     <script src="upload_video.js"></script>
     
-    <h1> Coaches Signin</h1>
+    //<h1> Coaches Signin</h1>
     
-    <section className="page">
+    <section id="prospect-confirmation" className="page">
        	<form onSubmit={ this.handleSubmit }>
     		<div className="container">
     			<div className="row">
@@ -443,10 +573,168 @@ export class ProspectDashboard extends Component {
     				</div>
     			</div>
     	  	</div>
-          	<button onClick={this.handleButtonClick} className="btn btn-default btn-large center-button">View Prospects</button>
+          	<button onClick={this.handleButtonClick} className="btn btn-default btn-large center-button">View Plans & Features</button>
     	</form>
     </section>
     
+    
+    <section className="page">
+    	<div className="container">
+    		<div className="row">
+    			<div className="col-sm-4">
+    				<div className="timeline-image1 background-gray">
+    					<h2>1</h2>
+    				</div>
+    				<h5 className="timeline-heading1">CREATE ACCOUNT</h5>
+    			</div>
+    			<div className="col-sm-4">
+    				<div className="timeline-image2 background-gray">
+    					<h2>2</h2>
+    				</div>
+    				<h5 className="timeline-heading2">GENERAL INFORMATION</h5>
+    			</div>
+    			<div className="col-sm-4">
+    				<div className="timeline-image3 background-blue">
+    					<h2>3</h2>
+    				</div>
+	    			<h5 className="timeline-heading3">BILLING</h5>
+    			</div>
+    		</div>
+    		<div className="row">
+    			<div className="col-xs-12">
+    				<div className="text-center plans-header">
+    					<h2>Plans & Features</h2>
+    				</div>
+    			</div>
+    		</div>
+    		<div className="row">
+    		  <div className="col-md-4">
+    			<table id="coach-plans-features-table" className="text-center">
+					<thead>	  
+					  <tr id="table-header-row">
+						<th className="features">
+							<h5>Basic</h5> 
+							<div className="cost" >Free!</div> 
+							<div>Receive referrals from Clubs around the country</div>
+						</th>		
+						</tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td className="" >Receive Prospect Referrals (No Registration Required)</td>
+					  </tr>
+					</tbody>
+					
+				</table>
+    		  </div>
+    		  <div className="col-md-4">
+    			<table id="coach-plans-features-table" className="text-center">
+					
+					<thead>	  
+					  <tr id="table-header-row">
+						<th className="features">
+							<h5>Plus Membership</h5> 
+							<div className="cost" >$10/month</div>
+							<div className="cost-month" >$108/year (10% off)</div>
+							<div>Free 3 Month Trial!</div>
+						</th>
+						</tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td className="" >Receive Prospect Referrals (No Registration Required)</td>
+					  </tr>
+					  <tr>
+						<td className="" >Access our searchable database of D1, D2, D3, NAIA, JUCO prospects</td>
+					  </tr>
+					  <tr>
+						<td className="" >Access Prospect Contact, Atheltic, & Academic Information</td>
+					  </tr>
+					  <tr>
+						<td className=" background-blue" >View Prospect Recruitment Level (D1,D2,D3,NAIA,JUCO)</td>
+				      </tr>
+					  <tr>
+						<td className=" background-blue" >Request Full Game Film</td>
+					  </tr>
+					</tbody>
+					
+				</table>
+    		  </div>
+    		  <div className="col-md-4">
+    			<table id="coach-plans-features-table" className="text-center">
+					
+					<thead>	  
+					  <tr id="table-header-row">
+						<th className="features">
+							<h5>Premium Membership</h5> 
+							<div className="cost" >$20/month</div>
+							<div className="cost-month" >$216/year (10% off)</div>
+							<div>Free 3 Month Trial!</div>
+						</th>
+						</tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td className="" >Receive Prospect Referrals (No Registration Required)</td>
+					  </tr>
+					  <tr>
+						<td className="" >Access our searchable database of D1, D2, D3, NAIA, JUCO prospects</td>
+					  </tr>
+					  <tr>
+						<td className="" >Access Prospect Contact, Atheltic, & Academic Information</td>
+					  </tr>
+					  <tr>
+						<td className=" background-blue" >View Prospect Recruitment Level (D1,D2,D3,NAIA,JUCO)</td>
+				      </tr>
+					  <tr>
+						<td className=" background-blue" >Request Full Game Film</td>
+					  </tr>
+					  <tr>
+						<td className=" background-blue" >View Which Schools Have Recruited the Prospect</td>
+					  </tr>
+					  <tr>
+						<td className=" background-blue" >View How Prospects Are Being Contacted (letter, text, visit, etc)</td>
+				      </tr>
+				      
+					</tbody>
+					
+				</table>
+    		  </div>
+    		  <select id="price-plan-dropdown" style={{margin:'20px', width:'85%'}} name="price-plan" className="form-control standalone" type="select">
+					<option value="none" defaultValue>Select Price Plan</option>
+					<option value="basic">Basic - Free</option>
+					<option value="plus">Plus - $10/month</option>
+					<option value="plus">Plus - $108/year(10% off)</option>
+					<option value="Premium">Premium - $20/month</option>
+					<option value="Premium">Premium - $216/year(10% off)</option>
+				</select>
+    		  
+    		</div>
+    	</div>
+    	
+        <form className="text-center" onSubmit={ this.handleSubmit }>
+        
+          	<a onClick={this.handleButtonClick} className="btn btn-default btn-large">Complete Registration</a>
+       
+        </form>
+      </section>
+      
+      <section className="page">
+       	<form onSubmit={ this.handleSubmit }>
+    		<div className="container">
+    			<div className="row">
+    				<div className="col-sm-12">
+    					<h3 className="text-center" >You have successfully created your 														college coach account!</h3>
+    					<p>Please visit your dashboard and use our service to search and 			follow prospects in our database. This platform is intended to help
+your coaching staff discover new prospects and gain more information on prospects you already follow. </p>													
+						<p>We will email a bill corresponding to your pricing plan in the next 3-5 days.</p>
+                        <p>Thank you for choosing Prospect Source!</p>
+    				</div>
+    			</div>
+    	  	</div>
+          	<button onClick={this.handleButtonClick} className="btn btn-default btn-large center-button">View Profile</button>
+    	</form>
+    </section>
     
     <h1> Coaches Dashboard</h1>
     
@@ -603,16 +891,44 @@ export class ProspectDashboard extends Component {
     							<li className="cat-btn background-blue">ACT</li>
     							<li className="cat-btn background-blue">GPA</li>    							
     						</ul>
-    					
+    						<li >
+							  <div id="all-prospects-container" className="prospect-summary background-light-gray ">
+									<ul id="all-prospects" className=" ">
+										<li className="prospect-feed">{task.firstName} {task.lastName} ({task.classRank}/{task.position})</li>
+										<li className="prospect-feed">{task.stateAthlete}</li>
+										<li className="prospect-feed">{task.aauProgram}</li>
+									</ul>
+									<ul id="prospect-divisions" className=" ">
+										<li>
+											<div className="highlight-box"></div><p className="text-center">D1</p>
+										</li>
+										<li>
+											<div className="highlight-box"></div><p className="text-center">D2</p>
+										</li>
+										<li>
+											<div className="highlight-box"></div><p className="text-center">D3</p>
+										</li>
+										<li>
+											<div className="highlight-box"></div><p className="text-center">NAIA</p>
+										</li>
+										<li>
+											<div className="highlight-box"></div><p className="text-center">JUCO</p>
+										</li>
+									</ul>
+								<div className="profile-link-button text-center background-gray">Profile</div>
+							  </div>
+							</li>
     					</div>
     				</div>
     			</div>
     	  	</div>
     </section>
-
-        </div>
+      
+       
+       </div>
     );
-    //        
+    
+            
     //  <div className={classNames('task-item', {'task-item--completed': task.completed, 'task-item--editing': editing})} tabIndex="0">
     //    <div className="cell">
     //      <button
@@ -672,89 +988,10 @@ export class ProspectDashboard extends Component {
     //  </div>
   }
 }
-//var Letter = React.createClass({
-//  render: function() {
-//    var _this = this;
-//    var createItem = function(prospect, index) {
-//      return (
-//         <div id="letter-update" className="recruit-update-container text-center">
-//          <u><h3>Recruiting Letter</h3></u>
-//          <input type="text"/><div className="btn-default search">Search School</div>
-//          <div className="letter-attributes background-light-gray">
-//          	<ul className="list-inline">
-//          		<li><input type="checkbox" /><span>Mens</span></li>
-//          		<li><input type="checkbox" /><span>Womens</span></li>
-//          	</ul> 
-//        	<label htmlFor="sel1"></label>
-//    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-//      					<option value="NCAA D1  V">NCAA D1  V</option>
-//    					<option value="NCAA D2  V">NCAA D2  V</option>
-//    					<option value="NCAA D3  V">NCAA D3  V</option>
-//    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-//     				</select> 
-//          </div>        
-//        </div>
-//      );
-//    };
-//    return <ul className="prospect-list list-unstyled">{ this.props.prospects.map(createItem) }</ul>;
-//  }
-//});
-//
-//var Text = React.createClass({
-//  render: function() {
-//    var _this = this;
-//    var createItem = function(prospect, index) {
-//      return (
-//         <div id="text-update" className="recruit-update-container text-center">
-//          <u><h3>Recruiting Text</h3></u>
-//          <input type="text"/><div className="btn-default search">Search School</div>
-//          <div className="letter-attributes background-light-gray">
-//          	<ul className="list-inline">
-//          		<li><input type="checkbox" /><span>Mens</span></li>
-//          		<li><input type="checkbox" /><span>Womens</span></li>
-//          	</ul> 
-//        	<label htmlFor="sel1"></label>
-//    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-//      					<option value="NCAA D1  V">NCAA D1  V</option>
-//    					<option value="NCAA D2  V">NCAA D2  V</option>
-//    					<option value="NCAA D3  V">NCAA D3  V</option>
-//    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-//     				</select> 
-//          </div>        
-//        </div>
-//      );
-//    };
-//    return <ul className="prospect-list list-unstyled">{ this.props.prospects.map(createItem) }</ul>;
-//  }
-//});
-//
-//var Email = React.createClass({
-//  render: function() {
-//    var _this = this;
-//    var createItem = function(prospect, index) {
-//      return (
-//         <div id="email-update" className="recruit-update-container text-center">
-//          <u><h3>Recruiting Email</h3></u>
-//          <input type="text"/><div className="btn-default search">Search School</div>
-//          <div className="letter-attributes background-light-gray">
-//          	<ul className="list-inline">
-//          		<li><input type="checkbox" /><span>Mens</span></li>
-//          		<li><input type="checkbox" /><span>Womens</span></li>
-//          	</ul> 
-//        	<label htmlFor="sel1"></label>
-//    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-//      					<option value="NCAA D1  V">NCAA D1  V</option>
-//    					<option value="NCAA D2  V">NCAA D2  V</option>
-//    					<option value="NCAA D3  V">NCAA D3  V</option>
-//    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-//     				</select> 
-//          </div>        
-//        </div>
-//      );
-//    };
-//    return <ul className="prospect-list list-unstyled">{ this.props.prospects.map(createItem) }</ul>;
-//  }
-//});
+
+
+
+
 //
 //var Call = React.createClass({
 //  render: function() {
