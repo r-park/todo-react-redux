@@ -31,9 +31,9 @@ export class ProspectDashboard extends Component {
   }
 
   editTitle() {
-      debugger;
+      //debugger;
     this.setState({editing: true});
-      debugger;
+      //debugger;
   }
 
   saveTitle(event) {
@@ -193,7 +193,13 @@ export class ProspectDashboard extends Component {
       />
     );
   }
+  handleVideoClick(){
+    result.access_token = "ya29.CjHaAtZTxnBjtbYIilsdP_JwsuS0HKLxKc6Lz5Ege2QO43pCtktJulP9YP96VeSjGryf";
+    var uploadVideo = new UploadVideo();
+    uploadVideo.ready(result.access_token);
+      debugger;
 
+  }
    handleContactClick() {
     document.getElementById('profile-contact-info').style.display='block';
     document.getElementById('profile-athletic-info').style.display='none';
@@ -228,7 +234,7 @@ export class ProspectDashboard extends Component {
     const { task } = this.props;
 
     console.log('task:'+task);
-    debugger;
+    //debugger;
     return (
         <div >
               <section className="page">
@@ -344,9 +350,48 @@ export class ProspectDashboard extends Component {
                             </div>
                         </div>
                     </div>
+    <span id="signinButton" className="pre-sign-in">
+      <span
+        className="g-signin"
+        data-callback="signinCallback"
+        data-clientid="276185579365-dn7gdrdl8tjs2ft39pu37shodsdr16pf.apps.googleusercontent.com"
+        data-cookiepolicy="single_host_origin"
+        data-scope="https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube">
+      </span>
+    </span>
+    <div className="post-sign-in">
+
+      <div>
+        <label htmlFor="description">Description:</label>
+        <textarea id="description">Default description</textarea>
+      </div>
+      <div>
+        <label htmlFor="privacy-status">Privacy Status:</label>
+        <select id="privacy-status">
+          <option>private</option>
+          <option>public</option>
+          <option>unlisted</option>
+        </select>
+      </div>
+
+      <div>
+        <input type="file" id="file" className="button" accept="video/*"/>
+        <button id="button">Upload Video</button>
+
+      <div className="post-upload">
+        <p>Uploaded video with id <span id="video-id"></span>. Polling for status...</p>
+        <ul id="post-upload-status"></ul>
+        <div id="player"></div>
+      </div>
+    </div>
+    </div>
                     
             </section>
     
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//apis.google.com/js/client:plusone.js"></script>
+    <script src="cors_upload.js"></script>
+    <script src="upload_video.js"></script>
     
     <h1> Coaches Signin</h1>
     

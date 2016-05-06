@@ -54,7 +54,7 @@ console.log('State : '+this.state);
   onChange(title, event) {
       const {tasks} = this.props;
     //const obj = {};
-    //debugger;
+    debugger;
     tasks.length ? this.state[title]= event.target.value.trim(): this.firstSubmit(title,event.target.value.trim());
     //obj[title]= event.target.value;
     //this.setState(obj);
@@ -108,7 +108,7 @@ console.log('State : '+this.state);
                   autoFocus
                   className="task-form__input"
                   maxLength="64"
-                  onChange={this.onChange.bind(this,objRef )}
+                  onChange={this.onChange.bind(this,objRef, this.displayAcademicInfo )}
                   onKeyUp={this.onKeyUp}
                   
                   placeholder={tasks.length && tasks[0][objRef] != "" ? tasks[0][objRef] :objDisplay} 
@@ -122,6 +122,7 @@ console.log('State : '+this.state);
   }
 
   render() {
+      var displayAcademicInfo=false;
       var genInfo={
               contactInfo: {
                    1:{ ref:'firstName',       display: 'First Name'       },
@@ -228,7 +229,7 @@ console.log('State : '+this.state);
     			<div className="col-md-4 input-box">
     				<div className="input-container">
             			<h4>ACADEMIC INFORMATION</h4>
-                        {this.mappedInputs(genInfo.academicInfo)}
+                        {displayAcademicInfo ? this.mappedInputs(genInfo.academicInfo): ""}
        				</div>
     			</div>
     		</div>

@@ -54,7 +54,7 @@ export class Tasks extends Component {
       tasks,
       updateTask
     } = this.props;
-      debugger;
+      //debugger;
 
     const { filter } = location.query;
 
