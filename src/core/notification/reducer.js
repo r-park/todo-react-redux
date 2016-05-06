@@ -1,10 +1,5 @@
-import {
-  DELETE_TASK_SUCCESS
-} from 'src/core/tasks';
-
-import {
-  DISMISS_NOTIFICATION
-} from './action-types';
+import { DELETE_TASK_SUCCESS } from 'src/core/tasks';
+import { DISMISS_NOTIFICATION } from './action-types';
 
 
 export const initialState = {
