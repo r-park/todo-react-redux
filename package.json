@@ -17,11 +17,11 @@
     "node": ">=5.2"
   },
   "scripts": {
-    "build": "npm run lint && npm test && npm run clean && webpack --config webpack.dist.js --progress",
+    "build": "cross-env NODE_ENV=production npm run lint && npm test && npm run clean && webpack --progress",
     "clean": "del-cli ./target",
     "lint": "eslint -c .eslintrc ./src",
-    "start": "webpack-dev-server --config webpack.dev.js --progress",
-    "test": "karma start --single-run"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --progress",
+    "test": "cross-env NODE_ENV=test karma start --single-run"
   },
   "devDependencies": {
     "autoprefixer": "~6.3.6",
@@ -36,6 +36,7 @@
     "browser-sync": "~2.11.1",
     "classnames": "~2.2.5",
     "connect-history-api-fallback": "~1.1.0",
+    "cross-env": "~1.0.7",
     "css-loader": "~0.23.1",
     "del": "~2.2.0",
     "del-cli": "~0.2.0",
