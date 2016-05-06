@@ -26,6 +26,8 @@ export class Tasks extends Component {
     updateTask: PropTypes.func.isRequired
   };
 
+	
+
   componentWillMount() {
     this.props.registerListeners();
   }
@@ -46,6 +48,8 @@ export class Tasks extends Component {
   }
 
   render() {
+    
+    window.scrollTo(0, 0);
     const {
       createTask,
       deleteTask,
@@ -62,14 +66,12 @@ export class Tasks extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-          <h1 style={{marginTop:'100px',marginLeft:'100px'}}> Prospect: General Information </h1>
           <TaskForm createTask={createTask} 
             {...this.props}
           />
         </div>
 
         <div className="g-col">
-          <h1 style={{marginLeft:'100px'}}> Prospect: Prospect Dashboard</h1>
           <ProspectList
             deleteTask={deleteTask}
             filter={filter}
