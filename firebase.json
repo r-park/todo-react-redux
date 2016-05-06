@@ -26,5 +26,5 @@
     "destination": "/index.html"
   }],
 
-  "rules": "./firebase-rules.json"
+  "rules": "./firebase.rules.json"
 }

@@ -4,7 +4,7 @@ dist: trusty
 language: node_js
 
 node_js:
-  - 5.1
+  - 5.2
 
 before_install:
   - export CHROME_BIN=chromium-browser
@@ -16,10 +16,15 @@ install:
   - npm install
 
 script:
-  - ./scripts/dist.sh
+  - npm run build
 
-after_success:
-  - ./scripts/deploy.sh
+deploy:
+  provider: script
+  script: ./deploy.sh
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: true
 
 notifications:
   email:
