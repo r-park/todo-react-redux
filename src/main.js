@@ -8,7 +8,7 @@ import 'styles/styles.scss';
 import { Root } from 'components/root';
 import { authActions, authRouteResolver } from 'core/auth';
 import { FIREBASE_URL } from './config';
-import configureStore from './store';
+import configureStore from 'core/store';
 
 
 const store = configureStore({
@@ -21,5 +21,5 @@ store.dispatch(authActions.initAuth());
 
 
 ReactDOM.render((
-  <Root history={history} onEnter={authRouteResolver(store.getState)} store={store}/>
+  <Root history={history} onEnter={authRouteResolver(store.getState)} store={store} />
 ), document.querySelector('.app-root'));

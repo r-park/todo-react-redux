@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 // Reducers
-import { authReducer } from 'core/auth';
-import { firebaseReducer } from 'core/firebase';
-import { notificationReducer } from 'core/notification';
-import { tasksReducer } from 'core/tasks';
+import { authReducer } from './auth';
+import { firebaseReducer } from './firebase';
+import { notificationReducer } from './notification';
+import { tasksReducer } from './tasks';
 
 
 export default combineReducers({

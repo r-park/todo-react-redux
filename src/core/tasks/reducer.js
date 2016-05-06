@@ -19,18 +19,11 @@ export const initialState = {
 export function tasksReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_TASK_SUCCESS:
-      let list;
-
-      if (state.deleted && state.deleted.key === action.payload.key) {
-        list = [ ...state.previous ];
-      }
-      else {
-        list = [ action.payload, ...state.list ];
-      }
-
       return {
         deleted: null,
-        list,
+        list: (state.deleted && state.deleted.key === action.payload.key) ?
+              [ ...state.previous ] :
+              [ action.payload, ...state.list ],
         previous: []
       };
 

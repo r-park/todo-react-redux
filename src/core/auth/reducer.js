@@ -1,8 +1,5 @@
-import {
-  INIT_AUTH,
-  SIGN_IN_SUCCESS,
-  SIGN_OUT_SUCCESS
-} from './action-types';
+/* eslint-disable no-case-declarations */
+import { INIT_AUTH, SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS } from './action-types';
 
 
 export const initialState = {

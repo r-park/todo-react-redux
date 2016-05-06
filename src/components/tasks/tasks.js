@@ -40,7 +40,8 @@ export class Tasks extends Component {
       <Notification
         action={undeleteTask}
         dismiss={dismissNotification}
-        {...notification} />
+        {...notification}
+      />
     );
   }
 
@@ -68,7 +69,8 @@ export class Tasks extends Component {
             deleteTask={deleteTask}
             filter={filter}
             tasks={tasks}
-            updateTask={updateTask} />
+            updateTask={updateTask}
+          />
         </div>
 
         {notification.display ? this.renderNotification() : null}

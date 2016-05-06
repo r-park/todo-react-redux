@@ -30,7 +30,8 @@ export class TaskList extends Component {
             deleteTask={deleteTask}
             key={index}
             task={task}
-            updateTask={updateTask} />
+            updateTask={updateTask}
+          />
         );
       });
   }
