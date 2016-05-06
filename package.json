@@ -17,11 +17,14 @@
     "node": ">=5.2"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production npm run lint && npm test && npm run clean && webpack --progress",
+    "build": "cross-env NODE_ENV=production webpack --display-chunks --display-modules --progress",
     "clean": "del-cli ./target",
-    "lint": "eslint -c .eslintrc ./src",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --progress",
-    "test": "cross-env NODE_ENV=test karma start --single-run"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --progress",
+    "lint": "eslint -c .eslintrc.yml *.js ./src",
+    "prebuild": "npm-run-all clean lint test",
+    "start": "npm run dev",
+    "test": "cross-env NODE_ENV=test karma start --single-run",
+    "test:watch": "cross-env NODE_ENV=test karma start"
   },
   "devDependencies": {
     "autoprefixer": "~6.3.6",
@@ -38,16 +41,11 @@
     "connect-history-api-fallback": "~1.1.0",
     "cross-env": "~1.0.7",
     "css-loader": "~0.23.1",
-    "del": "~2.2.0",
     "del-cli": "~0.2.0",
     "eslint": "~2.9.0",
     "eslint-plugin-react": "~5.0.1",
     "extract-text-webpack-plugin": "~1.0.1",
     "firebase": "~2.4.2",
-    "gulp": "gulpjs/gulp.git#4.0",
-    "gulp-eslint": "~2.0.0",
-    "gulp-header": "~1.7.1",
-    "gulp-util": "~3.0.7",
     "html-webpack-plugin": "~2.16.1",
     "jasmine-core": "~2.4.1",
     "karma": "~0.13.22",
@@ -59,6 +57,7 @@
     "mockfirebase": "~0.12.0",
     "moment": "~2.13.0",
     "node-sass": "~3.7.0",
+    "npm-run-all": "~1.8.0",
     "postcss-loader": "~0.9.1",
     "react": "~15.0.2",
     "react-addons-test-utils": "~15.0.2",
