@@ -2,7 +2,9 @@
 
 
 # Todo app with React, Redux, and Firebase
-A simple Todo app example with `undelete` capability — built with React, Redux, and Firebase. Try the demo at <a href="https://todo-react-redux.firebaseapp.com" target="_blank">todo-react-redux.firebaseapp.com</a>.
+A simple Todo app example with `undelete` capability — built with React, Redux, and Firebase.
+
+Try the demo at <a href="https://todo-react-redux.firebaseapp.com" target="_blank">todo-react-redux.firebaseapp.com</a>.
 
 - React
 - React-Redux
@@ -43,5 +45,6 @@ Commands
 |`npm run build`|Lint, test, and build the application to `./target`|
 |`npm run dev`|Same as `npm start`|
 |`npm run lint`|Lint `.js` files|
+|`npm run server`|Start express server @ `localhost:3000` to serve built artifacts from `./target` (must run `npm run build` first)|
 |`npm test`|Run unit tests with Karma and Jasmine|
 |`npm run test:watch`|Run unit tests with Karma and Jasmine; watch for changes to re-run tests|
