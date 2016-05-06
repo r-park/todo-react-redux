@@ -35,12 +35,9 @@ module.exports = config;
 
 
 config.resolve = {
-  alias: {
-    test: path.resolve('./test')
-  },
   extensions: ['', '.ts', '.js'],
   modulesDirectories: ['node_modules'],
-  root: path.resolve('./src')
+  root: path.resolve('.')
 };
 
 config.plugins = [

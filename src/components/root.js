@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router';
 
 // Config
-import { SIGN_IN_PATH, TASKS_PATH } from 'config';
+import { SIGN_IN_PATH, TASKS_PATH } from 'src/config';
 
 // Components
 import App from './app/app';

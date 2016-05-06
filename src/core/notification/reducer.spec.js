@@ -1,5 +1,5 @@
 /* eslint-disable no-undefined */
-import { DELETE_TASK_SUCCESS } from 'core/tasks';
+import { DELETE_TASK_SUCCESS } from 'src/core/tasks';
 
 import {
   DISMISS_NOTIFICATION

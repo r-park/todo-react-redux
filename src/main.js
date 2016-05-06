@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import 'styles/styles.scss';
-import { Root } from 'components/root';
-import { authActions, authRouteResolver } from 'core/auth';
+import './styles/styles.scss';
+import { Root } from './components/root';
+import { authActions, authRouteResolver } from './core/auth';
+import configureStore from './core/store';
 import { FIREBASE_URL } from './config';
-import configureStore from 'core/store';
 
 
 const store = configureStore({
