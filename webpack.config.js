@@ -71,11 +71,11 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
       'babel-polyfill',
       'classnames',
       'firebase',
+      'history',
       'react',
       'react-dom',
       'react-redux',
       'react-router',
-      'react-router-redux',
       'redux',
       'redux-thunk'
     ]

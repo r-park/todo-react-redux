@@ -1,21 +1,22 @@
-import Firebase from 'firebase';
+import './styles/styles.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { useRouterHistory } from 'react-router';
+import Firebase from 'firebase';
+import { createHistory } from 'history';
 
-import './styles/styles.scss';
 import { Root } from './components/root';
 import { authActions, authRouteResolver } from './core/auth';
 import configureStore from './core/store';
 import { FIREBASE_URL } from './config';
 
 
+const history = useRouterHistory(createHistory)({basename: '/'});
+
 const store = configureStore({
   firebase: new Firebase(FIREBASE_URL)
 });
-
-const history = syncHistoryWithStore(browserHistory, store);
 
 store.dispatch(authActions.initAuth());
 
