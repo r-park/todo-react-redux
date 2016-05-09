@@ -313,6 +313,19 @@ export class ProspectDashboard extends Component {
     document.getElementById("marketing-service").style.display='none';
     document.getElementById("marketing-confirm").style.display='block';
     document.getElementById("prospect-dashboard").style.display='block';
+    window.scrollTo(0, 0);
+  }
+
+  coachesView(event)  {
+	  document.getElementById("profile").style.display='block';
+	  document.getElementById("prospect-dashboard").style.display='none';
+	  window.scrollTo(0, 0);
+  }
+  
+  backToDashboard(event) {
+      document.getElementById("profile").style.display='none';
+	  document.getElementById("prospect-dashboard").style.display='block';
+	  window.scrollTo(0, 0);
   }
 
   render() {
@@ -339,7 +352,7 @@ export class ProspectDashboard extends Component {
                                 <p>In addition to adding recruiting interest to your profile, you can order 
                                 premium video and marketing service to get your information in front of more 
                                 coaches.</p>
-                                <p>We will email you a bill summarizing all selected services in the next 3-5 days.
+                                <p>We will email a bill corresponding to your chosen pricing plan in the next 3-5 days.
                                 </p>
                             </div>
                         </div>
@@ -381,7 +394,7 @@ export class ProspectDashboard extends Component {
                                 </div>    				
                             </div>
                     <div className="col-sm-9">
-                        <div><u><h5 id="prospect-clubname">{task.pricePlan}</h5></u><u><h5 id="prospect-coach-view" className="text-right">View What Coaches See</h5></u></div>
+                        <div><u><h5 id="prospect-clubname">{task.pricePlan}</h5></u><u><h5 onClick={this.coachesView} id="prospect-coach-view" className="text-right">View What Coaches See</h5></u></div>
                         
                         <div className="prospect-container">
                             <ul className="prospect-categories list-inline">
@@ -411,7 +424,7 @@ export class ProspectDashboard extends Component {
                         </div>
                         <div id="upgrade-price-plan" className="recruit-update-container text-center">
 						  <u><h3>Premium Services</h3></u>
-						  <div className="letter-attributes background-light-gray text-left">
+						  <div className="letter-attributes background-light-gray text-center">
 			 				<p>To access these services please upgrade your pricing plan.</p>
 						  </div>
 						  <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Close</button>        
@@ -433,55 +446,19 @@ export class ProspectDashboard extends Component {
                                 </div>    				
                             </div>
                             <div className="col-sm-8 col-md-9">
-                                <div className="prospect-container">
-                                    <button id="video-files-button" className="btn btn-default btn-large center-button background-light-gray"><h5>View Uploaded Video Files</h5></button>
-                                    <ul className="video-upload-container list-unstyled">
-                                        <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
-                                        <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
-                                        <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
-                                        <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
-                                        <li>Upload Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>    							
-                                    </ul>
-                                    <button className="btn btn-default btn-large center-button" onClick={this.closeVideoUpload}>Submit Video Order</button>
+                                <div className="prospect-container"> 
+                                	<a href="https://prospect-source.firebaseapp.com/upload_video.html">
+										<button id="video-files-button" className="btn btn-default btn-large center-button background-light-gray">
+											Upload Video File
+										</button>
+                                    </a>
+                                    <button className="btn btn-default btn-large center-button" onClick={this.closeVideoUpload}>
+                                    	Back To Dashboard
+                                	</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-    <span id="signinButton" className="pre-sign-in">
-      <span
-        className="g-signin"
-        data-callback="signinCallback"
-        data-clientid="276185579365-dn7gdrdl8tjs2ft39pu37shodsdr16pf.apps.googleusercontent.com"
-        data-cookiepolicy="single_host_origin"
-        data-scope="https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube">
-      </span>
-    </span>
-    <div className="post-sign-in">
-
-      <div>
-        <label htmlFor="description">Description:</label>
-        <textarea id="description">Default description</textarea>
-      </div>
-      <div>
-        <label htmlFor="privacy-status">Privacy Status:</label>
-        <select id="privacy-status">
-          <option>private</option>
-          <option>public</option>
-          <option>unlisted</option>
-        </select>
-      </div>
-
-      <div>
-        <input type="file" id="file" className="button" accept="video/*"/>
-        <button id="button">Upload Video</button>
-
-      <div className="post-upload">
-        <p>Uploaded video with id <span id="video-id"></span>. Polling for status...</p>
-        <ul id="post-upload-status"></ul>
-        <div id="player"></div>
-      </div>
-    </div>
-    </div>
                     
             </section>
             
@@ -497,11 +474,15 @@ export class ProspectDashboard extends Component {
 							</div>
 							<div className="col-sm-8 col-md-9">
 								<div className="prospect-container">
-									<ul className="video-upload-container list-unstyled">
-										<li>Upload Highlight Video<input className="custom-file-input" type="file" name="video" accept="video/*" /></li>
-										<li>Hudl Highlight URL<input className="custom-file-input" type="text" name="hudl-url" /></li>
-										</ul>
-									<button className="btn btn-default btn-large center-button" onClick={this.submitMarketingOrder}>Submit Marketing Order</button>
+									<div className="video-upload-container list-unstyled">
+										<a href="https://prospect-source.firebaseapp.com/upload_video.html">
+											<button id="video-files-button" className="btn btn-default btn-large center-button background-light-gray">
+												Upload Video File
+											</button>
+										</a>										
+										<div id="hudl-url">Hudl Highlight URL<input className="custom-file-input" type="text" name="hudl-url" /></div>
+									</div>
+									<button id="submit-back" className="btn btn-default btn-large" onClick={this.submitMarketingOrder}>Submit & Return To Dashboard</button>
 								</div>
 							</div>
 						</div>
@@ -525,7 +506,7 @@ export class ProspectDashboard extends Component {
     
     //<h1> Coaches Signin</h1>
     
-    <section id="prospect-confirmation" className="page">
+    <section id="coach-gen-info" className="page">
        	<form onSubmit={ this.handleSubmit }>
     		<div className="container">
     			<div className="row">
@@ -559,17 +540,6 @@ export class ProspectDashboard extends Component {
           					<div>Head Coach Email<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
           					<div>Head Coach Phone<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
     					</div>
-    				</div>
-    				<div className="col-md-4 input-box">
-    					<div id="gender-info" className="input-container">
-    						<h4>Coach Verification</h4>
-    						<div>IN ORDER TO VERIFY YOUR EMAIL ADDRESS AS A
-								COLLEGE COACH, PLEASE MAKE SURE THE EMAIL
-								ADDRESS SEEN BELOW IS CORRECT SO WE CAN
-								SEND AN EMAIL TO VERIFY IT IS A UNIVERSITY
-								EMAIL.</div>
-							<h4>Email just entered</h4>
-          				</div>
     				</div>
     			</div>
     	  	</div>
@@ -719,15 +689,29 @@ export class ProspectDashboard extends Component {
         </form>
       </section>
       
-      <section className="page">
+      <section id="coach-confirmation" className="page">
        	<form onSubmit={ this.handleSubmit }>
     		<div className="container">
     			<div className="row">
     				<div className="col-sm-12">
-    					<h3 className="text-center" >You have successfully created your 														college coach account!</h3>
-    					<p>Please visit your dashboard and use our service to search and 			follow prospects in our database. This platform is intended to help
-your coaching staff discover new prospects and gain more information on prospects you already follow. </p>													
-						<p>We will email a bill corresponding to your pricing plan in the next 3-5 days.</p>
+    					<h3 className="text-center" >You have successfully created your college coach account!
+    					</h3>
+    				</div>
+    				<div className="col-md-4 input-box">
+    					<div id="gender-info" className="input-container">
+    						<h4>Coach Verification</h4>
+    						<div>IN ORDER TO VERIFY YOUR EMAIL ADDRESS AS A
+								COLLEGE COACH, PLEASE MAKE SURE THE EMAIL
+								ADDRESS SEEN BELOW IS CORRECT SO WE CAN
+								SEND AN EMAIL TO VERIFY IT IS A UNIVERSITY
+								EMAIL.</div>
+							<h4>task.coachesEmail</h4>
+          				</div>
+    				</div>
+					<div>    					
+    					<p>Please visit your dashboard and use our service to search and follow prospects 
+    					in our database. This platform is intended to help your coaching staff discover new prospects and gain more information on prospects you already follow. </p>													
+						<p>We will email a bill corresponding to your chosen pricing plan in the next 3-5 days.</p>
                         <p>Thank you for choosing Prospect Source!</p>
     				</div>
     			</div>
@@ -772,7 +756,7 @@ your coaching staff discover new prospects and gain more information on prospect
     				<div id="" className="data-cat-btn background-blue" onClick={this.handleRecruitingClick}>
     					<h5>Recruiting Interest</h5>
     				</div>
-    				<div id="" className="data-cat-btn background-gray" >
+    				<div id="" className="data-cat-btn background-gray" onClick={this.backToDashboard} >
     					<h5>Back To Dashboard</h5>
     				</div>
     			</div>
@@ -894,7 +878,7 @@ your coaching staff discover new prospects and gain more information on prospect
     						<li >
 							  <div id="all-prospects-container" className="prospect-summary background-light-gray ">
 									<ul id="all-prospects" className=" ">
-										<li className="prospect-feed">{task.firstName} {task.lastName} ({task.classRank}/{task.position})</li>
+										<li className="prospect-feed">{task.firstName} {task.lastName} ({task.gradeClass}/{task.position})</li>
 										<li className="prospect-feed">{task.stateAthlete}</li>
 										<li className="prospect-feed">{task.aauProgram}</li>
 									</ul>

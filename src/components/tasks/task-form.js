@@ -177,7 +177,6 @@ console.log('State : '+this.state);
   }
 
   render() {
-      var displayAcademicInfo=false;
       var genInfo={
               contactInfo: {
                    1:{ ref:'firstName',       display: 'First Name'       },
@@ -289,7 +288,7 @@ console.log('State : '+this.state);
     			<div className="col-md-4 input-box">
     				<div className="input-container">
             			<h4>ACADEMIC INFORMATION</h4>
-                        {displayAcademicInfo ? this.mappedInputs(genInfo.academicInfo): ""}
+                        {this.mappedInputs(genInfo.academicInfo)}
        				</div>
     			</div>
     		</div>
