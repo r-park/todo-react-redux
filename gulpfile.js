@@ -35,7 +35,7 @@ const config = {
     files: [paths.target + '/**'],
     notify: false,
     open: false,
-    port: 3000,
+    port: 80,
     server: {
       baseDir: paths.target
     }

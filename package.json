@@ -17,7 +17,7 @@
     "build": "npm run lint && npm test && npm run clean && webpack --config webpack.dist.js --progress",
     "clean": "del-cli ./target",
     "lint": "eslint -c .eslintrc ./src",
-    "start": "webpack-dev-server --config webpack.dev.js --progress",
+    "start": "webpack-dev-server --host 0.0.0.0 --config webpack.dev.js --progress",
     "test": "karma start --single-run"
   },
   "dependencies": {
