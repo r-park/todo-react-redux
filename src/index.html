@@ -107,7 +107,7 @@
     
     .btn-default {
     color: #333;
-    background-color: #5ccae6;
+    background-color: #e7e7e7;
     border-color: #939598;
     border-radius: 25px;
     margin-top: 25px;
@@ -212,6 +212,14 @@
 	padding: 10px 5px 35px 5px;
 	}
 	
+	.input-container  {
+	margin: 0px 5px;
+	border: 4px solid #5ccae6;
+	border-radius: 50px;
+	font-size: 14px;
+	padding: 10px 5px 35px 5px;
+	}
+	
 	.background-blue {
     background-color: #5ccae6;
 	}
@@ -284,9 +292,10 @@
 	}
 	
 	.timeline-image1 h2 {
-    margin: 8px 0px 0px 0px;
+    margin: 6px 0px 0px 0px;
     text-align: center;
     color: #fff;
+    font-size: 30px;
 	}
 	
 	
@@ -300,9 +309,10 @@
 	}
 	
 	.timeline-image2 h2 {
-    margin: 8px 0px 0px 0px;
+    margin: 6px 0px 0px 0px;
     text-align: center;
     color: #fff;
+    font-size: 30px;
 	}
 	
 	.timeline-image3 {
@@ -315,31 +325,10 @@
 	}
 
 	.timeline-image3 h2 {
-    margin: 8px 0px 0px 0px;
-    text-align: center;
-    color: #fff;
-	}
-	 
-	@media (min-height: 600px) {
-	
-	.timeline-image1 h2 {
     margin: 6px 0px 0px 0px;
     text-align: center;
     color: #fff;
-	}
-	
-	.timeline-image2 h2 {
-    margin: 6px 0px 0px 0px;
-    text-align: center;
-    color: #fff;
-	}
-
-	.timeline-image3 h2 {
-    margin: 6px 0px 0px 0px;
-    text-align: center;
-    color: #fff;
-	}
-	
+    font-size: 30px;
 	}
 	
 	@media(min-width:768px) {
@@ -430,6 +419,11 @@
     font-size: 14px;
     padding: 10px 5px 10px 5px;
 	font-family: "Venera300";
+	margin-top: 5%;
+	}
+	
+	.sign-in button {
+    background-color: #5ccae6;
 	}
 	
 	#signin .btn-default {
@@ -607,7 +601,7 @@
  	margin: 2px 0px 2px 0px;
  	}
  	
- 	.prospect-activity {
+ 	.prospect-button {
  	border-radius: 25px;
  	padding: 2%;
     text-align: left;
@@ -615,6 +609,9 @@
 	margin-top: 1px;
  	}
  	
+	.prospect-button:hover {
+ 	background-color: gray;
+ 	}
 
 	.data-cat-btn  {
  	border-radius: 25px;
@@ -636,6 +633,7 @@
  	}
  	
  	.cat-btn  {
+ 	border: 1px solid #e7e7e7;
  	border-radius: 25px;
  	padding: 1%;
     text-align: center;
@@ -974,6 +972,10 @@
     margin: 10px auto 10px auto;
  	}
  	
+ 	#recruiting-tracking  {
+ 	margin-bottom: 29px;
+ 	}
+ 	
  	#recruiting-tracking .row {
  	margin-left: 0px;
  	margin-right: 0px;
@@ -1040,6 +1042,30 @@
  	display:inline;
     width: 25%;
  	}
+ 	}
+ 	
+ 	.college-recruiting-summary  {
+ 	display: none;
+ 	position: absolute;
+ 	top: 20%;
+ 	left:20%;
+ 	margin: 10px 0px;
+    border: 4px solid #939598;
+    border-radius: 60px;
+    font-size: 14px;
+    padding: 10px 5px 35px 5px;
+    width: 65%;
+    background-color: #fff;
+ 	}
+ 	
+ 	@media screen and (max-width: 768px) {
+ 	.college-recruiting-summary {
+    top: 40%;
+    }
+}
+ 	
+ 	.college-recruiting-summary  ul  {
+ 	margin-left: 40%;
  	}
  	
  	.letter-attributes  {
@@ -1282,6 +1308,10 @@
  	#all-prospects-container {
  	position: relative;
  	}
+	
+	#all-prospects  {
+	 list-style-type: none;
+	}
 
  	#all-prospects, #prospect-divisions {
  	margin: 5px 0px 5px 5px;
@@ -1360,11 +1390,12 @@
  	}
  	
  	.highlight-box  {
+ 	display: inline-block;
  	height: 10px;
  	width: 10px;
  	border: 1px solid grey;
  	border-radius: 2px;
- 	margin: 0px auto;
+ 	margin-right: 5px;
  	}
  	
  	
@@ -1394,6 +1425,45 @@
  	
  	#app-sign-in h3 {
  	margin: 0px;
+ 	}
+ 	
+ 	.registered-prospect-container {
+    margin: 10px 0px;
+    border: 4px solid #5ccae6;
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 10px 5px 0px 5px;
+    clear: left;
+    }
+ 	
+ 	#player-recruiting-summary  {
+ 	display: none;
+ 	background-color: #fff;
+ 	border-radius: 50px;
+    margin-bottom: 20px;
+	margin-top: 10px;
+	word-wrap: break-word;
+ 	}
+ 	
+ 	#coach-confirmation .col-sm-6 {
+ 	padding-top: 35px;
+ 	padding-bottom: 20px;
+ 	}
+ 	
+ 	#coach-email  {
+ 	margin-top: 20px;
+    margin-bottom: 0px;
+    word-wrap: break-word;
+ 	}
+ 	
+ 	#prospect-interest-caption {
+ 	margin-top: -10px;
+ 	}
+
+    /* demo display nones */
+ 	
+ 	#coach-general-info, #coaches-plans, #coach-confirmation, #coach-dashboard, #profile {
+ 	display: none;
  	}
  	
 </style>

@@ -14,6 +14,7 @@ import { ProspectList } from './prospect-list';
 
 
 export class Tasks extends Component {
+
   static propTypes = {
     createTask: PropTypes.func.isRequired,
     deleteTask: PropTypes.func.isRequired,

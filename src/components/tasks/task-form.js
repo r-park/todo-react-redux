@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 
 export class TaskForm extends Component {
   
+  
+  
   static propTypes = {
     createTask: PropTypes.func.isRequired
   };
@@ -46,7 +48,8 @@ export class TaskForm extends Component {
       this.state['act'             ]='';
       this.state['classRank'       ]='';
       this.state['gender'          ]='';
-      this.state['pricePlan'       ]='';      
+      this.state['pricePlan'       ]='';
+      this.state['collegeProgramGender']='';     
       //debugger;
       this.state[key]=value;
 
@@ -97,13 +100,13 @@ console.log('State : '+this.state);
     // tasks.length ? this.props.updateTask(this.props.tasks[0], this.state): this.firstSubmit(title, event.target.value);
     this.props.updateTask(this.props.tasks[0], this.state);
     //this.clearInput();
-    if (title.pricePlan !== "") {
+    if (title.pricePlan == "") {
     document.getElementById('general-info').style.display='none';
-  	document.getElementById('prospect-dashboard').style.display='block';
+  	document.getElementById('prospect-plans-features').style.display='block';
   	window.scrollTo(0, 0);
     } else {
     document.getElementById('general-info').style.display='none';
-  	document.getElementById('prospect-plans-features').style.display='block';
+  	document.getElementById('prospect-dashboard').style.display='block';
   	window.scrollTo(0, 0);
   	}
   }
@@ -156,7 +159,7 @@ console.log('State : '+this.state);
           return (
               <div 
                   key={k}
-                  style={{margin:'20px'}}
+                  style={{margin:'5px'}}
               >
                 <input
                   autoComplete="off"
@@ -207,6 +210,11 @@ console.log('State : '+this.state);
               },
               academicInfo:{
                   25:{ ref:'gpa',           display: 'GPA'               },
+                  26:{ ref:'act',           display: 'ACT'               },
+                  27:{ ref:'classRank',     display: 'Class Rank'        },
+              },
+              coachInfo:{
+                  25:{ ref:'name',           display: 'GPA'               },
                   26:{ ref:'act',           display: 'ACT'               },
                   27:{ ref:'classRank',     display: 'Class Rank'        },
               }
@@ -278,7 +286,7 @@ console.log('State : '+this.state);
 								<option value="McCall MadMen">McCall MadMen</option>
 								<option value="Maschoff Monsters">Maschoff Monsters</option>
 							</select>
-							<select id="gender" style={{margin:'20px', width:'85%'}} onChange={ this.onChangeGender.bind(this)} value={this.state.gender} id="gender" name="gender" className="form-control standalone" type="select">
+							<select id="gender" style={{margin:'20px', width:'85%'}} onChange={ this.onChangeGender.bind(this)} value={this.state.gender} id="gender" name="gender" className="form-control standalone" type="select" >
 								<option value="none" defaultValue>Select Gender</option>
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
@@ -628,6 +636,51 @@ console.log('State : '+this.state);
           <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>        
         </div>
 
+		<section id="coach-general-info" className="page">
+       	<form onSubmit={ this.handleSubmit }>
+    		<div className="container">
+    			<div className="row">
+    				<div className="col-sm-4">
+    					<div className="timeline-image1 background-gray">
+    						<h2>1</h2>
+    					</div>
+    					<h5 className="timeline-heading1">CREATE ACCOUNT</h5>
+    				</div>
+    				<div className="col-sm-4">
+    					<div className="timeline-image2 background-blue">
+    						<h2>2</h2>
+    					</div>
+    					<h5 className="timeline-heading2">GENERAL INFORMATION</h5>
+    				</div>
+    				<div className="col-sm-4">
+    					<div className="timeline-image3 background-gray">
+    						<h2>3</h2>
+    					</div>
+	    				<h5 className="timeline-heading3">BILLING</h5>
+    				</div>
+    			</div>
+    			<div className="row">
+    				<div className="col-md-offset-4 col-md-4 input-box">
+    					<div className="input-container program-info">
+    						<h4>Coach Information</h4>
+    						<div>Name<input onChange={this.handleUserInput} value={ this.state.ccNumber } /></div>
+          					<div>Position<input onChange={this.handleUserInput} value={ this.state.ccCode } /></div>
+          					<div>Email<input onChange={this.handleUserInput} value={ this.state.ccExpiration } /></div>
+          					<div>Phone Number<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
+          					<div>Head Coach Email<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
+          					<div>Head Coach Phone<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
+          					<select id="college-team-gender" style={{margin:'20px', width:'85%'}} name="price-plan" className="form-control standalone" type="select" placeholder="select">
+								<option value="none" defaultValue>Select Price Plan</option>
+								<option value="Mens Program">Mens Program</option>
+								<option value="Womens Program">Womens Program</option>
+							</select>
+    					</div>
+    				</div>
+    			</div>
+    	  	</div>
+          	<button onClick={this.handleButtonClick} className="btn btn-default btn-large center-button">Next</button>
+    	</form>
+    </section>
 
         </div>
     );

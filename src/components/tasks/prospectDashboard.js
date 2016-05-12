@@ -133,7 +133,7 @@ export class ProspectDashboard extends Component {
     							<li className="cat-btn background-blue"><input type="checkbox"  />NAIA</li>
     							<li className="cat-btn background-blue"><input type="checkbox"  />JUCO</li>
     						</ul>
-    						<h2 id="prospect-interest" className="text-center" >My Recruiting Interest</h2>
+    						<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
 							<div id="recruiting-tracking">    						
 								<div className="row">
 									<div className="col-sm-4 recruiting-tracking-btn background-blue"  style={divStyle}><h5>RECEIVED</h5><h5>A LETTER</h5></div>
@@ -193,6 +193,8 @@ export class ProspectDashboard extends Component {
       />
     );
   }
+  
+  
   handleVideoClick(){
     result.access_token = "ya29.CjHaAtZTxnBjtbYIilsdP_JwsuS0HKLxKc6Lz5Ege2QO43pCtktJulP9YP96VeSjGryf";
     var uploadVideo = new UploadVideo();
@@ -200,33 +202,57 @@ export class ProspectDashboard extends Component {
       debugger;
 
   }
-   handleContactClick() {
-    document.getElementById('profile-contact-info').style.display='block';
-    document.getElementById('profile-athletic-info').style.display='none';
-    document.getElementById('profile-academic-info').style.display='none';
-    document.getElementById('player-recruiting-interest').style.display='none';
+  
+  // click-handlers for Prospect-signin
+  
+  handleConfirmClick(event) {
+	document.getElementById('prospect-confirmation').style.display='none';
+	document.getElementById('prospect-dashboard').style.display='block';
+	window.scrollTo(0, 0);
+  } 
+  
+  // click-handlers for prospect-dashboard
+  
+   handleDashboardClick() {
+    document.getElementById('prospect-updates-container').style.display='block';
+    document.getElementById('player-recruiting-summary').style.display='none';
+  }
+   
+   handleSummaryClick() {
+    document.getElementById('prospect-updates-container').style.display='none';
+    document.getElementById('player-recruiting-summary').style.display='block';
   }
   
-   handleAthleticClick(event) {
-    document.getElementById('profile-contact-info').style.display='none';
-    document.getElementById('profile-athletic-info').style.display='block';
-    document.getElementById('profile-academic-info').style.display='none';
-    document.getElementById('player-recruiting-interest').style.display='none';
+  handleEditProfileClick(event)  {
+  	document.getElementById('prospect-dashboard').style.display='none';
+  	document.getElementById('general-info').style.display='block';
+  }
+  
+  handleEditPricingPlanClick(event)  {
+    document.getElementById('prospect-dashboard').style.display='none';
+  	document.getElementById('prospect-plans-features').style.display='block';
+  }
+ 
+  handleVideoServiceClick(event)  {
+  		debugger;
+  	if (this.props.task.pricePlan == "Basic Plan") {
+	    document.getElementById("upgrade-price-plan").style.display='block';
+	} else {
+  	document.getElementById('prospect-dashboard').style.display='none';
+  	document.getElementById('video-upload').style.display='block';
+  	}
   }
 
-   handleAcademicClick(event) {
-    document.getElementById('profile-contact-info').style.display='none';
-    document.getElementById('profile-athletic-info').style.display='none';
-    document.getElementById('profile-academic-info').style.display='block';
-    document.getElementById('player-recruiting-interest').style.display='none';
-  }
-  
-   handleRecruitingClick(event) {
-    document.getElementById('profile-contact-info').style.display='none';
-    document.getElementById('profile-athletic-info').style.display='none';
-    document.getElementById('profile-academic-info').style.display='none';
-    document.getElementById('player-recruiting-interest').style.display='block';
-  }
+  handleMarketingServiceClick(event)  {
+  	if (this.props.task.pricePlan == "Basic Plan" 
+  	|| this.props.task.pricePlan == "Plus Monthly Plan" 
+  	|| this.props.task.pricePlan == "Plus Yearly Plan") {
+		document.getElementById("upgrade-price-plan").style.display='block';	
+	} else  {
+  	document.getElementById('prospect-dashboard').style.display='none';
+  	document.getElementById('marketing-service').style.display='block';
+  	}
+  } 
 
   handleLetterClick(event) {
     document.getElementById("letter-update").style.display='block';
@@ -259,56 +285,17 @@ export class ProspectDashboard extends Component {
   handleOfferedClick(event) {
     document.getElementById("offered-update").style.display='block';
   }
-
-  handleConfirmClick(event) {
-	document.getElementById('prospect-confirmation').style.display='none';
-	document.getElementById('prospect-dashboard').style.display='block';
-	window.scrollTo(0, 0);
-  } 
-
-  handleEditProfileClick(event)  {
-  	document.getElementById('prospect-dashboard').style.display='none';
-  	document.getElementById('general-info').style.display='block';
-  }
   
-  handleEditPricingPlanClick(event)  {
-    document.getElementById('prospect-dashboard').style.display='none';
-  	document.getElementById('prospect-plans-features').style.display='block';
-  }
- 
-   
-  handleVideoServiceClick(event)  {
-  		debugger;
-  	if (this.props.task.pricePlan == "Basic Plan") {
-	    document.getElementById("upgrade-price-plan").style.display='block';
-	} else {
-  	document.getElementById('prospect-dashboard').style.display='none';
-  	document.getElementById('video-upload').style.display='block';
-  	}
-  }
-
-  handleMarketingServiceClick(event)  {
-  	if (this.props.task.pricePlan == "Basic Plan" 
-  	|| this.props.task.pricePlan == "Plus Monthly Plan" 
-  	|| this.props.task.pricePlan == "Plus Yearly Plan") {
-		document.getElementById("upgrade-price-plan").style.display='block';	
-	} else  {
-  	document.getElementById('prospect-dashboard').style.display='none';
-  	document.getElementById('marketing-service').style.display='block';
-  	}
-  } 
-  
-
   submitUpdate(event) {
     document.getElementById("upgrade-price-plan").style.display='none';
 	document.getElementById("marketing-confirm").style.display='none';
   }
-  
+   
   closeVideoUpload(event) {
 	document.getElementById("video-upload").style.display='none';
     document.getElementById("prospect-dashboard").style.display='block';
   }
-  
+   
   submitMarketingOrder(event) {
     document.getElementById("marketing-service").style.display='none';
     document.getElementById("marketing-confirm").style.display='block';
@@ -320,13 +307,60 @@ export class ProspectDashboard extends Component {
 	  document.getElementById("profile").style.display='block';
 	  document.getElementById("prospect-dashboard").style.display='none';
 	  window.scrollTo(0, 0);
+  } 
+   
+  handleCollegeRecruitingSummary() {
+  	  document.getElementById("recruiting-activity-summary").style.display='block';
   }
   
-  backToDashboard(event) {
+  closeCollegeRecruitingSummary() {
+  	  document.getElementById("recruiting-activity-summary").style.display='none';
+  }
+  
+
+// click-handlers for Player-Profile
+
+   handleContactClick() {
+    document.getElementById('profile-contact-info').style.display='block';
+    document.getElementById('profile-athletic-info').style.display='none';
+    document.getElementById('profile-academic-info').style.display='none';
+    document.getElementById('player-recruiting-interest').style.display='none';
+  }
+  
+   handleAthleticClick(event) {
+    document.getElementById('profile-contact-info').style.display='none';
+    document.getElementById('profile-athletic-info').style.display='block';
+    document.getElementById('profile-academic-info').style.display='none';
+    document.getElementById('player-recruiting-interest').style.display='none';
+  }
+
+   handleAcademicClick(event) {
+    document.getElementById('profile-contact-info').style.display='none';
+    document.getElementById('profile-athletic-info').style.display='none';
+    document.getElementById('profile-academic-info').style.display='block';
+    document.getElementById('player-recruiting-interest').style.display='none';
+  }
+  
+   handleRecruitingClick(event) {
+    document.getElementById('profile-contact-info').style.display='none';
+    document.getElementById('profile-athletic-info').style.display='none';
+    document.getElementById('profile-academic-info').style.display='none';
+    document.getElementById('player-recruiting-interest').style.display='block';
+  }
+
+   backToDashboard(event) {
       document.getElementById("profile").style.display='none';
 	  document.getElementById("prospect-dashboard").style.display='block';
 	  window.scrollTo(0, 0);
   }
+  
+// click-handlers for coaches-signin
+
+
+// click-handlers for coaches-dashboard
+  
+  
+
 
   render() {
     const { editing } = this.state;
@@ -366,10 +400,10 @@ export class ProspectDashboard extends Component {
                             <div className="col-sm-3">
                                 <div className="panel-container">
                                     <div id="program-name" ><h5>{task.firstName} {task.lastName}</h5></div>
-                                    <div id="" className="data-cat-btn background-gray">
+                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleDashboardClick}>
                                         <h5>Dashboard</h5>
                                     </div>
-                                    <div id="" className="data-cat-btn background-gray">
+                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleSummaryClick}>
                                         <h5>Summary</h5>
                                     </div>
                                     <div className="panel-cat-name">
@@ -396,31 +430,59 @@ export class ProspectDashboard extends Component {
                     <div className="col-sm-9">
                         <div><u><h5 id="prospect-clubname">{task.pricePlan}</h5></u><u><h5 onClick={this.coachesView} id="prospect-coach-view" className="text-right">View What Coaches See</h5></u></div>
                         
-                        <div className="prospect-container">
-                            <ul className="prospect-categories list-inline">
-                                <li className="cat-btn background-blue">D1</li>
-                                <li className="cat-btn background-blue">D2</li>
-                                <li className="cat-btn background-blue">D3</li>
-                                <li className="cat-btn background-blue">NAIA</li>
-                                <li className="cat-btn background-blue">JUCO</li>
-                            </ul>
-                            <h2 id="prospect-interest" className="text-center" >My Recruiting Interest</h2>
-                            <div id="recruiting-tracking">    						
-                                <div className="row">
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleLetterClick}><p>RECEIVED A LETTER</p></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleTextClick}><p>RECEIVED A TEXT</p></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleEmailClick}><p>RECEIVED AN EMAIL</p></div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><p>RECEIVED A PHONE CALL</p></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCampClick}><p>WAS INVITED TO A CAMP</p></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><p>HAD A PRIVATE WORKOUT</p></div>
-                                </div>
-                                <div className="row">
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleCampusClick}><p>WAS INVITED TO CAMPUS</p></div>
-                                    <div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleOfferedClick}><p>WAS OFFERED</p></div>
-                                </div>
-                            </div>
+                        <div className="registered-prospect-container">
+                        	<div id="prospect-updates-container"> 
+								<ul className="prospect-categories list-inline">
+									<li className="cat-btn background-blue">D1</li>
+									<li className="cat-btn background-blue">D2</li>
+									<li className="cat-btn ">D3</li>
+									<li className="cat-btn ">NAIA</li>
+									<li className="cat-btn ">JUCO</li>
+								</ul>
+								<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
+								<p id="prospect-interest-caption" className="text-center background-light-gray">Build your profile by tracking which schools are recruiting you!</p>
+								<div id="recruiting-tracking">    						
+									<div className="row">
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleLetterClick}><p>RECEIVED A LETTER</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleTextClick}><p>RECEIVED A TEXT</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleEmailClick}><p>RECEIVED AN EMAIL</p></div>
+									</div>
+									<div className="row">
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><p>RECEIVED A PHONE CALL</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCampClick}><p>WAS INVITED TO A CAMP</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><p>HAD A PRIVATE WORKOUT</p></div>
+									</div>
+									<div className="row">
+										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleCampusClick}><p>WAS INVITED TO CAMPUS</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleOfferedClick}><p>WAS OFFERED</p></div>
+									</div>
+								</div>
+                           	</div>
+                           	<div id="player-recruiting-summary" className="">
+							<ul className="prospect-categories list-inline">
+								<li className="cat-btn background-blue">D1</li>
+								<li className="cat-btn background-blue">D2</li>
+								<li className="cat-btn ">D3</li>
+								<li className="cat-btn ">NAIA</li>
+								<li className="cat-btn ">JUCO</li>
+							</ul>
+							<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
+							<div id="recruiting-interest-cats">   
+								<ul>
+									<li className="btn btn-default">High Major</li>
+									<li className="btn btn-default">High Major - / Mid-Major +</li>
+									<li className="btn btn-default background-blue">Mid-Major</li>
+									<li className="btn btn-default background-blue">Mid-Major - / Low Major +</li>
+									<li className="btn btn-default">Low Major</li>
+								</ul>						
+							</div>
+							<div id="recruiting-activity-feed" >
+								<ul className=" list-unstyled" >
+									<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Southwest Minnesota University</li>
+									<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+								</ul>
+							</div>
+    					</div>
                         </div>
                         <div id="upgrade-price-plan" className="recruit-update-container text-center">
 						  <u><h3>Premium Services</h3></u>
@@ -428,6 +490,19 @@ export class ProspectDashboard extends Component {
 			 				<p>To access these services please upgrade your pricing plan.</p>
 						  </div>
 						  <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Close</button>        
+						</div>
+						<div id="recruiting-activity-summary" className="college-recruiting-summary text-center">
+						  <u><h5>Drake University & {task.firstName} {task.lastName}</h5></u>
+						  <ul className="list-unstyled text-left">
+		 				  	<li><div className="highlight-box background-blue"></div>Letter</li>
+		 				  	<li><div className="highlight-box background-blue"></div>Text</li>
+		 				  	<li><div className="highlight-box background-blue"></div>Phone Call</li>
+		 				  	<li><div className="highlight-box"></div>Camp Invite</li>
+		 				  	<li><div className="highlight-box"></div>Private Workout</li>
+		 				  	<li><div className="highlight-box background-blue"></div>Recruiting Visit</li>
+		 				  	<li><div className="highlight-box"></div>Scholarship Offer</li>
+						  </ul>
+						  <button className="btn btn-default btn-large" onClick={this.closeCollegeRecruitingSummary}>Close</button>        
 						</div>
                     </div>
                 </div>
@@ -504,51 +579,10 @@ export class ProspectDashboard extends Component {
     <script src="cors_upload.js"></script>
     <script src="upload_video.js"></script>
     
-    //<h1> Coaches Signin</h1>
-    
-    <section id="coach-gen-info" className="page">
-       	<form onSubmit={ this.handleSubmit }>
-    		<div className="container">
-    			<div className="row">
-    				<div className="col-sm-4">
-    					<div className="timeline-image1 background-gray">
-    						<h2>1</h2>
-    					</div>
-    					<h5 className="timeline-heading1">SIGN IN</h5>
-    				</div>
-    				<div className="col-sm-4">
-    					<div className="timeline-image2 background-blue">
-    						<h2>2</h2>
-    					</div>
-    					<h5 className="timeline-heading2">GENERAL INFORMATION</h5>
-    				</div>
-    				<div className="col-sm-4">
-    					<div className="timeline-image3 background-gray">
-    						<h2>3</h2>
-    					</div>
-	    				<h5 className="timeline-heading3">BILLING</h5>
-    				</div>
-    			</div>
-    			<div className="row">
-    				<div className="col-md-offset-2 col-md-4 input-box">
-    					<div className="input-container program-info">
-    						<h4>Coach Information</h4>
-    						<div>Name<input onChange={this.handleUserInput} value={ this.state.ccNumber } /></div>
-          					<div>Position<input onChange={this.handleUserInput} value={ this.state.ccCode } /></div>
-          					<div>Email<input onChange={this.handleUserInput} value={ this.state.ccExpiration } /></div>
-          					<div>Phone Number<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
-          					<div>Head Coach Email<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
-          					<div>Head Coach Phone<input onChange={this.handleUserInput} value={ this.state.ccName } /></div>
-    					</div>
-    				</div>
-    			</div>
-    	  	</div>
-          	<button onClick={this.handleButtonClick} className="btn btn-default btn-large center-button">View Plans & Features</button>
-    	</form>
-    </section>
     
     
-    <section className="page">
+    
+    <section id="coaches-plans" className="page">
     	<div className="container">
     		<div className="row">
     			<div className="col-sm-4">
@@ -697,18 +731,20 @@ export class ProspectDashboard extends Component {
     					<h3 className="text-center" >You have successfully created your college coach account!
     					</h3>
     				</div>
-    				<div className="col-md-4 input-box">
+    			</div>	
+    			<div className="row">
+    				<div className="col-sm-offset-1 col-sm-4 input-box">
     					<div id="gender-info" className="input-container">
     						<h4>Coach Verification</h4>
-    						<div>IN ORDER TO VERIFY YOUR EMAIL ADDRESS AS A
-								COLLEGE COACH, PLEASE MAKE SURE THE EMAIL
-								ADDRESS SEEN BELOW IS CORRECT SO WE CAN
-								SEND AN EMAIL TO VERIFY IT IS A UNIVERSITY
-								EMAIL.</div>
-							<h4>task.coachesEmail</h4>
+    						<div>In order to verify your email address as a
+								college coach, please make sure the email
+								address seen below is correct so we can
+								send an email to verify it is a university
+								email.</div>
+							<p id="coach-email" className="text-center">task.coachesEmail</p>
           				</div>
     				</div>
-					<div>    					
+					<div className="col-sm-6" >    					
     					<p>Please visit your dashboard and use our service to search and follow prospects 
     					in our database. This platform is intended to help your coaching staff discover new prospects and gain more information on prospects you already follow. </p>													
 						<p>We will email a bill corresponding to your chosen pricing plan in the next 3-5 days.</p>
@@ -720,7 +756,6 @@ export class ProspectDashboard extends Component {
     	</form>
     </section>
     
-    <h1> Coaches Dashboard</h1>
     
     
     <section id="profile" className="page">
@@ -810,7 +845,7 @@ export class ProspectDashboard extends Component {
 								</ul>						
 							</div>
 							<div id="recruiting-activity-feed" >
-								<ul className="prospect-activity background-light-gray list-inline" onClick={this.handleSummaryClick}>
+								<ul className="prospect-button background-light-gray list-inline" onClick={this.handleSummaryClick}>
 									<li className="prospect-update">Southwest Minnesota</li>
 								</ul>
 							</div>
@@ -826,7 +861,7 @@ export class ProspectDashboard extends Component {
       
       
       
-      <section className="">
+      <section id="coach-dashboard" className="">
     		<div className="container">
     			<div className="row">
     				<div className="col-sm-3">
@@ -839,10 +874,10 @@ export class ProspectDashboard extends Component {
     							<h5>Edit Information</h5>
     						</div>
     						<div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
-    							<h5>School Information</h5>
+    							<h5>Account Information</h5>
 							</div>
 							<div id="" className="data-cat-btn background-gray" onClick={this.handleContactClick}>
-								<h5>Coach Information</h5>
+								<h5>Pricing Plan</h5>
 							</div>
 							<div className="panel-cat-name">
 								<h5>Recruiting Feeds</h5>
@@ -877,8 +912,8 @@ export class ProspectDashboard extends Component {
     						</ul>
     						<li >
 							  <div id="all-prospects-container" className="prospect-summary background-light-gray ">
-									<ul id="all-prospects" className=" ">
-										<li className="prospect-feed">{task.firstName} {task.lastName} ({task.gradeClass}/{task.position})</li>
+									<ul id="all-prospects" className="list-unstyled ">
+										<li className="prospect-feed list-unstyled">{task.firstName} {task.lastName} ({task.gradeClass}/{task.position})</li>
 										<li className="prospect-feed">{task.stateAthlete}</li>
 										<li className="prospect-feed">{task.aauProgram}</li>
 									</ul>

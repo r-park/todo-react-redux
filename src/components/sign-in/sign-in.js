@@ -21,30 +21,13 @@ export class SignIn extends Component {
       <section id="app-sign-in" className="">
     	<div className="container">
     		<div className="row">
-    			<div id="logo" className="col-sm-offset-3 col-sm-6 input-box">
-					<div>
-					</div>
-				</div>
-    			<div style={{width:'33%'}} className="col-sm-offset-1 col-sm-4 sign-in">
+    			
+    			<div className="col-sm-offset-4 col-sm-4 sign-in">
     				<div id="aau-prospect" >
                       <div className="g-row" >
                         <div className="g-col text-center">
                           <h3 className="sign-in__heading ">Prospect</h3>
                           <h3 className="sign-in__heading ">Sign In</h3>
-
-                          <button onClick={signInWithFacebook} className="btn btn-default btn-large center-button">Facebook</button>
-                          <button onClick={signInWithGoogle} className="btn btn-default btn-large center-button">Google</button>
-                          <button onClick={signInWithTwitter} className="btn btn-default btn-large center-button">Twitter</button>
-                        </div>
-                      </div>
-    				</div>
-    			</div>
-    			<div style={{width:'33%'}} className="col-sm-offset-2 col-sm-4 sign-in">
-    				<div id="aau-prospect" >
-                      <div className="g-row" >
-                        <div className="g-col text-center">
-                          <h3  className="sign-in__heading">Coach</h3>
-                          <h3  className="sign-in__heading">Sign In</h3>
 
                           <button onClick={signInWithFacebook} className="btn btn-default btn-large center-button">Facebook</button>
                           <button onClick={signInWithGoogle} className="btn btn-default btn-large center-button">Google</button>
