@@ -101,7 +101,7 @@
     }
     
     section {
-    padding: 50px 0px 50px 0px;
+    padding: 45px 0px 50px 0px;
     border-top: 2px solid #5ccae6;
     }
     
@@ -528,8 +528,8 @@
 	}
  	
  	#profile-athletic-info div, #profile-contact-info div, #profile-basics  div, #profile-academic-info div{
- 	margin-top: 1.5%;
- 	margin-bottom:1.5%;
+ 	margin-top: .5%;
+ 	margin-bottom: .5%;
 	}
  	
  	#profile-contact-info, #profile-athletic-info, #profile-academic-info, #player-recruiting-interest {
@@ -586,18 +586,18 @@
  	}
  	}
  	
- 	#recruiting-activity-feed  {
+ 	.recruiting-activity-feed  {
  	display:inline-block;
 	width: 100%;
  	}
  	
  	@media screen and (min-width:768px) {
- 	#recruiting-activity-feed  {
+ 	.recruiting-activity-feed  {
 	width: 60%;
  	}
  	}
  	
- 	#recruiting-activity-feed .btn {
+ 	.recruiting-activity-feed .btn {
  	margin: 2px 0px 2px 0px;
  	}
  	
@@ -936,10 +936,12 @@
  	
  	#prospect-clubname {
  	float: left;
+ 	margin-bottom: 15px;
   	}
   	
   	#prospect-coach-view {
 	float: right;
+	margin-bottom: 10px;
   	}
   	
   	#prospect-coach-view:hover {
@@ -1403,6 +1405,8 @@
  	display: none;
  	}
  	
+ 	
+ 	
  	#letter-update, #text-update, #email-update, #call-update, 
  	#camp-update, #workout-update, #campus-update, #offered-update, upgrade-price-plan, #marketing-confirm {
  	z-index: 1000;
@@ -1436,7 +1440,7 @@
     clear: left;
     }
  	
- 	#player-recruiting-summary  {
+ 	#player-d1-recruiting-summary, #player-d2-recruiting-summary, #player-d3-recruiting-summary, #player-d4-recruiting-summary, #player-d5-recruiting-summary  {
  	display: none;
  	background-color: #fff;
  	border-radius: 50px;
@@ -1463,6 +1467,10 @@
     /* demo display nones */
  	
  	#coach-general-info, #coaches-plans, #coach-confirmation, #coach-dashboard, #profile {
+ 	display: none;
+ 	}
+ 	
+ 	#hm-schools-recruiting-feed, #hmmm-schools-recruiting-feed, #mm-schools-recruiting-feed, #mmlm-schools-recruiting-feed, #lm-schools-recruiting-feed {
  	display: none;
  	}
  	

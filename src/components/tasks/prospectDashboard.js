@@ -5,7 +5,6 @@ import React, { Component, PropTypes } from 'react';
 
 
 
-
 export class ProspectDashboard extends Component {
   static propTypes = {
     deleteTask: PropTypes.func.isRequired,
@@ -215,14 +214,106 @@ export class ProspectDashboard extends Component {
   
    handleDashboardClick() {
     document.getElementById('prospect-updates-container').style.display='block';
-    document.getElementById('player-recruiting-summary').style.display='none';
+    document.getElementById('player-d1-recruiting-summary').style.display='none';
+	document.getElementById('player-d2-recruiting-summary').style.display='none';
+	document.getElementById('player-d3-recruiting-summary').style.display='none';
+	document.getElementById('player-d4-recruiting-summary').style.display='none';
+	document.getElementById('player-d5-recruiting-summary').style.display='none';
   }
    
    handleSummaryClick() {
     document.getElementById('prospect-updates-container').style.display='none';
-    document.getElementById('player-recruiting-summary').style.display='block';
+    document.getElementById('player-d1-recruiting-summary').style.display='block';
   }
   
+  		handleD1SummaryClick() {
+			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementById('player-d1-recruiting-summary').style.display='block';
+			document.getElementById('player-d2-recruiting-summary').style.display='none';
+			document.getElementById('player-d3-recruiting-summary').style.display='none';
+			document.getElementById('player-d4-recruiting-summary').style.display='none';
+			document.getElementById('player-d5-recruiting-summary').style.display='none';
+			document.getElementById('all-d1-schools-recruiting-feed').style.display='inline-block';
+			document.getElementById('hm-schools-recruiting-feed').style.display='none';
+			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
+			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+		  }
+		handleD2SummaryClick() {
+			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementById('player-d1-recruiting-summary').style.display='none';
+			document.getElementById('player-d2-recruiting-summary').style.display='block';
+			document.getElementById('player-d3-recruiting-summary').style.display='none';
+			document.getElementById('player-d4-recruiting-summary').style.display='none';
+			document.getElementById('player-d5-recruiting-summary').style.display='none';
+		  }
+		handleD3SummaryClick() {
+			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementById('player-d1-recruiting-summary').style.display='none';
+			document.getElementById('player-d2-recruiting-summary').style.display='none';
+			document.getElementById('player-d3-recruiting-summary').style.display='block';
+			document.getElementById('player-d4-recruiting-summary').style.display='none';
+			document.getElementById('player-d5-recruiting-summary').style.display='none';
+		  }
+		handleD4SummaryClick() {
+			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementById('player-d1-recruiting-summary').style.display='none';
+			document.getElementById('player-d2-recruiting-summary').style.display='none';
+			document.getElementById('player-d3-recruiting-summary').style.display='none';
+			document.getElementById('player-d4-recruiting-summary').style.display='block';
+			document.getElementById('player-d5-recruiting-summary').style.display='none';
+		  }
+		handleD5SummaryClick() {
+			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementById('player-d1-recruiting-summary').style.display='none';
+			document.getElementById('player-d2-recruiting-summary').style.display='none';
+			document.getElementById('player-d3-recruiting-summary').style.display='none';
+			document.getElementById('player-d4-recruiting-summary').style.display='none';
+			document.getElementById('player-d5-recruiting-summary').style.display='block';
+		  }
+		  
+		handleD1HMFilter() {
+			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
+			document.getElementById('hm-schools-recruiting-feed').style.display='inline-block';
+			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
+			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+		}
+		handleD1HMMMFilter() {
+			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
+			document.getElementById('hm-schools-recruiting-feed').style.display='none';
+			document.getElementById('hmmm-schools-recruiting-feed').style.display='inline-block';
+			document.getElementById('mm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
+			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+		}
+		handleD1MMFilter() {
+			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
+			document.getElementById('hm-schools-recruiting-feed').style.display='none';
+			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mm-schools-recruiting-feed').style.display='inline-block';
+			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
+			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+		}
+		handleD1MMLMFilter() {
+			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
+			document.getElementById('hm-schools-recruiting-feed').style.display='none';
+			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mmlm-schools-recruiting-feed').style.display='inline-block';
+			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+		}
+		handleD1LMFilter() {
+			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
+			document.getElementById('hm-schools-recruiting-feed').style.display='none';
+			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
+			document.getElementById('lm-schools-recruiting-feed').style.display='inline-block';
+		}
+   
   handleEditProfileClick(event)  {
   	document.getElementById('prospect-dashboard').style.display='none';
   	document.getElementById('general-info').style.display='block';
@@ -431,14 +522,15 @@ export class ProspectDashboard extends Component {
                         <div><u><h5 id="prospect-clubname">{task.pricePlan}</h5></u><u><h5 onClick={this.coachesView} id="prospect-coach-view" className="text-right">View What Coaches See</h5></u></div>
                         
                         <div className="registered-prospect-container">
-                        	<div id="prospect-updates-container"> 
+                        	 
 								<ul className="prospect-categories list-inline">
-									<li className="cat-btn background-blue">D1</li>
-									<li className="cat-btn background-blue">D2</li>
-									<li className="cat-btn ">D3</li>
-									<li className="cat-btn ">NAIA</li>
-									<li className="cat-btn ">JUCO</li>
+									<li className="cat-btn background-blue" onClick={this.handleD1SummaryClick}>D1</li>
+									<li className="cat-btn background-blue" onClick={this.handleD2SummaryClick}>D2</li>
+									<li className="cat-btn " onClick={this.handleD3SummaryClick}>D3</li>
+									<li className="cat-btn " onClick={this.handleD4SummaryClick}>NAIA</li>
+									<li className="cat-btn " onClick={this.handleD5SummaryClick}>JUCO</li>
 								</ul>
+							<div id="prospect-updates-container">
 								<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
 								<p id="prospect-interest-caption" className="text-center background-light-gray">Build your profile by tracking which schools are recruiting you!</p>
 								<div id="recruiting-tracking">    						
@@ -458,31 +550,94 @@ export class ProspectDashboard extends Component {
 									</div>
 								</div>
                            	</div>
-                           	<div id="player-recruiting-summary" className="">
-							<ul className="prospect-categories list-inline">
-								<li className="cat-btn background-blue">D1</li>
-								<li className="cat-btn background-blue">D2</li>
-								<li className="cat-btn ">D3</li>
-								<li className="cat-btn ">NAIA</li>
-								<li className="cat-btn ">JUCO</li>
-							</ul>
-							<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
-							<div id="recruiting-interest-cats">   
-								<ul>
-									<li className="btn btn-default">High Major</li>
-									<li className="btn btn-default">High Major - / Mid-Major +</li>
-									<li className="btn btn-default background-blue">Mid-Major</li>
-									<li className="btn btn-default background-blue">Mid-Major - / Low Major +</li>
-									<li className="btn btn-default">Low Major</li>
-								</ul>						
+                           	<div className="g-col">
+							
+						
 							</div>
-							<div id="recruiting-activity-feed" >
-								<ul className=" list-unstyled" >
-									<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Southwest Minnesota University</li>
-									<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
-								</ul>
+                           	<div id="player-d1-recruiting-summary" className="">
+								<h2 id="prospect-interest" className="text-center" >D1 Recruiting Interest</h2>
+								<div id="recruiting-interest-cats">   
+									<ul>
+										<li className="btn btn-default" onClick={this.handleD1HMFilter}>High Major</li>
+										<li className="btn btn-default" onClick={this.handleD1HMMMFilter}>High Major - / Mid-Major +</li>
+										<li className="btn btn-default background-blue" onClick={this.handleD1MMFilter}>Mid-Major</li>
+										<li className="btn btn-default background-blue" onClick={this.handleD1MMLMFilter}>Mid-Major - / Low Major +</li>
+										<li className="btn btn-default" onClick={this.handleD1LMFilter}>Low Major</li>
+									</ul>						
+								</div>
+								<div id="all-d1-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Southwest Minnesota University</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+								<div id="hm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.High Major</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+								<div id="hmmm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.High Major - / Mid-Major +</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+								<div id="mm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.Mid-Major +</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+								<div id="mmlm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.Mid-Major - / Low Major +</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+								<div id="lm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.Low Major +</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
 							</div>
-    					</div>
+							<div id="player-d2-recruiting-summary" className="text-center">
+								<h2 id="prospect-interest" className="text-center" >D2 Recruiting Interest</h2>
+								<div className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>D2 school</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+							</div>
+							<div id="player-d3-recruiting-summary" className="text-center">
+								<h2 id="prospect-interest" className="text-center" >D3 Recruiting Interest</h2>
+								<div className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>D3 school</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+							</div>
+							<div id="player-d4-recruiting-summary" className="text-center">
+								<h2 id="prospect-interest" className="text-center" >NAIA Recruiting Interest</h2>
+								<div className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>NAIA school</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+							</div>
+							<div id="player-d5-recruiting-summary" className="text-center">
+								<h2 id="prospect-interest" className="text-center" >JUCO Recruiting Interest</h2>
+								<div className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>JUCO school</li>
+										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+									</ul>
+								</div>
+							</div>
                         </div>
                         <div id="upgrade-price-plan" className="recruit-update-container text-center">
 						  <u><h3>Premium Services</h3></u>
