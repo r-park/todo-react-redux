@@ -61,13 +61,13 @@ export class TaskForm extends Component {
       this.state['textFilterOffered']='';     
 
       
-      this.state['recruitingInfo']= {
-          d1:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' },
-          d2:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' },
-          d3:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' },
-          d4:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' },
-          d5:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }
-      };
+      this.state['recruitingInfo']= [
+          {d1:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }},
+          {d2:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }},
+          {d3:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }},
+          {d4:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }},
+          {d5:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }}
+      ];
       //debugger;
       this.state[key]=value;
 
@@ -220,9 +220,22 @@ console.log('State : '+this.state);
                                 false: true;
                               return true ;
                   })
-                  .map((college) =>{
-                      return (<li>{college.college}</li>);
+                  .map((college,k) =>{
+                      return (<li
+                              key={k}
+                              onClick={this.recruitInterestClick.bind(this,event,college,filter)}
+                              ><u>{college.college}</u></li>);
       });
+  }
+  recruitInterestClick(props,college,filter,event){
+      debugger;
+
+    //this.state.recruitingInfo = { d1:{ [filter]:college } };
+    this.props.createTask(this.props.tasks[0], { [filter]:college  });
+    //this.onSubmit(event);
+    //this.props.updateTask(this.props.tasks[0], this.state);
+
+
   }
   render() {
          var recruitingInterest = 
