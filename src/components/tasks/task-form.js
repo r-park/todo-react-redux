@@ -51,6 +51,16 @@ export class TaskForm extends Component {
       this.state['pricePlan'       ]='';
       this.state['collegeProgramGender']='';     
       this.state['textFilter']='';     
+      this.state['textFilterLetter']='';     
+      this.state['textFilterText']='';     
+      this.state['textFilterEmail']='';     
+      this.state['textFilterCall']='';     
+      this.state['textFilterCamp']='';     
+      this.state['textFilterWorkout']='';     
+      this.state['textFilterCampus']='';     
+      this.state['textFilterOffered']='';     
+
+      
       this.state['recruitingInfo']= {
           d1:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' },
           d2:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' },
@@ -75,7 +85,11 @@ console.log('State : '+this.state);
     //this.setState(obj);
     //this.props.tasks && this.props.tasks[0]['key'] ? this.state[title]= event.target.value: this.firstSubmit(title, event.target.value);
     
-   title == 'textFilter'? this.onSubmit(event): ''; 
+    ['textFilter','textFilterLetter',
+      'textFilterText','textFilterEmail',
+      'textFilterCall', 'textFilterCamp',
+      'textFilterWorkout','textFilterCampus','textFilterOffered']
+      .indexOf(title) != -1 ? this.onSubmit(event): ''; 
   }
 
   onChangeAAUCLUB(event) {
@@ -140,7 +154,7 @@ console.log('State : '+this.state);
   	}
   }
      
-    submitUpdate(event) {
+    submitUpdate(props ,filter, event) {
         debugger;
     document.getElementById("letter-update").style.display='none';
     document.getElementById("text-update").style.display='none';
@@ -151,9 +165,9 @@ console.log('State : '+this.state);
     document.getElementById("campus-update").style.display='none';
     document.getElementById("offered-update").style.display='none';
     document.getElementById("upgrade-price-plan").style.display='none';
-    this.state['textFilter']='';     
+    this.state[filter]='';     
     debugger; 
-    this.onChange('textFilter', event);
+    this.onChange(filter, event);
     //this.onSubmit(event); 
     //this.props.updateTask(this.props.tasks[0], this.state);
   }
@@ -193,9 +207,9 @@ console.log('State : '+this.state);
       });
   }
 
-  mappedColleges (recruitingInterest) {
+  mappedColleges (recruitingInterest, filter) {
       debugger;
-      var textFilter = this.state.textFilter === undefined ?  '' : this.state.textFilter;
+      var textFilter = this.state[filter] === undefined ?  '' : this.state[filter];
 
       return recruitingInterest
                   .filter((college)=>{
@@ -210,7 +224,6 @@ console.log('State : '+this.state);
                       return (<li>{college.college}</li>);
       });
   }
-
   render() {
          var recruitingInterest = 
              
@@ -7245,9 +7258,30 @@ console.log('State : '+this.state);
                   26:{ ref:'act',           display: 'ACT'               },
                   27:{ ref:'classRank',     display: 'Class Rank'        },
               },
-              textFilter:{
-                  28:{ ref:'textFilter',           display: 'Search'  },
-              }
+              textFilterLetter:{
+                  28:{ ref:'textFilterLetter',           display: 'Search'  },
+              },
+              textFilterText:{
+                  29:{ ref:'textFilterText',           display: 'Search'  },
+              },
+              textFilterEmail:{
+                  30:{ ref:'textFilterEmail',           display: 'Search'  },
+              },
+              textFilterCall:{
+                  31:{ ref:'textFilterCall',           display: 'Search'  },
+              },
+              textFilterCamp:{
+                  32:{ ref:'textFilterCamp',           display: 'Search'  },
+              },
+              textFilterWorkout:{
+                  33:{ ref:'textFilterWorkout',           display: 'Search'  },
+              },
+              textFilterCampus:{
+                  34:{ ref:'textFilterCampus',           display: 'Search'  },
+              },
+              textFilterOffered:{
+                  35:{ ref:'textFilterOffered',           display: 'Search'  },
+              },
 
           };
 
@@ -7545,7 +7579,112 @@ console.log('State : '+this.state);
       
       	<div id="letter-update" className="recruit-update-container text-center">
 			<u><h3>Recruiting Letter</h3></u>
-               {this.mappedInputs(genInfo.textFilter)}
+
+               {this.mappedInputs(genInfo.textFilterLetter)}
+			<div  style={ { paddingBottom : '5px' }} className="letter-attributes background-light-gray">
+                <ul style={ {
+                        listStyle:'none', 
+                        height: '200px',
+                        overflow: 'auto',
+                        overflowY: 'scroll',
+                        paddingBottom : '5px'
+                }}>
+                    {this.mappedColleges(recruitingInterest, 'textFilterLetter', this)}
+                </ul>
+			</div> 
+			  <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event, 'textFilterLetter')}>Submit</button>            
+		</div>
+
+        <div id="text-update" className="recruit-update-container text-center">
+			  <u><h3>Recruiting Text</h3></u>
+               {this.mappedInputs(genInfo.textFilterText)}
+			<div  style={ { paddingBottom : '5px' }} className="letter-attributes background-light-gray">
+                <ul style={ {
+                        listStyle:'none', 
+                        height: '200px',
+                        overflow: 'auto',
+                        overflowY: 'scroll',
+                        paddingBottom : '5px'
+                }}>
+                    {this.mappedColleges(recruitingInterest, 'textFilterText', this)}
+                </ul>
+			</div> 
+			  <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event, 'textFilterText')}>Submit</button>            
+        </div>
+        
+        <div id="email-update" className="recruit-update-container text-center">
+          <u><h3>Recruiting Email</h3></u>
+               {this.mappedInputs(genInfo.textFilterEmail)}
+			<div  style={ { paddingBottom : '5px' }} className="letter-attributes background-light-gray">
+                <ul style={ {
+                        listStyle:'none', 
+                        height: '200px',
+                        overflow: 'auto',
+                        overflowY: 'scroll',
+                        paddingBottom : '5px'
+                }}>
+                    {this.mappedColleges(recruitingInterest,'textFilterEmail', this)}
+                </ul>
+			</div> 
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this, event,'textFilterEmail')}>Submit</button>           
+        </div>
+        
+        <div id="call-update" className="recruit-update-container text-center">
+          <u><h3>Recruiting Phone Call</h3></u>
+               {this.mappedInputs(genInfo.textFilterCall)}
+			<div  style={ { paddingBottom : '5px' }} className="letter-attributes background-light-gray">
+                <ul style={ {
+                        listStyle:'none', 
+                        height: '200px',
+                        overflow: 'auto',
+                        overflowY: 'scroll',
+                        paddingBottom : '5px'
+                }}>
+                    {this.mappedColleges(recruitingInterest,'textFilterCall', this)}
+                </ul>
+			</div> 
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCall')}>Submit</button>      
+        </div>
+        
+        <div id="camp-update" className="recruit-update-container text-center">
+          <u><h3>Recruiting Camp</h3></u>
+               {this.mappedInputs(genInfo.textFilterCamp)}
+			<div  style={ { paddingBottom : '5px' }} className="letter-attributes background-light-gray">
+                <ul style={ {
+                        listStyle:'none', 
+                        height: '200px',
+                        overflow: 'auto',
+                        overflowY: 'scroll',
+                        paddingBottom : '5px'
+                }}>
+                    {this.mappedColleges(recruitingInterest, 'textFilterCamp',  this)}
+                </ul>
+			</div> 
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCamp')}>Submit</button>        
+        </div>
+        
+        
+         <div id="workout-update" className="recruit-update-container text-center">
+          <u><h3>Recruiting Workout</h3></u>
+               {this.mappedInputs(genInfo.textFilterWorkout)}
+			<div  style={ { paddingBottom : '5px' }} className="letter-attributes background-light-gray">
+                <ul style={ {
+                        listStyle:'none', 
+                        height: '200px',
+                        overflow: 'auto',
+                        overflowY: 'scroll',
+                        paddingBottom : '5px'
+                }}>
+                    {this.mappedColleges(recruitingInterest,'textFilterWorkout', this)}
+                </ul>
+			</div> 
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterWorkout')}>Submit</button>      
+        </div>
+
+
+         <div id="campus-update" className="recruit-update-container text-center">
+          <u><h3>Campus Visit</h3></u>
+               {this.mappedInputs(genInfo.textFilterCampus)}
 			<div  style={ { paddingBottom : '5px' }} className="letter-attributes background-light-gray">
                 <ul style={ {
                         listStyle:'none', 
@@ -7557,117 +7696,25 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest, this)}
                 </ul>
 			</div> 
-			  <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this)}>Submit</button>            
-		</div>
-        
-        <div id="text-update" className="recruit-update-container text-center">
-			  <u><h3>Recruiting Text</h3></u>
-			  <input type="text"/><div className="btn-default search">Search School</div>
-			  <div className="letter-attributes background-light-gray"> 
-				<label htmlFor="sel1"></label>
-						<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-							<option value="NCAA D1  V">NCAA D1  V</option>
-							<option value="NCAA D2  V">NCAA D2  V</option>
-							<option value="NCAA D3  V">NCAA D3  V</option>
-							<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-						</select> 
-			  </div>   
-			  <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>            
-        </div>
-        
-        <div id="email-update" className="recruit-update-container text-center">
-          <u><h3>Recruiting Email</h3></u>
-          <input type="text"/><div className="btn-default search">Search School</div>
-          <div className="letter-attributes background-light-gray">
-        	<label htmlFor="sel1"></label>
-    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-      					<option value="NCAA D1  V">NCAA D1  V</option>
-    					<option value="NCAA D2  V">NCAA D2  V</option>
-    					<option value="NCAA D3  V">NCAA D3  V</option>
-    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-     				</select> 
-          </div>   
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>           
-        </div>
-        
-        <div id="call-update" className="recruit-update-container text-center">
-          <u><h3>Recruiting Phone Call</h3></u>
-          <input type="text"/><div className="btn-default search">Search School</div>
-          <div className="letter-attributes background-light-gray"> 
-        	<label htmlFor="sel1"></label>
-    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-      					<option value="NCAA D1  V">NCAA D1  V</option>
-    					<option value="NCAA D2  V">NCAA D2  V</option>
-    					<option value="NCAA D3  V">NCAA D3  V</option>
-    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-     				</select> 
-          </div>  
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>      
-        </div>
-        
-        <div id="camp-update" className="recruit-update-container text-center">
-          <u><h3>Recruiting Camp</h3></u>
-          <input type="text"/><div className="btn-default search">Search School</div>
-          <div className="letter-attributes background-light-gray">
-        	<label htmlFor="sel1"></label>
-    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-      					<option value="NCAA D1  V">NCAA D1  V</option>
-    					<option value="NCAA D2  V">NCAA D2  V</option>
-    					<option value="NCAA D3  V">NCAA D3  V</option>
-    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-     				</select> 
-          </div>
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>        
-        </div>
-        
-        
-         <div id="workout-update" className="recruit-update-container text-center">
-          <u><h3>Recruiting Workout</h3></u>
-          <input type="text"/><div className="btn-default search">Search School</div>
-          <div className="letter-attributes background-light-gray"> 
-        	<label htmlFor="sel1"></label>
-    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-      					<option value="NCAA D1  V">NCAA D1  V</option>
-    					<option value="NCAA D2  V">NCAA D2  V</option>
-    					<option value="NCAA D3  V">NCAA D3  V</option>
-    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-     				</select> 
-          </div>  
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>      
-        </div>
-
-
-         <div id="campus-update" className="recruit-update-container text-center">
-          <u><h3>Campus Visit</h3></u>
-          <input type="text"/><div className="btn-default search">Search School</div>
-          <div className="letter-attributes background-light-gray">
-          	 
-        	<label htmlFor="sel1"></label>
-    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-      					<option value="NCAA D1  V">NCAA D1  V</option>
-    					<option value="NCAA D2  V">NCAA D2  V</option>
-    					<option value="NCAA D3  V">NCAA D3  V</option>
-    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-     				</select> 
-          </div>
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>        
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCampus')}>Submit</button>        
         </div>
      
 
          <div id="offered-update" className="recruit-update-container text-center">
           <u><h3>Recruiting Offer</h3></u>
-          <input type="text"/><div className="btn-default search">Search School</div>
-          <div className="letter-attributes background-light-gray">
-          	 
-        	<label htmlFor="sel1"></label>
-    				<select id="sel1" className="form-control standalone" type="select" label="Select" placeholder="select">
-      					<option value="NCAA D1  V">NCAA D1  V</option>
-    					<option value="NCAA D2  V">NCAA D2  V</option>
-    					<option value="NCAA D3  V">NCAA D3  V</option>
-    					<option value="NCAA NAIA  V">NCAA NAIA  V</option>
-     				</select> 
-          </div>
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>        
+               {this.mappedInputs(genInfo.textFilterOffered)}
+			<div  style={ { paddingBottom : '5px' }} className="letter-attributes background-light-gray">
+                <ul style={ {
+                        listStyle:'none', 
+                        height: '200px',
+                        overflow: 'auto',
+                        overflowY: 'scroll',
+                        paddingBottom : '5px'
+                }}>
+                    {this.mappedColleges(recruitingInterest, this)}
+                </ul>
+			</div> 
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterOffered')}>Submit</button>        
         </div>
 
 		<section id="coach-general-info" className="page">
