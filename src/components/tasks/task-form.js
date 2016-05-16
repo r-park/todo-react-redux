@@ -50,6 +50,7 @@ export class TaskForm extends Component {
       this.state['gender'          ]='';
       this.state['pricePlan'       ]='';
       this.state['collegeProgramGender']='';     
+      this.state['filterText']='';     
       //debugger;
       this.state[key]=value;
 
@@ -68,6 +69,7 @@ console.log('State : '+this.state);
 //debugger;
     //this.props.tasks && this.props.tasks[0]['key'] ? this.state[title]= event.target.value: this.firstSubmit(title, event.target.value);
     
+   title == 'textFilter'? this.onSubmit(event): ''; 
   }
 
   onChangeAAUCLUB(event) {
@@ -166,7 +168,7 @@ console.log('State : '+this.state);
                   autoFocus
                   className="task-form__input"
                   maxLength="64"
-                  onChange={this.onChange.bind(this,objRef, this.displayAcademicInfo )}
+                  onChange={this.onChange.bind(this,objRef)}
                   onKeyUp={this.onKeyUp}
                   
                   placeholder={tasks.length && tasks[0][objRef] != "" ? tasks[0][objRef] :objDisplay} 
@@ -179,7 +181,47 @@ console.log('State : '+this.state);
       });
   }
 
+  mappedColleges (recruitingInterest) {
+      debugger;
+      var filterText = this.state.textFilter === undefined ?  '' : this.state.textFilter;
+
+      return recruitingInterest
+                  .filter((college)=>{
+                      return college
+                             .college
+                             .toLowerCase()
+                             .indexOf(filterText.toLowerCase()) === -1 ? 
+                                false: true;
+                              return true ;
+                  })
+                  .map((college) =>{
+                      return (<li>{college.college}</li>);
+      });
+  }
+
   render() {
+         var recruitingInterest = [  
+          {  
+            "college":"Boston College",
+            "conference":"Atlantic Coast Conference",
+            "value":"(M) DI High-Major"
+          },
+          {  
+            "college":"Clemson University",
+            "conference":"Atlantic Coast Conference",
+            "value":"(M) DI High-Major"
+          },
+          {  
+            "college":"Duke University",
+            "conference":"Atlantic Coast Conference",
+            "value":"(M) DI High-Major"
+          },
+          {  
+            "college":"Florida State University",
+            "conference":"Atlantic Coast Conference",
+            "value":"(M) DI High-Major"
+          }
+        ];
       var genInfo={
               contactInfo: {
                    1:{ ref:'firstName',       display: 'First Name'       },
@@ -217,8 +259,13 @@ console.log('State : '+this.state);
                   25:{ ref:'name',           display: 'GPA'               },
                   26:{ ref:'act',           display: 'ACT'               },
                   27:{ ref:'classRank',     display: 'Class Rank'        },
+              },
+              textFilter:{
+                  28:{ ref:'textFilter',           display: 'textFilter'  },
               }
+
           };
+
 
         var divStyle = { display: 'inline-block', width: '33%', float: 'left', padding: 10, };
     //      <form className="task-form" onSubmit={this.onSubmit} noValidate>
@@ -513,14 +560,16 @@ console.log('State : '+this.state);
       
       	<div id="letter-update" className="recruit-update-container text-center">
 			<u><h3>Recruiting Letter</h3></u>
-			<input type="text"/><div className="btn-default search">Search School</div>
+        <form onSubmit={ this.handleSubmit }>
+                        {this.mappedInputs(genInfo.textFilter)}
+          <button onClick={this.onSubmit} id="prospect-data-button" className="btn btn-default btn-large center-button">NEXT</button>
+        </form >
+            <ul>
+                {this.mappedColleges(recruitingInterest, this)}
+            </ul>
 			<div className="letter-attributes background-light-gray">
 				<select id="letter" className="form-control standalone" type="select" label="Select" placeholder="select">
-					<option value="NCAA D1">NCAA D1</option>
-					<option value="NCAA D2">NCAA D2</option>
-					<option value="NCAA D3">NCAA D3</option>
-					<option value="NCAA NAIA">NCAA NAIA</option>
-					<option value="NCAA JUCO">NCAA JUCO</option>
+
 				</select> 
 			</div> 
 			<button className="btn btn-default btn-large" onClick={this.submitUpdate}>Submit</button>       
