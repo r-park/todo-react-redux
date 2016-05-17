@@ -658,20 +658,17 @@ export class ProspectDashboard extends Component {
 								</div>
 								<div id="mm-schools-recruiting-feed" className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.Mid-Major +</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 								<div id="mmlm-schools-recruiting-feed" className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.Mid-Major - / Low Major +</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 								<div id="lm-schools-recruiting-feed" className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.Low Major +</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 							</div>
