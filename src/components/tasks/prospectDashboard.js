@@ -77,30 +77,49 @@ export class ProspectDashboard extends Component {
    }
    prospectSummary(){
        debugger;
-        //1HMFilter
+       debugger;
+        //D1HMFilter
         //D1HMMMFilter
         //D1LMFilter
         //D1MMFilter
         //D1MMLMFilter
+       //
+                                //college.value.indexOf('DIII')?
+                                //    return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college}</li>
+                                //    : return <div></div>;
         return(
             <div style={{height:'220px',overflow:'auto'}}>
                 {
                     Object.keys(this.props.task.recruitingInfo).map(
                         (task)=>{
                             return Object.keys(this.props.task.recruitingInfo[task])
-                            .filter((f)=>{
-                                console.log('=======f======');
-                                console.log(this.props.task.recruitingInfo[task][f]['value']);
-                                return true;
-                            })
                             .map((textFilter)=>{
                                 var college = this.props.task.recruitingInfo[task][textFilter]
-                                console.log('========================');
-                                console.log('========================');
-                                console.log('college: '+college.college);
-                                console.log('conference: '+college.conference);
-                                console.log('value: '+college.value);
-                                return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college}</li>
+                                if (
+                                    college.value.indexOf('High-Major') != -1 && !!this.state.D1HMFilter
+                                    || college.value.indexOf('High-Major - / Mid-Major +') != -1 && !!this.state.D1HMMMFilter
+                                    || college.value.indexOf('Mid-Major') != -1 && !!this.state.D1MMFilter
+                                    || college.value.indexOf('Mid-Major - / Low-Major +') != -1 && !!this.state.D1MMLMFilter
+                                    || college.value.indexOf('Low-Major') != -1 && !!this.state.D1LMFilter
+                                    || college.value.indexOf('NAIA') != -1 && !!this.state.D4SummaryClick
+                                    || college.value.indexOf('JUCO') != -1 && !!this.state.D5SummaryClick
+                                ){
+                                    console.log('========================');
+                                    console.log('========================');
+                                    console.log('college: '+college.college);
+                                    console.log('conference: '+college.conference);
+                                    console.log('value: '+college.value);
+                                    console.log('=========DIII===============');
+                                    console.log(college.value.indexOf('DI'));
+                                    console.log('==========D1HMFilter ==============');
+                                    console.log(this.state.D1HMFilter );
+                                    console.log('==========D1HMMMFilter==============');
+                                    console.log(!!this.state.D1HMMMFilter);
+
+                                    return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college} : {college.value}</li>;
+                                }    
+                                return <div></div>;
+                                
                             })
                         }
                     )
@@ -268,6 +287,8 @@ export class ProspectDashboard extends Component {
   }
   
   		handleD1SummaryClick() {
+            this.state['D1SummaryClick'] ? this.state['D1SummaryClick']=false: this.state['D1SummaryClick']=true;
+            this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='block';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
@@ -282,6 +303,8 @@ export class ProspectDashboard extends Component {
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
 		  }
 		handleD2SummaryClick() {
+            this.state['D2SummaryClick'] ? this.state['D2SummaryClick']=false: this.state['D2SummaryClick']=true;
+            this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
 			document.getElementById('player-d2-recruiting-summary').style.display='block';
@@ -290,6 +313,8 @@ export class ProspectDashboard extends Component {
 			document.getElementById('player-d5-recruiting-summary').style.display='none';
 		  }
 		handleD3SummaryClick() {
+            this.state['D3SummaryClick'] ? this.state['D3SummaryClick']=false: this.state['D3SummaryClick']=true;
+            this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
@@ -298,6 +323,8 @@ export class ProspectDashboard extends Component {
 			document.getElementById('player-d5-recruiting-summary').style.display='none';
 		  }
 		handleD4SummaryClick() {
+            this.state['D4SummaryClick'] ? this.state['D4SummaryClick']=false: this.state['D4SummaryClick']=true;
+            this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
@@ -306,6 +333,8 @@ export class ProspectDashboard extends Component {
 			document.getElementById('player-d5-recruiting-summary').style.display='none';
 		  }
 		handleD5SummaryClick() {
+            this.state['D5SummaryClick'] ? this.state['D5SummaryClick']=false: this.state['D5SummaryClick']=true;
+            this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
@@ -324,6 +353,7 @@ export class ProspectDashboard extends Component {
 			document.getElementById('mm-schools-recruiting-feed').style.display='none';
 			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+            this.props.updateTask(this.props.task, this.state);
 		}
 		handleD1HMMMFilter() {
             this.state['D1HMMMFilter'] ? this.state['D1HMMMFilter']=false: this.state['D1HMMMFilter']=true;
@@ -333,6 +363,7 @@ export class ProspectDashboard extends Component {
 			document.getElementById('mm-schools-recruiting-feed').style.display='none';
 			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+            this.props.updateTask(this.props.task, this.state);
 		}
 		handleD1MMFilter() {
             this.state['D1MMFilter'] ? this.state['D1MMFilter']=false: this.state['D1MMFilter']=true;
@@ -342,6 +373,7 @@ export class ProspectDashboard extends Component {
 			document.getElementById('mm-schools-recruiting-feed').style.display='inline-block';
 			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+            this.props.updateTask(this.props.task, this.state);
 		}
 		handleD1MMLMFilter() {
             this.state['D1MMLMFilter'] ? this.state['D1MMLMFilter']=false: this.state['D1MMLMFilter']=true;
@@ -351,9 +383,11 @@ export class ProspectDashboard extends Component {
 			document.getElementById('mm-schools-recruiting-feed').style.display='none';
 			document.getElementById('mmlm-schools-recruiting-feed').style.display='inline-block';
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
+            this.props.updateTask(this.props.task, this.state);
 		}
 		handleD1LMFilter() {
             this.state['D1LMFilter'] ? this.state['D1LMFilter']=false: this.state['D1LMFilter']=true;
+            this.props.updateTask(this.props.task, this.state);
 			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
 			document.getElementById('hm-schools-recruiting-feed').style.display='none';
 			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
