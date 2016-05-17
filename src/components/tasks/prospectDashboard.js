@@ -77,12 +77,23 @@ export class ProspectDashboard extends Component {
    }
    prospectSummary(){
        debugger;
+        //1HMFilter
+        //D1HMMMFilter
+        //D1LMFilter
+        //D1MMFilter
+        //D1MMLMFilter
         return(
             <div style={{height:'220px',overflow:'auto'}}>
                 {
                     Object.keys(this.props.task.recruitingInfo).map(
                         (task)=>{
-                            return Object.keys(this.props.task.recruitingInfo[task]).map((textFilter)=>{
+                            return Object.keys(this.props.task.recruitingInfo[task])
+                            .filter((f)=>{
+                                console.log('=======f======');
+                                console.log(this.props.task.recruitingInfo[task][f]['value']);
+                                return true;
+                            })
+                            .map((textFilter)=>{
                                 var college = this.props.task.recruitingInfo[task][textFilter]
                                 console.log('========================');
                                 console.log('========================');
