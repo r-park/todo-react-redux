@@ -8,11 +8,27 @@ import {
 } from './action-types';
 
 
-export function createTask(task,t) {
+export function createRecruitInfo(task,t) {
   return (dispatch, getState) => {
     const { auth, firebase } = getState();
 debugger;
     firebase.child(`prospects/${auth.id}/${task.key}/recruitingInfo`)
+      .push(t, error => {
+        if (error) {
+          console.error('ERROR @ createTask :', error); // eslint-disable-line no-console
+          dispatch({
+            type: CREATE_TASK_ERROR,
+            payload: error
+          });
+        }
+      });
+  };
+}
+export function createTask(t) {
+  return (dispatch, getState) => {
+    const { auth, firebase } = getState();
+debugger;
+    firebase.child(`prospects/${auth.id}/`)
       .push(t, error => {
         if (error) {
           console.error('ERROR @ createTask :', error); // eslint-disable-line no-console

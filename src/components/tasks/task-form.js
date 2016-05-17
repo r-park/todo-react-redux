@@ -61,13 +61,7 @@ export class TaskForm extends Component {
       this.state['textFilterOffered']='';     
 
       
-      this.state['recruitingInfo']= [
-          {d1:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }},
-          {d2:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }},
-          {d3:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }},
-          {d4:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }},
-          {d5:{ letter:'', text:'', email:'', call:'', campInvitation:'', privateWorkout:'', campusInvitation:'', offered:'' }}
-      ];
+      this.state['recruitingInfo']= [];
       //debugger;
       this.state[key]=value;
 
@@ -167,7 +161,7 @@ console.log('State : '+this.state);
     document.getElementById("upgrade-price-plan").style.display='none';
     this.state[filter]='';     
     debugger; 
-    this.onChange(filter, event);
+    //this.onChange(filter, event);
     //this.onSubmit(event); 
     //this.props.updateTask(this.props.tasks[0], this.state);
   }
@@ -231,11 +225,10 @@ console.log('State : '+this.state);
       debugger;
 
     //this.state.recruitingInfo = { d1:{ [filter]:college } };
-    this.props.createTask(this.props.tasks[0], { [filter]:college  });
+    this.props.createRecruitInfo(this.props.tasks[0], { [filter]:college  });
     //this.onSubmit(event);
     //this.props.updateTask(this.props.tasks[0], this.state);
-
-
+    //this.submitUpdate.bind(this,filter,event);
   }
   render() {
          var recruitingInterest = 
@@ -7605,7 +7598,7 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest, 'textFilterLetter', this)}
                 </ul>
 			</div> 
-			  <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event, 'textFilterLetter')}>Submit</button>            
+			  <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event, 'textFilterLetter')}>Close</button>            
 		</div>
 
         <div id="text-update" className="recruit-update-container text-center">
@@ -7622,7 +7615,7 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest, 'textFilterText', this)}
                 </ul>
 			</div> 
-			  <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event, 'textFilterText')}>Submit</button>            
+			  <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event, 'textFilterText')}>Close</button>            
         </div>
         
         <div id="email-update" className="recruit-update-container text-center">
@@ -7639,7 +7632,7 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest,'textFilterEmail', this)}
                 </ul>
 			</div> 
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this, event,'textFilterEmail')}>Submit</button>           
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this, event,'textFilterEmail')}>Close</button>           
         </div>
         
         <div id="call-update" className="recruit-update-container text-center">
@@ -7656,7 +7649,7 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest,'textFilterCall', this)}
                 </ul>
 			</div> 
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCall')}>Submit</button>      
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCall')}>Close</button>      
         </div>
         
         <div id="camp-update" className="recruit-update-container text-center">
@@ -7673,7 +7666,7 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest, 'textFilterCamp',  this)}
                 </ul>
 			</div> 
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCamp')}>Submit</button>        
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCamp')}>Close</button>        
         </div>
         
         
@@ -7691,7 +7684,7 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest,'textFilterWorkout', this)}
                 </ul>
 			</div> 
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterWorkout')}>Submit</button>      
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterWorkout')}>Close</button>      
         </div>
 
 
@@ -7709,7 +7702,7 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest, this)}
                 </ul>
 			</div> 
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCampus')}>Submit</button>        
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCampus')}>Close</button>        
         </div>
      
 
@@ -7727,7 +7720,7 @@ console.log('State : '+this.state);
                     {this.mappedColleges(recruitingInterest, this)}
                 </ul>
 			</div> 
-          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterOffered')}>Submit</button>        
+          <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterOffered')}>Close</button>        
         </div>
 
 		<section id="coach-general-info" className="page">
