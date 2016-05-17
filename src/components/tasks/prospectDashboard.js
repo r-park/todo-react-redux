@@ -66,7 +66,37 @@ export class ProspectDashboard extends Component {
     }
   }
 
-
+  filters(){
+    return <ul>
+        <li className="btn btn-default" onClick={this.handleD1HMFilter.bind(this)}>High Major</li>
+        <li className="btn btn-default" onClick={this.handleD1HMMMFilter.bind(this)}>High Major - / Mid-Major +</li>
+        <li className="btn btn-default " onClick={this.handleD1MMFilter.bind(this)}>Mid-Major</li>
+        <li className="btn btn-default background-blue" onClick={this.handleD1MMLMFilter.bind(this)}>Mid-Major - / Low Major +</li>
+        <li className="btn btn-default" onClick={this.handleD1LMFilter.bind(this)}>Low Major</li>
+    </ul>						
+   }
+   prospectSummary(){
+       debugger;
+        return(
+            <div style={{height:'220px',overflow:'auto'}}>
+                {
+                    Object.keys(this.props.task.recruitingInfo).map(
+                        (task)=>{
+                            return Object.keys(this.props.task.recruitingInfo[task]).map((textFilter)=>{
+                                var college = this.props.task.recruitingInfo[task][textFilter]
+                                console.log('========================');
+                                console.log('========================');
+                                console.log('college: '+college.college);
+                                console.log('conference: '+college.conference);
+                                console.log('value: '+college.value);
+                                return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college}</li>
+                            })
+                        }
+                    )
+                }
+            </div>
+        );
+   }
           // First Name       : {task.firstName} 
           // Last Name        : {task.lastName}
           // Email (Athlete)  : {task.emailAthlete}
@@ -274,6 +304,9 @@ export class ProspectDashboard extends Component {
 		  }
 		  
 		handleD1HMFilter() {
+            debugger;
+            this.state['D1HMFilter'] ? this.state['D1HMFilter']=false: this.state['D1HMFilter']=true;
+            debugger;
 			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
 			document.getElementById('hm-schools-recruiting-feed').style.display='inline-block';
 			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
@@ -282,6 +315,7 @@ export class ProspectDashboard extends Component {
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
 		}
 		handleD1HMMMFilter() {
+            this.state['D1HMMMFilter'] ? this.state['D1HMMMFilter']=false: this.state['D1HMMMFilter']=true;
 			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
 			document.getElementById('hm-schools-recruiting-feed').style.display='none';
 			document.getElementById('hmmm-schools-recruiting-feed').style.display='inline-block';
@@ -290,6 +324,7 @@ export class ProspectDashboard extends Component {
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
 		}
 		handleD1MMFilter() {
+            this.state['D1MMFilter'] ? this.state['D1MMFilter']=false: this.state['D1MMFilter']=true;
 			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
 			document.getElementById('hm-schools-recruiting-feed').style.display='none';
 			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
@@ -298,6 +333,7 @@ export class ProspectDashboard extends Component {
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
 		}
 		handleD1MMLMFilter() {
+            this.state['D1MMLMFilter'] ? this.state['D1MMLMFilter']=false: this.state['D1MMLMFilter']=true;
 			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
 			document.getElementById('hm-schools-recruiting-feed').style.display='none';
 			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
@@ -306,6 +342,7 @@ export class ProspectDashboard extends Component {
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
 		}
 		handleD1LMFilter() {
+            this.state['D1LMFilter'] ? this.state['D1LMFilter']=false: this.state['D1LMFilter']=true;
 			document.getElementById('all-d1-schools-recruiting-feed').style.display='none';
 			document.getElementById('hm-schools-recruiting-feed').style.display='none';
 			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
@@ -557,30 +594,21 @@ export class ProspectDashboard extends Component {
                            	<div id="player-d1-recruiting-summary" className="">
 								<h2 id="prospect-interest" className="text-center" >D1 Recruiting Interest</h2>
 								<div id="recruiting-interest-cats">   
-									<ul>
-										<li className="btn btn-default" onClick={this.handleD1HMFilter}>High Major</li>
-										<li className="btn btn-default" onClick={this.handleD1HMMMFilter}>High Major - / Mid-Major +</li>
-										<li className="btn btn-default background-blue" onClick={this.handleD1MMFilter}>Mid-Major</li>
-										<li className="btn btn-default background-blue" onClick={this.handleD1MMLMFilter}>Mid-Major - / Low Major +</li>
-										<li className="btn btn-default" onClick={this.handleD1LMFilter}>Low Major</li>
-									</ul>						
+                                    {this.filters()}
 								</div>
 								<div id="all-d1-schools-recruiting-feed" className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Southwest Minnesota University</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 								<div id="hm-schools-recruiting-feed" className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.High Major</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 								<div id="hmmm-schools-recruiting-feed" className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>task.High Major - / Mid-Major +</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 								<div id="mm-schools-recruiting-feed" className="recruiting-activity-feed" >
@@ -604,19 +632,23 @@ export class ProspectDashboard extends Component {
 							</div>
 							<div id="player-d2-recruiting-summary" className="text-center">
 								<h2 id="prospect-interest" className="text-center" >D2 Recruiting Interest</h2>
+								<div id="recruiting-interest-cats">   
+                                    {this.filters()}
+								</div>
 								<div className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>D2 school</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 							</div>
 							<div id="player-d3-recruiting-summary" className="text-center">
 								<h2 id="prospect-interest" className="text-center" >D3 Recruiting Interest</h2>
+								<div id="recruiting-interest-cats">   
+                                    {this.filters()}
+								</div>
 								<div className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>D3 school</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 							</div>
@@ -624,8 +656,7 @@ export class ProspectDashboard extends Component {
 								<h2 id="prospect-interest" className="text-center" >NAIA Recruiting Interest</h2>
 								<div className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>NAIA school</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 							</div>
@@ -633,8 +664,7 @@ export class ProspectDashboard extends Component {
 								<h2 id="prospect-interest" className="text-center" >JUCO Recruiting Interest</h2>
 								<div className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>JUCO school</li>
-										<li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>Drake University</li>
+                                        {this.prospectSummary()}
 									</ul>
 								</div>
 							</div>

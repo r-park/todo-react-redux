@@ -73,7 +73,7 @@ console.log('State : '+this.state);
   onChange(title, event) {
       const {tasks} = this.props;
     //const obj = {};
-    debugger;
+    //debugger;
     tasks.length ? this.state[title]= event.target.value.trim(): this.firstSubmit(title,event.target.value.trim());
     //obj[title]= event.target.value;
     //this.setState(obj);
@@ -149,7 +149,7 @@ console.log('State : '+this.state);
   }
      
     submitUpdate(props ,filter, event) {
-        debugger;
+        //debugger;
     document.getElementById("letter-update").style.display='none';
     document.getElementById("text-update").style.display='none';
     document.getElementById("email-update").style.display='none';
@@ -160,7 +160,7 @@ console.log('State : '+this.state);
     document.getElementById("offered-update").style.display='none';
     document.getElementById("upgrade-price-plan").style.display='none';
     this.state[filter]='';     
-    debugger; 
+    //debugger; 
     //this.onChange(filter, event);
     //this.onSubmit(event); 
     //this.props.updateTask(this.props.tasks[0], this.state);
@@ -202,7 +202,7 @@ console.log('State : '+this.state);
   }
 
   mappedColleges (recruitingInterest, filter) {
-      debugger;
+      //debugger;
       var textFilter = this.state[filter] === undefined ?  '' : this.state[filter];
 
       return recruitingInterest
@@ -222,7 +222,7 @@ console.log('State : '+this.state);
       });
   }
   recruitInterestClick(props,college,filter,event){
-      debugger;
+      //debugger;
 
     //this.state.recruitingInfo = { d1:{ [filter]:college } };
     this.props.createRecruitInfo(this.props.tasks[0], { [filter]:college  });
