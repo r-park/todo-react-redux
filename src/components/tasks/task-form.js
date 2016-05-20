@@ -215,10 +215,16 @@ console.log('State : '+this.state);
                               return true ;
                   })
                   .map((college,k) =>{
-                      return (<li
-                              key={k}
-                              onClick={this.recruitInterestClick.bind(this,event,college,filter)}
-                              ><u>{college.college}</u></li>);
+                      return (
+                              <button 
+                                  style={{display:'inline-block', width: '60%', margin: '5px'}}
+                                  className="btn btn-default btn-large" 
+                                  key={k}
+                                  onClick={this.recruitInterestClick.bind(this,event,college,filter)}
+                              >
+                                  {college.college}
+                              </button>            
+                      );
       });
   }
   recruitInterestClick(props,college,filter,event){
@@ -228,7 +234,7 @@ console.log('State : '+this.state);
     this.props.createRecruitInfo(this.props.tasks[0], { [filter]:college  });
     //this.onSubmit(event);
     //this.props.updateTask(this.props.tasks[0], this.state);
-    //this.submitUpdate.bind(this,filter,event);
+    //this.submitUpdate.bind();
   }
   render() {
          var recruitingInterest = 

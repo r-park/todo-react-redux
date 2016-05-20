@@ -288,11 +288,34 @@ export class ProspectDashboard extends Component {
   }
    
    handleSummaryClick() {
-    document.getElementById('prospect-updates-container').style.display='none';
-    document.getElementById('player-d1-recruiting-summary').style.display='block';
+		this.handleD2SummaryClick();
+            this.state['D1SummaryClick'] = true;
+            this.state['D2SummaryClick'] = false;
+            this.state['D3SummaryClick'] = false;
+            this.state['D4SummaryClick'] = false;
+            this.state['D5SummaryClick'] = false;
+            this.state.D1HMFilter        = true;
+            this.state.D1HMMMFilter      = true;
+            this.state.D1MMFilter        = true;
+            this.state.D1MMLMFilter      = true;
+            this.state.D1LMFilter        = true;
+            this.props.updateTask(this.props.task, this.state);
+			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementById('player-d1-recruiting-summary').style.display='block';
+			document.getElementById('player-d2-recruiting-summary').style.display='none';
+			document.getElementById('player-d3-recruiting-summary').style.display='none';
+			document.getElementById('player-d4-recruiting-summary').style.display='none';
+			document.getElementById('player-d5-recruiting-summary').style.display='none';
+			document.getElementById('all-d1-schools-recruiting-feed').style.display='inline-block';
+			document.getElementById('hm-schools-recruiting-feed').style.display='none';
+			document.getElementById('hmmm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mm-schools-recruiting-feed').style.display='none';
+			document.getElementById('mmlm-schools-recruiting-feed').style.display='none';
+			document.getElementById('lm-schools-recruiting-feed').style.display='none';
   }
   
   		handleD1SummaryClick() {
+		this.handleD2SummaryClick();
             debugger;
             this.state['D1SummaryClick'] = true;
             this.state['D2SummaryClick'] = false;
@@ -639,7 +662,7 @@ export class ProspectDashboard extends Component {
                                     <div id="" className="data-cat-btn background-gray" onClick={this.handleDashboardClick}>
                                         <h5>Dashboard</h5>
                                     </div>
-                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleSummaryClick}>
+                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleSummaryClick.bind(this)}>
                                         <h5>Summary</h5>
                                     </div>
                                     <div className="panel-cat-name">
