@@ -87,7 +87,10 @@ export class ProspectDashboard extends Component {
                                 //college.value.indexOf('DIII')?
                                 //    return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college}</li>
                                 //    : return <div></div>;
+                                
+
         return(
+
             <div style={{height:'220px',overflow:'auto'}}>
                 {
                     this.props.task.recruitingInfo ?
@@ -95,7 +98,7 @@ export class ProspectDashboard extends Component {
                         (task)=>{
                             return Object.keys(this.props.task.recruitingInfo[task])
                             .map((textFilter)=>{
-                                var college = this.props.task.recruitingInfo[task][textFilter]
+                                var college = this.props.task.recruitingInfo[task][textFilter];
                                     console.log('========================');
                                     console.log('========================');
                                     console.log('college: '+college.college);
@@ -119,11 +122,10 @@ export class ProspectDashboard extends Component {
                                     || college.value.indexOf('NAIA') != -1                                                        && !!this.state.D4SummaryClick       
                                     || college.value.indexOf('JUCO') != -1                                                        && !!this.state.D5SummaryClick        
                                 ){
-
-                                    return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college} : {college.value} : {college.value.length}</li>;
-                                }    
-                                return <div></div>;
-                                
+                                        return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college} : {college.value} </li>;
+                                }else{ 
+                                    return <div></div>;
+                                }
                             })
                         }
                     ): ""
