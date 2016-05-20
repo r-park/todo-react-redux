@@ -7705,7 +7705,7 @@ console.log('State : '+this.state);
                         overflowY: 'scroll',
                         paddingBottom : '5px'
                 }}>
-                    {this.mappedColleges(recruitingInterest, this)}
+                    {this.mappedColleges(recruitingInterest, 'textFilterCampus', this)}
                 </ul>
 			</div> 
           <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterCampus')}>Close</button>        
@@ -7723,7 +7723,7 @@ console.log('State : '+this.state);
                         overflowY: 'scroll',
                         paddingBottom : '5px'
                 }}>
-                    {this.mappedColleges(recruitingInterest, this)}
+                    {this.mappedColleges(recruitingInterest, 'textFilterOffered', this)}
                 </ul>
 			</div> 
           <button className="btn btn-default btn-large" onClick={this.submitUpdate.bind(this,event,'textFilterOffered')}>Close</button>        

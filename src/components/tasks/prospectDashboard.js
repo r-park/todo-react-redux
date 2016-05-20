@@ -803,6 +803,7 @@ export class ProspectDashboard extends Component {
 						  <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Close</button>        
 						</div>
 						<div id="recruiting-activity-summary" className="college-recruiting-summary text-center">
+                        <h5 style={{color:'red'}}><b>Note:</b> Upcoming feature</h5>
 						  <u><h5>Drake University & {task.firstName} {task.lastName}</h5></u>
 						  <ul className="list-unstyled text-left">
 		 				  	<li><div className="highlight-box background-blue"></div>Letter</li>
