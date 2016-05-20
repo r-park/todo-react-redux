@@ -114,7 +114,7 @@ console.log('State : '+this.state);
 
       const {tasks} = this.props;
     //debugger;
-    // tasks.length ? this.props.updateTask(this.props.tasks[0], this.state): this.firstSubmit(title, event.target.value);
+     tasks.length ? this.props.updateTask(this.props.tasks[0], this.state): this.firstSubmit(title, event.target.value);
     this.props.updateTask(this.props.tasks[0], this.state);
     //this.clearInput();
     if (tasks[0].pricePlan == '') {
