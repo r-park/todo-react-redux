@@ -71,7 +71,7 @@ export class ProspectDashboard extends Component {
         <li className="btn btn-default" onClick={this.handleD1HMFilter.bind(this)}>High Major</li>
         <li className="btn btn-default" onClick={this.handleD1HMMMFilter.bind(this)}>High Major - / Mid-Major +</li>
         <li className="btn btn-default " onClick={this.handleD1MMFilter.bind(this)}>Mid-Major</li>
-        <li className="btn btn-default background-blue" onClick={this.handleD1MMLMFilter.bind(this)}>Mid-Major - / Low Major +</li>
+        <li className="btn btn-default " onClick={this.handleD1MMLMFilter.bind(this)}>Mid-Major - / Low Major +</li>
         <li className="btn btn-default" onClick={this.handleD1LMFilter.bind(this)}>Low Major</li>
     </ul>						
    }
@@ -90,6 +90,7 @@ export class ProspectDashboard extends Component {
         return(
             <div style={{height:'220px',overflow:'auto'}}>
                 {
+                    this.props.task.recruitingInfo ?
                     Object.keys(this.props.task.recruitingInfo).map(
                         (task)=>{
                             return Object.keys(this.props.task.recruitingInfo[task])
@@ -100,6 +101,7 @@ export class ProspectDashboard extends Component {
                                     console.log('college: '+college.college);
                                     console.log('conference: '+college.conference);
                                     console.log('value: '+college.value);
+                                    console.log('valueLength: '+college.value.length);
                                     console.log('=========DIII===============');
                                     console.log(college.value.indexOf('DI'));
                                     console.log('==========D1HMFilter ==============');
@@ -107,22 +109,24 @@ export class ProspectDashboard extends Component {
                                     console.log('==========D1HMMMFilter==============');
                                     console.log(!!this.state.D1HMMMFilter);
                                 if (
-                                    college.value.indexOf('High-Major') != -1 && !!this.state.D1HMFilter                      && !this.state.D4SummaryClick && !this.state.D5SummaryClick
-                                    || college.value.indexOf('High-Major - / Mid-Major +') != -1 && !!this.state.D1HMMMFilter && !this.state.D4SummaryClick && !this.state.D5SummaryClick
-                                    || college.value.indexOf('Mid-Major') != -1 && !!this.state.D1MMFilter                    && !this.state.D4SummaryClick && !this.state.D5SummaryClick
-                                    || college.value.indexOf('Mid-Major - / Low-Major +') != -1 && !!this.state.D1MMLMFilter  && !this.state.D4SummaryClick && !this.state.D5SummaryClick
-                                    || college.value.indexOf('Low-Major') != -1 && !!this.state.D1LMFilter     
-                                    || college.value.indexOf('NAIA') != -1 && !!this.state.D4SummaryClick       
-                                    || college.value.indexOf('JUCO') != -1 && !!this.state.D5SummaryClick        
+                                    college.value.indexOf('High-Major') != -1                       && college.value.length == 17 && !!this.state.D1HMFilter      && !this.state.D4SummaryClick && !this.state.D5SummaryClick
+                                    || college.value.indexOf('High-Major - / Mid-Major +') != -1                                  && !!this.state.D1HMMMFilter    && !this.state.D4SummaryClick && !this.state.D5SummaryClick
+                                    || college.value.indexOf('Mid-Major') != -1                     && college.value.length == 13 && !!this.state.D1MMFilter      && !this.state.D4SummaryClick && !this.state.D5SummaryClick
+                                    || college.value.indexOf('Mid-Major - / Low-Major +') != -1                                   && !!this.state.D1MMLMFilter    && !this.state.D4SummaryClick && !this.state.D5SummaryClick
+                                    || college.value.indexOf('Low-Major') != -1                     && college.value.length == 13 && !!this.state.D1LMFilter     
+                                    || college.value.indexOf('DII') != -1                           && college.value.length == 7  && !!this.state.D2SummaryClick       
+                                    || college.value.indexOf('DIII') != -1                          && college.value.length == 8  && !!this.state.D3SummaryClick       
+                                    || college.value.indexOf('NAIA') != -1                                                        && !!this.state.D4SummaryClick       
+                                    || college.value.indexOf('JUCO') != -1                                                        && !!this.state.D5SummaryClick        
                                 ){
 
-                                    return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college} : {college.value}</li>;
+                                    return <li className="prospect-button background-light-gray" onClick={this.handleCollegeRecruitingSummary}>{college.college} : {college.value} : {college.value.length}</li>;
                                 }    
                                 return <div></div>;
                                 
                             })
                         }
-                    )
+                    ): ""
                 }
             </div>
         );
@@ -287,11 +291,17 @@ export class ProspectDashboard extends Component {
   }
   
   		handleD1SummaryClick() {
-            this.state['D1SummaryClick']=true;
-            this.state['D2SummaryClick']=false;
-            this.state['D3SummaryClick']=false;
-            this.state['D4SummaryClick']=false;
-            this.state['D5SummaryClick']=false;
+            debugger;
+            this.state['D1SummaryClick'] = true;
+            this.state['D2SummaryClick'] = false;
+            this.state['D3SummaryClick'] = false;
+            this.state['D4SummaryClick'] = false;
+            this.state['D5SummaryClick'] = false;
+            this.state.D1HMFilter        = true;
+            this.state.D1HMMMFilter      = true;
+            this.state.D1MMFilter        = true;
+            this.state.D1MMLMFilter      = true;
+            this.state.D1LMFilter        = true;
             this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='block';
@@ -307,16 +317,16 @@ export class ProspectDashboard extends Component {
 			document.getElementById('lm-schools-recruiting-feed').style.display='none';
 		  }
 		handleD2SummaryClick() {
-            this.state['D1SummaryClick']=false;
-            this.state['D2SummaryClick']=true;
-            this.state['D3SummaryClick']=false;
-            this.state['D4SummaryClick']=false;
-            this.state['D5SummaryClick']=false;
-            this.state.D1HMFilter = 'false';
-            this.state.D1HMMMFilter = 'false';
-            this.state.D1MMFilter = 'false';
-            this.state.D1MMLMFilter = 'false';
-            this.state.D1LMFilter= 'false';
+            this.state['D1SummaryClick'] = false;
+            this.state['D2SummaryClick'] = true;
+            this.state['D3SummaryClick'] = false;
+            this.state['D4SummaryClick'] = false;
+            this.state['D5SummaryClick'] = false;
+            this.state.D1HMFilter        = false;
+            this.state.D1HMMMFilter      = false;
+            this.state.D1MMFilter        = false;
+            this.state.D1MMLMFilter      = false;
+            this.state.D1LMFilter        = false;
             this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
@@ -326,16 +336,19 @@ export class ProspectDashboard extends Component {
 			document.getElementById('player-d5-recruiting-summary').style.display='none';
 		  }
 		handleD3SummaryClick() {
-            this.state['D1SummaryClick']=false;
-            this.state['D2SummaryClick']=false;
-            this.state['D3SummaryClick']=true;
-            this.state['D4SummaryClick']=false;
-            this.state['D5SummaryClick']=false;
-            this.state.D1HMFilter = 'false';
-            this.state.D1HMMMFilter = 'false';
-            this.state.D1MMFilter = 'false';
-            this.state.D1MMLMFilter = 'false';
-            this.state.D1LMFilter= 'false';
+
+            this.state['D1SummaryClick'] = false;
+            this.state['D2SummaryClick'] = false;
+            this.state['D3SummaryClick'] = true;
+            this.state['D4SummaryClick'] = false;
+            this.state['D5SummaryClick'] = false;
+            this.state.D1HMFilter        = false;
+            this.state.D1HMMMFilter      = false;
+            this.state.D1MMFilter        = false;
+            this.state.D1MMLMFilter      = false;
+            this.state.D1LMFilter        = false;
+
+
             this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
@@ -345,16 +358,21 @@ export class ProspectDashboard extends Component {
 			document.getElementById('player-d5-recruiting-summary').style.display='none';
 		  }
 		handleD4SummaryClick() {
-            this.state['D1SummaryClick']=false;
-            this.state['D2SummaryClick']=false;
-            this.state['D3SummaryClick']=false;
-            this.state['D4SummaryClick']=true;
-            this.state['D5SummaryClick']=false;
-            this.state.D1HMFilter = 'false';
-            this.state.D1HMMMFilter = 'false';
-            this.state.D1MMFilter = 'false';
-            this.state.D1MMLMFilter = 'false';
-            this.state.D1LMFilter= 'false';
+
+            this.state['D1SummaryClick'] = false;
+            this.state['D2SummaryClick'] = false;
+            this.state['D3SummaryClick'] = false;
+            this.state['D4SummaryClick'] = true;
+            this.state['D5SummaryClick'] = false;
+            this.state.D1HMFilter        = false;
+            this.state.D1HMMMFilter      = false;
+            this.state.D1MMFilter        = false;
+            this.state.D1MMLMFilter      = false;
+            this.state.D1LMFilter        = false;
+
+
+
+
             this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
@@ -364,16 +382,19 @@ export class ProspectDashboard extends Component {
 			document.getElementById('player-d5-recruiting-summary').style.display='none';
 		  }
 		handleD5SummaryClick() {
-            this.state['D1SummaryClick']=false;
-            this.state['D2SummaryClick']=false;
-            this.state['D3SummaryClick']=false;
-            this.state['D4SummaryClick']=false;
-            this.state['D5SummaryClick']=true;
-            this.state.D1HMFilter = 'false';
-            this.state.D1HMMMFilter = 'false';
-            this.state.D1MMFilter = 'false';
-            this.state.D1MMLMFilter = 'false';
-            this.state.D1LMFilter= 'false';
+            this.state['D1SummaryClick'] = false;
+            this.state['D2SummaryClick'] = false;
+            this.state['D3SummaryClick'] = false;
+            this.state['D4SummaryClick'] = false;
+            this.state['D5SummaryClick'] = true;
+            this.state.D1HMFilter        = false;
+            this.state.D1HMMMFilter      = false;
+            this.state.D1MMFilter        = false;
+            this.state.D1MMLMFilter      = false;
+            this.state.D1LMFilter        = false;
+
+
+
             this.props.updateTask(this.props.task, this.state);
 			document.getElementById('prospect-updates-container').style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
@@ -646,11 +667,11 @@ export class ProspectDashboard extends Component {
                         <div className="registered-prospect-container">
                         	 
 								<ul className="prospect-categories list-inline">
-									<li className="cat-btn background-blue" onClick={this.handleD1SummaryClick.bind(this)}>D1</li>
-									<li className="cat-btn background-blue" onClick={this.handleD2SummaryClick.bind(this)}>D2</li>
-									<li className="cat-btn " onClick={this.handleD3SummaryClick.bind(this)}>D3</li>
-									<li className="cat-btn " onClick={this.handleD4SummaryClick.bind(this)}>NAIA</li>
-									<li className="cat-btn " onClick={this.handleD5SummaryClick.bind(this)}>JUCO</li>
+									<li className="cat-btn background-blue"                onClick={this.handleD1SummaryClick.bind(this)}>D1</li>
+									<li className="cat-btn background-blue"                onClick={this.handleD2SummaryClick.bind(this)}>D2</li>
+									<li className="cat-btn background-blue"                onClick={this.handleD3SummaryClick.bind(this)}>D3</li>
+									<li className="cat-btn background-blue"                onClick={this.handleD4SummaryClick.bind(this)}>NAIA</li>
+									<li className="cat-btn background-blue"                onClick={this.handleD5SummaryClick.bind(this)}>JUCO</li>
 								</ul>
 							<div id="prospect-updates-container">
 								<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
@@ -715,7 +736,6 @@ export class ProspectDashboard extends Component {
 							<div id="player-d2-recruiting-summary" className="text-center">
 								<h2 id="prospect-interest" className="text-center" >D2 Recruiting Interest</h2>
 								<div id="recruiting-interest-cats">   
-                                    {this.filters()}
 								</div>
 								<div className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
@@ -726,7 +746,6 @@ export class ProspectDashboard extends Component {
 							<div id="player-d3-recruiting-summary" className="text-center">
 								<h2 id="prospect-interest" className="text-center" >D3 Recruiting Interest</h2>
 								<div id="recruiting-interest-cats">   
-                                    {this.filters()}
 								</div>
 								<div className="recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
