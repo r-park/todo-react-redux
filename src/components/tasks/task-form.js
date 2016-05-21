@@ -97,7 +97,8 @@ console.log('State : '+this.state);
   }
 
   onChangePricePlan(event) {
-      this.state['pricePlan']=event.target.value; 
+      this.state['pricePlan']=event.target.value;
+      this.state['registered']= 'true';  
   }
 
   onKeyUp(event) {
@@ -116,12 +117,12 @@ console.log('State : '+this.state);
     // tasks.length ? this.props.updateTask(this.props.tasks[0], this.state): this.firstSubmit(title, event.target.value);
     this.props.updateTask(this.props.tasks[0], this.state);
     //this.clearInput();
-    if (title.pricePlan == "") {
+    if (tasks[0].pricePlan == '') {
     document.getElementById('general-info').style.display='none';
   	document.getElementById('prospect-plans-features').style.display='block';
   	window.scrollTo(0, 0);
     } else {
-    document.getElementById('general-info').style.display='none';
+  	document.getElementById('general-info').style.display='none';
   	document.getElementById('prospect-dashboard').style.display='block';
   	window.scrollTo(0, 0);
   	}
@@ -137,7 +138,7 @@ console.log('State : '+this.state);
     // tasks.length ? this.props.updateTask(this.props.tasks[0], this.state): this.firstSubmit(title, event.target.value);
     this.props.updateTask(this.props.tasks[0], this.state);
     //this.clearInput();
-    if (title.firstName !== "") {
+    if (tasks[0].registered === "true") {
     document.getElementById('prospect-plans-features').style.display='none';
   	document.getElementById('prospect-dashboard').style.display='block';
   	window.scrollTo(0, 0);

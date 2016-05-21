@@ -493,24 +493,27 @@ export class ProspectDashboard extends Component {
   }
  
   handleVideoServiceClick(event)  {
+  	document.getElementById("upgrade-price-plan").style.display='block';
   		debugger;
-  	if (this.props.task.pricePlan == "Basic Plan") {
+  	 {/* if (this.props.task.pricePlan == "Basic Plan") {
 	    document.getElementById("upgrade-price-plan").style.display='block';
 	} else {
   	document.getElementById('prospect-dashboard').style.display='none';
   	document.getElementById('video-upload').style.display='block';
-  	}
+  	} */}
   }
 
   handleMarketingServiceClick(event)  {
-  	if (this.props.task.pricePlan == "Basic Plan" 
+  	  	document.getElementById("upgrade-price-plan").style.display='block';
+  	
+  {/*	if (this.props.task.pricePlan == "Basic Plan" 
   	|| this.props.task.pricePlan == "Plus Monthly Plan" 
   	|| this.props.task.pricePlan == "Plus Yearly Plan") {
 		document.getElementById("upgrade-price-plan").style.display='block';	
 	} else  {
   	document.getElementById('prospect-dashboard').style.display='none';
   	document.getElementById('marketing-service').style.display='block';
-  	}
+  	}  */}
   } 
 
   handleLetterClick(event) {
@@ -710,10 +713,10 @@ export class ProspectDashboard extends Component {
 									<div className="row">
 										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><p>RECEIVED A PHONE CALL</p></div>
 										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCampClick}><p>WAS INVITED TO A CAMP</p></div>
-										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><p>HAD A PRIVATE WORKOUT</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><p>RECEIVED A COACH VISIT</p></div>
 									</div>
 									<div className="row">
-										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleCampusClick}><p>WAS INVITED TO CAMPUS</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleCampusClick}><p>OFFICIAL CAMPUS VISIT</p></div>
 										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleOfferedClick}><p>WAS OFFERED</p></div>
 									</div>
 								</div>
@@ -798,7 +801,8 @@ export class ProspectDashboard extends Component {
                         <div id="upgrade-price-plan" className="recruit-update-container text-center">
 						  <u><h3>Premium Services</h3></u>
 						  <div className="letter-attributes background-light-gray text-center">
-			 				<p>To access these services please upgrade your pricing plan.</p>
+<p>Under Development: If you need more info or help contact Alex@theprospectsource.com </p>
+		{/************************	 				<p>To access these services please upgrade your pricing plan.</p> */}
 						  </div>
 						  <button className="btn btn-default btn-large" onClick={this.submitUpdate}>Close</button>        
 						</div>
