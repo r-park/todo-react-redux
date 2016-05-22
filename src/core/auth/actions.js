@@ -1,67 +1,64 @@
+import { firebaseAuth } from 'src/core/firebase';
 import {
   INIT_AUTH,
+  SIGN_IN_ERROR,
   SIGN_IN_SUCCESS,
   SIGN_OUT_SUCCESS
 } from './action-types';
 
 
 function authenticate(provider) {
-  return (dispatch, getState) => {
-    const { firebase } = getState();
-
-    firebase.authWithOAuthPopup(provider, (error, authData) => {
-      if (error) {
-        console.error('ERROR @ authWithOAuthPopup :', error); // eslint-disable-line no-console
-      }
-      else {
-        dispatch({
-          type: SIGN_IN_SUCCESS,
-          payload: authData,
-          meta: {
-            timestamp: Date.now()
-          }
-        });
-      }
-    });
+  return dispatch => {
+    firebaseAuth.signInWithPopup(provider)
+      .then(result => dispatch(signInSuccess(result)))
+      .catch(error => dispatch(signInError(error)));
   };
 }
 
-
-export function initAuth() {
-  return (dispatch, getState) => {
-    const { firebase } = getState();
-    dispatch({
-      type: INIT_AUTH,
-      payload: firebase.getAuth(),
-      meta: {
-        timestamp: Date.now()
-      }
-    });
+export function initAuth(user) {
+  return {
+    type: INIT_AUTH,
+    payload: user
   };
 }
 
+export function signInError(error) {
+  return {
+    type: SIGN_IN_ERROR,
+    payload: error
+  };
+}
+
+export function signInSuccess(result) {
+  return {
+    type: SIGN_IN_SUCCESS,
+    payload: result.user
+  };
+}
 
 export function signInWithGithub() {
-  return authenticate('github');
+  return authenticate(new firebase.auth.GithubAuthProvider());
 }
 
 
 export function signInWithGoogle() {
-  return authenticate('google');
+  return authenticate(new firebase.auth.GoogleAuthProvider());
 }
 
 
 export function signInWithTwitter() {
-  return authenticate('twitter');
+  return authenticate(new firebase.auth.TwitterAuthProvider());
 }
 
-
 export function signOut() {
-  return (dispatch, getState) => {
-    const { firebase } = getState();
-    firebase.unauth();
-    dispatch({
-      type: SIGN_OUT_SUCCESS
-    });
+  return dispatch => {
+    firebaseAuth.signOut()
+      .then(() => dispatch(signOutSuccess()));
+  };
+}
+
+export function signOutSuccess() {
+  return {
+    type: SIGN_OUT_SUCCESS
   };
 }

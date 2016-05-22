@@ -1,5 +1,6 @@
 import * as notificationActions from './actions';
-export { notificationActions };
 
+
+export { notificationActions };
 export * from './action-types';
 export * from './reducer';

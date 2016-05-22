@@ -17,7 +17,7 @@ ecmaFeatures:
   modules: true
 
 globals:
-  MockFirebase: true
+  firebase: true
   sinon: true
 
 rules:

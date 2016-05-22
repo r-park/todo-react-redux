@@ -76,6 +76,7 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
       'react-dom',
       'react-redux',
       'react-router',
+      'react-router-redux',
       'redux',
       'redux-thunk'
     ]
