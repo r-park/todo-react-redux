@@ -1,6 +1,3 @@
-// Override global `Firebase` with `MockFirebase`
-MockFirebase.override();
-
 // Recursively discover all spec files
 var context = require.context('./src', true, /\.spec\.js$/);
 

@@ -1,4 +1,10 @@
-export const FIREBASE_URL = 'https://todo-react-redux.firebaseio.com';
+export const FIREBASE_CONFIG = {
+  apiKey: 'AIzaSyBsVVpEDrlNPEmshLcmOuE0FxhjPn0AqMg',
+  authDomain: 'todo-react-redux.firebaseapp.com',
+  databaseURL: 'https://todo-react-redux.firebaseio.com',
+  storageBucket: 'firebase-todo-react-redux.appspot.com'
+};
+
 
 // Route paths
 export const SIGN_IN_PATH = '/sign-in';

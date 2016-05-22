@@ -2,18 +2,18 @@
 
 
 # Todo app with React, Redux, and Firebase
-A simple Todo app example with `undelete` capability — built with React, Redux, and Firebase.
+A simple Todo app example with `undelete` capability — built with React, Redux, and Firebase v3.
 
 Try the demo at <a href="https://todo-react-redux.firebaseapp.com" target="_blank">todo-react-redux.firebaseapp.com</a>.
 
 - React
 - React-Redux
 - React-Router
+- React-Router-Redux
 - Redux
 - Redux-Devtools-Extension for Chrome
-- Redux-Simple-Router
 - Babel
-- Firebase
+- Firebase `3.0.2`
   - JSON Datastore
   - OAuth authentication with GitHub, Google, and Twitter
   - Hosting
