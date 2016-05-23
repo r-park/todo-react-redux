@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 3000;
 //---------------------------------------------------------
 const loaders = {
   js: {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
-  scss: {test: /\.scss$/, loader: 'style!css!postcss-loader!sass'}
+  scss: {test: /\.scss$/, loader: 'style!css!postcss!sass'}
 };
 
 
@@ -47,7 +47,7 @@ config.plugins = [
 ];
 
 config.postcss = [
-  autoprefixer({ browsers: ['last 3 versions', 'Firefox ESR'] })
+  autoprefixer({ browsers: ['last 3 versions'] })
 ];
 
 config.sassLoader = {
@@ -156,7 +156,7 @@ if (ENV_PRODUCTION) {
   config.module = {
     loaders: [
       loaders.js,
-      {test: /\.scss$/, loader: ExtractTextPlugin.extract('css!postcss-loader!sass')}
+      {test: /\.scss$/, loader: ExtractTextPlugin.extract('css?-autoprefixer!postcss!sass')}
     ]
   };
 
