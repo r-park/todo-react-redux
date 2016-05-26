@@ -68,7 +68,7 @@ export class ProspectDashboard extends Component {
 
   filters(){
     return <ul>
-        <li className="btn btn-default" onClick={this.handleD1HMFilter.bind(this)}>High Major</li>
+        <li className="btn btn-default " onClick={this.handleD1HMFilter.bind(this)}>High Major</li>
         <li className="btn btn-default" onClick={this.handleD1HMMMFilter.bind(this)}>High Major - / Mid-Major +</li>
         <li className="btn btn-default " onClick={this.handleD1MMFilter.bind(this)}>Mid-Major</li>
         <li className="btn btn-default " onClick={this.handleD1MMLMFilter.bind(this)}>Mid-Major - / Low Major +</li>
@@ -99,18 +99,18 @@ export class ProspectDashboard extends Component {
                             return Object.keys(this.props.task.recruitingInfo[task])
                             .map((textFilter)=>{
                                 var college = this.props.task.recruitingInfo[task][textFilter];
-                                    console.log('========================');
-                                    console.log('========================');
-                                    console.log('college: '+college.college);
-                                    console.log('conference: '+college.conference);
-                                    console.log('value: '+college.value);
-                                    console.log('valueLength: '+college.value.length);
-                                    console.log('=========DIII===============');
-                                    console.log(college.value.indexOf('DI'));
-                                    console.log('==========D1HMFilter ==============');
-                                    console.log(this.state.D1HMFilter );
-                                    console.log('==========D1HMMMFilter==============');
-                                    console.log(!!this.state.D1HMMMFilter);
+                                    //console.log('========================');
+                                    //console.log('========================');
+                                    //console.log('college: '+college.college);
+                                    //console.log('conference: '+college.conference);
+                                    //console.log('value: '+college.value);
+                                    //console.log('valueLength: '+college.value.length);
+                                    //console.log('=========DIII===============');
+                                    //console.log(college.value.indexOf('DI'));
+                                    //console.log('==========D1HMFilter ==============');
+                                    //console.log(this.state.D1HMFilter );
+                                    //console.log('==========D1HMMMFilter==============');
+                                    //console.log(!!this.state.D1HMMMFilter);
                                 if (
                                     college.value.indexOf('High-Major') != -1                       && college.value.length == 17 && !!this.state.D1HMFilter      && !this.state.D4SummaryClick && !this.state.D5SummaryClick
                                     || college.value.indexOf('High-Major - / Mid-Major +') != -1                                  && !!this.state.D1HMMMFilter    && !this.state.D4SummaryClick && !this.state.D5SummaryClick
@@ -133,6 +133,219 @@ export class ProspectDashboard extends Component {
             </div>
         );
    }
+   d1filter(divisionBooleanD1){
+       if(divisionBooleanD1){
+           return <li className="cat-btn background-blue"  onClick={this.handleD1SummaryClick.bind(this)}>D1</li>
+       }
+           return <li className="cat-btn "  onClick={this.handleD1SummaryClick.bind(this)}>D1</li>
+   }
+   d2filter(divisionBooleanD2){
+       if(divisionBooleanD2){
+           return <li className="cat-btn background-blue"  onClick={this.handleD2SummaryClick.bind(this)}>D2</li>
+       }  
+           return <li className="cat-btn "  onClick={this.handleD2SummaryClick.bind(this)}>D2</li>
+   }
+   d3filter(divisionBooleanD3){
+       if(divisionBooleanD3){
+           return <li className="cat-btn background-blue"  onClick={this.handleD3SummaryClick.bind(this)}>D3</li>
+       }  
+           return <li className="cat-btn "  onClick={this.handleD3SummaryClick.bind(this)}>D3</li>
+   }
+   d4filter(divisionBooleanD4){
+       if(divisionBooleanD4){
+           return <li className="cat-btn background-blue"  onClick={this.handleD4SummaryClick.bind(this)}>NAIA</li>
+       }  
+           return <li className="cat-btn "  onClick={this.handleD4SummaryClick.bind(this)}>NAIA</li>
+   }
+   d5filter(divisionBooleanD5){
+       if(divisionBooleanD5){
+           return <li className="cat-btn background-blue"  onClick={this.handleD5SummaryClick.bind(this)}>JUCO</li>
+       }  
+           return <li className="cat-btn "  onClick={this.handleD5SummaryClick.bind(this)}>JUCO</li>
+   }
+   
+
+   divisionFilters(){
+      let divisionBoolean = ''; 
+      let divisionBooleanD1 = ''; 
+      let divisionBooleanD2 = ''; 
+      let divisionBooleanD3 = ''; 
+      let divisionBooleanD4 = ''; 
+      let divisionBooleanD5 = ''; 
+      let divisionString = ''; 
+                    this.props.task.recruitingInfo ?
+                     Object.keys(this.props.task.recruitingInfo).map(
+                        (task)=>{
+                            return Object.keys(this.props.task.recruitingInfo[task])
+                            .map((textFilter)=>{
+                                var college = this.props.task.recruitingInfo[task][textFilter];
+
+                                    //college.value.indexOf('High-Major') != -1                       && college.value.length == 17 //&& !!this.state.D1HMFilter      && !this.state.D4SummaryClick && !this.state.D5SummaryClick
+                                    //|| college.value.indexOf('High-Major - / Mid-Major +') != -1                                  //&& !!this.state.D1HMMMFilter    && !this.state.D4SummaryClick && !this.state.D5SummaryClick
+                                    //|| college.value.indexOf('Mid-Major') != -1                     && college.value.length == 13 //&& !!this.state.D1MMFilter      && !this.state.D4SummaryClick && !this.state.D5SummaryClick
+                                    //|| college.value.indexOf('Mid-Major - / Low-Major +') != -1                                   //&& !!this.state.D1MMLMFilter    && !this.state.D4SummaryClick && !this.state.D5SummaryClick
+                                    //|| college.value.indexOf('Low-Major') != -1                     && college.value.length == 13 //&& !!this.state.D1LMFilter     
+                                    //|| college.value.indexOf('DII') != -1                           && college.value.length == 7  && !!this.state.D2SummaryClick       
+                                    //|| college.value.indexOf('DIII') != -1                          && college.value.length == 8  && !!this.state.D3SummaryClick       
+                                    //|| college.value.indexOf('NAIA') != -1                                                        && !!this.state.D4SummaryClick       
+                                    //|| college.value.indexOf('JUCO') != -1                                                        && !!this.state.D5SummaryClick        
+                                if (
+                                    college.value.indexOf('High-Major') != -1                       && college.value.length == 17 
+                                    || college.value.indexOf('High-Major - / Mid-Major +') != -1                                  
+                                    || college.value.indexOf('Mid-Major') != -1                     && college.value.length == 13 
+                                    || college.value.indexOf('Mid-Major - / Low-Major +') != -1                                  
+                                    || college.value.indexOf('Low-Major') != -1                     && college.value.length == 13 
+                                ){
+                                     divisionBooleanD1 = true;
+                                }else if(
+                                     college.value.indexOf('DII') != -1     && college.value.length == 7  
+                                ){ 
+                                     divisionBooleanD2 = true;
+
+                                }else if(
+                                    college.value.indexOf('DIII') != -1                          && college.value.length == 8
+                                ){ 
+                                     divisionBooleanD3 = true;
+                                }else if(
+                                    college.value.indexOf('NAIA') != -1
+                                ){ 
+                                     divisionBooleanD4 = true;
+                                }else if(
+                                    college.value.indexOf('JUCO') != -1
+                                ){ 
+                                     divisionBooleanD5 = true;
+                                }else{ 
+                                   return false;
+                                }
+                            })
+                        }
+                    ): ''
+        console.log('divisionBooleanD1');
+        console.log(divisionBooleanD1===true);
+       //console.log(!!this.state.D1SummaryClick);
+       //console.log(this.props.task.D1SummaryClick === 'true');
+       //if(!!this.state.D1SummaryClick || this.props.task.D1SummaryClick === 'true'){
+       if(divisionBooleanD1 ){
+           return <ul className="prospect-categories list-inline">
+                    {this.d1filter(divisionBooleanD1)}
+                    {this.d2filter(divisionBooleanD2)}
+                    {this.d3filter(divisionBooleanD3)}
+                    {this.d4filter(divisionBooleanD4)}
+                    {this.d5filter(divisionBooleanD5)}
+                </ul>
+       }else{
+           return <ul className="prospect-categories list-inline">
+                    <li className="cat-btn "  onClick={this.handleD1SummaryClick.bind(this)}>D1</li>
+                    <li className="cat-btn "  onClick={this.handleD2SummaryClick.bind(this)}>D2</li>
+                    <li className="cat-btn "  onClick={this.handleD3SummaryClick.bind(this)}>D3</li>
+                    <li className="cat-btn "  onClick={this.handleD4SummaryClick.bind(this)}>NAIA</li>
+                    <li className="cat-btn "  onClick={this.handleD5SummaryClick.bind(this)}>JUCO</li>
+                </ul>
+       }
+    }
+    registeredProspectContainer(){
+
+                        return <div className="registered-prospect-container">
+                        	 
+                            {this.divisionFilters()}
+							<div id="prospect-updates-container">
+								<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
+								<p id="prospect-interest-caption" className="text-center background-light-gray">Build your profile by tracking which schools are recruiting you!</p>
+								<div id="recruiting-tracking">    						
+									<div className="row">
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleLetterClick}><p>RECEIVED A LETTER</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleTextClick}><p>RECEIVED A TEXT</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleEmailClick}><p>RECEIVED AN EMAIL</p></div>
+									</div>
+									<div className="row">
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><p>RECEIVED A PHONE CALL</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCampClick}><p>WAS INVITED TO A CAMP</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><p>RECEIVED A COACH VISIT</p></div>
+									</div>
+									<div className="row">
+										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleCampusClick}><p>OFFICIAL CAMPUS VISIT</p></div>
+										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleOfferedClick}><p>WAS OFFERED</p></div>
+									</div>
+								</div>
+                           	</div>
+                           	<div className="g-col">
+							
+						
+							</div>
+                           	<div id="player-d1-recruiting-summary" className="">
+								<h2 id="prospect-interest" className="text-center" >D1 Recruiting Interest</h2>
+								<div id="recruiting-interest-cats">   
+                                    {this.filters()}
+								</div>
+								<div id="all-d1-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+								<div id="hm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+								<div id="hmmm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+								<div id="mm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+								<div id="mmlm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+								<div id="lm-schools-recruiting-feed" className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+							</div>
+							<div id="player-d2-recruiting-summary" className="text-center">
+								<h2 id="prospect-interest" className="text-center" >D2 Recruiting Interest</h2>
+								<div id="recruiting-interest-cats">   
+								</div>
+								<div className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+							</div>
+							<div id="player-d3-recruiting-summary" className="text-center">
+								<h2 id="prospect-interest" className="text-center" >D3 Recruiting Interest</h2>
+								<div id="recruiting-interest-cats">   
+								</div>
+								<div className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+							</div>
+							<div id="player-d4-recruiting-summary" className="text-center">
+								<h2 id="prospect-interest" className="text-center" >NAIA Recruiting Interest</h2>
+								<div className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+							</div>
+							<div id="player-d5-recruiting-summary" className="text-center">
+								<h2 id="prospect-interest" className="text-center" >JUCO Recruiting Interest</h2>
+								<div className="recruiting-activity-feed" >
+									<ul className=" list-unstyled" >
+                                        {this.prospectSummary()}
+									</ul>
+								</div>
+							</div>
+                        </div>
+    }
           // First Name       : {task.firstName} 
           // Last Name        : {task.lastName}
           // Email (Athlete)  : {task.emailAthlete}
@@ -692,112 +905,7 @@ export class ProspectDashboard extends Component {
                     <div className="col-sm-9">
                         <div><u><h5 id="prospect-clubname">{task.pricePlan}</h5></u><u><h5 onClick={this.coachesView} id="prospect-coach-view" className="text-right">View What Coaches See</h5></u></div>
                         
-                        <div className="registered-prospect-container">
-                        	 
-								<ul className="prospect-categories list-inline">
-									<li className="cat-btn background-blue"                onClick={this.handleD1SummaryClick.bind(this)}>D1</li>
-									<li className="cat-btn background-blue"                onClick={this.handleD2SummaryClick.bind(this)}>D2</li>
-									<li className="cat-btn background-blue"                onClick={this.handleD3SummaryClick.bind(this)}>D3</li>
-									<li className="cat-btn background-blue"                onClick={this.handleD4SummaryClick.bind(this)}>NAIA</li>
-									<li className="cat-btn background-blue"                onClick={this.handleD5SummaryClick.bind(this)}>JUCO</li>
-								</ul>
-							<div id="prospect-updates-container">
-								<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
-								<p id="prospect-interest-caption" className="text-center background-light-gray">Build your profile by tracking which schools are recruiting you!</p>
-								<div id="recruiting-tracking">    						
-									<div className="row">
-										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleLetterClick}><p>RECEIVED A LETTER</p></div>
-										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleTextClick}><p>RECEIVED A TEXT</p></div>
-										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleEmailClick}><p>RECEIVED AN EMAIL</p></div>
-									</div>
-									<div className="row">
-										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCallClick}><p>RECEIVED A PHONE CALL</p></div>
-										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleCampClick}><p>WAS INVITED TO A CAMP</p></div>
-										<div className="col-sm-4 recruiting-tracking-btn background-blue" onClick={this.handleWorkoutClick}><p>RECEIVED A COACH VISIT</p></div>
-									</div>
-									<div className="row">
-										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleCampusClick}><p>OFFICIAL CAMPUS VISIT</p></div>
-										<div className="col-sm-4 recruiting-tracking-btn background-blue"onClick={this.handleOfferedClick}><p>WAS OFFERED</p></div>
-									</div>
-								</div>
-                           	</div>
-                           	<div className="g-col">
-							
-						
-							</div>
-                           	<div id="player-d1-recruiting-summary" className="">
-								<h2 id="prospect-interest" className="text-center" >D1 Recruiting Interest</h2>
-								<div id="recruiting-interest-cats">   
-                                    {this.filters()}
-								</div>
-								<div id="all-d1-schools-recruiting-feed" className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-								<div id="hm-schools-recruiting-feed" className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-								<div id="hmmm-schools-recruiting-feed" className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-								<div id="mm-schools-recruiting-feed" className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-								<div id="mmlm-schools-recruiting-feed" className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-								<div id="lm-schools-recruiting-feed" className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-							</div>
-							<div id="player-d2-recruiting-summary" className="text-center">
-								<h2 id="prospect-interest" className="text-center" >D2 Recruiting Interest</h2>
-								<div id="recruiting-interest-cats">   
-								</div>
-								<div className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-							</div>
-							<div id="player-d3-recruiting-summary" className="text-center">
-								<h2 id="prospect-interest" className="text-center" >D3 Recruiting Interest</h2>
-								<div id="recruiting-interest-cats">   
-								</div>
-								<div className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-							</div>
-							<div id="player-d4-recruiting-summary" className="text-center">
-								<h2 id="prospect-interest" className="text-center" >NAIA Recruiting Interest</h2>
-								<div className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-							</div>
-							<div id="player-d5-recruiting-summary" className="text-center">
-								<h2 id="prospect-interest" className="text-center" >JUCO Recruiting Interest</h2>
-								<div className="recruiting-activity-feed" >
-									<ul className=" list-unstyled" >
-                                        {this.prospectSummary()}
-									</ul>
-								</div>
-							</div>
-                        </div>
+                        {this.registeredProspectContainer()}
                         <div id="upgrade-price-plan" className="recruit-update-container text-center">
 						  <u><h3>Premium Services</h3></u>
 						  <div className="letter-attributes background-light-gray text-center">
@@ -1142,23 +1250,10 @@ export class ProspectDashboard extends Component {
 							<div><h4>Class Rank:</h4>  { task.classRank}</div>
 						</div>
 						<div id="player-recruiting-interest" className="">
-    					
-							<ul className="prospect-categories list-inline">
-								<li className="cat-btn background-blue">D1</li>
-								<li className="cat-btn background-blue">D2</li>
-								<li className="cat-btn background-blue">D3</li>
-								<li className="cat-btn background-blue">NAIA</li>
-								<li className="cat-btn background-blue">JUCO</li>
-							</ul>
+                            {this.divisionFilters()}	
 							<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
 							<div id="recruiting-interest-cats">   
-								<ul>
-									<li className="btn btn-default">High Major</li>
-									<li className="btn btn-default">High Major - / Mid-Major +</li>
-									<li className="btn btn-default">Mid-Major</li>
-									<li className="btn btn-default">Mid-Major - / Low Major +</li>
-									<li className="btn btn-default">Low Major</li>
-								</ul>						
+                            {this.filters()}
 							</div>
 							<div id="recruiting-activity-feed" >
 								<ul className="prospect-button background-light-gray list-inline" onClick={this.handleSummaryClick}>

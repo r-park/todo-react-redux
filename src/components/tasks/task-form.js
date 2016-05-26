@@ -60,6 +60,11 @@ export class TaskForm extends Component {
       this.state['textFilterCampus']='';     
       this.state['textFilterOffered']='';     
 
+      this.state['D1SummaryClick'] = 'false';
+      this.state['D2SummaryClick'] = 'false';
+      this.state['D3SummaryClick'] = 'false';
+      this.state['D4SummaryClick'] = 'false';
+      this.state['D5SummaryClick'] = 'false';
       
       //this.state['recruitingInfo']= [];
       //debugger;
