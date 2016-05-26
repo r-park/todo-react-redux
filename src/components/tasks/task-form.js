@@ -61,13 +61,14 @@ export class TaskForm extends Component {
       this.state['textFilterOffered']='';     
 
       
-      this.state['recruitingInfo']= [];
+      //this.state['recruitingInfo']= [];
       //debugger;
       this.state[key]=value;
 
 console.log('State : '+this.state);
 //debugger;
       this.props.createTask(this.state)
+      this.forceUpdate();
   }
 
   onChange(title, event) {
@@ -236,6 +237,8 @@ console.log('State : '+this.state);
     //this.onSubmit(event);
     //this.props.updateTask(this.props.tasks[0], this.state);
     //this.submitUpdate.bind();
+    debugger;
+    this.forceUpdate();
   }
   render() {
          var recruitingInterest = 
