@@ -20,7 +20,7 @@ module.exports = {
 
   entry: {
     main: [
-      'webpack-dev-server/client?http://localhost:3000',
+      'webpack-dev-server/client?http://0.0.0.0:3000',
       'webpack/hot/dev-server',
       config.entry.main
     ],
@@ -65,6 +65,7 @@ module.exports = {
     contentBase: './src',
     historyApiFallback: true,
     hot: true,
+    host: '0.0.0.0',
     port: 3000,
     progress: true,
     publicPath: config.output.publicPath,

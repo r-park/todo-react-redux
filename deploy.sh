@@ -1,5 +1,8 @@
+webpack --config webpack.dist.js --progress
 sudo rm -rf ./target
 webpack --config webpack.dist.js --progress
-cp -R src/fonts ./target/fonts
-cp -R src/img ./target/img 
+sudo mkdir -P ./target/fonts
+sudo mkdir -P ./target/img
+sudo cp -R ./src/fonts ./target/fonts
+sudo cp -R ./src/img ./target/img 
 firebase deploy

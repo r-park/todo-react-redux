@@ -67,12 +67,77 @@ export class ProspectDashboard extends Component {
   }
 
   filters(){
+     let defaultClass= 'btn btn-default ',
+         arr = [];
+                    this.props.task.recruitingInfo ?
+                    arr = Object.keys(this.props.task.recruitingInfo).map(
+                        (task)=>{
+                            return Object.keys(this.props.task.recruitingInfo[task])
+                            .map((textFilter)=>{
+                                var college = this.props.task.recruitingInfo[task][textFilter];
+                                    //console.log('========================');
+                                    //console.log('========================');
+                                    //console.log('college: '+college.college);
+                                    //console.log('conference: '+college.conference);
+                                    console.log('value: '+college.value);
+                                    //console.log('valueLength: '+college.value.length);
+                                    //console.log('=========DIII===============');
+                                    //console.log(college.value.indexOf('DI'));
+                                    //console.log('==========D1HMFilter ==============');
+                                    //console.log(this.state.D1HMFilter );
+                                    //console.log('==========D1HMMMFilter==============');
+                                    //console.log(!!this.state.D1HMMMFilter);
+                                if (
+                                    college.value.indexOf('High-Major') != -1                       && college.value.length == 17 
+                                ){
+                                    return 'High-Major_';
+                                }else if(
+                                    college.value.indexOf('High-Major - / Mid-Major +') != -1                                  
+                                ){
+                                    return 'High-Major - / Mid-Major +';
+                                }else if(
+                                    college.value.indexOf('Mid-Major') != -1                     && college.value.length == 13 
+                                ){
+                                    return 'Mid-Major_';
+                                }else if(
+                                   college.value.indexOf('Mid-Major - / Low-Major +') != -1                                  
+                                ){
+                                    return 'Mid-Major - / Low-Major +';
+                                }else if(
+                                    college.value.indexOf('Low-Major') != -1                     && college.value.length == 13 
+                                ){
+                                    return 'Low-Major_';
+                                }else if(
+                                    college.value.indexOf('DII') != -1                           && college.value.length == 7  
+                                ){
+                                    return 'DII';
+                                }else if(
+                                    college.value.indexOf('DIII') != -1                          && college.value.length == 8  
+                                ){
+                                    return 'DIII';
+                                }else if(
+                                    college.value.indexOf('NAIA') != -1                                                       
+                                ){
+                                    return 'NAIA';
+                                }else {
+                                    //|| college.value.indexOf('JUCO') != -1                                                       
+                                    console.log('things and stuff');
+                                    return 'JUCO';
+                                }})
+                        }
+                    ): ""
+                    console.log('arr'+arr.toString());
+                    let highMajor =arr.toString().indexOf('High-Major_') !== -1 ? 'background-blue':'';
+                    let hmmm=arr.toString().indexOf('High-Major - / Mid-Major +') !== -1 ? 'background-blue':'';
+                    let hmlm=arr.toString().indexOf('High-Major - / Low-Major +') !== -1 ? 'background-blue':'';
+                    let lm=arr.toString().indexOf('Low-Major_') !== -1 ? 'background-blue':'';
+                    let mm=arr.toString().indexOf('Mid-Major_') !== -1 ? 'background-blue':'';
     return <ul>
-        <li className="btn btn-default " onClick={this.handleD1HMFilter.bind(this)}>High Major</li>
-        <li className="btn btn-default" onClick={this.handleD1HMMMFilter.bind(this)}>High Major - / Mid-Major +</li>
-        <li className="btn btn-default " onClick={this.handleD1MMFilter.bind(this)}>Mid-Major</li>
-        <li className="btn btn-default " onClick={this.handleD1MMLMFilter.bind(this)}>Mid-Major - / Low Major +</li>
-        <li className="btn btn-default" onClick={this.handleD1LMFilter.bind(this)}>Low Major</li>
+        <li className={defaultClass+highMajor} onClick={this.handleD1HMFilter.bind(this)}>High Major</li>
+        <li className={defaultClass+hmmm} onClick={this.handleD1HMMMFilter.bind(this)}>High Major - / Mid-Major +</li>
+        <li className={defaultClass+mm} onClick={this.handleD1MMFilter.bind(this)}>Mid-Major</li>
+        <li className={defaultClass+hmlm} onClick={this.handleD1MMLMFilter.bind(this)}>Mid-Major - / Low Major +</li>
+        <li className={defaultClass+lm} onClick={this.handleD1LMFilter.bind(this)}>Low Major</li>
     </ul>						
    }
    prospectSummary(){
