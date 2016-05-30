@@ -5,7 +5,8 @@ import {
   DELETE_TASK_ERROR,
   DELETE_TASK_SUCCESS,
   UPDATE_TASK_ERROR,
-  UPDATE_TASK_SUCCESS
+  UPDATE_TASK_SUCCESS,
+  TASKS_LISTENERS_REGISTERED
 } from './action-types';
 
 
@@ -97,6 +98,8 @@ export function registerListeners() {
       type: DELETE_TASK_SUCCESS,
       payload: recordFromSnapshot(snapshot)
     }));
+
+    dispatch({type: TASKS_LISTENERS_REGISTERED})
   };
 }
 

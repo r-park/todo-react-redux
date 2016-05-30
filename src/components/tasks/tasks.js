@@ -23,7 +23,7 @@ export class Tasks extends Component {
   };
 
   componentWillMount() {
-    this.props.registerListeners();
+    if (!this.props.listening) this.props.registerListeners();
   }
 
   renderNotification() {
@@ -78,5 +78,6 @@ export class Tasks extends Component {
 
 export default connect(state => ({
   notification: state.notification,
+  listening: state.tasks.listening,
   tasks: state.tasks.list
 }), Object.assign({}, tasksActions, notificationActions))(Tasks);
