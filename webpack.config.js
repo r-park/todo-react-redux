@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const WebpackMd5Hash = require('webpack-md5-hash');
 
 
 //=========================================================
@@ -150,6 +151,8 @@ if (ENV_PRODUCTION) {
     'redux-thunk'
   ];
 
+  config.output.filename = '[name].[chunkhash].js';
+
   config.module = {
     loaders: [
       loaders.js,
@@ -158,6 +161,7 @@ if (ENV_PRODUCTION) {
   };
 
   config.plugins.push(
+    new WebpackMd5Hash(),
     new ExtractTextPlugin('styles.css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
