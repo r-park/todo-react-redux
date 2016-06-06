@@ -7,6 +7,7 @@ A simple Todo app example with `undelete` capability — built with React, Redux
 Try the demo at <a href="https://todo-react-redux.firebaseapp.com" target="_blank">todo-react-redux.firebaseapp.com</a>.
 
 - React
+- React-Hot-Loader `3.0.0-beta.2`
 - React-Redux
 - React-Router
 - React-Router-Redux

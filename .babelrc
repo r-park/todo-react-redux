@@ -5,5 +5,8 @@
     "stage-1"
   ],
 
-  "sourceRoot": "./src"
+  "plugins": [
+    "transform-function-bind",
+    "react-hot-loader/babel"
+  ]
 }

@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
+const WebpackMd5Hash = require('webpack-md5-hash');
 
 
 //=========================================================
@@ -61,24 +62,9 @@ config.sassLoader = {
 //  DEVELOPMENT or PRODUCTION
 //-------------------------------------
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
-  config.devtool = 'source-map';
-
   config.entry = {
     main: [
       './src/main'
-    ],
-    vendor: [
-      'babel-polyfill',
-      'classnames',
-      'firebase',
-      'history',
-      'react',
-      'react-dom',
-      'react-redux',
-      'react-router',
-      'react-router-redux',
-      'redux',
-      'redux-thunk'
     ]
   };
 
@@ -89,10 +75,9 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
   };
 
   config.plugins.push(
-    new webpack.optimize.CommonsChunkPlugin('vendor', '[name].js'),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      hash: true,
+      hash: false,
       inject: 'body',
       template: './src/index.html'
     })
@@ -104,22 +89,18 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
 //  DEVELOPMENT
 //-------------------------------------
 if (ENV_DEVELOPMENT) {
+  config.devtool = 'cheap-module-source-map';
+
   config.entry.main.unshift(
     `webpack-dev-server/client?http://${HOST}:${PORT}`,
-    'webpack/hot/dev-server'
+    'webpack/hot/only-dev-server',
+    'react-hot-loader/patch'
   );
 
   config.module = {
     loaders: [
-      loaders.scss,
-      {test: /\.js$/, exclude: /node_modules/, loader: 'babel', query: {
-        plugins: [
-          [
-            'react-transform',
-            {transforms: [ {transform: 'react-transform-hmr', imports: ['react'], locals: ['module']} ]}
-          ]
-        ]
-      }}
+      loaders.js,
+      loaders.scss
     ]
   };
 
@@ -153,6 +134,25 @@ if (ENV_DEVELOPMENT) {
 //  PRODUCTION
 //-------------------------------------
 if (ENV_PRODUCTION) {
+  config.devtool = 'source-map';
+
+  config.entry.vendor = [
+    'babel-polyfill',
+    'classnames',
+    'firebase',
+    'history',
+    'react',
+    'react-dom',
+    'react-hot-loader',
+    'react-redux',
+    'react-router',
+    'react-router-redux',
+    'redux',
+    'redux-thunk'
+  ];
+
+  config.output.filename = '[name].[chunkhash].js';
+
   config.module = {
     loaders: [
       loaders.js,
@@ -161,7 +161,12 @@ if (ENV_PRODUCTION) {
   };
 
   config.plugins.push(
+    new WebpackMd5Hash(),
     new ExtractTextPlugin('styles.css'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       mangle: true,
