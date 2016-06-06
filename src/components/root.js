@@ -2,16 +2,16 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Route, Router } from 'react-router';
 
-// Config
+// config
 import { SIGN_IN_PATH, TASKS_PATH } from 'src/config';
 
-// Components
+// components
 import App from './app/app';
 import SignIn from './sign-in/sign-in';
 import Tasks from './tasks/tasks';
 
 
-export function Root({history, onEnter, store}) {
+export default function Root({history, onEnter, store}) {
   return (
     <Provider store={store}>
       <Router history={history}>

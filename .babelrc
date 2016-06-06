@@ -5,5 +5,7 @@
     "stage-1"
   ],
 
-  "sourceRoot": "./src"
+  "plugins": [
+    "react-hot-loader/babel"
+  ]
 }
