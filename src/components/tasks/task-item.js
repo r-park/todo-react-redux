@@ -14,12 +14,12 @@ export class TaskItem extends Component {
 
     this.state = {editing: false};
 
-    this.delete = this.delete.bind(this);
-    this.editTitle = this.editTitle.bind(this);
-    this.saveTitle = this.saveTitle.bind(this);
-    this.stopEditing = this.stopEditing.bind(this);
-    this.toggleStatus = this.toggleStatus.bind(this);
-    this.onKeyUp = this.onKeyUp.bind(this);
+    this.delete = ::this.delete;
+    this.editTitle = ::this.editTitle;
+    this.saveTitle = ::this.saveTitle;
+    this.stopEditing = ::this.stopEditing;
+    this.toggleStatus = ::this.toggleStatus;
+    this.onKeyUp = ::this.onKeyUp;
   }
 
   delete() {

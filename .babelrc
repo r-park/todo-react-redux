@@ -6,6 +6,7 @@
   ],
 
   "plugins": [
+    "transform-function-bind",
     "react-hot-loader/babel"
   ]
 }

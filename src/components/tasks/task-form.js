@@ -11,9 +11,9 @@ export class TaskForm extends Component {
 
     this.state = {title: ''};
 
-    this.onChange = this.onChange.bind(this);
-    this.onKeyUp = this.onKeyUp.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = ::this.onChange;
+    this.onKeyUp = ::this.onKeyUp;
+    this.onSubmit = ::this.onSubmit;
   }
 
   clearInput() {

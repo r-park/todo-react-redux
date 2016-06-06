@@ -18,7 +18,7 @@ export class App extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.signOut = this.signOut.bind(this);
+    this.signOut = ::this.signOut;
   }
 
   componentWillReceiveProps(nextProps) {
