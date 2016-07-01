@@ -28,13 +28,6 @@ module.exports = config => {
 
     singleRun: false,
 
-    customLaunchers: {
-      TRAVIS_CHROME: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    },
-
-    browsers: process.env.TRAVIS ? ['TRAVIS_CHROME'] : ['Chrome']
+    browsers: ['Chrome']
   });
 };
