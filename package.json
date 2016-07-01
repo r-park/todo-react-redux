@@ -14,7 +14,7 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">=5.2"
+    "node": ">=5.11"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --display-chunks --display-modules --progress",
@@ -46,6 +46,7 @@
     "express": "~4.13.4",
     "extract-text-webpack-plugin": "~1.0.1",
     "firebase": "~3.0.3",
+    "firebase-tools": "3.0.4",
     "html-webpack-plugin": "~2.19.0",
     "jasmine-core": "~2.4.1",
     "karma": "~0.13.22",
