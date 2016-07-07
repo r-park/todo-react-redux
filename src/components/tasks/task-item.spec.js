@@ -1,5 +1,6 @@
 import { Simulate } from 'react-addons-test-utils';
 import { createTestComponent } from 'test/utils';
+import { Task } from 'src/core/tasks';
 import { TaskItem } from './task-item';
 
 
@@ -9,7 +10,7 @@ describe('TaskItem', () => {
 
 
   beforeEach(() => {
-    task = {completed: true, title: 'test'};
+    task = new Task({completed: true, title: 'test'});
 
     taskItem = createTestComponent(TaskItem, {
       task,
@@ -24,8 +25,8 @@ describe('TaskItem', () => {
       expect(taskItem.state.editing).toEqual(false);
     });
 
-    it('should initialize #props.task with a task object', () => {
-      expect(typeof taskItem.props.task).toBe('object');
+    it('should initialize #props.task with a Task instance', () => {
+      expect(taskItem.props.task instanceof Task).toBe(true);
     });
   });
 

@@ -1,32 +1,24 @@
-/* eslint-disable no-case-declarations */
+import { Record } from 'immutable';
 import { INIT_AUTH, SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS } from './action-types';
 
 
-export const initialState = {
+export const AuthState = new Record({
   authenticated: false,
   id: null
-};
+});
 
 
-export function authReducer(state = initialState, {payload, type}) {
+export function authReducer(state = new AuthState(), {payload, type}) {
   switch (type) {
     case INIT_AUTH:
-      return {
+    case SIGN_IN_SUCCESS:
+      return state.merge({
         authenticated: !!payload,
         id: payload ? payload.uid : null
-      };
-
-    case SIGN_IN_SUCCESS:
-      return {
-        authenticated: true,
-        id: payload.uid
-      };
+      });
 
     case SIGN_OUT_SUCCESS:
-      return {
-        authenticated: false,
-        id: null
-      };
+      return new AuthState();
 
     default:
       return state;

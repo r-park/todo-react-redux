@@ -1,57 +1,57 @@
-/* eslint-disable no-undefined */
 import {
   INIT_AUTH,
   SIGN_IN_SUCCESS,
   SIGN_OUT_SUCCESS
 } from './action-types';
 
-import {
-  authReducer,
-  initialState
-} from './reducer';
+import { authReducer } from './reducer';
 
 
 describe('Auth reducer', () => {
-  it('should return the initial state when action.type is not found', () => {
-    expect(authReducer(undefined, {})).toEqual(initialState);
-  });
-
-
   describe('INIT_AUTH', () => {
-    it('should return state as `unauthenticated` when payload is `null`', () => {
-      let state = authReducer(initialState, {
+    it('should set AuthState.authenticated to false when payload is null', () => {
+      let state = authReducer(undefined, {
         type: INIT_AUTH,
         payload: null
       });
 
-      expect(state).toEqual(initialState);
+      expect(state.authenticated).toBe(false);
+      expect(state.id).toBe(null);
+    });
+
+    it('should set AuthState.authenticated to true when payload provided', () => {
+      let state = authReducer(undefined, {
+        type: INIT_AUTH,
+        payload: {uid: '123'}
+      });
+
+      expect(state.authenticated).toBe(true);
+      expect(state.id).toBe('123');
     });
   });
 
 
   describe('SIGN_IN_SUCCESS', () => {
-    it('should return state as `authenticated`', () => {
-      let state = authReducer(initialState, {
+    it('should set AuthState.authenticated to true', () => {
+      let state = authReducer(undefined, {
         type: SIGN_IN_SUCCESS,
         payload: {uid: '123'}
       });
 
-      expect(state).toEqual({
-        authenticated: true,
-        id: '123'
-      });
+      expect(state.authenticated).toBe(true);
+      expect(state.id).toBe('123');
     });
   });
 
 
   describe('SIGN_OUT_SUCCESS', () => {
-    it('should return state as `unauthenticated`', () => {
-      let state = authReducer(initialState, {
-        type: SIGN_OUT_SUCCESS,
-        payload: null
+    it('should set AuthState.authenticated to false', () => {
+      let state = authReducer(undefined, {
+        type: SIGN_OUT_SUCCESS
       });
 
-      expect(state).toEqual(initialState);
+      expect(state.authenticated).toBe(false);
+      expect(state.id).toBe(null);
     });
   });
 });

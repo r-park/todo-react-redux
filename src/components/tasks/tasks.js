@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { List } from 'immutable';
 
 import { notificationActions } from 'src/core/notification';
 import { tasksActions } from 'src/core/tasks';
@@ -17,7 +18,7 @@ export class Tasks extends Component {
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
     registerListeners: PropTypes.func.isRequired,
-    tasks: PropTypes.array.isRequired,
+    tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired
   };
@@ -36,8 +37,10 @@ export class Tasks extends Component {
     return (
       <Notification
         action={undeleteTask}
+        actionLabel={notification.actionLabel}
         dismiss={dismissNotification}
-        {...notification}
+        display={notification.display}
+        message={notification.message}
       />
     );
   }

@@ -49,6 +49,7 @@
     "firebase": "~3.1.0",
     "firebase-tools": "3.0.4",
     "html-webpack-plugin": "~2.22.0",
+    "immutable": "~3.8.1",
     "jasmine-core": "~2.4.1",
     "karma": "~1.0.0",
     "karma-chrome-launcher": "~1.0.1",
