@@ -6,6 +6,7 @@ export { authActions };
 export * from './action-types';
 export { authReducer } from './reducer';
 export * from './route-resolver';
+export { getAuth } from './selectors';
 
 
 export function initAuth(dispatch) {

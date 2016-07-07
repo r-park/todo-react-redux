@@ -1,9 +1,10 @@
+import { List } from 'immutable';
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { List } from 'immutable';
+import { createSelector } from 'reselect';
 
-import { notificationActions } from 'src/core/notification';
-import { tasksActions } from 'src/core/tasks';
+import { getNotification, notificationActions } from 'src/core/notification';
+import { getTaskList, tasksActions } from 'src/core/tasks';
 import { Notification } from './notification';
 import { TaskFilters } from './task-filters';
 import { TaskForm } from './task-form';
@@ -79,7 +80,27 @@ export class Tasks extends Component {
   }
 }
 
-export default connect(state => ({
-  notification: state.notification,
-  tasks: state.tasks.list
-}), Object.assign({}, tasksActions, notificationActions))(Tasks);
+
+//=====================================
+//  CONNECT
+//-------------------------------------
+
+const mapStateToProps = createSelector(
+  getNotification,
+  getTaskList,
+  (notification, tasks) => ({
+    notification,
+    tasks
+  })
+);
+
+const mapDispatchToProps = Object.assign(
+  {},
+  tasksActions,
+  notificationActions
+);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tasks);

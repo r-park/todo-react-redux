@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 import { POST_SIGN_IN_PATH, POST_SIGN_OUT_PATH } from 'src/config';
-import { authActions } from 'src/core/auth';
+import { authActions, getAuth } from 'src/core/auth';
 
 
 export class App extends Component {
@@ -62,6 +63,17 @@ export class App extends Component {
   }
 }
 
-export default connect(state => ({
-  auth: state.auth
-}), authActions)(App);
+
+//=====================================
+//  CONNECT
+//-------------------------------------
+
+const mapStateToProps = createSelector(
+  getAuth,
+  auth => ({auth})
+);
+
+export default connect(
+  mapStateToProps,
+  authActions
+)(App);

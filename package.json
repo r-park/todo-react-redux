@@ -71,6 +71,7 @@
     "react-router-redux": "~4.0.5",
     "redux": "~3.5.2",
     "redux-thunk": "~2.1.0",
+    "reselect": "~2.5.3",
     "sass-loader": "~4.0.0",
     "sinon": "~1.17.4",
     "style-loader": "~0.13.1",
