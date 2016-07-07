@@ -1,4 +1,5 @@
 import { firebaseDb } from 'src/core/firebase';
+import { Task } from './task';
 import {
   CREATE_TASK_ERROR,
   CREATE_TASK_SUCCESS,
@@ -102,7 +103,7 @@ export function registerListeners() {
 
 
 function recordFromSnapshot(snapshot) {
-  let record = snapshot.val();
-  record.key = snapshot.key;
-  return record;
+  let attrs = snapshot.val();
+  attrs.key = snapshot.key;
+  return new Task(attrs);
 }

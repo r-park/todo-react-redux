@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import React, { Component, PropTypes } from 'react';
+import { Task } from 'src/core/tasks';
 
 
 export class TaskItem extends Component {
   static propTypes = {
     deleteTask: PropTypes.func.isRequired,
-    task: PropTypes.object.isRequired,
+    task: PropTypes.instanceOf(Task).isRequired,
     updateTask: PropTypes.func.isRequired
   };
 
@@ -20,6 +21,11 @@ export class TaskItem extends Component {
     this.stopEditing = ::this.stopEditing;
     this.toggleStatus = ::this.toggleStatus;
     this.onKeyUp = ::this.onKeyUp;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.task !== this.props.task ||
+           nextState.editing !== this.state.editing;
   }
 
   delete() {

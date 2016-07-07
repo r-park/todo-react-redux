@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { List } from 'immutable';
 import { TaskItem } from './task-item';
 
 
@@ -6,7 +7,7 @@ export class TaskList extends Component {
   static propTypes = {
     deleteTask: PropTypes.func.isRequired,
     filter: PropTypes.string,
-    tasks: PropTypes.array.isRequired,
+    tasks: PropTypes.instanceOf(List).isRequired,
     updateTask: PropTypes.func.isRequired
   };
 

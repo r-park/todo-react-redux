@@ -1,3 +1,5 @@
+import { List, Record } from 'immutable';
+
 import {
   SIGN_OUT_SUCCESS
 } from 'src/core/auth';
@@ -9,48 +11,42 @@ import {
 } from './action-types';
 
 
-export const initialState = {
+export const TasksState = new Record({
   deleted: null,
-  list: [],
-  previous: []
-};
+  list: new List(),
+  previous: null
+});
 
 
-export function tasksReducer(state = initialState, action) {
-  switch (action.type) {
+export function tasksReducer(state = new TasksState(), {payload, type}) {
+  switch (type) {
     case CREATE_TASK_SUCCESS:
-      return {
+      return state.merge({
         deleted: null,
-        list: (state.deleted && state.deleted.key === action.payload.key) ?
-              [ ...state.previous ] :
-              [ action.payload, ...state.list ],
-        previous: []
-      };
+        previous: null,
+        list: state.deleted && state.deleted.key === payload.key ?
+              state.previous :
+              state.list.unshift(payload)
+      });
 
     case DELETE_TASK_SUCCESS:
-      return {
-        deleted: action.payload,
-        list: state.list.filter(task => {
-          return task.key !== action.payload.key;
-        }),
-        previous: [ ...state.list ]
-      };
+      return state.merge({
+        deleted: payload,
+        previous: state.list,
+        list: state.list.filter(task => task.key !== payload.key)
+      });
 
     case UPDATE_TASK_SUCCESS:
-      return {
+      return state.merge({
         deleted: null,
+        previous: null,
         list: state.list.map(task => {
-          return task.key === action.payload.key ? action.payload : task;
-        }),
-        previous: []
-      };
+          return task.key === payload.key ? payload : task;
+        })
+      });
 
     case SIGN_OUT_SUCCESS:
-      return {
-        deleted: null,
-        list: [],
-        previous: []
-      };
+      return new TasksState();
 
     default:
       return state;

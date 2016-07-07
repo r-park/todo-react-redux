@@ -14,3 +14,4 @@ import 'redux-thunk';
 //
 import 'classnames';
 import 'firebase';
+import 'immutable';
