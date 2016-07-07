@@ -36,7 +36,7 @@ module.exports = config;
 
 
 config.resolve = {
-  extensions: ['', '.ts', '.js'],
+  extensions: ['', '.js'],
   modulesDirectories: ['node_modules'],
   root: path.resolve('.')
 };
@@ -63,9 +63,7 @@ config.sassLoader = {
 //-------------------------------------
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
   config.entry = {
-    main: [
-      './src/main'
-    ]
+    main: ['./src/main.js']
   };
 
   config.output = {
@@ -76,6 +74,7 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
 
   config.plugins.push(
     new HtmlWebpackPlugin({
+      chunkSortMode: 'dependency',
       filename: 'index.html',
       hash: false,
       inject: 'body',
@@ -94,7 +93,8 @@ if (ENV_DEVELOPMENT) {
   config.entry.main.unshift(
     `webpack-dev-server/client?http://${HOST}:${PORT}`,
     'webpack/hot/only-dev-server',
-    'react-hot-loader/patch'
+    'react-hot-loader/patch',
+    'babel-polyfill'
   );
 
   config.module = {
@@ -136,20 +136,7 @@ if (ENV_DEVELOPMENT) {
 if (ENV_PRODUCTION) {
   config.devtool = 'source-map';
 
-  config.entry.vendor = [
-    'babel-polyfill',
-    'classnames',
-    'firebase',
-    'history',
-    'react',
-    'react-dom',
-    'react-hot-loader',
-    'react-redux',
-    'react-router',
-    'react-router-redux',
-    'redux',
-    'redux-thunk'
-  ];
+  config.entry.vendor = './src/vendor.js';
 
   config.output.filename = '[name].[chunkhash].js';
 
@@ -162,7 +149,7 @@ if (ENV_PRODUCTION) {
 
   config.plugins.push(
     new WebpackMd5Hash(),
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('styles.[contenthash].css'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity
