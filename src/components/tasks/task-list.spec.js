@@ -36,25 +36,9 @@ describe('TaskList', () => {
 
 
   describe('DOM:', () => {
-    it('should render all tasks', () => {
+    it('should render tasks', () => {
       let taskItems = scryRenderedComponentsWithType(taskList, TaskItem);
       expect(taskItems.length).toEqual(2);
-    });
-
-    it('should render active tasks', () => {
-      taskList = createTestComponent(TaskList, {filter: 'active', ...props});
-      let taskItems = scryRenderedComponentsWithType(taskList, TaskItem);
-
-      expect(taskItems.length).toEqual(1);
-      expect(taskItems[0].props.task.completed).toEqual(false);
-    });
-
-    it('should render completed tasks', () => {
-      taskList = createTestComponent(TaskList, {filter: 'completed', ...props});
-      let taskItems = scryRenderedComponentsWithType(taskList, TaskItem);
-
-      expect(taskItems.length).toEqual(1);
-      expect(taskItems[0].props.task.completed).toEqual(true);
     });
   });
 });
