@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
-import { POST_SIGN_IN_PATH, POST_SIGN_OUT_PATH } from 'src/config';
 import { authActions, getAuth } from 'src/core/auth';
+import { paths } from '../routes';
 
 
 export class App extends Component {
@@ -27,16 +27,15 @@ export class App extends Component {
     const { auth } = this.props;
 
     if (auth.authenticated && !nextProps.auth.authenticated) {
-      router.replace(POST_SIGN_OUT_PATH);
+      router.replace(paths.SIGN_IN);
     }
     else if (!auth.authenticated && nextProps.auth.authenticated) {
-      router.replace(POST_SIGN_IN_PATH);
+      router.replace(paths.TASKS);
     }
   }
 
   signOut() {
     this.props.signOut();
-    window.location.replace('/');
   }
 
   render() {
