@@ -1,0 +1,42 @@
+@import
+"settings";
+
+@import
+"~minx/src/settings",
+"~minx/src/functions",
+"~minx/src/mixins",
+"~minx/src/reset",
+"~minx/src/elements";
+
+@import
+"grid",
+'button',
+"header",
+"sign-in",
+"notification",
+"task-filters",
+"task-form",
+"task-item",
+"task-list";
+
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-bottom: 120px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hide {
+  display: none !important;
+}
+
+::selection {
+  background: rgba(200,200,255,.1);
+}
