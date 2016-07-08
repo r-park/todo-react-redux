@@ -1,5 +1,3 @@
-import './styles/styles.scss';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -8,7 +6,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import { initAuth } from './core/auth';
 import configureStore from './core/store';
-import Root from './components/root';
+import Root from './views/root';
+import './views/styles/styles.scss';
 
 
 const store = configureStore();
@@ -26,8 +25,8 @@ function render(Root) {
 }
 
 if (module.hot) {
-  module.hot.accept('./components/root', () => {
-    render(require('./components/root').default);
+  module.hot.accept('./views/root', () => {
+    render(require('./views/root').default);
   });
 }
 

@@ -1,0 +1,78 @@
+//=========================================================
+//  Header
+//---------------------------------------------------------
+
+.header {
+  padding: 10px 0;
+  height: 60px;
+  overflow: hidden;
+  line-height: 40px;
+}
+
+
+.header__title {
+  @include fa-icon(circle-o);
+  float: left;
+  font-size: rem(14px);
+  font-weight: 400;
+  text-rendering: auto;
+  transform: translate(0,0);
+
+  &:before {
+    padding-right: 5px;
+    color: #fff;
+    font-family: 'FontAwesome';
+    line-height: 20px;
+  }
+}
+
+
+.header__actions {
+  @include clearfix;
+  float: right;
+  padding: 8px 0;
+  line-height: 24px;
+
+  li {
+    float: left;
+    list-style: none;
+
+    &:last-child {
+      margin-left: 12px;
+      padding-left: 12px;
+      border-left: 1px solid #333;
+    }
+
+    &:first-child {
+      border: none;
+    }
+  }
+
+  .btn {
+    display: block;
+    margin: 0;
+    color: #999;
+    font-size: rem(14px);
+    line-height: 24px;
+  }
+
+  .link {
+    display: block;
+    color: inherit;
+    font-size: rem(14px);
+    text-decoration: none;
+    text-rendering: auto;
+    transform: translate(0,0);
+  }
+
+
+  .link--github {
+    @include fa-icon(github);
+    font-size: rem(24px);
+
+    &:before {
+      font-family: 'FontAwesome';
+      line-height: 24px;
+    }
+  }
+}
