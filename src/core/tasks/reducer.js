@@ -8,6 +8,7 @@ import {
   CREATE_TASK_SUCCESS,
   DELETE_TASK_SUCCESS,
   FILTER_TASKS,
+  LOAD_TASKS_SUCCESS,
   UPDATE_TASK_SUCCESS
 } from './action-types';
 
@@ -40,6 +41,9 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
 
     case FILTER_TASKS:
       return state.set('filter', payload.filterType || '');
+
+    case LOAD_TASKS_SUCCESS:
+      return state.set('list', new List(payload.reverse()));
 
     case UPDATE_TASK_SUCCESS:
       return state.merge({

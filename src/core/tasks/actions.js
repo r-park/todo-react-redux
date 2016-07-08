@@ -1,84 +1,105 @@
-import { firebaseDb } from 'src/core/firebase';
-import { Task } from './task';
+import { getDeletedTask } from './selectors';
+import { taskList } from './task-list';
 import {
   CREATE_TASK_ERROR,
   CREATE_TASK_SUCCESS,
   DELETE_TASK_ERROR,
   DELETE_TASK_SUCCESS,
+  FILTER_TASKS,
+  LOAD_TASKS_SUCCESS,
+  UNDELETE_TASK_ERROR,
+  UNLOAD_TASKS_SUCCESS,
   UPDATE_TASK_ERROR,
-  UPDATE_TASK_SUCCESS,
-  FILTER_TASKS
+  UPDATE_TASK_SUCCESS
 } from './action-types';
 
 
 export function createTask(title) {
-  return (dispatch, getState) => {
-    const { auth } = getState();
-
-    firebaseDb.ref(`tasks/${auth.id}`)
-      .push({completed: false, title}, error => {
-        if (error) {
-          console.error('ERROR @ createTask :', error); // eslint-disable-line no-console
-          dispatch({
-            type: CREATE_TASK_ERROR,
-            payload: error
-          });
-        }
-      });
+  return dispatch => {
+    taskList.push({completed: false, title})
+      .catch(error => dispatch(createTaskError(error)));
   };
 }
 
+export function createTaskError(error) {
+  return {
+    type: CREATE_TASK_ERROR,
+    payload: error
+  };
+}
+
+export function createTaskSuccess(task) {
+  return {
+    type: CREATE_TASK_SUCCESS,
+    payload: task
+  };
+}
 
 export function deleteTask(task) {
-  return (dispatch, getState) => {
-    const { auth } = getState();
-
-    firebaseDb.ref(`tasks/${auth.id}/${task.key}`)
-      .remove(error => {
-        if (error) {
-          console.error('ERROR @ deleteTask :', error); // eslint-disable-line no-console
-          dispatch({
-            type: DELETE_TASK_ERROR,
-            payload: error
-          });
-        }
-      });
+  return dispatch => {
+    taskList.remove(task.key)
+      .catch(error => dispatch(deleteTaskError(error)));
   };
 }
 
+export function deleteTaskError(error) {
+  return {
+    type: DELETE_TASK_ERROR,
+    payload: error
+  };
+}
+
+export function deleteTaskSuccess(task) {
+  return {
+    type: DELETE_TASK_SUCCESS,
+    payload: task
+  };
+}
 
 export function undeleteTask() {
   return (dispatch, getState) => {
-    const { auth, tasks } = getState();
-    const task = tasks.deleted;
-
-    firebaseDb.ref(`tasks/${auth.id}/${task.key}`)
-      .set({completed: task.completed, title: task.title}, error => {
-        if (error) {
-          console.error('ERROR @ undeleteTask :', error); // eslint-disable-line no-console
-        }
-      });
+    const task = getDeletedTask(getState());
+    if (task) {
+      taskList.set(task.key, {completed: task.completed, title: task.title})
+        .catch(error => dispatch(undeleteTaskError(error)));
+    }
   };
 }
 
+export function undeleteTaskError(error) {
+  return {
+    type: UNDELETE_TASK_ERROR,
+    payload: error
+  };
+}
+
+export function updateTaskError(error) {
+  return {
+    type: UPDATE_TASK_ERROR,
+    payload: error
+  };
+}
 
 export function updateTask(task, changes) {
-  return (dispatch, getState) => {
-    const { auth } = getState();
-
-    firebaseDb.ref(`tasks/${auth.id}/${task.key}`)
-      .update(changes, error => {
-        if (error) {
-          console.error('ERROR @ updateTask :', error); // eslint-disable-line no-console
-          dispatch({
-            type: UPDATE_TASK_ERROR,
-            payload: error
-          });
-        }
-      });
+  return dispatch => {
+    taskList.update(task.key, changes)
+      .catch(error => dispatch(updateTaskError(error)));
   };
 }
 
+export function updateTaskSuccess(task) {
+  return {
+    type: UPDATE_TASK_SUCCESS,
+    payload: task
+  };
+}
+
+export function loadTasksSuccess(tasks) {
+  return {
+    type: LOAD_TASKS_SUCCESS,
+    payload: tasks
+  };
+}
 
 export function filterTasks(filterType) {
   return {
@@ -87,32 +108,17 @@ export function filterTasks(filterType) {
   };
 }
 
-
-export function registerListeners() {
+export function loadTasks() {
   return (dispatch, getState) => {
     const { auth } = getState();
-    const ref = firebaseDb.ref(`tasks/${auth.id}`);
-
-    ref.on('child_added', snapshot => dispatch({
-      type: CREATE_TASK_SUCCESS,
-      payload: recordFromSnapshot(snapshot)
-    }));
-
-    ref.on('child_changed', snapshot => dispatch({
-      type: UPDATE_TASK_SUCCESS,
-      payload: recordFromSnapshot(snapshot)
-    }));
-
-    ref.on('child_removed', snapshot => dispatch({
-      type: DELETE_TASK_SUCCESS,
-      payload: recordFromSnapshot(snapshot)
-    }));
+    taskList.path = `tasks/${auth.id}`;
+    taskList.subscribe(dispatch);
   };
 }
 
-
-function recordFromSnapshot(snapshot) {
-  let attrs = snapshot.val();
-  attrs.key = snapshot.key;
-  return new Task(attrs);
+export function unloadTasks() {
+  taskList.unsubscribe();
+  return {
+    type: UNLOAD_TASKS_SUCCESS
+  };
 }
