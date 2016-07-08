@@ -7,12 +7,14 @@ import {
 import {
   CREATE_TASK_SUCCESS,
   DELETE_TASK_SUCCESS,
+  FILTER_TASKS,
   UPDATE_TASK_SUCCESS
 } from './action-types';
 
 
 export const TasksState = new Record({
   deleted: null,
+  filter: '',
   list: new List(),
   previous: null
 });
@@ -35,6 +37,9 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
         previous: state.list,
         list: state.list.filter(task => task.key !== payload.key)
       });
+
+    case FILTER_TASKS:
+      return state.set('filter', payload.filterType || '');
 
     case UPDATE_TASK_SUCCESS:
       return state.merge({

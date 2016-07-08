@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { getNotification, notificationActions } from 'src/core/notification';
-import { getTaskList, tasksActions } from 'src/core/tasks';
+import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/core/tasks';
 import { Notification } from './notification';
 import { TaskFilters } from './task-filters';
 import { TaskForm } from './task-form';
@@ -16,6 +16,8 @@ export class Tasks extends Component {
     createTask: PropTypes.func.isRequired,
     deleteTask: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
+    filterTasks: PropTypes.func.isRequired,
+    filterType: PropTypes.string.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
     registerListeners: PropTypes.func.isRequired,
@@ -26,6 +28,13 @@ export class Tasks extends Component {
 
   componentWillMount() {
     this.props.registerListeners();
+    this.props.filterTasks(this.props.location.query.filter);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.query.filter !== this.props.location.query.filter) {
+      this.props.filterTasks(nextProps.location.query.filter);
+    }
   }
 
   renderNotification() {
@@ -50,13 +59,11 @@ export class Tasks extends Component {
     const {
       createTask,
       deleteTask,
-      location,
+      filterType,
       notification,
       tasks,
       updateTask
     } = this.props;
-
-    const { filter } = location.query;
 
     return (
       <div className="g-row">
@@ -65,10 +72,9 @@ export class Tasks extends Component {
         </div>
 
         <div className="g-col">
-          <TaskFilters filter={filter} />
+          <TaskFilters filter={filterType} />
           <TaskList
             deleteTask={deleteTask}
-            filter={filter}
             tasks={tasks}
             updateTask={updateTask}
           />
@@ -87,9 +93,11 @@ export class Tasks extends Component {
 
 const mapStateToProps = createSelector(
   getNotification,
-  getTaskList,
-  (notification, tasks) => ({
+  getTaskFilter,
+  getVisibleTasks,
+  (notification, filterType, tasks) => ({
     notification,
+    filterType,
     tasks
   })
 );

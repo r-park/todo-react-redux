@@ -6,7 +6,8 @@ import {
   DELETE_TASK_ERROR,
   DELETE_TASK_SUCCESS,
   UPDATE_TASK_ERROR,
-  UPDATE_TASK_SUCCESS
+  UPDATE_TASK_SUCCESS,
+  FILTER_TASKS
 } from './action-types';
 
 
@@ -75,6 +76,14 @@ export function updateTask(task, changes) {
           });
         }
       });
+  };
+}
+
+
+export function filterTasks(filterType) {
+  return {
+    type: FILTER_TASKS,
+    payload: {filterType}
   };
 }
 
