@@ -5,6 +5,7 @@ import {
   CREATE_TASK_SUCCESS,
   DELETE_TASK_SUCCESS,
   FILTER_TASKS,
+  LOAD_TASKS_SUCCESS,
   UPDATE_TASK_SUCCESS
 } from './action-types';
 
@@ -67,6 +68,32 @@ describe('tasks', () => {
         });
 
         expect(nextState.filter).toBe('completed');
+      });
+    });
+
+
+    describe('LOAD_TASKS_SUCCESS', () => {
+      it('should set task list', () => {
+        let state = new TasksState();
+
+        let nextState = tasksReducer(state, {
+          type: LOAD_TASKS_SUCCESS,
+          payload: [task1, task2]
+        });
+
+        expect(nextState.list.size).toBe(2);
+      });
+
+      it('should order tasks newest first', () => {
+        let state = new TasksState();
+
+        let nextState = tasksReducer(state, {
+          type: LOAD_TASKS_SUCCESS,
+          payload: [task1, task2]
+        });
+
+        expect(nextState.list.get(0)).toBe(task2);
+        expect(nextState.list.get(1)).toBe(task1);
       });
     });
 

@@ -18,16 +18,17 @@ export class Tasks extends Component {
     dismissNotification: PropTypes.func.isRequired,
     filterTasks: PropTypes.func.isRequired,
     filterType: PropTypes.string.isRequired,
+    loadTasks: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
-    registerListeners: PropTypes.func.isRequired,
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
+    unloadTasks: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired
   };
 
   componentWillMount() {
-    this.props.registerListeners();
+    this.props.loadTasks();
     this.props.filterTasks(this.props.location.query.filter);
   }
 
@@ -35,6 +36,10 @@ export class Tasks extends Component {
     if (nextProps.location.query.filter !== this.props.location.query.filter) {
       this.props.filterTasks(nextProps.location.query.filter);
     }
+  }
+
+  componentWillUnmount() {
+    this.props.unloadTasks();
   }
 
   renderNotification() {
