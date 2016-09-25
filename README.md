@@ -12,7 +12,7 @@ A version of this app built with [redux-saga middleware](https://github.com/yelo
 ## Stack
 
 - React
-- React-Hot-Loader `3.0.0-beta.2`
+- React-Hot-Loader `3.0.0-beta.5`
 - React-Redux
 - React-Router
 - React-Router-Redux
@@ -78,15 +78,14 @@ $ firebase deploy
 ```
 
 
-NPM Command Summary
--------------------
+NPM Commands
+------------
 
 |Script|Description|
 |---|---|
-|`npm start`|Start webpack development server @ `localhost:3000`|
-|`npm run build`|Lint, test, and build the application to `./target`|
-|`npm run dev`|Same as `npm start`|
-|`npm run lint`|Lint `.js` files|
-|`npm run server`|Start express server @ `localhost:3000` to serve build artifacts from `./target` (must run `npm run build` first)|
-|`npm test`|Run unit tests with Karma and Jasmine|
-|`npm run test:watch`|Run unit tests with Karma and Jasmine; watch for changes to re-run tests|
+|npm start|Start webpack development server @ **localhost:3000**|
+|npm run build|Lint, test, and build the application to **./target**|
+|npm run lint|Lint **.js** files|
+|npm run server|Start express server @ **localhost:3000** to serve build artifacts from **./target** (must run **npm run build** first)|
+|npm test|Run unit tests with Karma and Jasmine|
+|npm run test:watch|Run unit tests with Karma and Jasmine; watch for changes to re-run tests|

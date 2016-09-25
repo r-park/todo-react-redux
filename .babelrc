@@ -5,15 +5,15 @@
     "stage-0"
   ],
 
-  "plugins": [
-    "react-hot-loader/babel"
-  ],
-
   "env": {
-    "production": {
+    "development": {
       "plugins": [
-        "transform-react-constant-elements",
-        "transform-react-inline-elements"
+        "react-hot-loader/babel"
+      ]
+    },
+    "production": {
+      "presets": [
+        "react-optimize"
       ]
     }
   }

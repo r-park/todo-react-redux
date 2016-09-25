@@ -175,7 +175,7 @@ rules:
   no-undef-init: 2
   no-undefined: 0
   no-unexpected-multiline: 2
-  no-underscore-dangle: [2, {allowAfterThis: true}]
+  no-underscore-dangle: 0
   no-unmodified-loop-condition: 2
   no-unneeded-ternary: 0
   no-unreachable: 2
@@ -239,9 +239,10 @@ rules:
   react/display-name: 0
   react/forbid-prop-types: [2, {forbid: ["any"]}]
   react/jsx-boolean-value: 0
-  react/jsx-closing-bracket-location: [2, {nonEmpty: 'after-props'}]
+  react/jsx-closing-bracket-location: [2, {selfClosing: "tag-aligned", nonEmpty: "after-props"}]
   react/jsx-curly-spacing: [2, "never"]
   react/jsx-equals-spacing: [2, "never"]
+  react/jsx-filename-extension: 0
   react/jsx-first-prop-new-line: [2, "multiline"]
   react/jsx-handler-names: 0
   react/jsx-indent: [1, 2]
@@ -249,31 +250,35 @@ rules:
   react/jsx-key: 2
   react/jsx-max-props-per-line: 0
   react/jsx-no-bind: [0, {ignoreRefs: true}]
+  react/jsx-no-comment-textnodes: 2
   react/jsx-no-duplicate-props: 2
   react/jsx-no-literals: 0
+  react/jsx-no-target-blank: 2
   react/jsx-no-undef: 2
   react/jsx-pascal-case: 2
   react/jsx-sort-props: 0
   react/jsx-space-before-closing: [2, "always"]
   react/jsx-uses-react: 1
   react/jsx-uses-vars: 1
+  react/jsx-wrap-multilines: 2
   react/no-danger: 1
   react/no-deprecated: 1
-  react/no-did-mount-set-state: [2, "allow-in-func"]
-  react/no-did-update-set-state: [2, "allow-in-func"]
+  react/no-did-mount-set-state: 2
+  react/no-did-update-set-state: 2
   react/no-direct-mutation-state: 2
+  react/no-find-dom-node: 2
   react/no-is-mounted: 2
   react/no-multi-comp: 1
+  react/no-render-return-value: 2
   react/no-set-state: 0
   react/no-string-refs: 2
   react/no-unknown-property: 2
   react/prefer-es6-class: 2
   react/prefer-stateless-function: 2
   react/prop-types: 2
-  react/react-in-jsx-scope: 1
-  react/require-extension: 1
+  react/react-in-jsx-scope: 2
+  react/require-optimization: 0
   react/require-render-return: 2
-  react/self-closing-comp: 2
+  react/self-closing-comp: 0
   react/sort-comp: 1
   react/sort-prop-types: 1
-  react/wrap-multilines: 2
