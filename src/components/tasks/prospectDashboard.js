@@ -884,11 +884,14 @@ export class ProspectDashboard extends Component {
   }
   
    handleRecruitingClick(event) {
+
+    document.getElementById('panel-container-summary').click();
     document.getElementById('profile-contact-info').style.display='none';
     document.getElementById('profile-athletic-info').style.display='none';
     document.getElementById('profile-academic-info').style.display='none';
     document.getElementById('player-recruiting-interest').style.display='block';
     document.getElementsByClassName('prospect-updates-container')[0].style.display='none';
+    document.getElementsByClassName('prospect-updates-container')[1].style.display='none';
 
   }
 
