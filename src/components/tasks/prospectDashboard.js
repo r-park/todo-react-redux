@@ -313,7 +313,7 @@ export class ProspectDashboard extends Component {
                         return <div className="registered-prospect-container">
                         	 
                             {this.divisionFilters()}
-							<div id="prospect-updates-container">
+							<div id="prospect-updates-container" className="prospect-updates-container">
 								<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
 								<p id="prospect-interest-caption" className="text-center background-light-gray">Build your profile by tracking which schools are recruiting you!</p>
 								<div id="recruiting-tracking">    						
@@ -337,37 +337,37 @@ export class ProspectDashboard extends Component {
 							
 						
 							</div>
-                           	<div id="player-d1-recruiting-summary" className="">
+                           	<div id="player-d1-recruiting-summary" className="player-d1-recruiting-summary">
 								<h2 id="prospect-interest" className="text-center" >D1 Recruiting Interest</h2>
 								<div id="recruiting-interest-cats">   
                                     {this.filters()}
 								</div>
-								<div id="all-d1-schools-recruiting-feed" className="recruiting-activity-feed" >
+								<div id="all-d1-schools-recruiting-feed" className="all-d1-schools-recruiting-feed recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
                                         {this.prospectSummary()}
 									</ul>
 								</div>
-								<div id="hm-schools-recruiting-feed" className="recruiting-activity-feed" >
+								<div id="hm-schools-recruiting-feed" className="hm-schools-recruiting-fee drecruiting-activity-feed" >
 									<ul className=" list-unstyled" >
                                         {this.prospectSummary()}
 									</ul>
 								</div>
-								<div id="hmmm-schools-recruiting-feed" className="recruiting-activity-feed" >
+								<div id="hmmm-schools-recruiting-feed" className="hmmm-schools-recruiting-feed recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
                                         {this.prospectSummary()}
 									</ul>
 								</div>
-								<div id="mm-schools-recruiting-feed" className="recruiting-activity-feed" >
+								<div id="mm-schools-recruiting-feed" className="mm-schools-recruiting-feed recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
                                         {this.prospectSummary()}
 									</ul>
 								</div>
-								<div id="mmlm-schools-recruiting-feed" className="recruiting-activity-feed" >
+								<div id="mmlm-schools-recruiting-feed" className="mmlm-schools-recruiting-feed recruiting-activity-feed" >
 									<ul className=" list-unstyled" >
                                         {this.prospectSummary()}
 									</ul>
 								</div>
-								<div id="lm-schools-recruiting-feed" className="recruiting-activity-feed" >
+								<div id="lm-schools-recruiting-feed" className="lm-schools-recruiting-feedrecruiting-activity-feed" >
 									<ul className=" list-unstyled" >
                                         {this.prospectSummary()}
 									</ul>
@@ -557,7 +557,7 @@ export class ProspectDashboard extends Component {
   // click-handlers for prospect-dashboard
   
    handleDashboardClick() {
-    document.getElementById('prospect-updates-container').style.display='block';
+    document.getElementsByClassName('prospect-updates-container')[0].style.display='block';
     document.getElementById('player-d1-recruiting-summary').style.display='none';
 	document.getElementById('player-d2-recruiting-summary').style.display='none';
 	document.getElementById('player-d3-recruiting-summary').style.display='none';
@@ -578,8 +578,10 @@ export class ProspectDashboard extends Component {
             this.state.D1MMLMFilter      = true;
             this.state.D1LMFilter        = true;
             this.props.updateTask(this.props.task, this.state);
-			document.getElementById('prospect-updates-container').style.display='none';
-			document.getElementById('player-d1-recruiting-summary').style.display='block';
+			document.getElementsByClassName('prospect-updates-container')[0].style.display='none';
+			document.getElementsByClassName('prospect-updates-container')[1].style.display='none';
+			document.getElementsByClassName('player-d1-recruiting-summary')[0].style.display='block';
+			document.getElementsByClassName('player-d1-recruiting-summary')[1].style.display='block';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
 			document.getElementById('player-d3-recruiting-summary').style.display='none';
 			document.getElementById('player-d4-recruiting-summary').style.display='none';
@@ -606,7 +608,7 @@ export class ProspectDashboard extends Component {
             this.state.D1MMLMFilter      = true;
             this.state.D1LMFilter        = true;
             this.props.updateTask(this.props.task, this.state);
-			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementsByClassName('prospect-updates-container')[0].style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='block';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
 			document.getElementById('player-d3-recruiting-summary').style.display='none';
@@ -631,7 +633,7 @@ export class ProspectDashboard extends Component {
             this.state.D1MMLMFilter      = false;
             this.state.D1LMFilter        = false;
             this.props.updateTask(this.props.task, this.state);
-			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementsByClassName('prospect-updates-container')[0].style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
 			document.getElementById('player-d2-recruiting-summary').style.display='block';
 			document.getElementById('player-d3-recruiting-summary').style.display='none';
@@ -653,7 +655,7 @@ export class ProspectDashboard extends Component {
 
 
             this.props.updateTask(this.props.task, this.state);
-			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementsByClassName('prospect-updates-container')[0].style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
 			document.getElementById('player-d3-recruiting-summary').style.display='block';
@@ -677,7 +679,7 @@ export class ProspectDashboard extends Component {
 
 
             this.props.updateTask(this.props.task, this.state);
-			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementsByClassName('prospect-updates-container')[0].style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
 			document.getElementById('player-d3-recruiting-summary').style.display='none';
@@ -699,7 +701,7 @@ export class ProspectDashboard extends Component {
 
 
             this.props.updateTask(this.props.task, this.state);
-			document.getElementById('prospect-updates-container').style.display='none';
+			document.getElementsByClassName('prospect-updates-container')[0].style.display='none';
 			document.getElementById('player-d1-recruiting-summary').style.display='none';
 			document.getElementById('player-d2-recruiting-summary').style.display='none';
 			document.getElementById('player-d3-recruiting-summary').style.display='none';
@@ -886,6 +888,8 @@ export class ProspectDashboard extends Component {
     document.getElementById('profile-athletic-info').style.display='none';
     document.getElementById('profile-academic-info').style.display='none';
     document.getElementById('player-recruiting-interest').style.display='block';
+    document.getElementsByClassName('prospect-updates-container')[0].style.display='none';
+
   }
 
    backToDashboard(event) {
@@ -943,7 +947,7 @@ export class ProspectDashboard extends Component {
                                     <div id="" className="data-cat-btn background-gray" onClick={this.handleDashboardClick}>
                                         <h5>Dashboard</h5>
                                     </div>
-                                    <div id="" className="data-cat-btn background-gray" onClick={this.handleSummaryClick.bind(this)}>
+                                    <div id="panel-container-summary" className="data-cat-btn background-gray" onClick={this.handleSummaryClick.bind(this)}>
                                         <h5>Summary</h5>
                                     </div>
                                     <div className="panel-cat-name">
@@ -1315,16 +1319,7 @@ export class ProspectDashboard extends Component {
 							<div><h4>Class Rank:</h4>  { task.classRank}</div>
 						</div>
 						<div id="player-recruiting-interest" className="">
-                            {this.divisionFilters()}	
-							<h2 id="prospect-interest" className="text-center" >Recruiting Interest</h2>
-							<div id="recruiting-interest-cats">   
-                            {this.filters()}
-							</div>
-							<div id="recruiting-activity-feed" >
-								<ul className="prospect-button background-light-gray list-inline" onClick={this.handleSummaryClick}>
-									<li className="prospect-update">Southwest Minnesota</li>
-								</ul>
-							</div>
+                            {this.registeredProspectContainer()}
     					
     					</div>
 			      	</div>	
