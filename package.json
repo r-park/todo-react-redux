@@ -4,6 +4,7 @@
   "description": "Prospect Source project",
   "main": "index.js",
   "scripts": {
+    "build": "npm test && webpack",
     "test": "mocha test --recursive"
   },
   "repository": {
@@ -21,6 +22,7 @@
     "node": ">=>6.0.0"
   },
   "devDependencies": {
+    "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
     "babel-register": "^6.23.0",
