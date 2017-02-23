@@ -4,7 +4,7 @@
   "description": "Prospect Source project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test --recursive"
   },
   "repository": {
     "type": "git",
@@ -12,12 +12,26 @@
   },
   "keywords": [],
   "author": "",
-  "license": "proprietary",
+  "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/riojack/todo-react-redux/issues"
   },
   "homepage": "https://github.com/riojack/todo-react-redux#readme",
   "engines": {
-      "node": ">=>6.0.0"
-    }
+    "node": ">=>6.0.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-register": "^6.23.0",
+    "chai": "^3.5.0",
+    "chance": "^1.0.6",
+    "enzyme": "^2.7.1",
+    "express": "^4.14.1",
+    "mocha": "^3.2.0",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "webpack": "^2.2.1"
+  }
 }
