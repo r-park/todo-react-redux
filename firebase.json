@@ -1,9 +1,0 @@
-{
-  "firebase": "prospect-source",
-  "public": "target",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
-}
