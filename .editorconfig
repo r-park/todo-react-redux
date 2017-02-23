@@ -1,6 +1,10 @@
 [*]
 charset = utf-8
 
+[package.json]
+indent_size = 2
+indent_style = space
+
 [*.{js,jsx,css,json}]
 end_of_line = lf
 insert_final_newline = true
