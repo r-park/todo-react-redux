@@ -15,4 +15,8 @@ describe('App tests', () => {
     it('should be a div', () => {
         expect(element.type()).to.equal('div');
     });
+
+    it('should have the text "hello, moon"', () => {
+        expect(element.text()).to.equal("hello, moon");
+    })
 });

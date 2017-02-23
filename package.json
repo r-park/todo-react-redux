@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm test && webpack",
+    "watch": "webpack -w",
     "test": "mocha test --recursive"
   },
   "repository": {

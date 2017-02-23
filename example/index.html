@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="utf-8">
+    <title>Prospect Source</title>
 </head>
 <body>
-$END$
+
+<div id="app-mount"></div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.0/react.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.0/react-dom.js"></script>
+<script src="application.min.js"></script>
+<script type="application/javascript">
+    (function () {
+        var element = React.createElement(window.ProspectSource.App, {}),
+            mount = document.getElementById("app-mount");
+
+        ReactDOM.render(element, mount);
+    })();
+</script>
 </body>
 </html>
