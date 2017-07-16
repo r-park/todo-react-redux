@@ -1,6 +1,6 @@
 machine:
   node:
-    version: 6.4
+    version: 8.1
 
 dependencies:
   pre:
@@ -9,6 +9,7 @@ dependencies:
 test:
   override:
     - npm run build
+    - npm test
 
 deployment:
   production:
