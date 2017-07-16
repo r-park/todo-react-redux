@@ -1,8 +1,8 @@
 [![CircleCI](https://circleci.com/gh/r-park/todo-react-redux.svg?style=shield&circle-token=6caf8c493bd66544717ff9a47ae01d8be036e53c)](https://circleci.com/gh/r-park/todo-react-redux)
 
 
-# Todo app with React, Redux, and Firebase
-A simple Todo app example with **undelete** capability — built with React, Redux, and Firebase.
+# Todo app with with , Create React App, React Redux, and Firebase
+A simple Todo app example with **undelete** capability — built with [Create React App](https://github.com/facebookincubator/create-react-app), [React Redux](https://github.com/reactjs/react-redux), and [Firebase](https://firebase.google.com/).
 
 Try the demo at https://todo-react-redux.firebaseapp.com. 
 
@@ -11,20 +11,16 @@ A version of this app built with [redux-saga middleware](https://github.com/yelo
 
 ## Stack
 
-- React
-- React-Hot-Loader `3.0.0-beta.5`
-- React-Redux
-- React-Router
-- React-Router-Redux
-- Redux
-- Redux-Thunk
-- Redux-Devtools-Extension for Chrome
-- Firebase SDK 3 with OAuth authentication
-- Babel
+- Create React App
+- React Redux
+- React Router
+- React Router Redux
+- Redux Thunk
+- Redux Devtools Extension for Chrome
+- Firebase SDK with OAuth authentication
 - Immutable
 - Reselect
 - SASS
-- Webpack
 
 
 Quick Start
@@ -44,7 +40,7 @@ $ npm start
 - Configure the authentication providers for your Firebase project from your Firebase account console
 
 #### Configure this app with your project-specific details:
-```javascript
+```json
 // .firebaserc
 
 {
@@ -53,8 +49,9 @@ $ npm start
   }
 }
 ```
+
 ```javascript
-// src/core/firebase/config.js
+// src/firebase/config.js
 
 export const firebaseConfig = {
   apiKey: 'your api key',
@@ -78,14 +75,10 @@ $ firebase deploy
 ```
 
 
-NPM Commands
-------------
+## NPM Commands
 
 |Script|Description|
 |---|---|
-|npm start|Start webpack development server @ **localhost:3000**|
-|npm run build|Lint, test, and build the application to **./target**|
-|npm run lint|Lint **.js** files|
-|npm run server|Start express server @ **localhost:3000** to serve build artifacts from **./target** (must run **npm run build** first)|
-|npm test|Run unit tests with Karma and Jasmine|
-|npm run test:watch|Run unit tests with Karma and Jasmine; watch for changes to re-run tests|
+|`npm start`|Start webpack development server @ `localhost:3000`|
+|`npm run build`|Build the application to `./build` directory|
+|`npm test`|Test the application; watch for changes and retest|
