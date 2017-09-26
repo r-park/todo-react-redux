@@ -82,10 +82,90 @@ export class TaskItem extends Component {
     );
   }
 
+  renderAssignee(task) {
+    return (
+      <div tabIndex="1">
+        {task.assignee}
+      </div>
+    );
+  }
+
+  renderCircle(task) {
+    return (
+      <div tabIndex="2">
+        {task.circle}
+      </div>
+    );
+  }
+
+  renderLabel(task) {
+    return (
+      <div tabIndex="2">
+        {task.label}
+      </div>
+    );
+  }
+
+  renderCreator(task) {
+    return (
+      <div tabIndex="3">
+        {task.creator}
+      </div>
+    );
+  }
+
+  renderDescription(task) {
+    return (
+      <div tabIndex="4">
+        {task.description}
+      </div>
+    );
+  }
+
+  renderCreatorSpecialComments(task) {
+    return (
+      <div tabIndex="4">
+        {task.creatorSpecialComments}
+      </div>
+    );
+  }
+  
+  renderCommunitySpecialComments(task) {
+    return (
+      <div tabIndex="5">
+        {task.communitySpecialComments}
+      </div>
+    );
+  }
+  
+  renderRelevantContacts(task) {
+    return (
+      <div tabIndex="5">
+        {task.relevantContacts}
+      </div>
+    );
+  }
+
+  renderAssigneePhone(task) {
+    return (
+      <div tabIndex="6">
+        {task.assigneePhone}
+      </div>
+    );
+  }
+
+  renderStatus(task) {
+    return (
+      <div tabIndex="7">
+        {task.status}
+      </div>
+    );
+  }
+
   render() {
     const { editing } = this.state;
     const { task } = this.props;
-
+    
     let containerClasses = classNames('task-item', {
       'task-item--completed': task.completed,
       'task-item--editing': editing
@@ -103,6 +183,46 @@ export class TaskItem extends Component {
 
         <div className="cell">
           {editing ? this.renderTitleInput(task) : this.renderTitle(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderAssignee(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderCircle(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderLabel(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderCreator(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderDescription(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderCreatorSpecialComments(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderCommunitySpecialComments(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderRelevantContacts(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderAssigneePhone(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderStatus(task)}
         </div>
 
         <div className="cell">
