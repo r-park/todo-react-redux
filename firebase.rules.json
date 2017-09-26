@@ -2,7 +2,7 @@
   "rules": {
     "tasks": {
       ".read": "auth != null", // Authenticated can read
-      ".write": "auth !== null && auth.uid === '4PmgNalTqzNR8mqYgqnoEa89wjz1'", //Testing - gal admin token
+      ".write": "auth !== null && root.child('admins'.hasChild(auth.uid)", // Testing admins
       "$taskId": {
         ".read": "auth !== null",
         // Creators and Assignee could write to this task
