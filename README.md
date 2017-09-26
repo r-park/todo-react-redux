@@ -31,9 +31,10 @@ $ npm start
 Admins
 -----
 Import the file under
-`assets/doocrate-export.json`
+`assets/database-example.json`
 and add the uid of the app admins
 
+Only admins can write new tasks at the moment
 
 ## Deploying to Firebase
 #### Prerequisites:

@@ -39,16 +39,17 @@ export class TaskItem extends Component {
   }
 
   save(event) {
-    if (this.state.editing) {
-      const { task } = this.props;
-      const title = event.target.value.trim();
+    if (!this.state.editing) 
+     return;
+     
+    const { task } = this.props;
+    const title = event.target.value.trim();
 
-      if (title.length && title !== task.title) {
-        this.props.updateTask(task, {title});
-      }
-
-      this.stopEditing();
+    if (title.length && title !== task.title) {
+      this.props.updateTask(task, {title});
     }
+
+    this.stopEditing();
   }
 
   stopEditing() {
@@ -85,7 +86,7 @@ export class TaskItem extends Component {
   renderAssignee(task) {
     return (
       <div tabIndex="1">
-        {task.assignee}
+        {task.assignee ? task.assignee.substr(0,10) : ''}
       </div>
     );
   }
@@ -109,7 +110,7 @@ export class TaskItem extends Component {
   renderCreator(task) {
     return (
       <div tabIndex="3">
-        {task.creator}
+        {task.creator ? task.creator.substr(0,10) : ''}
       </div>
     );
   }
@@ -118,38 +119,6 @@ export class TaskItem extends Component {
     return (
       <div tabIndex="4">
         {task.description}
-      </div>
-    );
-  }
-
-  renderCreatorSpecialComments(task) {
-    return (
-      <div tabIndex="4">
-        {task.creatorSpecialComments}
-      </div>
-    );
-  }
-  
-  renderCommunitySpecialComments(task) {
-    return (
-      <div tabIndex="5">
-        {task.communitySpecialComments}
-      </div>
-    );
-  }
-  
-  renderRelevantContacts(task) {
-    return (
-      <div tabIndex="5">
-        {task.relevantContacts}
-      </div>
-    );
-  }
-
-  renderAssigneePhone(task) {
-    return (
-      <div tabIndex="6">
-        {task.assigneePhone}
       </div>
     );
   }
@@ -174,14 +143,6 @@ export class TaskItem extends Component {
     return (
       <div className={containerClasses} tabIndex="0">
         <div className="cell">
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'active': task.completed, 'hide': editing})}
-            onClick={this.toggleStatus}>
-            <Icon name="done" />
-          </Button>
-        </div>
-
-        <div className="cell">
           {editing ? this.renderTitleInput(task) : this.renderTitle(task)}
         </div>
 
@@ -203,22 +164,6 @@ export class TaskItem extends Component {
 
         <div className="cell">
           {this.renderDescription(task)}
-        </div>
-
-        <div className="cell">
-          {this.renderCreatorSpecialComments(task)}
-        </div>
-
-        <div className="cell">
-          {this.renderCommunitySpecialComments(task)}
-        </div>
-
-        <div className="cell">
-          {this.renderRelevantContacts(task)}
-        </div>
-
-        <div className="cell">
-          {this.renderAssigneePhone(task)}
         </div>
 
         <div className="cell">
