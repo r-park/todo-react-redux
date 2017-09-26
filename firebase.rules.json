@@ -1,10 +1,18 @@
 {
   "rules": {
     "tasks": {
-      ".read": "auth != null", // All can read
-      "$task": {
-        ".read": "auth !== null && auth.uid === data.child('assignee').val()",
-        ".write": "auth !== null && ( (auth.uid === data.child('assignee').val()) || (auth.uid === data.child('creator').val() ) )"
+      ".read": "auth != null", // Authenticated can read
+      ".write": "auth !== null && auth.uid === '4PmgNalTqzNR8mqYgqnoEa89wjz1'", //Testing - gal admin token
+      "$taskId": {
+        ".read": "auth !== null",
+        // Creators and Assignee could write to this task
+        ".write": "auth !== null && ( (auth.uid === data.child('assignee').val()) || (auth.uid === data.child('creator').val() ) )",
+        
+        // Anything in task public can be read and write
+        "public": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        }
       }
     }
   }
