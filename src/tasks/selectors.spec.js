@@ -38,5 +38,12 @@ describe('Tasks selectors', () => {
       expect(taskList.size).toBe(1);
       expect(taskList.get(0).title).toBe('task-2');
     });
+
+    it('should return list of unassigned tasks', () => {
+      tasks = tasks.set('filter', 'unassigned');
+      let taskList = getVisibleTasks({tasks});
+
+      expect(taskList.size).toBe(2);
+    });
   });
 });

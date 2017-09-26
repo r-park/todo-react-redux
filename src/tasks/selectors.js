@@ -32,6 +32,9 @@ export const getVisibleTasks = createSelector(
 
       case 'completed':
         return tasks.filter(task => task.completed);
+      
+      case 'unassigned':
+        return tasks.filter(task => !task.assignee);
 
       default:
         return tasks;
