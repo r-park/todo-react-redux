@@ -2,9 +2,10 @@
   "rules": {
     "tasks": {
       ".read": "auth != null", // All can read
-      "$uid": {
-        ".read": "auth !== null && auth.uid === $uid",
-        ".write": "auth !== null && auth.uid === $uid"
+      ".write": "auth != null", // All can read
+      "$task": {
+        ".read": "auth !== null && auth.uid === data.child('assignee').val()",
+        ".write": "auth !== null && ( (auth.uid === data.child('assignee').val()) || (auth.uid === data.child('creator').val() ) )"
       }
     }
   }
