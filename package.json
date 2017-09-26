@@ -1,6 +1,6 @@
 {
-  "name": "todo-react-redux",
-  "version": "0.6.0",
+  "name": "doocrate",
+  "version": "0.6.1",
   "description": "Teal based task webapp",
   "homepage": "https://doocrate.firebaseapp.com",
   "repository": {

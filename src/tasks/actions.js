@@ -111,7 +111,7 @@ export function filterTasks(filterType) {
 export function loadTasks() {
   return (dispatch, getState) => {
     const { auth } = getState();
-    taskList.path = `tasks/${auth.id}`;
+    taskList.path = `tasks/`;
     taskList.subscribe(dispatch);
   };
 }
