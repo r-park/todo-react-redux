@@ -1,15 +1,15 @@
 {
   "name": "todo-react-redux",
   "version": "0.6.0",
-  "description": "Todo app with Create React App, React Redux, and Firebase",
-  "homepage": "https://todo-react-redux.firebaseapp.com",
+  "description": "Teal based task webapp",
+  "homepage": "https://doocrate.firebaseapp.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/r-park/todo-react-redux.git"
+    "url": "https://github.com/metaburn/doocrate.git"
   },
   "author": {
-    "name": "Richard Park",
-    "email": "objectiv@gmail.com"
+    "name": "Metaburn",
+    "email": "galbra@gmail.com"
   },
   "license": "MIT",
   "private": true,
