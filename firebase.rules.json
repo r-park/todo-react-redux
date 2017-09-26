@@ -1,6 +1,7 @@
 {
   "rules": {
     "tasks": {
+      ".read": "auth != null", // All can read
       "$uid": {
         ".read": "auth !== null && auth.uid === $uid",
         ".write": "auth !== null && auth.uid === $uid"
