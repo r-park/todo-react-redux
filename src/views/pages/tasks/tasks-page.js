@@ -9,7 +9,7 @@ import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/tasks';
 import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
 import TaskList from '../../components/task-list';
-import TaskView from './task-view';
+import TaskView from '../../components/task-view/task-view';
 
 export class TasksPage extends Component {
   static propTypes = {

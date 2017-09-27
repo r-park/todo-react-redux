@@ -16,7 +16,6 @@ export class TaskItem extends Component {
     this.edit = this.edit.bind(this);
     this.select = this.select.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.remove = this.remove.bind(this);
     this.save = this.save.bind(this);
     this.stopEditing = this.stopEditing.bind(this);
     this.toggleStatus = this.toggleStatus.bind(this);
@@ -67,7 +66,7 @@ export class TaskItem extends Component {
 
   renderTitle(task) {
     return (
-      <div className="task-item__title" tabIndex="0">
+      <div className="task-item__title">
         {task.title}
       </div>
     );
@@ -89,48 +88,16 @@ export class TaskItem extends Component {
 
   renderAssignee(task) {
     return (
-      <div tabIndex="1">
+      <div>
         {task.assignee ? task.assignee.substr(0,10) : ''}
-      </div>
-    );
-  }
-
-  renderCircle(task) {
-    return (
-      <div tabIndex="2">
-        {task.circle}
       </div>
     );
   }
 
   renderLabel(task) {
     return (
-      <div tabIndex="2">
+      <div>
         {task.label}
-      </div>
-    );
-  }
-
-  renderCreator(task) {
-    return (
-      <div tabIndex="3">
-        {task.creator ? task.creator.substr(0,10) : ''}
-      </div>
-    );
-  }
-
-  renderDescription(task) {
-    return (
-      <div tabIndex="4">
-        {task.description}
-      </div>
-    );
-  }
-
-  renderStatus(task) {
-    return (
-      <div tabIndex="7">
-        {task.status}
       </div>
     );
   }
@@ -145,7 +112,9 @@ export class TaskItem extends Component {
     });
 
     return (
-      <div className={containerClasses} tabIndex="0">
+      <div className={containerClasses} tabIndex={this.props.taskNumber+1}
+        onClick={this.select}
+        onKeyUp={this.select}>
         <div className="cell">
           {editing ? this.renderTitleInput(task) : this.renderTitle(task)}
         </div>
@@ -155,26 +124,10 @@ export class TaskItem extends Component {
         </div>
 
         <div className="cell">
-          {this.renderCircle(task)}
-        </div>
-
-        <div className="cell">
           {this.renderLabel(task)}
         </div>
 
-        <div className="cell">
-          {this.renderCreator(task)}
-        </div>
-
-        <div className="cell">
-          {this.renderDescription(task)}
-        </div>
-
-        <div className="cell">
-          {this.renderStatus(task)}
-        </div>
-
-        <div className="cell">
+        <div className="cell buttons-cell">
           <Button
             className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
             onClick={this.edit}>
@@ -185,16 +138,6 @@ export class TaskItem extends Component {
             onClick={this.stopEditing}>
             <Icon name="clear" />
           </Button>
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
-            onClick={this.select}>
-            <Icon name="launch" />
-          </Button>
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
-            onClick={this.remove}>
-            <Icon name="delete" />
-          </Button>
         </div>
       </div>
     );
@@ -202,7 +145,6 @@ export class TaskItem extends Component {
 }
 
 TaskItem.propTypes = {
-  removeTask: PropTypes.func.isRequired,
   task: PropTypes.object.isRequired,
   updateTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired

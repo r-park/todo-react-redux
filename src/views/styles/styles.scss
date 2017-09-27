@@ -25,3 +25,11 @@ a {
 ::selection {
   background: rgba(200,200,255,.1);
 }
+
+button:focus {
+  outline:0;
+}
+
+div:focus {
+  outline:0;
+}

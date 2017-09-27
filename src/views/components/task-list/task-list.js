@@ -10,6 +10,7 @@ function TaskList({removeTask, tasks, updateTask, selectTask}) {
     return (
       <TaskItem
         key={index}
+        taskNumber={index}
         task={task}
         removeTask={removeTask}
         updateTask={updateTask}

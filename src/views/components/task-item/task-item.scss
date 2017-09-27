@@ -18,6 +18,11 @@
   &:hover {
     border-top: 1px solid #e0e6e9;
   }
+
+  // TODO - Should be really selected by the active cell
+  &:focus {
+    border: 1px solid #bbb;
+  }
 }
 
 .task-item--editing {
