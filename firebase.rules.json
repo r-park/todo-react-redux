@@ -2,11 +2,16 @@
   "rules": {
     "tasks": {
       ".read": "auth != null", // Authenticated can read
-      ".write": "auth !== null && root.child('admins').hasChild(auth.uid)", // Testing admins
+      ".write": "auth !== null && root.child('admins').hasChild(auth.uid)", // Admins
       "$taskId": {
         ".read": "auth !== null",
         // Creators and Assignee could write to this task
         ".write": "auth !== null && ( (auth.uid === data.child('assignee').val()) || (auth.uid === data.child('creator').val() ) )",
+        
+        // Allow users to assign themselves
+        "assignee": {
+          ".write": "auth !== null && data.val() === null"
+        },
         
         // Anything in task public can be read and write
         "public": {

@@ -41,7 +41,6 @@ export class TaskItem extends Component {
   save(event) {
     if (!this.state.editing) 
      return;
-     
     const { task } = this.props;
     const title = event.target.value.trim();
 
