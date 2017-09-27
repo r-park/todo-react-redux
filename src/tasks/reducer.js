@@ -2,10 +2,11 @@ import { List, Record } from 'immutable';
 import { SIGN_OUT_SUCCESS } from 'src/auth/action-types';
 import {
   CREATE_TASK_SUCCESS,
+  SELECT_TASK,
   REMOVE_TASK_SUCCESS,
   FILTER_TASKS,
   LOAD_TASKS_SUCCESS,
-  UPDATE_TASK_SUCCESS
+  UPDATE_TASK_SUCCESS,
 } from './action-types';
 
 
@@ -13,7 +14,8 @@ export const TasksState = new Record({
   deleted: null,
   filter: '',
   list: new List(),
-  previous: null
+  previous: null,
+  selected: null
 });
 
 
@@ -37,6 +39,9 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
 
     case FILTER_TASKS:
       return state.set('filter', payload.filterType || '');
+
+    case SELECT_TASK:
+      return state.set('selected', payload || null);
 
     case LOAD_TASKS_SUCCESS:
       return state.set('list', new List(payload.reverse()));

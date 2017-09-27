@@ -6,3 +6,28 @@
   @include grid-column;
   width: 100%;
 }
+
+.g-col-30 {
+  @include grid-column;
+  width: 30%;
+}
+
+.g-col-40 {
+  @include grid-column;
+  width: 40%;
+}
+
+.g-col-50 {
+  @include grid-column;
+  width: 50%;
+}
+
+.g-col-60 {
+  @include grid-column;
+  width: 60%;
+}
+
+.g-col-70 {
+  @include grid-column;
+  width: 70%;
+}

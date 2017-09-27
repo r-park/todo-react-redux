@@ -17,6 +17,10 @@ export function getDeletedTask(state) {
   return getTasks(state).deleted;
 }
 
+export function getSelectedTask(state) {
+  return getTasks(state).selected;
+}
+
 
 //=====================================
 //  MEMOIZED SELECTORS

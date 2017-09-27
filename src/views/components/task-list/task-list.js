@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TaskItem from '../task-item/task-item';
 
 
-function TaskList({removeTask, tasks, updateTask}) {
+function TaskList({removeTask, tasks, updateTask, selectTask}) {
   let taskItems = tasks.map((task, index) => {
     return (
       <TaskItem
@@ -12,6 +12,7 @@ function TaskList({removeTask, tasks, updateTask}) {
         task={task}
         removeTask={removeTask}
         updateTask={updateTask}
+        selectTask={selectTask}
       />
     );
   });
@@ -26,7 +27,8 @@ function TaskList({removeTask, tasks, updateTask}) {
 TaskList.propTypes = {
   removeTask: PropTypes.func.isRequired,
   tasks: PropTypes.instanceOf(List).isRequired,
-  updateTask: PropTypes.func.isRequired
+  updateTask: PropTypes.func.isRequired,
+  selectTask: PropTypes.func.isRequired
 };
 
 export default TaskList;

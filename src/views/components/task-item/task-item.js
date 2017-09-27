@@ -14,6 +14,7 @@ export class TaskItem extends Component {
     this.state = {editing: false};
 
     this.edit = this.edit.bind(this);
+    this.select = this.select.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.remove = this.remove.bind(this);
     this.save = this.save.bind(this);
@@ -23,6 +24,10 @@ export class TaskItem extends Component {
 
   edit() {
     this.setState({editing: true});
+  }
+
+  select() {
+    this.props.selectTask(this.props.task);
   }
 
   handleKeyUp(event) {
@@ -182,6 +187,11 @@ export class TaskItem extends Component {
           </Button>
           <Button
             className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
+            onClick={this.select}>
+            <Icon name="launch" />
+          </Button>
+          <Button
+            className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
             onClick={this.remove}>
             <Icon name="delete" />
           </Button>
@@ -194,7 +204,8 @@ export class TaskItem extends Component {
 TaskItem.propTypes = {
   removeTask: PropTypes.func.isRequired,
   task: PropTypes.object.isRequired,
-  updateTask: PropTypes.func.isRequired
+  updateTask: PropTypes.func.isRequired,
+  selectTask: PropTypes.func.isRequired
 };
 
 

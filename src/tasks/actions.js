@@ -10,7 +10,8 @@ import {
   UNDELETE_TASK_ERROR,
   UNLOAD_TASKS_SUCCESS,
   UPDATE_TASK_ERROR,
-  UPDATE_TASK_SUCCESS
+  UPDATE_TASK_SUCCESS,
+  SELECT_TASK
 } from './action-types';
 
 
@@ -120,5 +121,12 @@ export function unloadTasks() {
   taskList.unsubscribe();
   return {
     type: UNLOAD_TASKS_SUCCESS
+  };
+}
+
+export function selectTask(task) {
+  return {
+    type: SELECT_TASK,
+    payload: task
   };
 }

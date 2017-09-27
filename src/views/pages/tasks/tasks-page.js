@@ -8,9 +8,8 @@ import { getNotification, notificationActions } from 'src/notification';
 import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/tasks';
 import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
-import TaskForm from '../../components/task-form';
 import TaskList from '../../components/task-list';
-
+import TaskView from './task-view';
 
 export class TasksPage extends Component {
   static propTypes = {
@@ -69,19 +68,29 @@ export class TasksPage extends Component {
     return (
       <div className="g-row">
         <div className="g-col">
-          <TaskForm handleSubmit={this.props.createTask} />
-        </div>
-
-        <div className="g-col">
           <TaskFilters filter={this.props.filterType} />
-          <TaskList
-            removeTask={this.props.removeTask}
-            tasks={this.props.tasks}
-            updateTask={this.props.updateTask}
-          />
         </div>
+        
+        <div className="g-row">
+          <div className="g-col-60">
+            <TaskView 
+              createTask={this.props.createTask}
+              removeTask={this.props.removeTask}
+              updateTask={this.props.updateTask}
+              selectTask={this.props.selectTask}
+            />
+          </div>
+          <div className="g-col-40">
+            <TaskList
+              removeTask={this.props.removeTask}
+              tasks={this.props.tasks}
+              updateTask={this.props.updateTask}
+              selectTask={this.props.selectTask}
+            />
+          </div>
 
-        {this.props.notification.display ? this.renderNotification() : null}
+          {this.props.notification.display ? this.renderNotification() : null}
+        </div>
       </div>
     );
   }

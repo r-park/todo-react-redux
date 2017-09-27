@@ -7,10 +7,10 @@ import './task-filters.css';
 
 const TaskFilters = ({filter}) => (
   <ul className="task-filters">
-    <li><NavLink isActive={() => !filter} to="/">View All</NavLink></li>
-    <li><NavLink isActive={() => filter === 'active'} to={{pathname: '/', search: '?filter=active'}}>Active</NavLink></li>
-    <li><NavLink isActive={() => filter === 'completed'} to={{pathname: '/', search: '?filter=completed'}}>Completed</NavLink></li>
-    <li><NavLink isActive={() => filter === 'unassigned'} to={{pathname: '/', search: '?filter=unassigned'}}>Unassigned</NavLink></li>
+    <li><NavLink isActive={() => !filter} to="/">כל המשימות בעולם</NavLink></li>
+    <li><NavLink isActive={() => filter === 'active'} to={{pathname: '/', search: '?filter=active'}}>משימות פעילות</NavLink></li>
+    <li><NavLink isActive={() => filter === 'completed'} to={{pathname: '/', search: '?filter=completed'}}>משימות שהסתיימו</NavLink></li>
+    <li><NavLink isActive={() => filter === 'unassigned'} to={{pathname: '/', search: '?filter=unassigned'}}>משימות חופשיות</NavLink></li>
   </ul>
 );
 
