@@ -3,6 +3,7 @@ import { List } from 'immutable';
 import PropTypes from 'prop-types';
 import TaskItem from '../task-item/task-item';
 
+import './task-list.css';
 
 function TaskList({removeTask, tasks, updateTask, selectTask}) {
   let taskItems = tasks.map((task, index) => {

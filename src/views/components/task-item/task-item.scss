@@ -4,15 +4,19 @@
 .task-item {
   display: flex;
   outline: none;
-  border-bottom: 1px dotted #666;
+  border-bottom: 1px solid #e0e6e9;
   height: 60px;
   overflow: hidden;
-  color: #fff;
+  color: #151b28;
   font-size: rem(18px);
   font-weight: 300;
 
   @include media-query(540) {
     font-size: rem(24px);
+  }
+
+  &:hover {
+    border-top: 1px solid #e0e6e9;
   }
 }
 
@@ -49,7 +53,7 @@
 //-------------------------------------
 .task-item__button {
   margin-left: 5px;
-  background: #2a2a2a;
+  background: rgb(237, 241, 244);
 
   &:first-child {
     margin: 0;

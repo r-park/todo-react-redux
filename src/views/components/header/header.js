@@ -9,12 +9,12 @@ const Header = ({authenticated, signOut}) => (
   <header className="header">
     <div className="g-row">
       <div className="g-col">
-        <h1 className="header__title">Doocrate</h1>
-        <ul className="header__actions">
+      <ul className="header-actions">
           {authenticated ? <li><Button onClick={signOut}>התנתקי</Button></li> : null}
           <li>
           </li>
         </ul>
+        <h1 className="header-title">Doocrate</h1>
       </div>
     </div>
   </header>

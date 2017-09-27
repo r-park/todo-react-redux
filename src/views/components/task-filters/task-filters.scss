@@ -14,14 +14,15 @@
   }
 
   li {
-    float: left;
+    float: right;
 
     &:not(:first-child) {
       margin-left: 12px;
     }
 
     &:not(:first-child):before {
-      padding-right: 12px;
+      padding-right: 10px;
+      padding-left: 10px;
       content: '/';
       font-weight: 300;
     }
@@ -31,8 +32,12 @@
     color: #999;
     text-decoration: none;
 
-    &.active {
+    &:hover {
       color: #fff;
+    }
+
+    &.active {
+      color: #eb1478;
     }
   }
 }
