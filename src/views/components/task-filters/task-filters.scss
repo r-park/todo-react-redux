@@ -3,14 +3,14 @@
 
 .task-filters {
   @include clearfix;
-  margin-bottom: 45px;
+  margin-bottom: 20px;
   padding-left: 1px;
   font-size: rem(16px);
   line-height: 24px;
   list-style-type: none;
 
   @include media-query(540) {
-    margin-bottom: 55px;
+    margin-bottom: 25px;
   }
 
   li {
@@ -33,7 +33,7 @@
     text-decoration: none;
 
     &:hover {
-      color: #fff;
+      color: #666;
     }
 
     &.active {

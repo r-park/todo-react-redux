@@ -126,19 +126,6 @@ export class TaskItem extends Component {
         <div className="cell">
           {this.renderLabel(task)}
         </div>
-
-        <div className="cell buttons-cell">
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
-            onClick={this.edit}>
-            <Icon name="mode_edit" />
-          </Button>
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': !editing})}
-            onClick={this.stopEditing}>
-            <Icon name="clear" />
-          </Button>
-        </div>
       </div>
     );
   }

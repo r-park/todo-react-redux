@@ -10,6 +10,10 @@ import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
 import TaskList from '../../components/task-list';
 import TaskView from '../../components/task-view/task-view';
+import Button from '../../components/button';
+import classNames from 'classnames';
+
+import './tasks-page.css';
 
 export class TasksPage extends Component {
   static propTypes = {
@@ -24,7 +28,7 @@ export class TasksPage extends Component {
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
-    updateTask: PropTypes.func.isRequired
+    updateTask: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -67,10 +71,23 @@ export class TasksPage extends Component {
   render() {
     return (
       <div className="g-row">
-        <div className="g-col">
-          <TaskFilters filter={this.props.filterType} />
+          <div className="g-col">
+            <TaskFilters filter={this.props.filterType} />
+          </div>
+
+        <div className="g-row">
+          <Button
+            className="button button-small add-task-button"
+            onClick={ () => {this.props.selectTask(
+              {
+                isNew: true,
+                title: 'משימה חדשה',
+              })} 
+              }>
+            הוסף משימה
+          </Button>
         </div>
-        
+      
         <div className="g-row">
           <div className="g-col-60">
             <TaskView 

@@ -1,8 +1,31 @@
 @import 'views/styles/shared';
 
-
 .task-view {
   border-radius: 3px 3px 0 0;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
   background: white;
+}
+
+
+.changing-input {
+  width: 100%; //TODO
+  transition: border-color 100ms;
+  font-size: 1.4em;
+  padding: 5px;
+  border: none;
+  text-rendering: optimizeSpeed;
+  vertical-align: top;
+  border-color: white;
+  &:hover {
+    border: 1px solid #d5dce0;
+    padding: 4px;
+  }
+  &:focus{
+    border-color: $primary-color;
+    outline: none;
+  }
+  &:active {
+    border-color: $primary-color;
+    outline: none;
+  }
 }

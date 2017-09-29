@@ -1,36 +1,40 @@
-import React  from 'react';
+import React, { Component }  from 'react';
 import { List } from 'immutable';
 import PropTypes from 'prop-types';
 import TaskItem from '../task-item/task-item';
 
 import './task-list.css';
 
-function TaskList({removeTask, tasks, updateTask, selectTask}) {
-  let taskItems = tasks.map((task, index) => {
+class TaskList extends Component {
+  static propTypes = {
+    removeTask: PropTypes.func.isRequired,
+    tasks: PropTypes.instanceOf(List).isRequired,
+    updateTask: PropTypes.func.isRequired,
+    selectTask: PropTypes.func.isRequired
+  };
+  
+  render() {
+    let taskItems = this.props.tasks.map((task, index) => {
+      return (
+        <TaskItem
+          key={index}
+          taskNumber={index}
+          task={task}
+          removeTask={this.props.removeTask}
+          updateTask={this.props.updateTask}
+          selectTask={this.props.selectTask}
+        />
+      );
+    });
+    
+
     return (
-      <TaskItem
-        key={index}
-        taskNumber={index}
-        task={task}
-        removeTask={removeTask}
-        updateTask={updateTask}
-        selectTask={selectTask}
-      />
+      <div className="task-list">
+        {taskItems}
+      </div>
     );
-  });
+  }
 
-  return (
-    <div className="task-list">
-      {taskItems}
-    </div>
-  );
 }
-
-TaskList.propTypes = {
-  removeTask: PropTypes.func.isRequired,
-  tasks: PropTypes.instanceOf(List).isRequired,
-  updateTask: PropTypes.func.isRequired,
-  selectTask: PropTypes.func.isRequired
-};
 
 export default TaskList;

@@ -7,18 +7,60 @@ import { createSelector } from 'reselect';
 import { getSelectedTask } from 'src/tasks';
 
 import './task-view.css';
+import Icon from '../icon';
 
 export class TaskView extends Component {
+  constructor() {
+    super(...arguments);
+
+    this.state = {
+      title: '',
+      description: '',
+      circle: '',
+      label: '',
+      creatorSpecialComments: '',
+      communitySpecialComments: '',
+      relevantContacts: '',
+      assigneePhone: '',
+      status: ''
+    }
+
+    this.stopEditing = this.handleKeyUp.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   static propTypes = {
     selectTask: PropTypes.func.isRequired,
-    createTask: PropTypes.func.isRequired,
+    updateTask: PropTypes.func.isRequired,
     removeTask: PropTypes.func.isRequired,
     selectedTask: PropTypes.object.isRequired,
   };
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.task) {
+      let { title, description, circle,
+        label, creatorSpecialComments, communitySpecialComments,
+        relevantContacts,
+        assigneePhone, status } = nextProps.task;
+      this.setState({
+        title: title || '',
+        description:description || '',
+        circle:circle || '',
+        label:label || '',
+        creatorSpecialComments:creatorSpecialComments || '',
+        communitySpecialComments: communitySpecialComments || '',
+        relevantContacts:relevantContacts || '',
+        assigneePhone:assigneePhone || '',
+        status:status || ''
+      });
+    }
+  }
+
   render() {
-    const { selectedTask } = this.props;
-    if(!selectedTask) {
+    const { task } = this.props;
+
+    if(!task) {
       return(
         <div className="task-view g-row">
           <div className="g-col">
@@ -31,18 +73,69 @@ export class TaskView extends Component {
     return (
       <div className="task-view g-row">
         <div className="g-col">
-          <h1>{selectedTask.title}</h1>
-          <h2>{selectedTask.description}</h2>
-          <h2>{selectedTask.circle}</h2>
-          <h2>{selectedTask.label}</h2>
-          <h2>{selectedTask.creatorSpecialComments}</h2>
-          <h2>{selectedTask.communitySpecialComments}</h2>
-          <h2>{selectedTask.relevantContacts}</h2>
-          <h2>{selectedTask.assigneePhone}</h2>
-          <h2>{selectedTask.status}</h2>
+        <form className="task-form" onSubmit={this.handleSubmit} noValidate>
+          {this.renderInput(task, 'title', 'שם המשימה')}
+          {this.renderInput(task, 'description', 'תאור המשימה')}
+          {this.renderInput(task, 'circle', 'מעגל')}
+          <div><Icon name="label_outline" /> {this.renderInput(task, 'label', 'תגיות')} </div>
+          {this.renderInput(task, 'creatorSpecialComments', 'הערות מיוחדות מהיוצר')}
+          {this.renderInput(task, 'communitySpecialComments', 'הערות מהקהילה')}
+          {this.renderInput(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
+          {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה')}
+          {this.renderInput(task, 'status', 'סטטוס המשימה')}
+          <input className='btn button button-small' type="submit" value="שמור" />
+        </form>
         </div>
       </div>
     );
+  }
+
+  renderInput(task, fieldName, placeholder) {
+    return (
+        <input
+        className='changing-input'
+        type='text'
+        name={fieldName}
+        value={this.state[fieldName]}
+        placeholder={placeholder}
+        onChange={this.handleChange} />
+    );
+  }
+
+  stopEditing() {
+    this.setState({editing: false});
+  }
+
+  handleChange(e) {
+    let fieldName = e.target.name;
+    this.setState({
+      [fieldName]: e.target.value
+    });
+  }
+
+  handleKeyUp(event) {
+    if (event.keyCode === 13) {
+      this.save(event);
+    }
+    else if (event.keyCode === 27) {
+      this.stopEditing();
+    }
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.updateTask(this.props.task,
+      {
+        title: this.state.title,
+        description: this.state.description,
+        circle: this.state.circle,
+        label: this.state.label,
+        creatorSpecialComments: this.state.creatorSpecialComments,
+        communitySpecialComments: this.state.communitySpecialComments,
+        relevantContacts: this.state.relevantContacts,
+        assigneePhone: this.state.assigneePhone,
+        status: this.state.status,
+      });
   }
 }
 
@@ -53,8 +146,8 @@ export class TaskView extends Component {
 
 const mapStateToProps = createSelector(
   getSelectedTask,
-  (selectedTask) => ({
-    selectedTask
+  (task) => ({
+    task
   })
 );
 
