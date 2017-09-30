@@ -15,9 +15,9 @@ import {
 } from './action-types';
 
 
-export function createTask(title) {
+export function createTask(task) {
   return dispatch => {
-    taskList.push({completed: false, title})
+    taskList.push(task)
       .catch(error => dispatch(createTaskError(error)));
   };
 }

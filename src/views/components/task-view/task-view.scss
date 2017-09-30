@@ -20,12 +20,4 @@
     border: 1px solid #d5dce0;
     padding: 4px;
   }
-  &:focus{
-    border-color: $primary-color;
-    outline: none;
-  }
-  &:active {
-    border-color: $primary-color;
-    outline: none;
-  }
 }

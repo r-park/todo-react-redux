@@ -14,9 +14,9 @@ export function notificationReducer(state = new NotificationState(), action) {
   switch (action.type) {
     case REMOVE_TASK_SUCCESS:
       return state.merge({
-        actionLabel: 'Undo',
+        actionLabel: 'בטל פעולה',
         display: true,
-        message: 'Task deleted'
+        message: 'המשימה נמחקה'
       });
 
     case DISMISS_NOTIFICATION:

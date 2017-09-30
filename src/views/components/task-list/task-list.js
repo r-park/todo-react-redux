@@ -7,9 +7,7 @@ import './task-list.css';
 
 class TaskList extends Component {
   static propTypes = {
-    removeTask: PropTypes.func.isRequired,
     tasks: PropTypes.instanceOf(List).isRequired,
-    updateTask: PropTypes.func.isRequired,
     selectTask: PropTypes.func.isRequired
   };
   
@@ -20,8 +18,6 @@ class TaskList extends Component {
           key={index}
           taskNumber={index}
           task={task}
-          removeTask={this.props.removeTask}
-          updateTask={this.props.updateTask}
           selectTask={this.props.selectTask}
         />
       );

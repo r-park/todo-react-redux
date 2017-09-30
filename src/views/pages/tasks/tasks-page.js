@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 
+import { authActions, getAuth } from 'src/auth';
 import { getNotification, notificationActions } from 'src/notification';
 import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/tasks';
 import Notification from '../../components/notification';
@@ -16,6 +17,11 @@ import classNames from 'classnames';
 import './tasks-page.css';
 
 export class TasksPage extends Component {
+  constructor() {
+    super(...arguments);
+    this.createNewTask = this.createNewTask.bind(this);
+  }
+
   static propTypes = {
     createTask: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
@@ -29,6 +35,7 @@ export class TasksPage extends Component {
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
   };
 
   componentWillMount() {
@@ -68,6 +75,12 @@ export class TasksPage extends Component {
     );
   }
 
+  createNewTask() {
+    let authUserId = this.props.auth.id;
+    this.props.createTask({creator: authUserId, title: 'משימה חדשה'});
+    // TODO Select the new created task
+  }
+
   render() {
     return (
       <div className="g-row">
@@ -78,12 +91,7 @@ export class TasksPage extends Component {
         <div className="g-row">
           <Button
             className="button button-small add-task-button"
-            onClick={ () => {this.props.selectTask(
-              {
-                isNew: true,
-                title: 'משימה חדשה',
-              })} 
-              }>
+            onClick={ this.createNewTask }>
             הוסף משימה
           </Button>
         </div>
@@ -99,9 +107,7 @@ export class TasksPage extends Component {
           </div>
           <div className="g-col-40">
             <TaskList
-              removeTask={this.props.removeTask}
               tasks={this.props.tasks}
-              updateTask={this.props.updateTask}
               selectTask={this.props.selectTask}
             />
           </div>
@@ -122,10 +128,12 @@ const mapStateToProps = createSelector(
   getNotification,
   getTaskFilter,
   getVisibleTasks,
-  (notification, filterType, tasks) => ({
+  getAuth,
+  (notification, filterType, tasks, auth) => ({
     notification,
     filterType,
-    tasks
+    tasks,
+    auth
   })
 );
 

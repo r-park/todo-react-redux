@@ -11,78 +11,20 @@ export class TaskItem extends Component {
   constructor() {
     super(...arguments);
 
-    this.state = {editing: false};
+    this.state = {};
 
-    this.edit = this.edit.bind(this);
     this.select = this.select.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.save = this.save.bind(this);
-    this.stopEditing = this.stopEditing.bind(this);
-    this.toggleStatus = this.toggleStatus.bind(this);
-  }
-
-  edit() {
-    this.setState({editing: true});
   }
 
   select() {
     this.props.selectTask(this.props.task);
   }
-
-  handleKeyUp(event) {
-    if (event.keyCode === 13) {
-      this.save(event);
-    }
-    else if (event.keyCode === 27) {
-      this.stopEditing();
-    }
-  }
-
-  remove() {
-    this.props.removeTask(this.props.task);
-  }
-
-  save(event) {
-    if (!this.state.editing) 
-     return;
-    const { task } = this.props;
-    const title = event.target.value.trim();
-
-    if (title.length && title !== task.title) {
-      this.props.updateTask(task, {title});
-    }
-
-    this.stopEditing();
-  }
-
-  stopEditing() {
-    this.setState({editing: false});
-  }
-
-  toggleStatus() {
-    const { task } = this.props;
-    this.props.updateTask(task, {completed: !task.completed});
-  }
-
+  
   renderTitle(task) {
     return (
       <div className="task-item__title">
         {task.title}
       </div>
-    );
-  }
-
-  renderTitleInput(task) {
-    return (
-      <input
-        autoComplete="off"
-        autoFocus
-        className="task-item__input"
-        defaultValue={task.title}
-        maxLength="64"
-        onKeyUp={this.handleKeyUp}
-        type="text"
-      />
     );
   }
 
@@ -103,12 +45,10 @@ export class TaskItem extends Component {
   }
 
   render() {
-    const { editing } = this.state;
     const { task } = this.props;
     
     let containerClasses = classNames('task-item', {
       'task-item--completed': task.completed,
-      'task-item--editing': editing
     });
 
     return (
@@ -116,7 +56,7 @@ export class TaskItem extends Component {
         onClick={this.select}
         onKeyUp={this.select}>
         <div className="cell">
-          {editing ? this.renderTitleInput(task) : this.renderTitle(task)}
+          {this.renderTitle(task)}
         </div>
 
         <div className="cell">
@@ -133,7 +73,6 @@ export class TaskItem extends Component {
 
 TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
-  updateTask: PropTypes.func.isRequired,
   selectTask: PropTypes.func.isRequired
 };
 

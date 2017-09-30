@@ -74,6 +74,11 @@ export class TaskView extends Component {
       <div className="task-view g-row">
         <div className="g-col">
         <form className="task-form" onSubmit={this.handleSubmit} noValidate>
+        <button
+          className="btn delete_task"
+          onClick={()=>this.props.removeTask(task)}
+          type="button">מחק משימה</button>
+          
           {this.renderInput(task, 'title', 'שם המשימה')}
           {this.renderInput(task, 'description', 'תאור המשימה')}
           {this.renderInput(task, 'circle', 'מעגל')}
@@ -98,6 +103,7 @@ export class TaskView extends Component {
         name={fieldName}
         value={this.state[fieldName]}
         placeholder={placeholder}
+        ref={e => this[fieldName+'Input'] = e}
         onChange={this.handleChange} />
     );
   }
