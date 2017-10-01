@@ -25,7 +25,6 @@ export class TaskView extends Component {
       status: ''
     }
 
-    this.stopEditing = this.handleKeyUp.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -34,6 +33,7 @@ export class TaskView extends Component {
     selectTask: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired,
     removeTask: PropTypes.func.isRequired,
+    assignTask: PropTypes.func.isRequired,
     selectedTask: PropTypes.object.isRequired,
     isAdmin: PropTypes.bool.isRequired,
   };
@@ -43,7 +43,7 @@ export class TaskView extends Component {
       let { title, description, circle,
         label, creatorSpecialComments, communitySpecialComments,
         relevantContacts,
-        assigneePhone, status } = nextProps.task;
+        assigneePhone, status, dueDate } = nextProps.task;
       this.setState({
         title: title || '',
         description:description || '',
@@ -53,7 +53,8 @@ export class TaskView extends Component {
         communitySpecialComments: communitySpecialComments || '',
         relevantContacts:relevantContacts || '',
         assigneePhone:assigneePhone || '',
-        status:status || ''
+        status: status || '',
+        dueDate: dueDate || '',
       });
     }
   }
@@ -75,10 +76,17 @@ export class TaskView extends Component {
       <div className="task-view g-row">
         <div className="g-col">
         <form className="task-form" onSubmit={this.handleSubmit} noValidate>
-        {this.props.isAdmin? <button
+        {this.props.isAdmin && !task.description &&
+        !task.circle && !task.label && !task.status?
+        <button
           className="button delete_task"
           onClick={()=>this.props.removeTask(task)}
           type="button">מחק משימה</button> : "" }
+
+        {!task.assignee ? <button
+          className="button assign_task"
+          onClick={()=>this.props.assignTask(task)}
+          type="button">קח אחריות על משימה זו</button> : ""}
           
           {this.renderInput(task, 'title', 'שם המשימה')}
           {this.renderInput(task, 'description', 'תאור המשימה')}
@@ -89,6 +97,7 @@ export class TaskView extends Component {
           {this.renderInput(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
           {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה')}
           {this.renderInput(task, 'status', 'סטטוס המשימה')}
+          {this.renderInput(task, 'dueDate', 'תאריך לביצוע')}
           <input className='button button-small' type="submit" value="שמור" />
         </form>
         </div>
@@ -109,10 +118,6 @@ export class TaskView extends Component {
     );
   }
 
-  stopEditing() {
-    this.setState({editing: false});
-  }
-
   handleChange(e) {
     let fieldName = e.target.name;
     this.setState({
@@ -122,10 +127,7 @@ export class TaskView extends Component {
 
   handleKeyUp(event) {
     if (event.keyCode === 13) {
-      this.save(event);
-    }
-    else if (event.keyCode === 27) {
-      this.stopEditing();
+      this.handleSubmit(event);
     }
   }
 

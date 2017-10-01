@@ -21,6 +21,7 @@ export class TasksPage extends Component {
     super(...arguments);
     this.createNewTask = this.createNewTask.bind(this);
     this.isAdmin = this.isAdmin.bind(this);
+    this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
   }
 
   static propTypes = {
@@ -32,6 +33,7 @@ export class TasksPage extends Component {
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
     removeTask: PropTypes.func.isRequired,
+    assignTask: PropTypes.func.isRequired,
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
@@ -86,6 +88,10 @@ export class TasksPage extends Component {
     return true; //TODO
   }
 
+  assignTaskToSignedUser(task) {
+    this.props.assignTask(task, this.props.auth.id);
+  }
+
   render() {
     return (
       <div className="g-row">
@@ -109,6 +115,7 @@ export class TasksPage extends Component {
               updateTask={this.props.updateTask}
               selectTask={this.props.selectTask}
               isAdmin={true}
+              assignTask={this.assignTaskToSignedUser}
             />
           </div>
           <div className="g-col-40">

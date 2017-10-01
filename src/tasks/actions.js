@@ -36,6 +36,13 @@ export function createTaskSuccess(task) {
   };
 }
 
+export function assignTask(task, assignee) {
+  return dispatch => {
+    taskList.update(task.key, { assignee })
+      .catch(error => dispatch(updateTaskError(error)));
+  };
+}
+
 export function removeTask(task) {
   return dispatch => {
     taskList.remove(task.key)
