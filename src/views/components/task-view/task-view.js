@@ -76,7 +76,7 @@ export class TaskView extends Component {
         <div className="g-col">
         <form className="task-form" onSubmit={this.handleSubmit} noValidate>
         {this.props.isAdmin? <button
-          className="btn delete_task"
+          className="button delete_task"
           onClick={()=>this.props.removeTask(task)}
           type="button">מחק משימה</button> : "" }
           
@@ -89,7 +89,7 @@ export class TaskView extends Component {
           {this.renderInput(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
           {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה')}
           {this.renderInput(task, 'status', 'סטטוס המשימה')}
-          <input className='btn button button-small' type="submit" value="שמור" />
+          <input className='button button-small' type="submit" value="שמור" />
         </form>
         </div>
       </div>

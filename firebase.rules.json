@@ -18,7 +18,8 @@
           ".read": "auth != null",
           ".write": "auth != null"
         }
-      }
+      },
+      ".indexOn": "creator"
     },
     "users": {
       ".read": "auth != null", // Authenticated can read

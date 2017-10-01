@@ -1,0 +1,8 @@
+{
+  "name": "limit-children-functions",
+  "description": "Limit number of child nodes Firebase Functions sample",
+  "dependencies": {
+    "firebase-admin": "^4.1.1",
+    "firebase-functions": "^0.5.1"
+  }
+}

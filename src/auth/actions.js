@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import firebaseDb from 'firebase';
 
 import { firebaseAuth } from 'src/firebase';
 import {

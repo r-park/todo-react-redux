@@ -8,7 +8,7 @@ import './task-list.css';
 class TaskList extends Component {
   static propTypes = {
     tasks: PropTypes.instanceOf(List).isRequired,
-    selectTask: PropTypes.func.isRequired
+    selectTask: PropTypes.func.isRequired,
   };
   
   render() {
