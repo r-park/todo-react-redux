@@ -35,6 +35,7 @@ export class TaskView extends Component {
     updateTask: PropTypes.func.isRequired,
     removeTask: PropTypes.func.isRequired,
     selectedTask: PropTypes.object.isRequired,
+    isAdmin: PropTypes.bool.isRequired,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -74,10 +75,10 @@ export class TaskView extends Component {
       <div className="task-view g-row">
         <div className="g-col">
         <form className="task-form" onSubmit={this.handleSubmit} noValidate>
-        <button
+        {this.props.isAdmin? <button
           className="btn delete_task"
           onClick={()=>this.props.removeTask(task)}
-          type="button">מחק משימה</button>
+          type="button">מחק משימה</button> : "" }
           
           {this.renderInput(task, 'title', 'שם המשימה')}
           {this.renderInput(task, 'description', 'תאור המשימה')}

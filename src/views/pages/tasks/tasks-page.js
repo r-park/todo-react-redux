@@ -20,6 +20,7 @@ export class TasksPage extends Component {
   constructor() {
     super(...arguments);
     this.createNewTask = this.createNewTask.bind(this);
+    this.isAdmin = this.isAdmin.bind(this);
   }
 
   static propTypes = {
@@ -81,6 +82,10 @@ export class TasksPage extends Component {
     // TODO Select the new created task
   }
 
+  isAdmin() {
+    return true; //TODO
+  }
+
   render() {
     return (
       <div className="g-row">
@@ -103,6 +108,7 @@ export class TasksPage extends Component {
               removeTask={this.props.removeTask}
               updateTask={this.props.updateTask}
               selectTask={this.props.selectTask}
+              isAdmin={true}
             />
           </div>
           <div className="g-col-40">

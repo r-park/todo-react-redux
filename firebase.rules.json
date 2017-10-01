@@ -19,6 +19,12 @@
           ".write": "auth != null"
         }
       }
+    },
+    "users": {
+      ".read": "auth != null", // Authenticated can read
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      }
     }
   }
 }
