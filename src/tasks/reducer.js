@@ -15,7 +15,8 @@ export const TasksState = new Record({
   filter: '',
   list: new List(),
   previous: null,
-  selected: null
+  selected: null,
+  auth: null
 });
 
 

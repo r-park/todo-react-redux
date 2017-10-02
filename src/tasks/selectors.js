@@ -21,6 +21,10 @@ export function getSelectedTask(state) {
   return getTasks(state).selected;
 }
 
+export function getAuth(state) {
+  return state.auth;
+}
+
 
 //=====================================
 //  MEMOIZED SELECTORS
@@ -29,16 +33,21 @@ export function getSelectedTask(state) {
 export const getVisibleTasks = createSelector(
   getTaskList,
   getTaskFilter,
-  (tasks, filter) => {
+  getAuth,
+  (tasks, filter, auth) => {
     switch (filter) {
-      case 'active':
-        return tasks.filter(task => !task.completed);
 
       case 'completed':
         return tasks.filter(task => task.completed);
       
       case 'unassigned':
         return tasks.filter(task => !task.assignee);
+      
+      case 'mine':
+        return tasks.filter(task => 
+        {
+          return (task.assignee && (task.assignee.id === auth.id))
+        });
 
       default:
         return tasks;

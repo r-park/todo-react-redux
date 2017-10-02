@@ -78,12 +78,14 @@ export class TaskView extends Component {
       );
     }
 
+    const isTaskEmpty = this.props.isAdmin && !task.description &&
+        !task.circle && !task.status;
+    
     return (
       <div className="task-view g-row">
         <div className="g-col">
         <form className="task-form" onSubmit={this.handleSubmit} noValidate>
-        {this.props.isAdmin && !task.description &&
-        !task.circle && !task.label && !task.status?
+        { isTaskEmpty ?
         <button
           className="button delete_task"
           onClick={()=>this.props.removeTask(task)}
