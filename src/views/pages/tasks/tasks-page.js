@@ -89,7 +89,13 @@ export class TasksPage extends Component {
   }
 
   assignTaskToSignedUser(task) {
-    this.props.assignTask(task, this.props.auth.id);
+    this.props.assignTask(task, {
+      id: this.props.auth.id,
+      email: this.props.auth.email,
+      name: this.props.auth.name,
+      photoURL: this.props.auth.photoURL,
+      phoneNumber: this.props.auth.phoneNumber
+    });
   }
 
   render() {

@@ -27,9 +27,11 @@ export class TaskItem extends Component {
   }
 
   renderAssignee(task) {
+    if (!task.assignee) return;
+
     return (
-      <div>
-        {task.assignee ? task.assignee.substr(0,10) : ''}
+      <div className='task-item-assignee'>
+        {task.assignee ? task.assignee.name : ''}
       </div>
     );
   }

@@ -22,3 +22,14 @@
     padding: 4px;
   }
 }
+
+.react-tagsinput-changing {
+  border: none;
+  overflow: hidden;
+  padding: 5px 1px 1px 1px;
+
+  &:hover {
+    border: 1px solid #d5dce0;
+    padding: 4px 0 0 0;
+  }
+}

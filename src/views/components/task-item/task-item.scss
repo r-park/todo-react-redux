@@ -75,7 +75,12 @@
   }
 }
 
-
 .label-default {
   margin: 0 3px;
+}
+
+.task-item-assignee {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

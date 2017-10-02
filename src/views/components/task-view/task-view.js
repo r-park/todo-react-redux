@@ -125,9 +125,15 @@ export class TaskView extends Component {
   }
 
   renderLabel() {
+    const showPlaceholder = !this.state.label || this.state.label.length == 0 ;
     return (
-      <TagsInput value={this.state.label}
-      onChange={this.handleLabelChange} />
+      <TagsInput className='react-tagsinput-changing'
+      value={this.state.label}
+      onChange={this.handleLabelChange}
+      onlyUnique={true}
+      addOnBlur={true}
+      inputProps={{ placeholder: showPlaceholder ? 'הכנס תגיות' : ''}}
+      />
     )
   }
 
