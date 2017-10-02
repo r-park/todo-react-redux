@@ -38,7 +38,12 @@ export function createTaskSuccess(task) {
 
 export function assignTask(task, assignee) {
   return dispatch => {
-    taskList.update(task.key, { assignee })
+    taskList.update(task.key, {
+      email:assignee.email,
+      id: assignee.id,
+      name: assignee.name,
+      photoURL: assignee.photoURL
+    })
       .catch(error => dispatch(updateTaskError(error)));
   };
 }

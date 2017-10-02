@@ -1,8 +1,8 @@
 {
   "rules": {
     "tasks": {
-      ".read": "auth != null", // Authenticated can read
-      ".write": "auth !== null && root.child('admins').hasChild(auth.uid)", // Admins
+      ".read": "auth != null", // All authorized can read
+      ".write": "auth !== null", // All authorized can read
       "$taskId": {
         ".read": "auth !== null",
         // Creators and Assignee could write to this task

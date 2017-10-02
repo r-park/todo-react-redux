@@ -79,28 +79,28 @@ export class TasksPage extends Component {
   }
 
   createNewTask() {
-    let authUserId = this.props.auth.id;
-    this.props.createTask({creator: authUserId, title: 'משימה חדשה'});
+    let creator = {
+      id: this.props.auth.id,
+      name: this.props.auth.name,
+      email: this.props.auth.email,
+      photoURL: this.props.auth.photoURL,
+    }
+    
+    this.props.createTask({creator , title: 'משימה חדשה'});
     // TODO Select the new created task
   }
 
   isAdmin() {
-    return true; //TODO
+    return false; //TODO
   }
 
   assignTaskToSignedUser(task) {
-    this.props.assignTask(task, {
-      id: this.props.auth.id,
-      email: this.props.auth.email,
-      name: this.props.auth.name,
-      photoURL: this.props.auth.photoURL,
-      phoneNumber: this.props.auth.phoneNumber
-    });
+    this.props.assignTask(task, this.props.auth);
   }
 
   render() {
     return (
-      <div className="g-row">
+      <div>
           <div className="g-col">
             <TaskFilters filter={this.props.filterType} />
           </div>
@@ -120,7 +120,7 @@ export class TasksPage extends Component {
               removeTask={this.props.removeTask}
               updateTask={this.props.updateTask}
               selectTask={this.props.selectTask}
-              isAdmin={true}
+              isAdmin={false}
               assignTask={this.assignTaskToSignedUser}
             />
           </div>

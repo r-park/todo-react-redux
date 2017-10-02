@@ -10,8 +10,10 @@ import './task-view.css';
 import Icon from '../icon';
 import Textarea from 'react-textarea-autosize';
 
+import Img from 'react-image'
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
+import Select from 'react-select';
 
 export class TaskView extends Component {
   constructor() {
@@ -21,6 +23,11 @@ export class TaskView extends Component {
       title: '',
       description: '',
       circle: '',
+      defaultCircle: [
+        { value: 'אור', label: 'אור' },
+        { value: 'אמיר', label: 'אמיר'},
+        { value: 'מיכאל', label: 'מיכאל'}
+      ],
       label: [],
       creatorSpecialComments: '',
       communitySpecialComments: '',
@@ -79,39 +86,64 @@ export class TaskView extends Component {
       );
     }
 
-    const isTaskEmpty = this.props.isAdmin && !task.description &&
+    const isTaskEmpty = !task.description &&
         !task.circle && !task.status;
     
     return (
-      <div className="task-view g-row">
-        <div className="g-col">
-        <form className="task-form" onSubmit={this.handleSubmit} noValidate>
-        { isTaskEmpty ?
-        <button
-          className="button delete_task"
-          onClick={()=>this.props.removeTask(task)}
-          type="button">מחק משימה</button> : "" }
+      <div className='task-view-container'>
+        <div className='task-view-header'>
 
         {!task.assignee ? <button
-          className="button assign_task"
+          className='button button-small assign_task'
           onClick={()=>this.props.assignTask(task)}
-          type="button">קח אחריות על משימה זו</button> : ""}
+          type='button'>קח אחריות על משימה זו</button> : 
           
-          {this.renderInput(task, 'title', 'שם המשימה')}
-          {this.renderTextArea(task, 'description', 'תאור המשימה')}
-          {this.renderInput(task, 'circle', 'מעגל')}
-          <div><Icon name="label_outline" /> {this.renderLabel()} </div>
-          {this.renderInput(task, 'creatorSpecialComments', 'הערות מיוחדות מהיוצר')}
-          {this.renderInput(task, 'communitySpecialComments', 'הערות מהקהילה')}
-          {this.renderInput(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
-          {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה')}
-          {this.renderInput(task, 'status', 'סטטוס המשימה')}
-          {this.renderInput(task, 'dueDate', 'תאריך לביצוע')}
-          <input className='button button-small' type="submit" value="שמור" />
-        </form>
+          <div className='avatar-container'>
+            <Img className='avatar' src={task.assignee.photoURL}/>
+            <span>{task.assignee.name}</span>
+          </div>}
+            
+          { isTaskEmpty ?
+          <button
+            className='button delete_task'
+            onClick={()=>this.props.removeTask(task)}
+            type='button'>מחק משימה</button> : '' }
+          
+        </div>
+        <div className='task-view'>
+          <form onSubmit={this.handleSubmit} noValidate>
+            {this.renderInput(task, 'title', 'שם המשימה')}
+            {this.renderTextArea(task, 'description', 'תאור המשימה')}
+            {this.props.isAdmin? 
+              this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle): ''}
+            <div><Icon name='label_outline' /> {this.renderLabel()} </div>
+            {this.renderTextArea(task, 'creatorSpecialComments', 'הערות מיוחדות מהיוצר')}
+            {this.renderTextArea(task, 'communitySpecialComments', 'הערות מהקהילה')}
+            {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
+            {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה')}
+            {this.renderTextArea(task, 'status', 'סטטוס המשימה')}
+            <input className='button button-small' type="submit" value="שמור" />
+          </form>
         </div>
       </div>
     );
+  }
+  
+  renderSelect(task, fieldName, placeholder, options) {
+    return (
+      <Select
+      name='circle-name'
+      type='text'
+      name={fieldName}
+      value={this.state[fieldName]}
+      placeholder={placeholder}
+      ref={e => this[fieldName+'Input'] = e}
+      onChange={(e) => { if (!e || !e.value) { return };
+                this.setState({ [fieldName]: e.value}) }}
+      options={options}
+      onBlur={this.handleSubmit}
+      clearable={false}/>
+  );
   }
 
   renderInput(task, fieldName, placeholder) {
@@ -123,7 +155,8 @@ export class TaskView extends Component {
         value={this.state[fieldName]}
         placeholder={placeholder}
         ref={e => this[fieldName+'Input'] = e}
-        onChange={this.handleChange} />
+        onChange={this.handleChange}
+        onBlur={this.handleSubmit} />
     );
   }
 
@@ -135,7 +168,8 @@ export class TaskView extends Component {
         value={this.state[fieldName]}
         placeholder={placeholder}
         ref={e => this[fieldName+'Input'] = e}
-        onChange={this.handleChange} />
+        onChange={this.handleChange}
+        onBlur={this.handleSubmit}/>
     );
   }
 

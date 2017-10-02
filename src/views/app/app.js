@@ -9,6 +9,7 @@ import RequireAuthRoute from '../components/require-auth-route';
 import RequireUnauthRoute from '../components/require-unauth-route';
 import SignInPage from '../pages/sign-in';
 import TasksPage from '../pages/tasks';
+import 'react-select/dist/react-select.css';
 
 
 const App = ({authenticated, signOut}) => (

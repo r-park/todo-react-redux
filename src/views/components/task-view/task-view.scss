@@ -1,17 +1,56 @@
 @import 'views/styles/shared';
 
-.task-view {
+.task-view-container {
   border-radius: 3px 3px 0 0;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   background: white;
   line-height: 1.4em;
   overflow-y: auto;
+}
 
+.task-view {
+  padding: 0 20px;
+  
   textarea {
     resize:none;
   }
+
+  .Select-control {
+    width: 200px !important;
+    border: none !important;
+    font-size: 1.4em;react-tagsinput-changing
+
+  
+    &:hover {
+      border: 1px solid #ccc !important;
+    }
+  }
+  
+  .Select-menu-outer {
+    width: 200px !important;
+  }
+  
 }
 
+.task-view-header {
+  padding: 10px 20px;
+  border-bottom: 1px solid #e0e6e8;
+
+  .button {
+    margin: 0 20px;
+  }
+
+  .avatar-container {
+    display: inline-block;
+  }
+
+  .avatar {
+    margin: 0 10px; 
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+  }
+}
 
 .changing-input {
   width: 100%; //TODO
@@ -32,6 +71,13 @@
   border: none;
   overflow: hidden;
   padding: 5px 1px 1px 1px;
+  width: calc(100% - 60px);
+  display: inline-block;
+  
+  input {
+    font-size: 1.4em;
+    width: calc( 100% - 80px);
+  }
 
   &:hover {
     border: 1px solid #d5dce0;
