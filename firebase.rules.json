@@ -6,7 +6,7 @@
       "$taskId": {
         ".read": "auth !== null",
         // Creators and Assignee could write to this task
-        ".write": "auth !== null && ( (auth.uid === data.child('assignee').val()) || (auth.uid === data.child('creator').val() ) )",
+        ".write": "auth !== null && ( (auth.uid === data.child('assignee/id').val()) || (auth.uid === data.child('creator').val() ) )",
         
         // Allow users to assign themselves
         "assignee": {
