@@ -8,6 +8,7 @@ import { getSelectedTask } from 'src/tasks';
 
 import './task-view.css';
 import Icon from '../icon';
+import Textarea from 'react-textarea-autosize';
 
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
@@ -97,7 +98,7 @@ export class TaskView extends Component {
           type="button">קח אחריות על משימה זו</button> : ""}
           
           {this.renderInput(task, 'title', 'שם המשימה')}
-          {this.renderInput(task, 'description', 'תאור המשימה')}
+          {this.renderTextArea(task, 'description', 'תאור המשימה')}
           {this.renderInput(task, 'circle', 'מעגל')}
           <div><Icon name="label_outline" /> {this.renderLabel()} </div>
           {this.renderInput(task, 'creatorSpecialComments', 'הערות מיוחדות מהיוצר')}
@@ -118,6 +119,18 @@ export class TaskView extends Component {
         <input
         className='changing-input'
         type='text'
+        name={fieldName}
+        value={this.state[fieldName]}
+        placeholder={placeholder}
+        ref={e => this[fieldName+'Input'] = e}
+        onChange={this.handleChange} />
+    );
+  }
+
+  renderTextArea(task, fieldName, placeholder) {
+    return (
+        <Textarea
+        className='changing-input'
         name={fieldName}
         value={this.state[fieldName]}
         placeholder={placeholder}

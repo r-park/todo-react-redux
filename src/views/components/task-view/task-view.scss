@@ -5,6 +5,11 @@
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
   background: white;
   line-height: 1.4em;
+  overflow-y: auto;
+
+  textarea {
+    resize:none;
+  }
 }
 
 

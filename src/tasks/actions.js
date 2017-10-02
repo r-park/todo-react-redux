@@ -68,7 +68,7 @@ export function undeleteTask() {
   return (dispatch, getState) => {
     const task = getDeletedTask(getState());
     if (task) {
-      taskList.set(task.key, task)
+      taskList.set(task.key, { title: task.title })
         .catch(error => dispatch(undeleteTaskError(error)));
     }
   };
