@@ -40,6 +40,7 @@
 
   &:first-child {
     padding-right: 20px;
+    
   }
 
   &:nth-child(2) {
@@ -51,36 +52,9 @@
 
 
 //=====================================
-//  Buttons
-//-------------------------------------
-.task-item__button {
-  margin-left: 5px;
-  background: rgb(237, 241, 244);
-
-  &:first-child {
-    margin: 0;
-  }
-
-  color: #555;
-
-  &:hover {
-    color: #999;
-  }
-
-  &:active {
-    background: #262626;
-  }
-
-  &.active {
-    color: #85bf6b;
-  }
-}
-
-
-//=====================================
 //  Title (static)
 //-------------------------------------
-.task-item__title {
+.task-item-title {
   display: inline-block;
   position: relative;
   max-width: 100%;
@@ -99,32 +73,9 @@
     height: 46%;
     content: '';
   }
-
-  .task-item--completed & {
-    color: #666;
-  }
-
-  .task-item--completed &:after {
-    width: 100%;
-  }
 }
 
 
-//=====================================
-//  Title (input)
-//-------------------------------------
-.task-item__input {
-  outline: none;
-  border: 0;
-  padding: 0;
-  width: 100%;
-  height: 60px;
-  color: inherit;
-  font: inherit;
-  background: transparent;
-
-  // hide `x`
-  &::-ms-clear {
-    display: none;
-  }
+.label-default {
+  margin: 0 3px;
 }

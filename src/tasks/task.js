@@ -7,8 +7,8 @@ export const Task = new Record({
   title: null,
   assignee: null,
   circle: null,
-  label: null,
-  color: null,
+  label: { }, //TODO: perhaps null is better here
+  dueDate: null,
   creator: null,
   description: null,
   creatorSpecialComments: null,

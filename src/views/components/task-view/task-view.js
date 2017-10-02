@@ -9,6 +9,9 @@ import { getSelectedTask } from 'src/tasks';
 import './task-view.css';
 import Icon from '../icon';
 
+import TagsInput from 'react-tagsinput';
+import 'react-tagsinput/react-tagsinput.css';
+
 export class TaskView extends Component {
   constructor() {
     super(...arguments);
@@ -17,7 +20,7 @@ export class TaskView extends Component {
       title: '',
       description: '',
       circle: '',
-      label: '',
+      label: [],
       creatorSpecialComments: '',
       communitySpecialComments: '',
       relevantContacts: '',
@@ -26,6 +29,7 @@ export class TaskView extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleLabelChange = this.handleLabelChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -39,24 +43,26 @@ export class TaskView extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.task) {
-      let { title, description, circle,
-        label, creatorSpecialComments, communitySpecialComments,
-        relevantContacts,
-        assigneePhone, status, dueDate } = nextProps.task;
-      this.setState({
-        title: title || '',
-        description:description || '',
-        circle:circle || '',
-        label:label || '',
-        creatorSpecialComments:creatorSpecialComments || '',
-        communitySpecialComments: communitySpecialComments || '',
-        relevantContacts:relevantContacts || '',
-        assigneePhone:assigneePhone || '',
-        status: status || '',
-        dueDate: dueDate || '',
-      });
-    }
+    let { title, description, circle,
+      label, creatorSpecialComments, communitySpecialComments,
+      relevantContacts,
+      assigneePhone, status, dueDate } = nextProps.task;
+    
+    const labelAsArray = label ?
+      (Object.keys(label).map( l => { return l })) : [];
+
+    this.setState({
+      title: title || '',
+      description:description || '',
+      circle:circle || '',
+      label: labelAsArray || [],
+      creatorSpecialComments:creatorSpecialComments || '',
+      communitySpecialComments: communitySpecialComments || '',
+      relevantContacts:relevantContacts || '',
+      assigneePhone:assigneePhone || '',
+      status: status || '',
+      dueDate: dueDate || '',
+    });
   }
 
   render() {
@@ -91,7 +97,7 @@ export class TaskView extends Component {
           {this.renderInput(task, 'title', 'שם המשימה')}
           {this.renderInput(task, 'description', 'תאור המשימה')}
           {this.renderInput(task, 'circle', 'מעגל')}
-          <div><Icon name="label_outline" /> {this.renderInput(task, 'label', 'תגיות')} </div>
+          <div><Icon name="label_outline" /> {this.renderLabel()} </div>
           {this.renderInput(task, 'creatorSpecialComments', 'הערות מיוחדות מהיוצר')}
           {this.renderInput(task, 'communitySpecialComments', 'הערות מהקהילה')}
           {this.renderInput(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
@@ -118,11 +124,22 @@ export class TaskView extends Component {
     );
   }
 
+  renderLabel() {
+    return (
+      <TagsInput value={this.state.label}
+      onChange={this.handleLabelChange} />
+    )
+  }
+
   handleChange(e) {
     let fieldName = e.target.name;
     this.setState({
       [fieldName]: e.target.value
     });
+  }
+
+  handleLabelChange(label) {
+    this.setState({label})
   }
 
   handleKeyUp(event) {
@@ -133,18 +150,27 @@ export class TaskView extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    let labelAsObject = this.arrayToObject(this.state.label);
     this.props.updateTask(this.props.task,
       {
         title: this.state.title,
         description: this.state.description,
         circle: this.state.circle,
-        label: this.state.label,
+        label: labelAsObject,
         creatorSpecialComments: this.state.creatorSpecialComments,
         communitySpecialComments: this.state.communitySpecialComments,
         relevantContacts: this.state.relevantContacts,
         assigneePhone: this.state.assigneePhone,
         status: this.state.status,
+        dueDate: this.state.dueDate
       });
+  }
+
+  arrayToObject(array) {
+    var result = {};
+    for (var i = 0; i < array.length; ++i)
+      result[array[i]] = true;
+    return result;
   }
 }
 

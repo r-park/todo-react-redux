@@ -6,20 +6,18 @@
   },
   "tasks" : {
     "-KuzTQLjK2aHDzlFZxfa" : {
-      "completed" : false,
       "title" : "Testing 1"
     },
     "-KuzTQyK262V2YzvLqFK" : {
-      "completed" : true,
       "title" : "Testing 2"
     },
     "-KuzTVy1vn7ywBsM0MOM" : {
-      "completed" : false,
       "title" : "Testing 3",
       "assignee": "kjaGzPx1flXTCfrTXzH7J16zcip2",
       "circle":"or",
-      "label":"label",
-      "color":"#eb1467",
+      "label": {
+        "art": "true"
+      },
       "creator": "kjaGzPx1flXTCfrTXzH7J16zcip2",
       "description": "Description",
       "creatorSpecialComments": "From the creator",

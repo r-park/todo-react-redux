@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import Button from '../button';
-import Icon from '../icon';
 
 import './task-item.css';
 
@@ -22,7 +20,7 @@ export class TaskItem extends Component {
   
   renderTitle(task) {
     return (
-      <div className="task-item__title">
+      <div className="task-item-title">
         {task.title}
       </div>
     );
@@ -37,9 +35,16 @@ export class TaskItem extends Component {
   }
 
   renderLabel(task) {
+    if(!task.label || Object.keys(task.label).length === 0 && task.label.constructor === Object) {
+      return null;
+    }
+    
     return (
       <div>
-        {task.label}
+        { 
+          Object.keys(task.label).map((label) => {
+            return (<span key={label} className="label-default">{label}</span>)
+          }) }
       </div>
     );
   }
@@ -50,6 +55,7 @@ export class TaskItem extends Component {
     let containerClasses = classNames('task-item', {
       'task-item--completed': task.completed,
     });
+   
 
     return (
       <div className={containerClasses} tabIndex={this.props.taskNumber+1}
