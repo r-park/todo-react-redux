@@ -86,7 +86,8 @@ export class TasksPage extends Component {
       photoURL: this.props.auth.photoURL,
     }
     
-    this.props.createTask({creator , title: 'משימה חדשה'});
+    let nowInTimestamp = new Date().getTime();
+    this.props.createTask({creator , title: 'משימה חדשה', createdDate: nowInTimestamp});
     // TODO Select the new created task
   }
 
@@ -102,16 +103,14 @@ export class TasksPage extends Component {
     return (
       <div>
           <div className="g-col">
+            <Button
+              className="button button-small add-task-button"
+              onClick={ this.createNewTask }>
+              הוסף משימה
+            </Button>
+
             <TaskFilters filter={this.props.filterType} />
           </div>
-
-        <div className="g-row">
-          <Button
-            className="button button-small add-task-button"
-            onClick={ this.createNewTask }>
-            הוסף משימה
-          </Button>
-        </div>
       
         <div className="g-row">
           <div className="g-col-60">

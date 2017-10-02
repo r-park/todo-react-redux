@@ -54,7 +54,7 @@ export class TaskView extends Component {
     let { title, description, circle,
       label, creatorSpecialComments, communitySpecialComments,
       relevantContacts,
-      assigneePhone, status, dueDate } = nextProps.task;
+      assigneePhone, status, dueDate, createdDate } = nextProps.task;
     
     const labelAsArray = label ?
       (Object.keys(label).map( l => { return l })) : [];
@@ -69,6 +69,7 @@ export class TaskView extends Component {
       relevantContacts:relevantContacts || '',
       assigneePhone:assigneePhone || '',
       status: status || '',
+      createdDate: createdDate || '',
       dueDate: dueDate || '',
     });
   }
