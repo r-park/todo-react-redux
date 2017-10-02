@@ -116,13 +116,13 @@ export class TaskView extends Component {
             {this.renderTextArea(task, 'description', 'תאור המשימה')}
             {this.props.isAdmin? 
               this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle): ''}
-            <div><Icon name='label_outline' /> {this.renderLabel()} </div>
+            <div><Icon className='label' name='label_outline' /> {this.renderLabel()} </div>
             {this.renderTextArea(task, 'creatorSpecialComments', 'הערות מיוחדות מהיוצר')}
             {this.renderTextArea(task, 'communitySpecialComments', 'הערות מהקהילה')}
             {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
             {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה')}
             {this.renderTextArea(task, 'status', 'סטטוס המשימה')}
-            <input className='button button-small' type="submit" value="שמור" />
+            <input className='button button-small button-save' type="submit" value="שמור" />
           </form>
         </div>
       </div>

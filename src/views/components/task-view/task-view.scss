@@ -9,7 +9,7 @@
 }
 
 .task-view {
-  padding: 0 20px;
+  padding: 10px 20px;
   
   textarea {
     resize:none;
@@ -29,13 +29,22 @@
   .Select-menu-outer {
     width: 200px !important;
   }
+
+  .button-save {
+    margin: 10px 6px;
+  }
+
+  .label {
+    vertical-align: top;
+    margin-top: .7em;
+  }
   
 }
 
 .task-view-header {
   padding: 10px 20px;
   border-bottom: 1px solid #e0e6e8;
-
+  
   .button {
     margin: 0 20px;
   }
@@ -73,6 +82,7 @@
   padding: 5px 1px 1px 1px;
   width: calc(100% - 60px);
   display: inline-block;
+  font-family: '"aktiv-grotesk-std", Helvetica Neue, Arial, sans-serif';
   
   input {
     font-size: 1.4em;
