@@ -1,10 +1,10 @@
-.g-row {
-  @include grid-row;
-  max-width: 100%;
-  padding: 0 20px;
-}
-
 @media only screen and (min-width: 768px)  {
+  .g-row {
+    @include grid-row;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
   .g-col {
     @include grid-column;
     width: 100%;
@@ -47,6 +47,11 @@
 }
 
 @media (max-width: 700px)  {
+  .g-row {
+    @include grid-row;
+    max-width: 100%;
+    padding: 0 5px;
+  }
 
   .g-col-xs-100 {
     width: 100%;

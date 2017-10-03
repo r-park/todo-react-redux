@@ -22,11 +22,20 @@
     }
 
     &:not(:first-child):before {
-      padding-right: 10px;
-      padding-left: 10px;
-      content: '/';
-      font-weight: 300;
+      padding-right: 5px;
+      padding-left: 5px;
+      content: ' ';
     }
+
+    @media (min-width: 768px)  {
+      &:not(:first-child):before {
+        content: '/';
+        font-weight: 300;
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+    }
+
   }
 
   a {
@@ -40,5 +49,9 @@
     &.active {
       color: #eb1478;
     }
+  }
+
+  @media only screen and (min-width: 320px)  {
+    padding: 1em;
   }
 }
