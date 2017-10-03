@@ -3,6 +3,7 @@ import { List } from 'immutable';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
+import { getAuth } from 'src/auth';
 
 import { getSelectedTask } from 'src/tasks';
 
@@ -90,6 +91,8 @@ export class TaskView extends Component {
     const isTaskEmpty = !task.description &&
         !task.circle && !task.status;
     
+    const isUserCreator = task.creator && task.creator.id == this.props.auth.id;
+
     return (
       <div className='task-view-container'>
         <div className='task-view-header'>
@@ -104,7 +107,7 @@ export class TaskView extends Component {
             <span>{task.assignee.name}</span>
           </div>}
             
-          { isTaskEmpty ?
+          { isTaskEmpty && isUserCreator ?
           <button
             className='button delete_task'
             onClick={()=>this.props.removeTask(task)}
@@ -230,15 +233,16 @@ export class TaskView extends Component {
   }
 }
 
-
 //=====================================
 //  CONNECT
 //-------------------------------------
 
 const mapStateToProps = createSelector(
   getSelectedTask,
-  (task) => ({
-    task
+  getAuth,
+  (task, auth) => ({
+    task,
+    auth
   })
 );
 
