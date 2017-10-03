@@ -52,10 +52,11 @@ export class TaskView extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    let nextSelectedTask = nextProps.task || {};
     let { title, description, circle,
       label, creatorSpecialComments, communitySpecialComments,
       relevantContacts,
-      assigneePhone, status, dueDate, createdDate } = nextProps.task;
+      assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
     
     const labelAsArray = label ?
       (Object.keys(label).map( l => { return l })) : [];
@@ -110,7 +111,7 @@ export class TaskView extends Component {
           { isTaskEmpty && isUserCreator ?
           <button
             className='button delete_task'
-            onClick={()=>this.props.removeTask(task)}
+            onClick={()=> { this.props.removeTask(task); this.props.selectTask(); }}
             type='button'>מחק משימה</button> : '' }
           
         </div>

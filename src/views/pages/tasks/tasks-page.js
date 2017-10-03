@@ -53,6 +53,7 @@ export class TasksPage extends Component {
       this.props.filterTasks(
         this.getFilterParam(nextProps.location.search)
       );
+      this.props.selectTask();
     }
   }
 
