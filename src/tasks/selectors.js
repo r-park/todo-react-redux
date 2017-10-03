@@ -35,13 +35,18 @@ export const getVisibleTasks = createSelector(
   getTaskFilter,
   getAuth,
   (tasks, filter, auth) => {
-    switch (filter) {
+    switch (filter.name) {
 
       case 'completed':
         return tasks.filter(task => task.completed);
       
       case 'unassigned':
         return tasks.filter(task => !task.assignee);
+      
+      case 'label':
+        return tasks.filter(task => {
+          return task.label && task.label[filter.text];
+        });
       
       case 'mine':
         return tasks.filter(task => 

@@ -28,7 +28,7 @@ export class TasksPage extends Component {
     createTask: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
     filterTasks: PropTypes.func.isRequired,
-    filterType: PropTypes.string.isRequired,
+    filterType: PropTypes.object.isRequired,
     loadTasks: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
@@ -63,7 +63,10 @@ export class TasksPage extends Component {
 
   getFilterParam(search) {
     const params = new URLSearchParams(search);
-    return params.get('filter');
+    let filterParams = {};
+    filterParams.name = params.get('filter');
+    filterParams.text = params.get('text');
+    return filterParams;
   }
 
   renderNotification() {

@@ -189,7 +189,7 @@ export class TaskView extends Component {
       onChange={this.handleLabelChange}
       onlyUnique={true}
       addOnBlur={true}
-      inputProps={{ placeholder: showPlaceholder ? 'הכנס תגיות' : ''}}
+      inputProps={{ placeholder: showPlaceholder ? 'הכנס תגיות. לחץ על Enter בין תגית לתגית' : ''}}
       />
     )
   }

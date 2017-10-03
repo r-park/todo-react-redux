@@ -12,7 +12,7 @@ import {
 
 export const TasksState = new Record({
   deleted: null,
-  filter: '',
+  filter: {name:''},
   list: new List(),
   previous: null,
   selected: null,
@@ -39,7 +39,7 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
       });
 
     case FILTER_TASKS:
-      return state.set('filter', payload.filterType || '');
+      return state.set('filter', payload.filterType || {name:''});
 
     case SELECT_TASK:
       return state.set('selected', payload || null);

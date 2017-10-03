@@ -14,6 +14,26 @@
     margin-bottom: 25px;
   }
 
+  .react-tagsinput-custom {
+    overflow: hidden;
+    padding: 5px 1px 1px 1px;
+    width: calc(100% - 60px);
+    display: inline-block;
+    font-family: '"aktiv-grotesk-std", Helvetica Neue, Arial, sans-serif';
+    border: 1px solid #d5dce0;
+    padding: 4px 0 0 0;
+    height: 54px;
+    
+    input {
+      font-size: 1.4em;
+      width: calc( 100% - 100px);
+    }
+  
+    &:hover {
+      border: 1px solid $primary-color;
+    }
+  }
+
   li {
     float: right;
 
