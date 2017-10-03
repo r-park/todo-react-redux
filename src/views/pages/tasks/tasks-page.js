@@ -87,7 +87,7 @@ export class TasksPage extends Component {
     }
     
     let nowInTimestamp = new Date().getTime();
-    this.props.createTask({creator , title: 'משימה חדשה', createdDate: nowInTimestamp});
+    this.props.createTask({creator , title: `משימה חדשה של ${creator.name}`, createdDate: nowInTimestamp});
     // TODO Select the new created task
   }
 

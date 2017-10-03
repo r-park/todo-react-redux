@@ -70,6 +70,7 @@
   text-rendering: optimizeSpeed;
   vertical-align: top;
   border-color: white;
+  overflow: hidden;
   &:hover {
     border: 1px solid #d5dce0;
     padding: 4px;

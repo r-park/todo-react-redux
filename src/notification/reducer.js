@@ -14,7 +14,6 @@ export function notificationReducer(state = new NotificationState(), action) {
   switch (action.type) {
     case REMOVE_TASK_SUCCESS:
       return state.merge({
-        actionLabel: 'בטל פעולה',
         display: true,
         message: 'המשימה נמחקה'
       });

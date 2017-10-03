@@ -45,11 +45,13 @@ class Notification extends Component {
     return (
       <div className="notification">
         <p className="notification__message" ref={c => this.message = c}>{this.props.message}</p>
+        {this.props.actionLabel ? 
         <button
           className="button notification__button"
           onClick={this.props.action}
           ref={c => this.button = c}
           type="button">{this.props.actionLabel}</button>
+        : ""}
       </div>
     );
   }
