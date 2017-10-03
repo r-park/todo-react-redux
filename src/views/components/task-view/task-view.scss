@@ -6,6 +6,7 @@
   background: white;
   line-height: 1.4em;
   overflow-y: auto;
+  margin-bottom: 2em;
 }
 
 .task-view {
@@ -42,10 +43,21 @@
 }
 
 .task-view-header {
-  padding: 10px 20px;
+  padding: 8px 10px;
   border-bottom: 1px solid #e0e6e8;
+
+  .close-bottom {
+    padding-bottom: 15px;
+  }
+  .close-icon {
+    color: #ccd1d6;
+    
+    &:hover {
+      color: $primary-color;
+    }
+  }
   
-  .button {
+  .action-button {
     margin: 0 20px;
   }
 
@@ -87,7 +99,7 @@
   
   input {
     font-size: 1.4em;
-    width: calc( 100% - 80px);
+    width: calc( 100% - 100px);
   }
 
   &:hover {

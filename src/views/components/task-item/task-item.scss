@@ -10,6 +10,7 @@
   color: #151b28;
   font-size: rem(18px);
   font-weight: 300;
+  border-top: 0px solid transparent;
 
   @include media-query(540) {
     font-size: rem(24px);

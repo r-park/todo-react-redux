@@ -15,6 +15,7 @@ import Img from 'react-image'
 import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import Select from 'react-select';
+import Button from '../button';
 
 export class TaskView extends Component {
   constructor() {
@@ -98,10 +99,12 @@ export class TaskView extends Component {
       <div className='task-view-container'>
         <div className='task-view-header'>
 
-        {!task.assignee ? <button
-          className='button button-small assign_task'
+        <Button className='button-no-border close-button' onClick={ () => this.props.selectTask() }><Icon name='close' className='close-icon grow' /></Button>
+        
+        {!task.assignee ? <Button
+          className='button button-small action-button assign_task'
           onClick={()=>this.props.assignTask(task)}
-          type='button'>קח אחריות על משימה זו</button> : 
+          type='button'>קח אחריות על משימה זו</Button> : 
           
           <div className='avatar-container'>
             <Img className='avatar' src={task.assignee.photoURL}/>
@@ -109,10 +112,10 @@ export class TaskView extends Component {
           </div>}
             
           { isTaskEmpty && isUserCreator ?
-          <button
-            className='button delete_task'
+          <Button
+            className='action-button delete_task'
             onClick={()=> { this.props.removeTask(task); this.props.selectTask(); }}
-            type='button'>מחק משימה</button> : '' }
+            type='button'>מחק משימה</Button> : '' }
           
         </div>
         <div className='task-view'>
@@ -155,13 +158,13 @@ export class TaskView extends Component {
     return (
         <input
         className='changing-input'
-        type='text'
-        name={fieldName}
-        value={this.state[fieldName]}
-        placeholder={placeholder}
-        ref={e => this[fieldName+'Input'] = e}
-        onChange={this.handleChange}
-        onBlur={this.handleSubmit} />
+        type = 'text'
+        name = { fieldName }
+        value = { this.state[fieldName] }
+        placeholder = { placeholder }
+        ref = { e => this[fieldName+'Input'] = e }
+        onChange = { this.handleChange }
+        onBlur = { this.handleSubmit } />
     );
   }
 

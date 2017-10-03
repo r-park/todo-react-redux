@@ -114,7 +114,7 @@ export class TasksPage extends Component {
           </div>
       
         <div className="g-row">
-          <div className="g-col-60">
+          <div className="g-col-60 g-col-xs-100">
             <TaskView 
               createTask={this.props.createTask}
               removeTask={this.props.removeTask}
@@ -124,7 +124,7 @@ export class TasksPage extends Component {
               assignTask={this.assignTaskToSignedUser}
             />
           </div>
-          <div className="g-col-40">
+          <div className="g-col-40 g-col-xs-100">
             <TaskList
               tasks={this.props.tasks}
               selectTask={this.props.selectTask}

@@ -61,3 +61,13 @@ div:focus {
 :-moz-placeholder { /* Firefox 18- */
   color: #c0c1c1;
 }
+
+.grow {
+  transition: all 0.3s ease;
+}
+.grow:hover
+{
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}

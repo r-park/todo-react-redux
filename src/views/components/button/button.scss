@@ -51,6 +51,10 @@ $primary-color: #eb1478;
   transition: all 0.2s ease;
 }
 
+.button-no-border {
+  border: none;
+}
+
 .button-small {
   padding: 0 9px;
   border-color: $primary-color;
