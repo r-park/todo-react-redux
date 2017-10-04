@@ -22,11 +22,19 @@ class TaskList extends Component {
         />
       );
     });
-    
-
+    const isAnyTasks = this.props.tasks && this.props.tasks.size > 0;
+    if (!isAnyTasks) {
+      return (
+        <div>
+          <span>נואופ. אין פה שום משימות. מוזמת לקחת על עצמך משימות או לשנות את החיפוש</span>
+          <br /><br />
+          <img src='https://c2.staticflickr.com/4/3795/14304043253_3e194d97e7_b.jpg'/>
+        </div>
+      );
+    }
     return (
       <div className="task-list">
-        {taskItems}
+        { taskItems }
       </div>
     );
   }
