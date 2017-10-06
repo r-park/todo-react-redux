@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ReactDom } from 'react-dom';
 import { List } from 'immutable';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -53,6 +54,11 @@ export class TaskView extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    // TODO: On mobile scroll to top - hackish
+    if(window.innerWidth < 768) {
+      window.scrollTo(0, 150);
+    }
+
     let nextSelectedTask = nextProps.task || {};
     let { title, description, circle,
       label, creatorSpecialComments, communitySpecialComments,
@@ -97,7 +103,7 @@ export class TaskView extends Component {
 
     return (
       <div className='task-view-container'>
-        <div className='task-view-header'>
+        <div className='task-view-header' name='task-view-header'>
 
         <Button className='button-no-border close-button' onClick={ () => this.props.selectTask() }><Icon name='close' className='close-icon grow' /></Button>
         

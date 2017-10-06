@@ -26,22 +26,23 @@ class TaskFilters extends Component {
     const showPlaceholder = !this.state.label || this.state.label.length == 0 ;
     const { filter } = this.props;
     return(
-      <ul className="task-filters">
+      <div  className="task-filters">
+      <ul>
         <li><NavLink isActive={() => !filter || !filter.name} to="/">כל המשימות בעולם</NavLink></li>
         <li><NavLink isActive={() => filter.name === 'mine'} to={{pathname: '/', search: '?filter=mine'}}>המשימות שלי</NavLink></li>
         <li><NavLink isActive={() => filter.name === 'unassigned'} to={{pathname: '/', search: '?filter=unassigned'}}>משימות פנויות</NavLink></li>
         <li><NavLink isActive={() => filter.name === 'label'} to={{pathname: '/', search: '?filter=label&text=' + this.state.label }}>משימות לפי תגית</NavLink></li>
-        
-        <TagsInput
-          value={this.state.label}
-          onChange={this.handleLabelChange}
-          onlyUnique={true}
-          className={'react-tagsinput-custom'}
-          addOnBlur={true}
-          renderInput={ this.autosizingRenderInput }
-          inputProps={{ placeholder: showPlaceholder ? 'חיפוש לפי תגית' : ''}}
-          />
       </ul>
+      <TagsInput
+        value={this.state.label}
+        onChange={this.handleLabelChange}
+        onlyUnique={true}
+        className={'react-tagsinput-custom'}
+        addOnBlur={true}
+        renderInput={ this.autosizingRenderInput }
+        inputProps={{ placeholder: showPlaceholder ? 'חפשי לפי תגית' : ''}}
+      />
+      </div>
     );
   }
 

@@ -3,12 +3,15 @@
 
 .task-filters {
   @include clearfix;
-  margin-bottom: 20px;
   padding: 0 60px;
   font-size: rem(16px);
   line-height: 24px;
-  list-style-type: none;
-  display: inline-flex;
+  display: inline-block;
+  width: 100%;
+
+  ul {
+    list-style-type: none;
+  }
 
   @include media-query(540) {
     margin-bottom: 25px;
@@ -17,16 +20,15 @@
   .react-tagsinput-custom {
     overflow: hidden;
     padding: 5px 1px 1px 1px;
-    width: calc(100% - 60px);
+    width: calc(100%);
     display: inline-block;
     font-family: '"aktiv-grotesk-std", Helvetica Neue, Arial, sans-serif';
     border: 1px solid #d5dce0;
     padding: 4px 0 0 0;
-    height: 54px;
     
     input {
-      font-size: 1.4em;
-      width: calc( 100% - 100px);
+      font-size: 1.0em;
+      width: 8em;
     }
   
     &:hover {

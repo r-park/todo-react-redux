@@ -106,13 +106,12 @@ export class TasksPage extends Component {
     return (
       <div>
           <div className="g-col">
+            <TaskFilters filter={this.props.filterType} />
             <Button
               className="button button-small add-task-button"
               onClick={ this.createNewTask }>
               הוסף משימה
             </Button>
-
-            <TaskFilters filter={this.props.filterType} />
           </div>
       
         <div className="g-row">

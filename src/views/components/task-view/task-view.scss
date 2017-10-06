@@ -7,6 +7,14 @@
   line-height: 1.4em;
   overflow-y: auto;
   margin-bottom: 2em;
+  z-index: 10;
+}
+
+@media (max-width: 700px) {
+  .task-view-container {
+    height: 87%;
+    width: 94%;
+  }
 }
 
 .task-view {
