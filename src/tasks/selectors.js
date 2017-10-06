@@ -51,7 +51,8 @@ export const getVisibleTasks = createSelector(
       case 'mine':
         return tasks.filter(task => 
         {
-          return (task.assignee && (task.assignee.id === auth.id))
+          return ((task.assignee && (task.assignee.id === auth.id)) ||
+            (task.creator && task.creator.id === auth.id));
         });
 
       default:

@@ -8,12 +8,12 @@
   height: 60px;
   overflow: hidden;
   color: #151b28;
-  font-size: rem(18px);
+  font-size: 1.2rem;
   font-weight: 300;
   border-top: 0px solid transparent;
 
   @include media-query(540) {
-    font-size: rem(24px);
+    font-size: rem(20px);
   }
 
   &:hover {
@@ -23,6 +23,13 @@
   // TODO - Should be really selected by the active cell
   &:focus {
     border: 1px solid #bbb;
+  }
+
+  .avatar {
+    margin: 0 10px; 
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
   }
 }
 
@@ -40,14 +47,16 @@
   }
 
   &:first-child {
-    padding-right: 20px;
+    padding-right: 10px;
     
   }
 
   &:nth-child(2) {
     flex: 1;
-    padding-right: 30px;
+    padding-right: 10px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
   }
 }
 

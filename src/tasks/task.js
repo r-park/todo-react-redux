@@ -6,6 +6,8 @@ export const Task = new Record({
   title: null,
   assignee: null,
   circle: null,
+  type: null,
+  projectName: null,
   label: { }, //TODO: perhaps null is better here
   createdDate: null,
   dueDate: null,

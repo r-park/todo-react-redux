@@ -31,6 +31,14 @@ export class TaskView extends Component {
         { value: 'אמיר', label: 'אמיר'},
         { value: 'מיכאל', label: 'מיכאל'}
       ],
+      type: '',
+      defaultType: [
+        { value: 1, label: 'תכנון ארוע' },
+        { value: 2, label: 'משמרות בארוע (בשביל אחראי משימות משמרות) - טרם נפתח', disabled: true},
+        { value: 3, label: 'משימות של מחנות נושא - טרם נפתח', disabled: true},
+        { value: 4, label: 'משימות של מיצבי אמנות - טרם נפתח', disabled: true},
+        { value: 5, label: 'אחר'}
+      ],
       label: [],
       creatorSpecialComments: '',
       communitySpecialComments: '',
@@ -60,7 +68,7 @@ export class TaskView extends Component {
     }
 
     let nextSelectedTask = nextProps.task || {};
-    let { title, description, circle,
+    let { title, description, circle, type,
       label, creatorSpecialComments, communitySpecialComments,
       relevantContacts,
       assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
@@ -79,7 +87,8 @@ export class TaskView extends Component {
       assigneePhone:assigneePhone || '',
       status: status || '',
       createdDate: createdDate || '',
-      dueDate: dueDate || '',
+      dueDate: dueDate || null,
+      type: type || null
     });
   }
 
@@ -131,6 +140,7 @@ export class TaskView extends Component {
             {this.props.isAdmin? 
               this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle): ''}
             <div><Icon className='label' name='label_outline' /> {this.renderLabel()} </div>
+            { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType)}
             {this.renderTextArea(task, 'creatorSpecialComments', 'הערות מיוחדות מהיוצר')}
             {this.renderTextArea(task, 'communitySpecialComments', 'הערות מהקהילה')}
             {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
@@ -146,17 +156,17 @@ export class TaskView extends Component {
   renderSelect(task, fieldName, placeholder, options) {
     return (
       <Select
-      name='circle-name'
       type='text'
       name={fieldName}
       value={this.state[fieldName]}
       placeholder={placeholder}
       ref={e => this[fieldName+'Input'] = e}
-      onChange={(e) => { if (!e || !e.value) { return };
-                this.setState({ [fieldName]: e.value}) }}
+      onChange={(e) => { let val=null; if (e) { val = e.value };
+                this.setState({ [fieldName]: val}) }}
       options={options}
       onBlur={this.handleSubmit}
-      clearable={false}/>
+      noResultsText={'לא נמצאו תוצאות'}
+      searchable={ false } />
   );
   }
 
@@ -220,19 +230,21 @@ export class TaskView extends Component {
   handleSubmit(event) {
     event.preventDefault();
     let labelAsObject = this.arrayToObject(this.state.label);
-    this.props.updateTask(this.props.task,
-      {
-        title: this.state.title,
-        description: this.state.description,
-        circle: this.state.circle,
-        label: labelAsObject,
-        creatorSpecialComments: this.state.creatorSpecialComments,
-        communitySpecialComments: this.state.communitySpecialComments,
-        relevantContacts: this.state.relevantContacts,
-        assigneePhone: this.state.assigneePhone,
-        status: this.state.status,
-        dueDate: this.state.dueDate
-      });
+    const fieldsToUpdate = {
+      title: this.state.title,
+      description: this.state.description,
+      circle: this.state.circle,
+      label: labelAsObject,
+      creatorSpecialComments: this.state.creatorSpecialComments,
+      communitySpecialComments: this.state.communitySpecialComments,
+      relevantContacts: this.state.relevantContacts,
+      assigneePhone: this.state.assigneePhone,
+      status: this.state.status,
+      type: this.state.type
+    };
+    fieldsToUpdate.dueDate = this.state.dueDate || null;
+    
+    this.props.updateTask(this.props.task, fieldsToUpdate);
   }
 
   arrayToObject(array) {
