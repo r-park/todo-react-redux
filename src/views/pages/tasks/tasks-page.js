@@ -90,8 +90,7 @@ export class TasksPage extends Component {
       photoURL: this.props.auth.photoURL,
     }
     
-    let nowInTimestamp = new Date().getTime();
-    this.props.createTask({creator , title: `משימה חדשה של ${creator.name}`, createdDate: nowInTimestamp});
+    this.props.createTask({creator , title: `משימה חדשה של ${creator.name}`, created: new Date()});
     // TODO Select the new created task
   }
 

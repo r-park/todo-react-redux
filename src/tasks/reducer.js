@@ -26,7 +26,7 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
       return state.merge({
         deleted: null,
         previous: null,
-        list: state.deleted && state.deleted.key === payload.key ?
+        list: state.deleted && state.deleted.id === payload.id ?
               state.previous :
               state.list.unshift(payload)
       });
@@ -35,7 +35,7 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
       return state.merge({
         deleted: payload,
         previous: state.list,
-        list: state.list.filter(task => task.key !== payload.key)
+        list: state.list.filter(task => task.id !== payload.id)
       });
 
     case FILTER_TASKS:
@@ -52,7 +52,7 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
         deleted: null,
         previous: null,
         list: state.list.map(task => {
-          return task.key === payload.key ? payload : task;
+          return task.id === payload.id ? payload : task;
         })
       });
 

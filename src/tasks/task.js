@@ -2,7 +2,7 @@ import { Record } from 'immutable';
 
 
 export const Task = new Record({
-  key: null,
+  id: null,
   title: null,
   assignee: null,
   circle: null,
