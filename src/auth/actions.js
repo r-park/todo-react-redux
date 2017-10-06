@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase, { firebaseDb } from 'firebase';
 
 import { firebaseAuth } from 'src/firebase';
 import {
@@ -12,22 +12,10 @@ import {
 function authenticate(provider) {
   return dispatch => {
     firebaseAuth.signInWithPopup(provider)
-      .then(result => { updateUserData(result, dispatch) })
+      .then(result => { dispatch(signInSuccess(result, dispatch)) })
       .catch(error => dispatch(signInError(error)));
   };
 }
-
-function updateUserData(result, dispatch) {
-  let { user } = result;
-  debugger;
-  firebase.database().ref('users/' + user.uid).set({
-    name: user.displayName,
-    email: user.email,
-    photoURL : user.photoURL,
-  });
-  return dispatch(signInSuccess(result));
-}
-
 
 
 export function initAuth(user) {

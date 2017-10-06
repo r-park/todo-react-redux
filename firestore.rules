@@ -1,0 +1,36 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isAdmin() {
+      return exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isUserAssigneeOrCreator() {
+      return request.auth.uid == resource.assignee.id
+        || request.auth.uid == resource.creator.id;
+    }
+
+    match /tasks/{anyTask} {
+    	allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null
+        && (isUserAssigneeOrCreator() || isAdmin()) ;
+      allow delete: if request.auth != null
+        && (isUserAssigneeOrCreator() || isAdmin()) ;
+
+        // Auth users can assign themself to task if no one assigned
+        match /assignee {
+          allow write: if request.auth != null && request.resource == null;
+        }
+    }
+
+    match /users/{userId} {
+      allow read: if request.auth != null; // Auth users can read
+      allow write: if userId == request.auth.uid;
+    }
+    
+    match /admins/{anyAdmin} {
+        allow read: if false;
+    }
+  }
+}

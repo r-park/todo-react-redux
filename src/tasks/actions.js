@@ -38,7 +38,7 @@ export function createTaskSuccess(task) {
 
 export function assignTask(task, assignee) {
   return dispatch => {
-    taskList.update(task.key, {
+    taskList.update(task.id, {
       assignee: {
         email: assignee.email,
         id: assignee.id,
@@ -52,7 +52,7 @@ export function assignTask(task, assignee) {
 
 export function removeTask(task) {
   return dispatch => {
-    taskList.remove(task.key)
+    taskList.remove(task.id)
       .catch(error => dispatch(removeTaskError(error)));
   };
 }
@@ -75,7 +75,7 @@ export function undeleteTask() {
   return (dispatch, getState) => {
     const task = getDeletedTask(getState());
     if (task) {
-      taskList.set(task.key, { title: task.title })
+      taskList.set(task.id, { title: task.title })
         .catch(error => dispatch(undeleteTaskError(error)));
     }
   };
@@ -97,7 +97,7 @@ export function updateTaskError(error) {
 
 export function updateTask(task, changes) {
   return dispatch => {
-    taskList.update(task.key, changes)
+    taskList.update(task.id, changes)
       .catch(error => dispatch(updateTaskError(error)));
   };
 }
@@ -126,7 +126,7 @@ export function filterTasks(filterType) {
 export function loadTasks() {
   return (dispatch, getState) => {
     const { auth } = getState();
-    taskList.path = `tasks/`;
+    taskList.path = `tasks`;
     taskList.subscribe(dispatch);
   };
 }

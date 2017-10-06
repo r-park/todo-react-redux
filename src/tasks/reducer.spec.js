@@ -18,8 +18,8 @@ describe('Tasks reducer', () => {
   let task2;
 
   beforeEach(() => {
-    task1 = new Task({completed: false, key: '0', title: 'task 1'});
-    task2 = new Task({completed: false, key: '1', title: 'task 2'});
+    task1 = new Task({completed: false, id: '0', title: 'task 1'});
+    task2 = new Task({completed: false, id: '1', title: 'task 2'});
   });
 
 
