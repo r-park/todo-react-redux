@@ -11,7 +11,6 @@ export class AddComment extends Component {
   constructor() {
     super(...arguments);
     this.state = {
-      showHideSideSubmit: 'hidden'
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -59,13 +58,17 @@ export class AddComment extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    
+    if(!this.state.body || this.state.body.length <= 1) {
+      return;
+    }
     this.props.createComment({
       taskId: this.props.task.id,
       body: this.state.body,
       creator: this.props.auth,
       created: new Date()
     });
+    
+    this.setState({body: ''});
   }
 
   renderHeader(comment) {
@@ -74,7 +77,7 @@ export class AddComment extends Component {
     const avatar = creator.photoURL ? <Img className='avatar' src={creator.photoURL} alt={comment.creator.name}/> : '';
     return (
       <div className='comment-item-creator' data-tip={creator.name}>
-        <span>{ creator.name }</span>
+        <span>{ avatar } { creator.name }</span>
       </div>
     );
   }

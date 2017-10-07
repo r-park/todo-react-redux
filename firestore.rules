@@ -30,7 +30,8 @@ service cloud.firestore {
 
     match /comments/{anyComment} {
       allow read: if request.auth != null;
-      allow create: if request.auth != null;
+      allow create: if request.auth != null &&
+        request.resource.data.body;
       allow update: if request.auth != null
         && isCreator();
       allow delete: if request.auth != null
