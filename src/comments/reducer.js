@@ -54,7 +54,6 @@ export function commentsReducer(state = new CommentsState(), {payload, type}) {
       return new CommentsState();
     
     case SELECT_TASK:
-      debugger;
       return state.set('selectedTask', payload || null);
 
     default:

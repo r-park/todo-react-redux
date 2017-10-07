@@ -18,7 +18,7 @@ import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import Select from 'react-select';
 import Button from '../button';
-import Comments from '../comments';
+import CommentList from '../comment-list';
 
 export class TaskView extends Component {
   constructor() {
@@ -62,9 +62,12 @@ export class TaskView extends Component {
     assignTask: PropTypes.func.isRequired,
     selectedTask: PropTypes.object.isRequired,
     isAdmin: PropTypes.bool.isRequired,
+    unloadComments: PropTypes.func.isRequired,
   };
 
   componentWillReceiveProps(nextProps) {
+    // TODO - check this maybe called several times now that we use comments
+
     // TODO: On mobile scroll to top - hackish
     if(window.innerWidth < 768) {
       window.scrollTo(0, 150);
@@ -94,6 +97,11 @@ export class TaskView extends Component {
       type: type || null,
       projectName: projectName || '',
     });
+
+    // if(nextProps.comments.length() != this.state.comments) {
+    //   this.props.unloadComments(); //TODO - probably length is not such a good indicator
+    //   // TODO - we should unload comments when we're start loading new comments
+    // }
   }
 
   render() {
@@ -146,15 +154,16 @@ export class TaskView extends Component {
               this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle): ''}
             <div><Icon className='label' name='label_outline' /> {this.renderLabel()} </div>
             { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType)}
-            {this.renderTextArea(task, 'creatorSpecialComments', 'הערות מיוחדות מהיוצר')}
-            {this.renderTextArea(task, 'communitySpecialComments', 'הערות מהקהילה')}
             {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
             {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה')}
             {this.renderTextArea(task, 'status', 'סטטוס המשימה')}
             <input className='button button-small button-save' type="submit" value="שמור" />
           </form>
         </div>
-        { this.props.comments ? <Comments task={task} comments={this.props.comments} /> : ''}
+        { this.props.comments ?
+          <CommentList task={task}
+          comments={this.props.comments}
+          unloadComments={this.props.unloadComments}/> : ''}
       </div>
     );
   }
@@ -279,7 +288,6 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = Object.assign(
   {},
-  // TODO: not sure what should be here
 );
 
 export default connect(

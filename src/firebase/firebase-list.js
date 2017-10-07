@@ -52,6 +52,7 @@ export class FirebaseList {
     
     let unsubscribe = collection.onSnapshot(snapshot => {
       if(!initialized) {
+        emit(this._actions.onLoad(list));
         initialized = true;
       }
       snapshot.docChanges.forEach(change => {
@@ -76,7 +77,9 @@ export class FirebaseList {
   }
 
   unsubscribe() {
-    this._unsubscribe();
+    if(this._unsubscribe) {
+      this._unsubscribe();
+    }
   }
 
   unwrapSnapshot(snapshot) {

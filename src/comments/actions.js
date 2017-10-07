@@ -98,9 +98,14 @@ export function loadCommentsSuccess(comments) {
 
 export function loadComments() {
   return (dispatch, getState) => {
-    const { auth, selectedTask } = getState();
+    const { selectedTask } = getState().comments;
     commentList.path = `comments`;
-    commentList.query = ['taskId','==', selectedTask.id];
+    if(selectedTask) {
+      commentList.query = ['taskId','==', selectedTask.id];
+    }else {
+      commentList.query = null;
+    }
+
     commentList.subscribe(dispatch);
   };
 }

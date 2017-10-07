@@ -23,6 +23,7 @@ export class TasksPage extends Component {
     this.createNewTask = this.createNewTask.bind(this);
     this.isAdmin = this.isAdmin.bind(this);
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
+    this.selectTaskAndSetComments = this.selectTaskAndSetComments.bind(this);
   }
 
   static propTypes = {
@@ -38,6 +39,7 @@ export class TasksPage extends Component {
     tasks: PropTypes.instanceOf(List).isRequired,
     undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
+    unloadComments: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
   };
@@ -54,7 +56,7 @@ export class TasksPage extends Component {
       this.props.filterTasks(
         this.getFilterParam(nextProps.location.search)
       );
-      this.props.selectTask();
+      this.selectTaskAndSetComments();
     }
   }
 
@@ -103,6 +105,15 @@ export class TasksPage extends Component {
     this.props.assignTask(task, this.props.auth);
   }
 
+  // TODO - Better handle it on the redux level and on each
+  // call to select task - load the correct comments
+  selectTaskAndSetComments(task) {
+    const result = this.props.selectTask(task);
+    this.props.unloadComments(); //TODO - not sure if needed here
+    this.props.loadComments();
+    return result;
+  }
+
   render() {
     return (
       <div>
@@ -121,15 +132,16 @@ export class TasksPage extends Component {
               createTask={this.props.createTask}
               removeTask={this.props.removeTask}
               updateTask={this.props.updateTask}
-              selectTask={this.props.selectTask}
+              selectTask={this.selectTaskAndSetComments}
               isAdmin={false}
               assignTask={this.assignTaskToSignedUser}
+              unloadComments={this.props.unloadComments}
             />
           </div>
           <div className="g-col-40 g-col-xs-100">
             <TaskList
               tasks={this.props.tasks}
-              selectTask={this.props.selectTask}
+              selectTask={this.selectTaskAndSetComments}
             />
           </div>
 

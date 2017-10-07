@@ -23,7 +23,6 @@ exports.limitTasksPerCreatorFirestore = functions.firestore.document('/tasks/{ta
   const creatorId = task.creator.id;
   console.log(creatorId);
   
-  //return admin.firestore().collection('tasks').where('title',"==", 'משימה חדשה של Gal Bracha').get().then(snapshot => {
   return parentRef.where('creator.id',"==", creatorId).get().then(snapshot => {
     console.log(snapshot);
     console.log(snapshot.size);
