@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 import { getAuth } from 'src/auth';
 
 import { getSelectedTask } from 'src/tasks';
+import { getCommentList } from 'src/comments';
 
 import './task-view.css';
 import Icon from '../icon';
@@ -17,6 +18,7 @@ import TagsInput from 'react-tagsinput';
 import 'react-tagsinput/react-tagsinput.css';
 import Select from 'react-select';
 import Button from '../button';
+import Comments from '../comments';
 
 export class TaskView extends Component {
   constructor() {
@@ -26,6 +28,7 @@ export class TaskView extends Component {
       title: '',
       description: '',
       circle: '',
+      projectName: null,
       defaultCircle: [
         { value: 'אור', label: 'אור' },
         { value: 'אמיר', label: 'אמיר'},
@@ -68,7 +71,7 @@ export class TaskView extends Component {
     }
 
     let nextSelectedTask = nextProps.task || {};
-    let { title, description, circle, type,
+    let { title, description, circle, type, projectName,
       label, creatorSpecialComments, communitySpecialComments,
       relevantContacts,
       assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
@@ -88,7 +91,8 @@ export class TaskView extends Component {
       status: status || '',
       createdDate: createdDate || '',
       dueDate: dueDate || null,
-      type: type || null
+      type: type || null,
+      projectName: projectName || '',
     });
   }
 
@@ -136,6 +140,7 @@ export class TaskView extends Component {
         <div className='task-view'>
           <form onSubmit={this.handleSubmit} noValidate>
             {this.renderInput(task, 'title', 'שם המשימה')}
+            {this.renderInput(task, 'projectName', 'שם הפרוייקט')}
             {this.renderTextArea(task, 'description', 'תאור המשימה')}
             {this.props.isAdmin? 
               this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle): ''}
@@ -149,6 +154,7 @@ export class TaskView extends Component {
             <input className='button button-small button-save' type="submit" value="שמור" />
           </form>
         </div>
+        { this.props.comments ? <Comments task={task} comments={this.props.comments} /> : ''}
       </div>
     );
   }
@@ -240,7 +246,8 @@ export class TaskView extends Component {
       relevantContacts: this.state.relevantContacts,
       assigneePhone: this.state.assigneePhone,
       status: this.state.status,
-      type: this.state.type
+      type: this.state.type,
+      projectName: this.state.projectName
     };
     fieldsToUpdate.dueDate = this.state.dueDate || null;
     
@@ -261,9 +268,11 @@ export class TaskView extends Component {
 
 const mapStateToProps = createSelector(
   getSelectedTask,
+  getCommentList,
   getAuth,
-  (task, auth) => ({
+  (task, comments, auth) => ({
     task,
+    comments,
     auth
   })
 );

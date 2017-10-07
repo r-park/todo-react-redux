@@ -1,5 +1,6 @@
 import { List, Record } from 'immutable';
 import { SIGN_OUT_SUCCESS } from 'src/auth/action-types';
+
 import {
   CREATE_TASK_SUCCESS,
   SELECT_TASK,

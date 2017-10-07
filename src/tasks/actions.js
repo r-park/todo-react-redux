@@ -1,5 +1,6 @@
 import { getDeletedTask } from './selectors';
 import { taskList } from './task-list';
+
 import {
   CREATE_TASK_ERROR,
   CREATE_TASK_SUCCESS,
@@ -11,7 +12,7 @@ import {
   UNLOAD_TASKS_SUCCESS,
   UPDATE_TASK_ERROR,
   UPDATE_TASK_SUCCESS,
-  SELECT_TASK
+  SELECT_TASK,
 } from './action-types';
 
 

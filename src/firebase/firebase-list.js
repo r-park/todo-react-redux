@@ -2,10 +2,11 @@ import { firebaseDb } from './firebase';
 
 
 export class FirebaseList {
-  constructor(actions, modelClass, path = null) {
+  constructor(actions, modelClass, path = null, query = null) {
     this._actions = actions;
     this._modelClass = modelClass;
     this._path = path;
+    this._query = query;
   }
 
   get path() {
@@ -14,6 +15,14 @@ export class FirebaseList {
 
   set path(value) {
     this._path = value;
+  }
+
+  get query() {
+    return this._query;
+  }
+
+  set query(value) {
+    this._query = value;
   }
 
   push(value) {
@@ -34,6 +43,10 @@ export class FirebaseList {
 
   subscribe(emit) {
     let collection = firebaseDb.collection(this._path);
+    if(this._query) {
+      collection = collection.where(
+        this._query[0],this._query[1],this._query[2]);
+    }
     let initialized = false;
     let list = [];
     

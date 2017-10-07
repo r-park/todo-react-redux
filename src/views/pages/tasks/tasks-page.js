@@ -7,6 +7,7 @@ import { createSelector } from 'reselect';
 import { authActions, getAuth } from 'src/auth';
 import { getNotification, notificationActions } from 'src/notification';
 import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/tasks';
+import { commentsActions } from 'src/comments';
 import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
 import TaskList from '../../components/task-list';
@@ -160,6 +161,7 @@ const mapStateToProps = createSelector(
 const mapDispatchToProps = Object.assign(
   {},
   tasksActions,
+  commentsActions,
   notificationActions
 );
 
