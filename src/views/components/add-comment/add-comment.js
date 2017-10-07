@@ -19,11 +19,11 @@ export class AddComment extends Component {
   }
 
   render() {
-    const { comment } = this.props;
     
     return (
       <div className='add-comment'>
         <form onSubmit={this.handleSubmit} noValidate>
+          { this.renderHeader() }
           { this.renderBody() }
           { this.renderSubmit() }
         </form>
@@ -71,14 +71,12 @@ export class AddComment extends Component {
     this.setState({body: ''});
   }
 
-  renderHeader(comment) {
-    if (!comment.creator) return;
-    const { creator } = comment;
-    const avatar = creator.photoURL ? <Img className='avatar' src={creator.photoURL} alt={comment.creator.name}/> : '';
+  renderHeader() {
+    const { auth } = this.props;
+    if (!auth) return;
+    const avatar = auth.photoURL ? <Img className='avatar' src={auth.photoURL} alt={auth.displayName}/> : '';
     return (
-      <div className='comment-item-creator' data-tip={creator.name}>
-        <span>{ avatar } { creator.name }</span>
-      </div>
+      <span>{ avatar } { auth.displayName }</span>
     );
   }
 
