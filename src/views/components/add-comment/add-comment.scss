@@ -1,0 +1,34 @@
+@import 'views/styles/shared';
+
+.add-comment {
+  background: #f6f8f9;
+  padding: 20px;
+
+  .hidden {
+    display: none;
+  }
+
+  .textarea-body {
+    width: 100%;
+    transition: border-color 100ms;
+    font-size: 1em;
+    padding: 5px;
+    text-rendering: optimizeSpeed;
+    vertical-align: top;
+    border-color: white;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #d5dce0;
+    resize: none;
+    transition: all 1s ease;
+    
+    &:hover {
+      border-color: $primary-color;
+    }
+  }
+
+  .button-add-comment {
+    margin-top: 1.5em;
+    transition: all 1s ease;
+  }
+}

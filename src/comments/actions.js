@@ -33,20 +33,6 @@ export function createCommentSuccess(comment) {
   };
 }
 
-export function assignComment(comment, assignee) {
-  return dispatch => {
-    commentList.update(comment.id, {
-      assignee: {
-        email: assignee.email,
-        id: assignee.id,
-        name: assignee.name,
-        photoURL: assignee.photoURL
-      }
-    })
-      .catch(error => dispatch(updateCommentError(error)));
-  };
-}
-
 export function removeComment(comment) {
   return dispatch => {
     commentList.remove(comment.id)

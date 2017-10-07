@@ -161,9 +161,11 @@ export class TaskView extends Component {
           </form>
         </div>
         { this.props.comments ?
-          <CommentList task={task}
+          <CommentList
+          task={task}
           comments={this.props.comments}
-          unloadComments={this.props.unloadComments}/> : ''}
+          auth={this.props.auth}
+          createComment={this.props.createComment}/> : ''}
       </div>
     );
   }

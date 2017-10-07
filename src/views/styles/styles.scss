@@ -71,3 +71,21 @@ div:focus {
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}

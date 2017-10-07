@@ -136,6 +136,7 @@ export class TasksPage extends Component {
               isAdmin={false}
               assignTask={this.assignTaskToSignedUser}
               unloadComments={this.props.unloadComments}
+              createComment={this.props.createComment}
             />
           </div>
           <div className="g-col-40 g-col-xs-100">
