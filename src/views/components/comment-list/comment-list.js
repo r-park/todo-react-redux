@@ -16,13 +16,11 @@ class CommentList extends Component {
   render() {
     let commentItems = this.props.comments.map((comment, index) => {
       return (
-        <div>
-          <CommentItem
-            key={index}
-            commentNumber={index}
-            comment={comment}
-          />
-        </div>
+        <CommentItem
+          key={index}
+          commentNumber={index}
+          comment={comment}
+        />
       );
     });
     const isAnyComments = this.props.comments && this.props.comments.size > 0;
@@ -46,7 +44,8 @@ class CommentList extends Component {
       <AddComment
       task={ this.props.task }
       createComment={this.props.createComment }
-      auth={this.props.auth} />)
+      auth={this.props.auth}
+      key='addComment' />)
   }
 
 }
