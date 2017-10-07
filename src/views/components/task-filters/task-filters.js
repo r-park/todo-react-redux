@@ -26,7 +26,7 @@ class TaskFilters extends Component {
     const showPlaceholder = !this.state.label || this.state.label.length == 0 ;
     const { filter } = this.props;
     return(
-      <div  className="task-filters">
+      <div className="task-filters">
       <ul>
         <li><NavLink isActive={() => !filter || !filter.name} to="/">כל המשימות בעולם</NavLink></li>
         <li><NavLink isActive={() => filter.name === 'mine'} to={{pathname: '/', search: '?filter=mine'}}>המשימות שלי</NavLink></li>
