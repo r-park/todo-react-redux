@@ -24,9 +24,9 @@ service cloud.firestore {
     	allow read: if request.auth != null;
       allow create: if request.auth != null;
       allow update: if request.auth != null
-        && ((isUserAssigneeOrCreator() || isAdmin()) || isTaskUnassigned());
+        && ((isUserAssigneeOrCreator() ) || isTaskUnassigned());
       allow delete: if request.auth != null
-        && (isUserAssigneeOrCreator() || isAdmin()) ;
+        && (isUserAssigneeOrCreator() ) ;
 
         // Auth users can assign themself to task if no one assigned
         match /assignee {
