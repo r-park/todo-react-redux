@@ -1,19 +1,23 @@
 service cloud.firestore {
   match /databases/{database}/documents {
     
-    // TODO: not sure why but this cause update to fail
     function isAdmin() {
       return exists(/databases/$(database)/documents/admins/$(request.auth.uid));
     }
-
+    
     function isUserAssigneeOrCreator() {
-      return request.auth.uid == resource.assignee.id || isCreator();
+    	return isUserAssignee() || isCreator();
+    }
+    
+    function isUserAssignee() {
+    	return resource.data.assignee != null && request.auth.uid == resource.data.assignee.id;
     }
 
     function isCreator() {
-      return request.auth.uid == resource.creator.id;
+      return request.auth.uid == resource.data.creator.id;
     }
 
+    // TODO - Make this work
     function isTaskUnassigned() {
       return resource.data.assignee == null
       && request.resource.data.size() == 1
@@ -23,15 +27,8 @@ service cloud.firestore {
     match /tasks/{anyTask} {
     	allow read: if request.auth != null;
       allow create: if request.auth != null;
-      allow update: if request.auth != null
-        && ((isUserAssigneeOrCreator() ) || isTaskUnassigned());
-      allow delete: if request.auth != null
-        && (isUserAssigneeOrCreator() ) ;
-
-        // Auth users can assign themself to task if no one assigned
-        match /assignee {
-          allow write: if request.auth != null && request.resource.data == null;
-        }
+      allow update: if request.auth != null && (isAdmin() || isUserAssigneeOrCreator())
+      allow delete: if request.auth != null && (isAdmin() || isCreator());
     }
   
 

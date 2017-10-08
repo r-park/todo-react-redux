@@ -43,8 +43,6 @@ export class TaskView extends Component {
         { value: 5, label: 'אחר'}
       ],
       label: [],
-      creatorSpecialComments: '',
-      communitySpecialComments: '',
       relevantContacts: '',
       assigneePhone: '',
       status: ''
@@ -75,8 +73,7 @@ export class TaskView extends Component {
 
     let nextSelectedTask = nextProps.task || {};
     let { title, description, circle, type, projectName,
-      label, creatorSpecialComments, communitySpecialComments,
-      relevantContacts,
+      label, relevantContacts,
       assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
     
     const labelAsArray = label ?
@@ -87,8 +84,6 @@ export class TaskView extends Component {
       description:description || '',
       circle:circle || '',
       label: labelAsArray || [],
-      creatorSpecialComments:creatorSpecialComments || '',
-      communitySpecialComments: communitySpecialComments || '',
       relevantContacts:relevantContacts || '',
       assigneePhone:assigneePhone || '',
       status: status || '',
@@ -252,8 +247,6 @@ export class TaskView extends Component {
       description: this.state.description,
       circle: this.state.circle,
       label: labelAsObject,
-      creatorSpecialComments: this.state.creatorSpecialComments,
-      communitySpecialComments: this.state.communitySpecialComments,
       relevantContacts: this.state.relevantContacts,
       assigneePhone: this.state.assigneePhone,
       status: this.state.status,
