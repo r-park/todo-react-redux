@@ -138,7 +138,7 @@ export class TasksPage extends Component {
   }
 
   renderTaskView() {
-    if (this.state.selectedTask == null) return null; 
+    if (this.state.selectedTask == null) return <div>&nbsp;</div>; 
     
     return (
       <TaskView 

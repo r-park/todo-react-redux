@@ -100,16 +100,9 @@ export class TaskView extends Component {
           projectName: projectName || '',
         });
       }
-
-    // if(nextProps.comments.length() != this.state.comments) {
-    //   this.props.unloadComments(); //TODO - probably length is not such a good indicator
-    //   // TODO - we should unload comments when we're start loading new comments
-    // }
   }
 
   render() {
-    //const { task } = this.props;
-    
     const task = this.props.selectedTask;
 
     if(!task) {
