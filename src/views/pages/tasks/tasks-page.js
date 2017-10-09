@@ -58,6 +58,8 @@ export class TasksPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("tasks page got new props");
+
     if (nextProps.location.search !== this.props.location.search) {
       this.props.filterTasks(
         this.getFilterParam(nextProps.location.search)
@@ -66,15 +68,15 @@ export class TasksPage extends Component {
 
     // if url has a task id - select it
     if (this.props.match != null) {
-      if (this.state.selectedTask == null || this.state.selectedTask.get("id") != nextProps.match.params.id) {
-        const tid = nextProps.match.params.id;
+      const tid = nextProps.match.params.id;
 
-        this.setState({
-          selectedTask: this.props.tasks.find((task)=>( task.get('id') == tid ))
-        })
-      }
+      this.setState({
+        selectedTask: this.props.tasks.find((task)=>( task.get('id') == tid ))
+      })
     } else {
-      this.selectTaskAndSetComments();
+      this.setState({
+        selectedTask: this.props.tasks.first()
+      })
     }
   }
 
@@ -123,10 +125,15 @@ export class TasksPage extends Component {
     this.props.assignTask(task, this.props.auth);
   }
 
-  // TODO - Better handle it on the redux level and on each
   // call to select task - load the correct comments
   selectTaskAndSetComments(task) {
-    this.props.history.push(`/task/${task.get("id")}`);
+    if (task) {
+      this.props.history.push(`/task/${task.get("id")}`);
+    }
+    else {
+      this.props.history.push(`/`);
+    }
+    
   }
 
   renderTaskView() {
