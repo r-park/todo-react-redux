@@ -68,7 +68,7 @@ export class TasksPage extends Component {
     // if url has a task id - select it
     if (this.props.match != null) {
       if (this.state.selectedTask == null || this.state.selectedTask.get("id") != nextProps.match.params.id) {
-        const tid = this.props.match.params.id;
+        const tid = nextProps.match.params.id;
 
         this.setState({
           selectedTask: this.props.tasks.find((task)=>( task.get('id') == tid ))
@@ -127,10 +127,24 @@ export class TasksPage extends Component {
   // TODO - Better handle it on the redux level and on each
   // call to select task - load the correct comments
   selectTaskAndSetComments(task) {
-    const result = this.props.selectTask(task);
-    this.props.unloadComments(); //TODO - not sure if needed here
-    this.props.loadComments();
-    return result;
+    this.props.history.push(`/task/${task.get("id")}`);
+  }
+
+  renderTaskView() {
+    if (this.state.selectedTask == null) return null; 
+    
+    return (
+      <TaskView 
+        createTask={this.props.createTask}
+        removeTask={this.props.removeTask}
+        updateTask={this.props.updateTask}
+        selectTask={this.selectTaskAndSetComments}
+        selectedTask={this.state.selectedTask.toJS()}
+        isAdmin={false}
+        assignTask={this.assignTaskToSignedUser}
+        unloadComments={this.props.unloadComments}
+        createComment={this.props.createComment}
+      />)
   }
 
   render() {
@@ -147,16 +161,7 @@ export class TasksPage extends Component {
       
         <div className="g-row">
           <div className="g-col-60 g-col-xs-100">
-            <TaskView 
-              createTask={this.props.createTask}
-              removeTask={this.props.removeTask}
-              updateTask={this.props.updateTask}
-              selectTask={this.selectTaskAndSetComments}
-              isAdmin={false}
-              assignTask={this.assignTaskToSignedUser}
-              unloadComments={this.props.unloadComments}
-              createComment={this.props.createComment}
-            />
+            { this.renderTaskView() }
           </div>
           <div className="g-col-40 g-col-xs-100">
             <TaskList

@@ -71,7 +71,7 @@ export class TaskView extends Component {
       window.scrollTo(0, 150);
     }
 
-    let nextSelectedTask = nextProps.task || {};
+    let nextSelectedTask = nextProps.selectedTask || {};
     let { title, description, circle, type, projectName,
       label, relevantContacts,
       assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
@@ -100,7 +100,9 @@ export class TaskView extends Component {
   }
 
   render() {
-    const { task } = this.props;
+    //const { task } = this.props;
+    
+    const task = this.props.selectedTask;
 
     if(!task) {
       return(
@@ -255,7 +257,7 @@ export class TaskView extends Component {
     };
     fieldsToUpdate.dueDate = this.state.dueDate || null;
     
-    this.props.updateTask(this.props.task, fieldsToUpdate);
+    this.props.updateTask(this.props.selectedTask, fieldsToUpdate);
   }
 
   arrayToObject(array) {
@@ -271,11 +273,9 @@ export class TaskView extends Component {
 //-------------------------------------
 
 const mapStateToProps = createSelector(
-  getSelectedTask,
   getCommentList,
   getAuth,
-  (task, comments, auth) => ({
-    task,
+  (comments, auth) => ({
     comments,
     auth
   })
@@ -288,4 +288,6 @@ const mapDispatchToProps = Object.assign(
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TaskView);
+)(TaskView); 
+
+//export default TaskView;
