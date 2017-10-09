@@ -5,6 +5,8 @@
   width: 319px;
   position: absolute;
   pointer-events: none;
+  left: calc(50% - 160px);
+  top: 12em;
 }
 
 .loader-unicorn.hideme {

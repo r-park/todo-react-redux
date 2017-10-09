@@ -129,6 +129,7 @@ export class TasksPage extends Component {
           </div>
       
         <div className="g-row">
+          <LoaderUnicorn isShow={ isLoading }/>
           <div className="g-col-60 g-col-xs-100">
             <TaskView 
               createTask={this.props.createTask}
@@ -142,7 +143,6 @@ export class TasksPage extends Component {
             />
           </div>
           <div className="g-col-40 g-col-xs-100">
-            <LoaderUnicorn isShow={ isLoading }/>
             <TaskList
               tasks={this.props.tasks}
               selectTask={this.selectTaskAndSetComments}
