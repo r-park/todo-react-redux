@@ -63,35 +63,43 @@ export class TaskView extends Component {
     unloadComments: PropTypes.func.isRequired,
   };
 
+  componentWillMount() {
+  }
+
   componentWillReceiveProps(nextProps) {
     // TODO - check this maybe called several times now that we use comments
 
-    // TODO: On mobile scroll to top - hackish
+    // TODO: On mobile scroll to top - hackish - 
+    // TODO: should move this to a window resize event...
     if(window.innerWidth < 768) {
       window.scrollTo(0, 150);
     }
 
     let nextSelectedTask = nextProps.selectedTask || {};
-    let { title, description, circle, type, projectName,
+    let { id, title, description, circle, type, projectName,
       label, relevantContacts,
       assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
     
-    const labelAsArray = label ?
-      (Object.keys(label).map( l => { return l })) : [];
+      // this checks if we got another task, or we're updating the same one
+      if (id != this.state.id) {
+        const labelAsArray = label ?
+          (Object.keys(label).map( l => { return l })) : [];
 
-    this.setState({
-      title: title || '',
-      description:description || '',
-      circle:circle || '',
-      label: labelAsArray || [],
-      relevantContacts:relevantContacts || '',
-      assigneePhone:assigneePhone || '',
-      status: status || '',
-      createdDate: createdDate || '',
-      dueDate: dueDate || null,
-      type: type || null,
-      projectName: projectName || '',
-    });
+        this.setState({
+          id: id || '',
+          title: title || '',
+          description:description || '',
+          circle:circle || '',
+          label: labelAsArray || [],
+          relevantContacts:relevantContacts || '',
+          assigneePhone:assigneePhone || '',
+          status: status || '',
+          createdDate: createdDate || '',
+          dueDate: dueDate || null,
+          type: type || null,
+          projectName: projectName || '',
+        });
+      }
 
     // if(nextProps.comments.length() != this.state.comments) {
     //   this.props.unloadComments(); //TODO - probably length is not such a good indicator

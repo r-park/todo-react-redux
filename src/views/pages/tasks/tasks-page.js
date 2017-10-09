@@ -51,7 +51,6 @@ export class TasksPage extends Component {
   }
 
   componentWillMount() {
-    console.log("mount");
     this.props.loadTasks();
     this.props.filterTasks(
       this.getFilterParam(this.props.location.search)
