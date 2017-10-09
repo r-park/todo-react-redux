@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { getAuth } from 'src/auth';
 
-import { getSelectedTask } from 'src/tasks';
 import { getCommentList } from 'src/comments';
 
 import './task-view.css';
