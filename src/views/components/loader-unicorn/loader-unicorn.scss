@@ -4,11 +4,10 @@
   height: 218px;
   width: 319px;
   position: absolute;
+  pointer-events: none;
 }
 
 .loader-unicorn.hideme {
   transition: opacity 300ms 0ms;
   opacity: 0.0;
-  // height: 0;
-  // width: 0;
 }
