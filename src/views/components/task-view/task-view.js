@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { getAuth } from 'src/auth';
 
-import { getSelectedTask } from 'src/tasks';
 import { getCommentList } from 'src/comments';
 
 import './task-view.css';
@@ -64,35 +63,43 @@ export class TaskView extends Component {
     unloadComments: PropTypes.func.isRequired,
   };
 
+  componentWillMount() {
+  }
+
   componentWillReceiveProps(nextProps) {
     // TODO - check this maybe called several times now that we use comments
 
-    // TODO: On mobile scroll to top - hackish
+    // TODO: On mobile scroll to top - hackish - 
+    // TODO: should move this to a window resize event...
     if(window.innerWidth < 768) {
       window.scrollTo(0, 150);
     }
 
-    let nextSelectedTask = nextProps.task || {};
-    let { title, description, circle, type, projectName,
+    let nextSelectedTask = nextProps.selectedTask || {};
+    let { id, title, description, circle, type, projectName,
       label, relevantContacts,
       assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
     
-    const labelAsArray = label ?
-      (Object.keys(label).map( l => { return l })) : [];
+      // this checks if we got another task, or we're updating the same one
+      if (id != this.state.id) {
+        const labelAsArray = label ?
+          (Object.keys(label).map( l => { return l })) : [];
 
-    this.setState({
-      title: title || '',
-      description:description || '',
-      circle:circle || '',
-      label: labelAsArray || [],
-      relevantContacts:relevantContacts || '',
-      assigneePhone:assigneePhone || '',
-      status: status || '',
-      createdDate: createdDate || '',
-      dueDate: dueDate || null,
-      type: type || null,
-      projectName: projectName || '',
-    });
+        this.setState({
+          id: id || '',
+          title: title || '',
+          description:description || '',
+          circle:circle || '',
+          label: labelAsArray || [],
+          relevantContacts:relevantContacts || '',
+          assigneePhone:assigneePhone || '',
+          status: status || '',
+          createdDate: createdDate || '',
+          dueDate: dueDate || null,
+          type: type || null,
+          projectName: projectName || '',
+        });
+      }
 
     // if(nextProps.comments.length() != this.state.comments) {
     //   this.props.unloadComments(); //TODO - probably length is not such a good indicator
@@ -101,7 +108,9 @@ export class TaskView extends Component {
   }
 
   render() {
-    const { task } = this.props;
+    //const { task } = this.props;
+    
+    const task = this.props.selectedTask;
 
     if(!task) {
       return(
@@ -256,7 +265,7 @@ export class TaskView extends Component {
     };
     fieldsToUpdate.dueDate = this.state.dueDate || null;
     
-    this.props.updateTask(this.props.task, fieldsToUpdate);
+    this.props.updateTask(this.props.selectedTask, fieldsToUpdate);
   }
 
   arrayToObject(array) {
@@ -272,11 +281,9 @@ export class TaskView extends Component {
 //-------------------------------------
 
 const mapStateToProps = createSelector(
-  getSelectedTask,
   getCommentList,
   getAuth,
-  (task, comments, auth) => ({
-    task,
+  (comments, auth) => ({
     comments,
     auth
   })
@@ -289,4 +296,6 @@ const mapDispatchToProps = Object.assign(
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TaskView);
+)(TaskView); 
+
+//export default TaskView;

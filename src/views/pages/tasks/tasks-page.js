@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 
 import { authActions, getAuth } from 'src/auth';
 import { getNotification, notificationActions } from 'src/notification';
-import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/tasks';
+import { getTaskFilter, getVisibleTasks, tasksActions, taskFilters } from 'src/tasks';
 import { commentsActions } from 'src/comments';
 import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
@@ -25,6 +25,8 @@ export class TasksPage extends Component {
     this.isAdmin = this.isAdmin.bind(this);
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
     this.selectTaskAndSetComments = this.selectTaskAndSetComments.bind(this);
+    
+    this.state = {selectedTask: null};
   }
 
   static propTypes = {
@@ -45,6 +47,10 @@ export class TasksPage extends Component {
     auth: PropTypes.object.isRequired
   };
 
+  static contextTypes = {
+    tasks: PropTypes.object.isRequired,
+  }
+
   componentWillMount() {
     this.props.loadTasks();
     this.props.filterTasks(
@@ -53,11 +59,25 @@ export class TasksPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("tasks page got new props");
+
     if (nextProps.location.search !== this.props.location.search) {
       this.props.filterTasks(
         this.getFilterParam(nextProps.location.search)
-      );
-      this.selectTaskAndSetComments();
+      );  
+    }
+
+    // if url has a task id - select it
+    if (this.props.match != null) {
+      const tid = nextProps.match.params.id;
+
+      this.setState({
+        selectedTask: this.props.tasks.find((task)=>( task.get('id') == tid ))
+      })
+    } else {
+      this.setState({
+        selectedTask: this.props.tasks.first()
+      })
     }
   }
 
@@ -106,13 +126,32 @@ export class TasksPage extends Component {
     this.props.assignTask(task, this.props.auth);
   }
 
-  // TODO - Better handle it on the redux level and on each
   // call to select task - load the correct comments
   selectTaskAndSetComments(task) {
-    const result = this.props.selectTask(task);
-    this.props.unloadComments(); //TODO - not sure if needed here
-    this.props.loadComments();
-    return result;
+    if (task) {
+      this.props.history.push(`/task/${task.get("id")}`);
+    }
+    else {
+      this.props.history.push(`/`);
+    }
+    
+  }
+
+  renderTaskView() {
+    if (this.state.selectedTask == null) return null; 
+    
+    return (
+      <TaskView 
+        createTask={this.props.createTask}
+        removeTask={this.props.removeTask}
+        updateTask={this.props.updateTask}
+        selectTask={this.selectTaskAndSetComments}
+        selectedTask={this.state.selectedTask.toJS()}
+        isAdmin={false}
+        assignTask={this.assignTaskToSignedUser}
+        unloadComments={this.props.unloadComments}
+        createComment={this.props.createComment}
+      />)
   }
 
   render() {
@@ -131,16 +170,7 @@ export class TasksPage extends Component {
         <div className="g-row">
           <LoaderUnicorn isShow={ isLoading }/>
           <div className="g-col-60 g-col-xs-100">
-            <TaskView 
-              createTask={this.props.createTask}
-              removeTask={this.props.removeTask}
-              updateTask={this.props.updateTask}
-              selectTask={this.selectTaskAndSetComments}
-              isAdmin={false}
-              assignTask={this.assignTaskToSignedUser}
-              unloadComments={this.props.unloadComments}
-              createComment={this.props.createComment}
-            />
+            { this.renderTaskView() }
           </div>
           <div className="g-col-40 g-col-xs-100">
             <TaskList
@@ -166,7 +196,7 @@ const mapStateToProps = createSelector(
   getTaskFilter,
   getVisibleTasks,
   getAuth,
-  (notification, filterType, tasks, auth) => ({
+  (notification, filterType, tasks, auth, getVisibleTasks) => ({
     notification,
     filterType,
     tasks,

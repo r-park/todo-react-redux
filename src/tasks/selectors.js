@@ -25,38 +25,42 @@ export function getAuth(state) {
   return state.auth;
 }
 
-
 //=====================================
 //  MEMOIZED SELECTORS
 //-------------------------------------
+
+export const taskFilters = {
+  complete: (tasks, filter, auth) => {
+    return tasks.filter(task => task.completed)
+  },
+
+  unassigned: (tasks, filter, auth) => {
+    return tasks.filter(task => !task.assignee);
+  },
+  
+  label: (tasks, filter, auth) => {
+    return tasks.filter(task => {
+      return task.label && task.label[filter.text];
+    });
+  },
+
+  mine: (tasks, filter, auth) => {
+    return tasks.filter(task => 
+      {
+        return ((task.assignee && (task.assignee.id === auth.id)) ||
+          (task.creator && task.creator.id === auth.id));
+      });
+  }
+}
 
 export const getVisibleTasks = createSelector(
   getTaskList,
   getTaskFilter,
   getAuth,
   (tasks, filter, auth) => {
-    switch (filter.name) {
+      if (taskFilters[filter.name] != null)
+        return taskFilters[filter.name](tasks, filter, auth)
 
-      case 'completed':
-        return tasks.filter(task => task.completed);
-      
-      case 'unassigned':
-        return tasks.filter(task => !task.assignee);
-      
-      case 'label':
-        return tasks.filter(task => {
-          return task.label && task.label[filter.text];
-        });
-      
-      case 'mine':
-        return tasks.filter(task => 
-        {
-          return ((task.assignee && (task.assignee.id === auth.id)) ||
-            (task.creator && task.creator.id === auth.id));
-        });
-
-      default:
-        return tasks;
+      return tasks;
     }
-  }
 );
