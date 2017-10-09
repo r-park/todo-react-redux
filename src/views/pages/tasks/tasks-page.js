@@ -14,6 +14,7 @@ import TaskList from '../../components/task-list';
 import TaskView from '../../components/task-view/task-view';
 import Button from '../../components/button';
 import classNames from 'classnames';
+import LoaderUnicorn from '../../components/loader-unicorn/loader-unicorn';
 
 import './tasks-page.css';
 
@@ -115,6 +116,7 @@ export class TasksPage extends Component {
   }
 
   render() {
+    const isLoading = (!this.props.tasks || this.props.tasks.size <= 0);
     return (
       <div>
           <div className="g-col">
@@ -140,6 +142,7 @@ export class TasksPage extends Component {
             />
           </div>
           <div className="g-col-40 g-col-xs-100">
+            <LoaderUnicorn isShow={ isLoading }/>
             <TaskList
               tasks={this.props.tasks}
               selectTask={this.selectTaskAndSetComments}
