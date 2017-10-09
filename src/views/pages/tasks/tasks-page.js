@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 
 import { authActions, getAuth } from 'src/auth';
 import { getNotification, notificationActions } from 'src/notification';
-import { getTaskFilter, getVisibleTasks, tasksActions } from 'src/tasks';
+import { getTaskFilter, getVisibleTasks, tasksActions, taskFilters } from 'src/tasks';
 import { commentsActions } from 'src/comments';
 import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
@@ -24,6 +24,8 @@ export class TasksPage extends Component {
     this.isAdmin = this.isAdmin.bind(this);
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
     this.selectTaskAndSetComments = this.selectTaskAndSetComments.bind(this);
+    
+    this.state = {selectedTask: null};
   }
 
   static propTypes = {
@@ -44,7 +46,12 @@ export class TasksPage extends Component {
     auth: PropTypes.object.isRequired
   };
 
+  static contextTypes = {
+    tasks: PropTypes.object.isRequired,
+  }
+
   componentWillMount() {
+    console.log("mount");
     this.props.loadTasks();
     this.props.filterTasks(
       this.getFilterParam(this.props.location.search)
@@ -55,7 +62,19 @@ export class TasksPage extends Component {
     if (nextProps.location.search !== this.props.location.search) {
       this.props.filterTasks(
         this.getFilterParam(nextProps.location.search)
-      );
+      );  
+    }
+
+    // if url has a task id - select it
+    if (this.props.match != null) {
+      if (this.state.selectedTask == null || this.state.selectedTask.get("id") != nextProps.match.params.id) {
+        const tid = this.props.match.params.id;
+
+        this.setState({
+          selectedTask: this.props.tasks.find((task)=>( task.get('id') == tid ))
+        })
+      }
+    } else {
       this.selectTaskAndSetComments();
     }
   }
@@ -163,7 +182,7 @@ const mapStateToProps = createSelector(
   getTaskFilter,
   getVisibleTasks,
   getAuth,
-  (notification, filterType, tasks, auth) => ({
+  (notification, filterType, tasks, auth, getVisibleTasks) => ({
     notification,
     filterType,
     tasks,
