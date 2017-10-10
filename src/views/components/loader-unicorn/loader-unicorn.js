@@ -8,7 +8,7 @@ const LoaderUnicorn = ({ isShow }) => {
   if(!isShow) { componentClasses.push('hideme'); }
 
   return(
-    <Img src='https://i.imgur.com/fzauVo0.gif' 
+    <Img src='https://i.imgur.com/wULKbXa.gif' 
       className={componentClasses.join(' ')} />
   );
 };
