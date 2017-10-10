@@ -119,6 +119,8 @@ export class TaskView extends Component {
         !task.circle && !task.status;
     
     const isUserCreator = task.creator && task.creator.id == this.props.auth.id;
+    const isUserAssignee = task.assignee && task.assignee.id == this.props.auth.id;
+    const isCreatorOrAssignee = isUserCreator || isUserAssignee;
 
     return (
       <div className='task-view-container'>
@@ -145,17 +147,17 @@ export class TaskView extends Component {
         </div>
         <div className='task-view'>
           <form onSubmit={this.handleSubmit} noValidate>
-            {this.renderInput(task, 'title', 'שם המשימה')}
-            {this.renderInput(task, 'projectName', 'שם הפרוייקט')}
-            {this.renderTextArea(task, 'description', 'תאור המשימה')}
+            {this.renderInput(task, 'title', 'שם המשימה', isCreatorOrAssignee)}
+            {this.renderInput(task, 'projectName', 'שם הפרוייקט', isCreatorOrAssignee)}
+            {this.renderTextArea(task, 'description', 'תאור המשימה', isCreatorOrAssignee)}
             {this.props.isAdmin? 
-              this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle): ''}
-            <div><Icon className='label' name='label_outline' /> {this.renderLabel()} </div>
-            { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType)}
-            {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים')}
-            {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה')}
-            {this.renderTextArea(task, 'status', 'סטטוס המשימה')}
-            <input className='button button-small button-save' type="submit" value="שמור" />
+              this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle, isCreatorOrAssignee): ''}
+            <div><Icon className='label' name='label_outline' /> {this.renderLabel(isCreatorOrAssignee)} </div>
+            { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType, isCreatorOrAssignee)}
+            {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים', isCreatorOrAssignee)}
+            {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה', isCreatorOrAssignee)}
+            {this.renderTextArea(task, 'status', 'סטטוס המשימה', isCreatorOrAssignee)}
+            {isCreatorOrAssignee ? <input className='button button-small button-save' type="submit" value="שמור" /> : ''}
           </form>
         </div>
         { this.props.comments ?
@@ -168,7 +170,7 @@ export class TaskView extends Component {
     );
   }
   
-  renderSelect(task, fieldName, placeholder, options) {
+  renderSelect(task, fieldName, placeholder, options, isEditable) {
     return (
       <Select
       type='text'
@@ -181,46 +183,53 @@ export class TaskView extends Component {
       options={options}
       onBlur={this.handleSubmit}
       noResultsText={'לא נמצאו תוצאות'}
-      searchable={ false } />
+      searchable={ false }
+      disabled = { !isEditable }/>
   );
   }
 
-  renderInput(task, fieldName, placeholder) {
+  renderInput(task, fieldName, placeholder, isEditable) {
+    const classNames = isEditable ? ' editable' : ''
     return (
         <input
-        className='changing-input'
+        className={`changing-input${classNames}`}
         type = 'text'
         name = { fieldName }
         value = { this.state[fieldName] }
         placeholder = { placeholder }
         ref = { e => this[fieldName+'Input'] = e }
         onChange = { this.handleChange }
-        onBlur = { this.handleSubmit } />
+        onBlur = { this.handleSubmit } 
+        disabled = { !isEditable } />
     );
   }
 
-  renderTextArea(task, fieldName, placeholder) {
+  renderTextArea(task, fieldName, placeholder, isEditable) {
+    const classNames = isEditable ? ' editable' : ''
     return (
         <Textarea
-        className='changing-input'
+        className={`changing-input${classNames}`}
         name={fieldName}
         value={this.state[fieldName]}
         placeholder={placeholder}
         ref={e => this[fieldName+'Input'] = e}
         onChange={this.handleChange}
-        onBlur={this.handleSubmit}/>
+        onBlur={this.handleSubmit}
+        disabled = { !isEditable } />
     );
   }
 
-  renderLabel() {
+  renderLabel(isEditable) {
     const showPlaceholder = !this.state.label || this.state.label.length == 0 ;
+    const classNames = isEditable ? ' editable' : ''
     return (
-      <TagsInput className='react-tagsinput-changing'
+      <TagsInput className={`react-tagsinput-changing${classNames}`}
       value={this.state.label}
       onChange={this.handleLabelChange}
       onlyUnique={true}
       addOnBlur={true}
       inputProps={{ placeholder: showPlaceholder ? 'הכנס תגיות. לחץ על Enter בין תגית לתגית' : ''}}
+      disabled = { !isEditable }
       />
     )
   }
