@@ -91,6 +91,9 @@
   vertical-align: top;
   border-color: white;
   overflow: hidden;
+}
+
+.editable {
   &:hover {
     border: 1px solid #d5dce0;
     padding: 4px;
@@ -108,10 +111,5 @@
   input {
     font-size: 1.4em;
     width: calc( 100% - 130px);
-  }
-
-  &:hover {
-    border: 1px solid #d5dce0;
-    padding: 4px 0 0 0;
   }
 }

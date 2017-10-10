@@ -59,8 +59,6 @@ export class TasksPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("tasks page got new props");
-
     if (nextProps.location.search !== this.props.location.search) {
       this.props.filterTasks(
         this.getFilterParam(nextProps.location.search)
