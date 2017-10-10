@@ -22,6 +22,7 @@ const App = ({authenticated, signOut}) => (
     <main>
       <RequireAuthRoute authenticated={authenticated} exact path="/" component={TasksPage}/>      
       <RequireAuthRoute authenticated={authenticated} path="/task/:id" component={TasksPage} />
+      <RequireAuthRoute authenticated={authenticated} path="/filter/:ftype/task/:id" component={TasksPage} />
       <RequireUnauthRoute authenticated={authenticated} path="/sign-in" component={SignInPage}/>
     </main>
   </div>

@@ -26,14 +26,17 @@ export class TasksPage extends Component {
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
     this.selectTaskAndSetComments = this.selectTaskAndSetComments.bind(this);
     
-    this.state = {selectedTask: null};
+    this.state = {
+      tasks: this.props.tasks,
+      selectedTask: null
+    };
   }
 
   static propTypes = {
     createTask: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
-    filterTasks: PropTypes.func.isRequired,
-    filterType: PropTypes.object.isRequired,
+    //filterTasks: PropTypes.func.isRequired,
+    //filterType: PropTypes.object.isRequired,
     loadTasks: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
@@ -47,26 +50,19 @@ export class TasksPage extends Component {
     auth: PropTypes.object.isRequired
   };
 
-  static contextTypes = {
-    tasks: PropTypes.object.isRequired,
-  }
-
   componentWillMount() {
     this.props.loadTasks();
-    this.props.filterTasks(
-      this.getFilterParam(this.props.location.search)
-    );
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.search !== this.props.location.search) {
-      this.props.filterTasks(
-        this.getFilterParam(nextProps.location.search)
-      );  
+      // this.props.filterTasks(
+      //   this.getFilterParam(nextProps.location.search)
+      // );  
     }
 
     // if url has a task id - select it
-    if (this.props.match != null) {
+    if (nextProps.match != null && nextProps.match.params.id) {
       const tid = nextProps.match.params.id;
 
       this.setState({
@@ -80,6 +76,11 @@ export class TasksPage extends Component {
       this.setState({
         selectedTask: this.props.tasks.first()
       })
+    }
+
+    if (nextProps.match != null && nextProps.match.params.ftype) {
+      this.setState({tasks: this.props.tasks});
+      //this.setState({tasks: this.props.tasks.filter(taskFilters["mine"])})
     }
   }
 
@@ -157,11 +158,11 @@ export class TasksPage extends Component {
   }
 
   render() {
-    const isLoading = (!this.props.tasks || this.props.tasks.size <= 0);
+    const isLoading = (!this.state.tasks || this.props.tasks.size <= 0);
     return (
       <div>
           <div className="g-col">
-            <TaskFilters filter={this.props.filterType} />
+            {/* <TaskFilters filter={this.props.filterType} /> */}
             <Button
               className="button button-small add-task-button"
               onClick={ this.createNewTask }>
@@ -176,7 +177,7 @@ export class TasksPage extends Component {
           </div>
           <div className="g-col-40 g-col-xs-100">
             <TaskList
-              tasks={this.props.tasks}
+              tasks={this.state.tasks}
               selectTask={this.selectTaskAndSetComments}
             />
           </div>
@@ -193,7 +194,14 @@ export class TasksPage extends Component {
 //  CONNECT
 //-------------------------------------
 
-const mapStateToProps = createSelector(
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks.list,
+    notification: state.notification,
+    auth: state.auth
+  }
+}
+/*createSelector(
   getNotification,
   getTaskFilter,
   getVisibleTasks,
@@ -204,7 +212,7 @@ const mapStateToProps = createSelector(
     tasks,
     auth
   })
-);
+);*/
 
 const mapDispatchToProps = Object.assign(
   {},
