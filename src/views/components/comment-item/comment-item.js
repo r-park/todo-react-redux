@@ -38,7 +38,7 @@ export class CommentItem extends Component {
 
   renderBody(comment) {
     return (
-      <div>
+      <div class='comment-body'>
         {comment.body}
       </div>
     );

@@ -82,12 +82,11 @@ export function loadCommentsSuccess(comments) {
   };
 }
 
-export function loadComments() {
+export function loadComments(selectedTaskId) {
   return (dispatch, getState) => {
-    const { selectedTask } = getState().comments;
     commentList.path = `comments`;
-    if(selectedTask) {
-      commentList.query = ['taskId','==', selectedTask.id];
+    if(selectedTaskId) {
+      commentList.query = ['taskId','==', selectedTaskId];
     }else {
       commentList.query = null;
     }
