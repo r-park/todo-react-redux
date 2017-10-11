@@ -28,10 +28,10 @@ class TaskFilters extends Component {
     return(
       <div className="task-filters">
       <ul>
-        <li><NavLink isActive={() => !filter || !filter.name} to="/">כל המשימות בעולם</NavLink></li>
-        <li><NavLink isActive={() => filter.name === 'mine'} to={{pathname: '/', search: '?filter=mine'}}>המשימות שלי</NavLink></li>
-        <li><NavLink isActive={() => filter.name === 'unassigned'} to={{pathname: '/', search: '?filter=unassigned'}}>משימות פנויות</NavLink></li>
-        <li><NavLink isActive={() => filter.name === 'label'} to={{pathname: '/', search: '?filter=label&text=' + this.state.label }}>משימות לפי תגית</NavLink></li>
+        <li><NavLink to="/task/1">כל המשימות בעולם</NavLink></li>
+        <li><NavLink to="/filter/mine">המשימות שלי</NavLink></li>
+        <li><NavLink to='/filter/unassigned'>משימות פנויות</NavLink></li>
+        <li><NavLink to='/filter/label'>משימות לפי תגית</NavLink></li>
       </ul>
       <TagsInput
         value={this.state.label}

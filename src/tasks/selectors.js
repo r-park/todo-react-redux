@@ -1,58 +1,45 @@
 import { createSelector } from 'reselect';
 
-
-export function getTasks(state) {
-  return state.tasks;
+const filters = { 
+  user: (auth, value) =>  ({type: "user", uid: value}),
+  complete: (auth, value) => ({type: "complete"}),
+  unassigned: (auth, value) => ({type: "unassigned"}),
+  label: (auth, value) => ({type: "label", text: value}),
+  mine: (auth, value) => ({type: "user", uid: auth.id})
 }
 
-export function getTaskList(state) {
-  return getTasks(state).list;
-}
-
-export function getTaskFilter(state) {
-  return getTasks(state).filter;
-}
-
-export function getDeletedTask(state) {
-  return getTasks(state).deleted;
-}
-
-export function getSelectedTask(state) {
-  return getTasks(state).selected;
-}
-
-export function getAuth(state) {
-  return state.auth;
+export function buildFilter(auth, type, value) {
+  return filters[type](auth, value); 
 }
 
 //=====================================
 //  MEMOIZED SELECTORS
 //-------------------------------------
-
 export const taskFilters = {
-  complete: (tasks, filter, auth) => {
+  complete: (tasks, filter) => {
     return tasks.filter(task => task.completed)
   },
 
-  unassigned: (tasks, filter, auth) => {
+  unassigned: (tasks, filter) => {
     return tasks.filter(task => !task.assignee);
   },
   
-  label: (tasks, filter, auth) => {
+  label: (tasks, filter) => {
     return tasks.filter(task => {
       return task.label && task.label[filter.text];
     });
   },
 
-  mine: (tasks, filter, auth) => {
+  user: (tasks, filter) => {
+    const auth = filter.uid;
     return tasks.filter(task => 
       {
-        return ((task.assignee && (task.assignee.id === auth.id)) ||
-          (task.creator && task.creator.id === auth.id));
+        return ((task.assignee && (task.assignee.id === auth)) ||
+          (task.creator && task.creator.id === auth));
       });
   }
 }
-
+/*
 export const getVisibleTasks = createSelector(
   getTaskList,
   getTaskFilter,
@@ -63,4 +50,4 @@ export const getVisibleTasks = createSelector(
 
       return tasks;
     }
-);
+); */

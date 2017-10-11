@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 
 import { authActions, getAuth } from 'src/auth';
 import { getNotification, notificationActions } from 'src/notification';
-import { getTaskFilter, getVisibleTasks, tasksActions, taskFilters } from 'src/tasks';
+import { buildFilter, tasksActions, taskFilters } from 'src/tasks';
 import { commentsActions } from 'src/comments';
 import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
@@ -24,7 +24,7 @@ export class TasksPage extends Component {
     this.createNewTask = this.createNewTask.bind(this);
     this.isAdmin = this.isAdmin.bind(this);
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
-    this.selectTaskAndSetComments = this.selectTaskAndSetComments.bind(this);
+    this.goToTask = this.goToTask.bind(this);
     
     this.state = {
       tasks: this.props.tasks,
@@ -35,8 +35,8 @@ export class TasksPage extends Component {
   static propTypes = {
     createTask: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
-    //filterTasks: PropTypes.func.isRequired,
-    //filterType: PropTypes.object.isRequired,
+    filters: PropTypes.object.isRequired,
+    buildFilter: PropTypes.func.isRequired, 
     loadTasks: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
@@ -56,9 +56,6 @@ export class TasksPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.search !== this.props.location.search) {
-      // this.props.filterTasks(
-      //   this.getFilterParam(nextProps.location.search)
-      // );  
     }
 
     // if url has a task id - select it
@@ -78,22 +75,17 @@ export class TasksPage extends Component {
       })
     }
 
-    if (nextProps.match != null && nextProps.match.params.ftype) {
+    if (nextProps.match != null && nextProps.match.params.ftype) {      
+      const filter = this.props.buildFilter(this.props.auth, nextProps.match.params.ftype);
+      this.setState({tasks: this.props.filters["user"](this.props.tasks, filter)});      
+    }
+    else {
       this.setState({tasks: this.props.tasks});
-      //this.setState({tasks: this.props.tasks.filter(taskFilters["mine"])})
     }
   }
 
   componentWillUnmount() {
     this.props.unloadTasks();
-  }
-
-  getFilterParam(search) {
-    const params = new URLSearchParams(search);
-    let filterParams = {};
-    filterParams.name = params.get('filter');
-    filterParams.text = params.get('text');
-    return filterParams;
   }
 
   renderNotification() {
@@ -130,7 +122,7 @@ export class TasksPage extends Component {
   }
 
   // call to select task - load the correct comments
-  selectTaskAndSetComments(task) {
+  goToTask(task) {
     if (task) {
       this.props.history.push(`/task/${task.get("id")}`);
     }
@@ -148,7 +140,7 @@ export class TasksPage extends Component {
         createTask={this.props.createTask}
         removeTask={this.props.removeTask}
         updateTask={this.props.updateTask}
-        selectTask={this.selectTaskAndSetComments}
+        selectTask={this.goToTask}
         selectedTask={this.state.selectedTask.toJS()}
         isAdmin={false}
         assignTask={this.assignTaskToSignedUser}
@@ -158,11 +150,13 @@ export class TasksPage extends Component {
   }
 
   render() {
+    // TODO : use state.tasks instead. It is possible that a filter would 
+    // return 0 results, but loading has finished
     const isLoading = (!this.state.tasks || this.props.tasks.size <= 0);
     return (
       <div>
           <div className="g-col">
-            {/* <TaskFilters filter={this.props.filterType} /> */}
+            { <TaskFilters filter={this.props.filterType} /> }
             <Button
               className="button button-small add-task-button"
               onClick={ this.createNewTask }>
@@ -178,7 +172,7 @@ export class TasksPage extends Component {
           <div className="g-col-40 g-col-xs-100">
             <TaskList
               tasks={this.state.tasks}
-              selectTask={this.selectTaskAndSetComments}
+              selectTask={this.goToTask}
             />
           </div>
 
@@ -193,26 +187,15 @@ export class TasksPage extends Component {
 //=====================================
 //  CONNECT
 //-------------------------------------
-
 const mapStateToProps = (state) => {
   return {
     tasks: state.tasks.list,
     notification: state.notification,
-    auth: state.auth
+    auth: state.auth,
+    filters: taskFilters,
+    buildFilter: buildFilter
   }
 }
-/*createSelector(
-  getNotification,
-  getTaskFilter,
-  getVisibleTasks,
-  getAuth,
-  (notification, filterType, tasks, auth, getVisibleTasks) => ({
-    notification,
-    filterType,
-    tasks,
-    auth
-  })
-);*/
 
 const mapDispatchToProps = Object.assign(
   {},
