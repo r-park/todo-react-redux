@@ -72,6 +72,10 @@ export class TasksPage extends Component {
       this.setState({
         selectedTask: this.props.tasks.find((task)=>( task.get('id') == tid ))
       })
+      if(this.state.selectedTask && tid != this.state.selectedTask.id) {
+        this.props.unloadComments();
+        this.props.loadComments(tid);
+      }
     } else {
       this.setState({
         selectedTask: this.props.tasks.first()
