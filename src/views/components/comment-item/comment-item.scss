@@ -1,0 +1,20 @@
+
+.comment-item {
+  margin-bottom: 1em;
+  font-size: 0.9em;
+
+  .comment-item-creator {
+    display: inline-block;
+  }
+
+  .comment-body {
+    padding: 0 3em;
+  }
+
+  .avatar {
+    margin: 0 5px; 
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+  }
+}

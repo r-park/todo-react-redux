@@ -2,10 +2,11 @@ import { firebaseDb } from './firebase';
 
 
 export class FirebaseList {
-  constructor(actions, modelClass, path = null) {
+  constructor(actions, modelClass, path = null, query = null) {
     this._actions = actions;
     this._modelClass = modelClass;
     this._path = path;
+    this._query = query;
   }
 
   get path() {
@@ -16,71 +17,74 @@ export class FirebaseList {
     this._path = value;
   }
 
+  get query() {
+    return this._query;
+  }
+
+  set query(value) {
+    this._query = value;
+  }
+
   push(value) {
-    return new Promise((resolve, reject) => {
-      firebaseDb.ref(this._path)
-        .push(value, error => error ? reject(error) : resolve());
-    });
+    return firebaseDb.collection(`${this._path}`).add(value);
   }
 
-  remove(key) {
-    return new Promise((resolve, reject) => {
-      firebaseDb.ref(`${this._path}/${key}`)
-        .remove(error => error ? reject(error) : resolve());
-    });
+  remove(id) {
+    return firebaseDb.collection(`${this._path}`).doc(id).delete();
   }
 
-  set(key, value) {
-    return new Promise((resolve, reject) => {
-      firebaseDb.ref(`${this._path}/${key}`)
-        .set(value, error => error ? reject(error) : resolve());
-    });
+  set(id, value) {
+    return firebaseDb.collection(`${this._path}`).doc(id).set(value);
   }
 
-  update(key, value) {
-    return new Promise((resolve, reject) => {
-      firebaseDb.ref(`${this._path}/${key}`)
-        .update(value, error => error ? reject(error) : resolve());
-    });
+  update(id, value) {
+    return firebaseDb.collection(`${this._path}`).doc(id).update(value);
   }
 
   subscribe(emit) {
-    let ref = firebaseDb.ref(this._path);
+    let collection = firebaseDb.collection(this._path);
+    if(this._query) {
+      collection = collection.where(
+        this._query[0],this._query[1],this._query[2]);
+    }
     let initialized = false;
     let list = [];
-
-    ref.once('value', () => {
-      initialized = true;
-      emit(this._actions.onLoad(list));
-    });
-
-    ref.on('child_added', snapshot => {
-      if (initialized) {
-        emit(this._actions.onAdd(this.unwrapSnapshot(snapshot)));
+    
+    let unsubscribe = collection.onSnapshot(snapshot => {
+      if(!initialized) {
+        emit(this._actions.onLoad(list));
+        initialized = true;
       }
-      else {
-        list.push(this.unwrapSnapshot(snapshot));
-      }
+      snapshot.docChanges.forEach(change => {
+          if (change.type === "added") {
+            if (initialized) {
+              emit(this._actions.onAdd(this.unwrapSnapshot(change.doc)));
+            }
+            else {
+              list.push(this.unwrapSnapshot(change.doc));
+            }
+          }
+          if (change.type === "modified") {
+              emit(this._actions.onChange(this.unwrapSnapshot(change.doc)));
+          }
+          if (change.type === "removed") {
+              emit(this._actions.onRemove(this.unwrapSnapshot(change.doc)));
+          }
+      });
     });
 
-    ref.on('child_changed', snapshot => {
-      emit(this._actions.onChange(this.unwrapSnapshot(snapshot)));
-    });
-
-    ref.on('child_removed', snapshot => {
-      emit(this._actions.onRemove(this.unwrapSnapshot(snapshot)));
-    });
-
-    this._unsubscribe = () => ref.off();
+    this._unsubscribe = () => unsubscribe();
   }
 
   unsubscribe() {
-    this._unsubscribe();
+    if(this._unsubscribe) {
+      this._unsubscribe();
+    }
   }
 
   unwrapSnapshot(snapshot) {
-    let attrs = snapshot.val();
-    attrs.key = snapshot.key;
-    return new this._modelClass(attrs);
+    let data = snapshot.data();
+    data.id = snapshot.id;
+    return new this._modelClass(data);
   }
 }

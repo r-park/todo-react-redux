@@ -1,0 +1,115 @@
+@import 'views/styles/shared';
+
+.task-view-container {
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  background: white;
+  line-height: 1.4em;
+  overflow-y: auto;
+  margin-bottom: 2em;
+  z-index: 10;
+}
+
+@media (max-width: 700px) {
+  .task-view-container {
+    height: 87%;
+    width: 94%;
+  }
+}
+
+.task-view {
+  padding: 10px 20px;
+  
+  textarea {
+    resize:none;
+  }
+
+  .Select-control {
+    width: 200px !important;
+    border: none !important;
+    font-size: 1.4em;react-tagsinput-changing
+
+  
+    &:hover {
+      border: 1px solid #ccc !important;
+    }
+  }
+  
+  .Select-menu-outer {
+    width: 200px !important;
+  }
+
+  .button-save {
+    margin: 10px 6px;
+  }
+
+  .label {
+    vertical-align: top;
+    margin-top: .7em;
+  }
+  
+}
+
+.task-view-header {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e0e6e8;
+
+  .close-bottom {
+    padding-bottom: 15px;
+  }
+  .close-icon {
+    color: #ccd1d6;
+    
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  
+  .action-button {
+    margin: 0 20px;
+  }
+
+  .avatar-container {
+    display: inline-block;
+  }
+
+  .avatar {
+    margin: 0 10px; 
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+  }
+}
+
+.changing-input {
+  width: 100%; //TODO
+  transition: border-color 100ms;
+  font-size: 1.4em;
+  padding: 5px;
+  border: none;
+  text-rendering: optimizeSpeed;
+  vertical-align: top;
+  border-color: white;
+  overflow: hidden;
+}
+
+.editable {
+  &:hover {
+    border: 1px solid #d5dce0;
+    padding: 4px;
+  }
+}
+
+.react-tagsinput-changing {
+  border: none;
+  overflow: hidden;
+  padding: 5px 1px 1px 1px;
+  width: calc(100% - 60px);
+  display: inline-block;
+  font-family: '"aktiv-grotesk-std", Helvetica Neue, Arial, sans-serif';
+  
+  input {
+    font-size: 1.4em;
+    width: calc( 100% - 130px);
+  }
+}

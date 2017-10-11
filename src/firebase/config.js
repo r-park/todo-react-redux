@@ -1,6 +1,7 @@
 export const firebaseConfig = {
-  apiKey: 'AIzaSyBsVVpEDrlNPEmshLcmOuE0FxhjPn0AqMg',
-  authDomain: 'todo-react-redux.firebaseapp.com',
-  databaseURL: 'https://todo-react-redux.firebaseio.com',
-  storageBucket: 'firebase-todo-react-redux.appspot.com'
+  apiKey: 'AIzaSyBXpbOuiLMkc2kmR-AdnG4RlkWeU1IoKgs',
+  authDomain: 'doocrate.firebaseapp.com',
+  databaseURL: 'https://doocrate.firebaseio.com/',
+  storageBucket: '',
+  projectId: 'doocrate'
 };

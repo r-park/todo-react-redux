@@ -1,5 +1,5 @@
-import { getDeletedTask } from './selectors';
 import { taskList } from './task-list';
+
 import {
   CREATE_TASK_ERROR,
   CREATE_TASK_SUCCESS,
@@ -10,13 +10,14 @@ import {
   UNDELETE_TASK_ERROR,
   UNLOAD_TASKS_SUCCESS,
   UPDATE_TASK_ERROR,
-  UPDATE_TASK_SUCCESS
+  UPDATE_TASK_SUCCESS,
+  SELECT_TASK,
 } from './action-types';
 
 
-export function createTask(title) {
+export function createTask(task) {
   return dispatch => {
-    taskList.push({completed: false, title})
+    taskList.push(task)
       .catch(error => dispatch(createTaskError(error)));
   };
 }
@@ -35,9 +36,23 @@ export function createTaskSuccess(task) {
   };
 }
 
+export function assignTask(task, assignee) {
+  return dispatch => {
+    taskList.update(task.id, {
+      assignee: {
+        email: assignee.email,
+        id: assignee.id,
+        name: assignee.name,
+        photoURL: assignee.photoURL
+      }
+    })
+      .catch(error => dispatch(updateTaskError(error)));
+  };
+}
+
 export function removeTask(task) {
   return dispatch => {
-    taskList.remove(task.key)
+    taskList.remove(task.id)
       .catch(error => dispatch(removeTaskError(error)));
   };
 }
@@ -56,15 +71,15 @@ export function removeTaskSuccess(task) {
   };
 }
 
-export function undeleteTask() {
-  return (dispatch, getState) => {
-    const task = getDeletedTask(getState());
-    if (task) {
-      taskList.set(task.key, {completed: task.completed, title: task.title})
-        .catch(error => dispatch(undeleteTaskError(error)));
-    }
-  };
-}
+// export function undeleteTask() {
+//   return (dispatch, getState) => {
+//     const task = getDeletedTask(getState());
+//     if (task) {
+//       taskList.set(task.id, { title: task.title })
+//         .catch(error => dispatch(undeleteTaskError(error)));
+//     }
+//   };
+// }
 
 export function undeleteTaskError(error) {
   return {
@@ -82,7 +97,7 @@ export function updateTaskError(error) {
 
 export function updateTask(task, changes) {
   return dispatch => {
-    taskList.update(task.key, changes)
+    taskList.update(task.id, changes)
       .catch(error => dispatch(updateTaskError(error)));
   };
 }
@@ -111,7 +126,7 @@ export function filterTasks(filterType) {
 export function loadTasks() {
   return (dispatch, getState) => {
     const { auth } = getState();
-    taskList.path = `tasks/${auth.id}`;
+    taskList.path = `tasks`;
     taskList.subscribe(dispatch);
   };
 }
@@ -120,5 +135,12 @@ export function unloadTasks() {
   taskList.unsubscribe();
   return {
     type: UNLOAD_TASKS_SUCCESS
+  };
+}
+
+export function selectTask(task) {
+  return {
+    type: SELECT_TASK,
+    payload: task
   };
 }
