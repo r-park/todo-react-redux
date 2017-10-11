@@ -16,12 +16,15 @@ class TaskFilters extends Component {
     
     this.handleLabelChange = this.handleLabelChange.bind(this);
   }
+  static propTypes = {
+    onLabelChange: PropTypes.func.isRequired,
+  }
 
   render() {
-    if (this.state.redirect) {
-      this.setState({redirect: false});
-      return <Redirect push to={ "?filter=label&text=" + this.state.label }/>;
-    }
+    // if (this.state.redirect) {
+    //   this.setState({redirect: false});
+    //   return <Redirect push to={ "/filter/label/" + this.state.label }/>;
+    // } 
     
     const showPlaceholder = !this.state.label || this.state.label.length == 0 ;
     const { filter } = this.props;
@@ -48,6 +51,7 @@ class TaskFilters extends Component {
 
   handleLabelChange(label) {
     this.setState({label, redirect: true});
+    this.props.onLabelChange(label);
   }
 }
 

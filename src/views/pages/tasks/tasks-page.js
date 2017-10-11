@@ -25,10 +25,12 @@ export class TasksPage extends Component {
     this.isAdmin = this.isAdmin.bind(this);
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
     this.goToTask = this.goToTask.bind(this);
+    this.onLabelChanged = this.onLabelChanged.bind(this);
     
     this.state = {
       tasks: this.props.tasks,
-      selectedTask: null
+      selectedTask: null,
+      labels: null
     };
   }
 
@@ -55,9 +57,6 @@ export class TasksPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.search !== this.props.location.search) {
-    }
-
     // if url has a task id - select it
     if (nextProps.match != null && nextProps.match.params.id) {
       const tid = nextProps.match.params.id;
@@ -73,19 +72,36 @@ export class TasksPage extends Component {
       this.setState({
         selectedTask: this.props.tasks.first()
       })
-    }
+    }    
 
+    // prepare filter if exists
+    let curTasks = this.props.tasks;
     if (nextProps.match != null && nextProps.match.params.ftype) {      
       const filter = this.props.buildFilter(this.props.auth, nextProps.match.params.ftype);
-      this.setState({tasks: this.props.filters["user"](this.props.tasks, filter)});      
+      curTasks = this.props.filters["user"](curTasks, filter);
     }
-    else {
-      this.setState({tasks: this.props.tasks});
+
+    this.setState({tasks: curTasks});      
+  }
+
+  componentDidUpdate(prevProps, prevState) {    
+    if (prevState.labels != this.state.labels) {
+      let curTasks = this.props.tasks;
+      if ( this.state.labels != null && this.state.labels.length > 0) {
+        const filter = this.props.buildFilter(this.props.auth, "label", this.state.labels);
+        curTasks = this.props.filters["label"](curTasks, filter, this.state.lables);
+      }
+      this.setState({tasks: curTasks});  
     }
+       
   }
 
   componentWillUnmount() {
     this.props.unloadTasks();
+  }
+
+  filterTasks() {
+    
   }
 
   renderNotification() {
@@ -128,8 +144,11 @@ export class TasksPage extends Component {
     }
     else {
       this.props.history.push(`/`);
-    }
-    
+    } 
+  }
+
+  onLabelChanged(labels) {
+    this.setState({labels});
   }
 
   renderTaskView() {
@@ -156,7 +175,7 @@ export class TasksPage extends Component {
     return (
       <div>
           <div className="g-col">
-            { <TaskFilters filter={this.props.filterType} /> }
+            { <TaskFilters filter={this.props.filterType} onLabelChange= {this.onLabelChanged}/> }
             <Button
               className="button button-small add-task-button"
               onClick={ this.createNewTask }>
