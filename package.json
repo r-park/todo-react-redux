@@ -19,7 +19,7 @@
   "scripts": {
     "eject": "react-scripts eject",
     "build": "run-s copy-production build:css build:js",
-    "build-staging": "run-s build:css build:js",
+    "build-staging": "run-s copy-staging build:css build:js",
     "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "build:js": "cross-env NODE_PATH=. react-scripts build",
     "deploy:staging": "run-s build-staging deploy-firebase-staging",
