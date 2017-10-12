@@ -24,7 +24,7 @@
     "build:js": "cross-env NODE_PATH=. react-scripts build",
     "deploy:staging": "run-s build-staging deploy-firebase-staging",
     "deploy-firebase-staging": "firebase use staging && firebase deploy",
-    "deploy:production": "run-s build-production deploy-firebase-production",
+    "deploy:production": "run-s build deploy-firebase-production",
     "deploy-firebase-production": "firebase use default && firebase deploy",
     "start": "run-p copy-staging start:css start:js",
     "start:css": "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
