@@ -64,18 +64,11 @@ export class TaskView extends Component {
   };
 
   componentWillMount() {
+    this.updateStateByProps(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // TODO - check this maybe called several times now that we use comments
-
-    // TODO: On mobile scroll to top - hackish - 
-    // TODO: should move this to a window resize event...
-    if(window.innerWidth < 768) {
-      window.scrollTo(0, 150);
-    }
-
-    let nextSelectedTask = nextProps.selectedTask || {};
+  updateStateByProps(props) {
+    let nextSelectedTask = props.selectedTask || {};
     let { id, title, description, circle, type, projectName,
       label, relevantContacts,
       assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
@@ -96,15 +89,26 @@ export class TaskView extends Component {
           status: status || '',
           createdDate: createdDate || '',
           dueDate: dueDate || null,
-          type: type || null,
+          type: type || '',
           projectName: projectName || '',
         });
       }
   }
 
+  componentWillReceiveProps(nextProps) {
+    // TODO - check this maybe called several times now that we use comments
+
+    // TODO: On mobile scroll to top - hackish - 
+    // TODO: should move this to a window resize event...
+    if(window.innerWidth < 768) {
+      window.scrollTo(0, 150);
+    }
+
+    this.updateStateByProps(nextProps);
+  }
+
   render() {
     const task = this.props.selectedTask;
-
     if(!task) {
       return(
         <div className="task-view g-row">
@@ -148,10 +152,9 @@ export class TaskView extends Component {
         <div className='task-view'>
           <form onSubmit={this.handleSubmit} noValidate>
             {this.renderInput(task, 'title', 'שם המשימה', isCreatorOrAssignee)}
-            {this.renderInput(task, 'projectName', 'שם הפרוייקט', isCreatorOrAssignee)}
+            {this.renderInput(task, 'projectName', 'שם הפרוייקט (במידה ומדובר במחנה נושא או מיצב אמנות)', isCreatorOrAssignee)}
             {this.renderTextArea(task, 'description', 'תאור המשימה', isCreatorOrAssignee)}
-            {this.props.isAdmin? 
-              this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle, isCreatorOrAssignee): ''}
+            {this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle, isCreatorOrAssignee)}
             <div><Icon className='label' name='label_outline' /> {this.renderLabel(isCreatorOrAssignee)} </div>
             { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType, isCreatorOrAssignee)}
             {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים', isCreatorOrAssignee)}

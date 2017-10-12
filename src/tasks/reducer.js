@@ -26,9 +26,7 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
       return state.merge({
         deleted: null,
         created: payload,
-        list: state.deleted && state.deleted.id === payload.id ?
-              state.previous :
-              state.list.unshift(payload)
+        list: state.list.unshift(payload)
       });
 
     case REMOVE_TASK_SUCCESS:

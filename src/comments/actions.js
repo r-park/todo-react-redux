@@ -90,6 +90,10 @@ export function loadComments(selectedTaskId) {
     }else {
       commentList.query = null;
     }
+    commentList.orderBy = {
+      name: 'created',
+      direction: 'asc'
+    }
 
     commentList.subscribe(dispatch);
   };
