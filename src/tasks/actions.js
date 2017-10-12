@@ -29,7 +29,7 @@ export function createTaskError(error) {
   };
 }
 
-export function createTaskSuccess(task) {
+export function createTaskSuccess(task, isLocallyCreated) {
   return {
     type: CREATE_TASK_SUCCESS,
     payload: task
@@ -70,16 +70,6 @@ export function removeTaskSuccess(task) {
     payload: task
   };
 }
-
-// export function undeleteTask() {
-//   return (dispatch, getState) => {
-//     const task = getDeletedTask(getState());
-//     if (task) {
-//       taskList.set(task.id, { title: task.title })
-//         .catch(error => dispatch(undeleteTaskError(error)));
-//     }
-//   };
-// }
 
 export function undeleteTaskError(error) {
   return {
@@ -127,6 +117,10 @@ export function loadTasks() {
   return (dispatch, getState) => {
     const { auth } = getState();
     taskList.path = `tasks`;
+    taskList.orderBy = {
+      name: 'created',
+      direction: 'asc'
+    }
     taskList.subscribe(dispatch);
   };
 }

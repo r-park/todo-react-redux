@@ -32,10 +32,10 @@ class TaskFilters extends Component {
     return(
       <div className="task-filters">
       <ul>
-        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === null} to='/task/1'>כל המשימות בעולם</NavLink></li>
-        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'mine'} to={{ pathname: '/task/1', search: 'filter=mine'}}>המשימות שלי</NavLink></li>
-        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'unassigned'} to={{ pathname: '/task/1', search: 'filter=unassigned'}}>משימות פנויות</NavLink></li>
-        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'label'} to={{ pathname: '/task/1', search: 'filter=label'}}>משימות לפי תגית</NavLink></li>
+        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === null} to='/'>כל המשימות בעולם</NavLink></li>
+        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'mine'} to={{ pathname: '/', search: 'filter=mine'}}>המשימות שלי</NavLink></li>
+        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'unassigned'} to={{ pathname: '/', search: 'filter=unassigned'}}>משימות פנויות</NavLink></li>
+        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'label'} to={{ pathname: '/', search: 'filter=label'}}>משימות לפי תגית</NavLink></li>
       </ul>
       <TagsInput
         value={this.state.label}
