@@ -45,7 +45,6 @@ export class TasksPage extends Component {
     removeTask: PropTypes.func.isRequired,
     assignTask: PropTypes.func.isRequired,
     tasks: PropTypes.instanceOf(List).isRequired,
-    undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
     unloadComments: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired,
@@ -72,12 +71,15 @@ export class TasksPage extends Component {
       this.setState({
         selectedTask: this.props.tasks.first()
       })
-    }    
+    }
 
     // prepare filter if exists
     let curTasks = this.props.tasks;
-    if (nextProps.match != null && nextProps.match.params.ftype) {      
-      const filter = this.props.buildFilter(this.props.auth, nextProps.match.params.ftype);
+    
+    const params = new URLSearchParams(nextProps.location.search);
+    const filterType = params.get('filter');
+    if (nextProps.match != null && filterType) {      
+      const filter = this.props.buildFilter(this.props.auth, filterType);
       curTasks = this.props.filters["user"](curTasks, filter);
     }
 
@@ -108,7 +110,7 @@ export class TasksPage extends Component {
     const { notification } = this.props;
     return (
       <Notification
-        action={this.props.undeleteTask}
+        action={()=> { }}
         actionLabel={notification.actionLabel}
         dismiss={this.props.dismissNotification}
         display={notification.display}
@@ -137,14 +139,15 @@ export class TasksPage extends Component {
     this.props.assignTask(task, this.props.auth);
   }
 
-  // call to select task - load the correct comments
   goToTask(task) {
-    if (task) {
-      this.props.history.push(`/task/${task.get("id")}`);
+    const params = new URLSearchParams(this.props.location.search);
+    const filterType = params.get('filter');
+    let taskParameter = task? `/task/${task.get("id")}` : `/task/1`;
+
+    if (filterType) {
+      taskParameter = `${taskParameter}?filter=${filterType}`
     }
-    else {
-      this.props.history.push(`/`);
-    } 
+    this.props.history.push(taskParameter);
   }
 
   onLabelChanged(labels) {

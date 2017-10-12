@@ -13,10 +13,8 @@ import {
 
 export const TasksState = new Record({
   deleted: null,
-  //filter: {name:''},
+  previous: null,
   list: new List(),
-  // previous: null,
-  // selected: null,
   auth: null,
   created: null
 });

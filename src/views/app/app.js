@@ -21,13 +21,9 @@ const App = ({authenticated, signOut}) => (
     />
 
     <main>    
-      <Switch>      
+      <Switch>
         <RequireAuthRoute authenticated={authenticated} exact path="/" component={TasksPage}/>      
         <RequireAuthRoute authenticated={authenticated} path="/task/:id" component={TasksPage} />
-        <RequireAuthRoute authenticated={authenticated} path="/filter/:ftype" component={TasksPage} />
-        <RequireAuthRoute authenticated={authenticated} path="/filter/label/:label" component={TasksPage} />
-        <RequireAuthRoute authenticated={authenticated} path="/filter/label/:label/task/:id" component={TasksPage} />
-        <RequireAuthRoute authenticated={authenticated} path="/filter/:ftype/task/:id" component={TasksPage} />            
         <RequireUnauthRoute authenticated={authenticated} path="/sign-in" component={SignInPage}/>
         <Route component={NotFound}/>
       </Switch>

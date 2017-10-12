@@ -20,21 +20,22 @@ class TaskFilters extends Component {
     onLabelChange: PropTypes.func.isRequired,
   }
 
+  // Since react router doesn't support query we read it manually from the url
+  getFilterQuery(location) {
+    const params = new URLSearchParams(location.search);
+    return params.get('filter');
+  }
+
   render() {
-    // if (this.state.redirect) {
-    //   this.setState({redirect: false});
-    //   return <Redirect push to={ "/filter/label/" + this.state.label }/>;
-    // } 
-    
     const showPlaceholder = !this.state.label || this.state.label.length == 0 ;
     const { filter } = this.props;
     return(
       <div className="task-filters">
       <ul>
-        <li><NavLink to="/task/1">כל המשימות בעולם</NavLink></li>
-        <li><NavLink to="/filter/mine">המשימות שלי</NavLink></li>
-        <li><NavLink to='/filter/unassigned'>משימות פנויות</NavLink></li>
-        <li><NavLink to='/filter/label'>משימות לפי תגית</NavLink></li>
+        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === null} to='/task/1'>כל המשימות בעולם</NavLink></li>
+        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'mine'} to={{ pathname: '/task/1', search: 'filter=mine'}}>המשימות שלי</NavLink></li>
+        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'unassigned'} to={{ pathname: '/task/1', search: 'filter=unassigned'}}>משימות פנויות</NavLink></li>
+        <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'label'} to={{ pathname: '/task/1', search: 'filter=label'}}>משימות לפי תגית</NavLink></li>
       </ul>
       <TagsInput
         value={this.state.label}
