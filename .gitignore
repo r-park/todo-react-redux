@@ -7,6 +7,8 @@ coverage/
 node_modules/
 tmp/
 
+# Config file is copied from config.production.js or config.staging.js using npm run build or npm run build-staging
+src/firebase/config.js 
 
 #======================================
 # Extensions

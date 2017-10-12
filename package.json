@@ -18,14 +18,21 @@
   },
   "scripts": {
     "eject": "react-scripts eject",
-    "build": "run-s build:css build:js",
+    "build": "run-s copy-production build:css build:js",
+    "build-staging": "run-s build:css build:js",
     "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "build:js": "cross-env NODE_PATH=. react-scripts build",
+    "deploy:staging": "run-s build-staging deploy-firebase-staging",
+    "deploy-firebase-staging": "firebase use staging && firebase deploy",
+    "deploy:production": "run-s build-production deploy-firebase-production",
+    "deploy-firebase-production": "firebase use default && firebase deploy",
     "start": "run-p start:css start:js",
     "start:css": "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start:js": "cross-env NODE_PATH=. react-scripts start",
     "test": "cross-env NODE_PATH=. react-scripts test --env=jsdom",
-    "test:ci": "cross-env CI=true NODE_PATH=. react-scripts test --env=jsdom"
+    "test:ci": "cross-env CI=true NODE_PATH=. react-scripts test --env=jsdom",
+    "copy-staging": "cp -R src/firebase/config.staging.js src/firebase/config.js",
+    "copy-production": "cp -R src/firebase/config.production.js src/firebase/config.js"
   },
   "dependencies": {
     "classnames": "^2.2.5",
