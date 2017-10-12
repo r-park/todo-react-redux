@@ -64,6 +64,20 @@ export const firebaseConfig = {
 };
 ```
 
+## Deploy command
+`deploy:staging`
+OR 
+`deploy:production`
+Will build - use the correct config file and deploy
+
+#### Staging
+You can also set staging env and use:
+`firebase use --add` to add your staging site
+Then run like
+`npm run build-staging`
+`firebase use` and choose staging
+`firebase deploy`
+
 #### Install firebase-tools:
 ```shell
 $ npm install -g firebase-tools

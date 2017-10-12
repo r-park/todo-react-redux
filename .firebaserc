@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "doocrate"
+    "default": "doocrate",
+    "staging": "doocrate2"
   }
 }
