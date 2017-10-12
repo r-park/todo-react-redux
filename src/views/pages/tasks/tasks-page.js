@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
 
 import { authActions, getAuth } from 'src/auth';
 import { getNotification, notificationActions } from 'src/notification';
-import { getTaskFilter, getVisibleTasks, tasksActions, taskFilters } from 'src/tasks';
+import { buildFilter, tasksActions, taskFilters } from 'src/tasks';
 import { commentsActions } from 'src/comments';
 import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
@@ -24,49 +24,40 @@ export class TasksPage extends Component {
     this.createNewTask = this.createNewTask.bind(this);
     this.isAdmin = this.isAdmin.bind(this);
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
-    this.selectTaskAndSetComments = this.selectTaskAndSetComments.bind(this);
+    this.goToTask = this.goToTask.bind(this);
+    this.onLabelChanged = this.onLabelChanged.bind(this);
     
-    this.state = {selectedTask: null};
+    this.state = {
+      tasks: this.props.tasks,
+      selectedTask: null,
+      labels: null
+    };
   }
 
   static propTypes = {
     createTask: PropTypes.func.isRequired,
     dismissNotification: PropTypes.func.isRequired,
-    filterTasks: PropTypes.func.isRequired,
-    filterType: PropTypes.object.isRequired,
+    filters: PropTypes.object.isRequired,
+    buildFilter: PropTypes.func.isRequired, 
     loadTasks: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     notification: PropTypes.object.isRequired,
     removeTask: PropTypes.func.isRequired,
     assignTask: PropTypes.func.isRequired,
     tasks: PropTypes.instanceOf(List).isRequired,
-    undeleteTask: PropTypes.func.isRequired,
     unloadTasks: PropTypes.func.isRequired,
     unloadComments: PropTypes.func.isRequired,
     updateTask: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
   };
 
-  static contextTypes = {
-    tasks: PropTypes.object.isRequired,
-  }
-
   componentWillMount() {
     this.props.loadTasks();
-    this.props.filterTasks(
-      this.getFilterParam(this.props.location.search)
-    );
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.location.search !== this.props.location.search) {
-      this.props.filterTasks(
-        this.getFilterParam(nextProps.location.search)
-      );  
-    }
-
     // if url has a task id - select it
-    if (this.props.match != null) {
+    if (nextProps.match != null && nextProps.match.params.id) {
       const tid = nextProps.match.params.id;
 
       this.setState({
@@ -81,25 +72,45 @@ export class TasksPage extends Component {
         selectedTask: this.props.tasks.first()
       })
     }
+
+    // prepare filter if exists
+    let curTasks = this.props.tasks;
+    
+    const params = new URLSearchParams(nextProps.location.search);
+    const filterType = params.get('filter');
+    if (nextProps.match != null && filterType) {      
+      const filter = this.props.buildFilter(this.props.auth, filterType);
+      curTasks = this.props.filters["user"](curTasks, filter);
+    }
+
+    this.setState({tasks: curTasks});      
+  }
+
+  componentDidUpdate(prevProps, prevState) {    
+    if (prevState.labels != this.state.labels) {
+      let curTasks = this.props.tasks;
+      if ( this.state.labels != null && this.state.labels.length > 0) {
+        const filter = this.props.buildFilter(this.props.auth, "label", this.state.labels);
+        curTasks = this.props.filters["label"](curTasks, filter, this.state.lables);
+      }
+      this.setState({tasks: curTasks});  
+    }
+       
   }
 
   componentWillUnmount() {
     this.props.unloadTasks();
   }
 
-  getFilterParam(search) {
-    const params = new URLSearchParams(search);
-    let filterParams = {};
-    filterParams.name = params.get('filter');
-    filterParams.text = params.get('text');
-    return filterParams;
+  filterTasks() {
+    
   }
 
   renderNotification() {
     const { notification } = this.props;
     return (
       <Notification
-        action={this.props.undeleteTask}
+        action={()=> { }}
         actionLabel={notification.actionLabel}
         dismiss={this.props.dismissNotification}
         display={notification.display}
@@ -128,15 +139,19 @@ export class TasksPage extends Component {
     this.props.assignTask(task, this.props.auth);
   }
 
-  // call to select task - load the correct comments
-  selectTaskAndSetComments(task) {
-    if (task) {
-      this.props.history.push(`/task/${task.get("id")}`);
+  goToTask(task) {
+    const params = new URLSearchParams(this.props.location.search);
+    const filterType = params.get('filter');
+    let taskParameter = task? `/task/${task.get("id")}` : `/task/1`;
+
+    if (filterType) {
+      taskParameter = `${taskParameter}?filter=${filterType}`
     }
-    else {
-      this.props.history.push(`/`);
-    }
-    
+    this.props.history.push(taskParameter);
+  }
+
+  onLabelChanged(labels) {
+    this.setState({labels});
   }
 
   renderTaskView() {
@@ -147,7 +162,7 @@ export class TasksPage extends Component {
         createTask={this.props.createTask}
         removeTask={this.props.removeTask}
         updateTask={this.props.updateTask}
-        selectTask={this.selectTaskAndSetComments}
+        selectTask={this.goToTask}
         selectedTask={this.state.selectedTask.toJS()}
         isAdmin={false}
         assignTask={this.assignTaskToSignedUser}
@@ -157,11 +172,13 @@ export class TasksPage extends Component {
   }
 
   render() {
-    const isLoading = (!this.props.tasks || this.props.tasks.size <= 0);
+    // TODO : use state.tasks instead. It is possible that a filter would 
+    // return 0 results, but loading has finished
+    const isLoading = (!this.state.tasks || this.props.tasks.size <= 0);
     return (
       <div>
           <div className="g-col">
-            <TaskFilters filter={this.props.filterType} />
+            { <TaskFilters filter={this.props.filterType} onLabelChange= {this.onLabelChanged}/> }
             <Button
               className="button button-small add-task-button"
               onClick={ this.createNewTask }>
@@ -176,8 +193,8 @@ export class TasksPage extends Component {
           </div>
           <div className="g-col-40 g-col-xs-100">
             <TaskList
-              tasks={this.props.tasks}
-              selectTask={this.selectTaskAndSetComments}
+              tasks={this.state.tasks}
+              selectTask={this.goToTask}
             />
           </div>
 
@@ -192,19 +209,15 @@ export class TasksPage extends Component {
 //=====================================
 //  CONNECT
 //-------------------------------------
-
-const mapStateToProps = createSelector(
-  getNotification,
-  getTaskFilter,
-  getVisibleTasks,
-  getAuth,
-  (notification, filterType, tasks, auth, getVisibleTasks) => ({
-    notification,
-    filterType,
-    tasks,
-    auth
-  })
-);
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks.list,
+    notification: state.notification,
+    auth: state.auth,
+    filters: taskFilters,
+    buildFilter: buildFilter
+  }
+}
 
 const mapDispatchToProps = Object.assign(
   {},

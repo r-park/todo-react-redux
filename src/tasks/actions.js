@@ -1,4 +1,3 @@
-import { getDeletedTask } from './selectors';
 import { taskList } from './task-list';
 
 import {
@@ -72,15 +71,15 @@ export function removeTaskSuccess(task) {
   };
 }
 
-export function undeleteTask() {
-  return (dispatch, getState) => {
-    const task = getDeletedTask(getState());
-    if (task) {
-      taskList.set(task.id, { title: task.title })
-        .catch(error => dispatch(undeleteTaskError(error)));
-    }
-  };
-}
+// export function undeleteTask() {
+//   return (dispatch, getState) => {
+//     const task = getDeletedTask(getState());
+//     if (task) {
+//       taskList.set(task.id, { title: task.title })
+//         .catch(error => dispatch(undeleteTaskError(error)));
+//     }
+//   };
+// }
 
 export function undeleteTaskError(error) {
   return {
