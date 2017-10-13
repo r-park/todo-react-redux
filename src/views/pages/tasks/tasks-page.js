@@ -125,6 +125,15 @@ export class TasksPage extends Component {
   }
 
   createNewTask() {
+    const filter = this.props.buildFilter(this.props.auth, "mine");
+    const myTasks = this.props.filters[filter.type](this.props.tasks, filter);
+
+    // TODO: Move to a better place
+    if (myTasks.size >= 8) {
+      console.warn("DOOCRATE: MAX TASKS FOR USERS REACHED")
+      return;
+    }
+
     let creator = {
       id: this.props.auth.id,
       name: this.props.auth.name,
@@ -142,6 +151,14 @@ export class TasksPage extends Component {
   }
 
   assignTaskToSignedUser(task) {
+    const myAssignedTasks = this.props.tasks.filter((t)=>{return t.get("assignee") != null && t.get("assignee").id == this.props.auth.id});
+
+    // TODO: Move to a better place
+    if(myAssignedTasks.size >= 4) {
+      return console.warn("DOOCRATE: TOO MANY TASKS ASSIGNED TO USER")
+    }
+    
+
     this.props.assignTask(task, this.props.auth);
   }
 
