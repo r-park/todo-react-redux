@@ -69,20 +69,20 @@ export class TasksPage extends Component {
       }
     } else {
       this.setState({
-        selectedTask: this.props.tasks.first()
+        selectedTask: this.state.tasks.first()
       })
     }
 
     // prepare filter if exists
-    let curTasks = this.props.tasks;
-    
+    let curTasks = nextProps.tasks;
     const params = new URLSearchParams(nextProps.location.search);
     const filterType = params.get('filter');
-    if (nextProps.match != null && filterType) {      
+    
+    if (filterType) {      
       const filter = this.props.buildFilter(this.props.auth, filterType);
-      curTasks = this.props.filters["user"](curTasks, filter);
+      curTasks = this.props.filters[filter.type](curTasks, filter);
     }
-
+    
     this.setState({tasks: curTasks});      
   }
 
@@ -94,8 +94,7 @@ export class TasksPage extends Component {
         curTasks = this.props.filters["label"](curTasks, filter, this.state.lables);
       }
       this.setState({tasks: curTasks});  
-    }
-       
+    } 
   }
 
   componentWillUnmount() {

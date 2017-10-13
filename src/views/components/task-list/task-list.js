@@ -26,6 +26,7 @@ class TaskList extends Component {
     if (!isAnyTasks) {
       return (
         <div>
+          אין משימות להציג
         </div>
       );
     }
