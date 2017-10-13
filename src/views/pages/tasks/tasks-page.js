@@ -201,6 +201,7 @@ export class TasksPage extends Component {
             <TaskList
               tasks={this.state.tasks}
               selectTask={this.goToTask}
+              selectedTaskId={this.state.selectedTask? this.state.selectedTask.get("id") : ""}
             />
           </div>
 

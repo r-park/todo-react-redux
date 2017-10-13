@@ -24,7 +24,7 @@ export class TaskItem extends Component {
     
     let containerClasses = classNames('task-item', {
       'task-item--completed': task.completed,
-    });
+    }, {'is-active': this.props.isActive});
    
 
     return (
@@ -86,7 +86,8 @@ export class TaskItem extends Component {
 
 TaskItem.propTypes = {
   task: PropTypes.object.isRequired,
-  selectTask: PropTypes.func.isRequired
+  selectTask: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired
 };
 
 

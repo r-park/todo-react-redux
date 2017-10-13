@@ -9,21 +9,26 @@ class TaskList extends Component {
   static propTypes = {
     tasks: PropTypes.instanceOf(List).isRequired,
     selectTask: PropTypes.func.isRequired,
+    selectedTaskId: PropTypes.string.isRequired,
   };
   
   render() {
-    let taskItems = this.props.tasks.map((task, index) => {
+    const isAnyTasks = this.props.tasks && this.props.tasks.size > 0;
+    let taskItems = null;
+    if (isAnyTasks) {
+      taskItems = this.props.tasks.map((task, index) => {
       return (
         <TaskItem
           key={index}
           taskNumber={index}
           task={task}
           selectTask={this.props.selectTask}
+          isActive={task.get("id") == this.props.selectedTaskId}
         />
       );
-    });
-    const isAnyTasks = this.props.tasks && this.props.tasks.size > 0;
-    if (!isAnyTasks) {
+    });    
+  }
+  else{
       return (
         <div>
           אין משימות להציג
