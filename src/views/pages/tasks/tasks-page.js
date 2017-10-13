@@ -26,6 +26,7 @@ export class TasksPage extends Component {
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
     this.goToTask = this.goToTask.bind(this);
     this.onLabelChanged = this.onLabelChanged.bind(this);
+    this.onNewTaskAdded = this.onNewTaskAdded.bind(this);
     
     this.state = {
       tasks: this.props.tasks,
@@ -118,6 +119,11 @@ export class TasksPage extends Component {
     );
   }
 
+  onNewTaskAdded(task) {
+    const taskObj = this.props.tasks.find((t)=>( t.get('id') == task.id ))
+    this.goToTask(taskObj);
+  }
+
   createNewTask() {
     let creator = {
       id: this.props.auth.id,
@@ -126,8 +132,9 @@ export class TasksPage extends Component {
       photoURL: this.props.auth.photoURL,
     }
     
-    this.props.createTask({creator , title: `משימה חדשה של ${creator.name}`, created: new Date()});
-    // TODO Select the new created task
+    this.props.createTask(
+      {creator , title: `משימה חדשה של ${creator.name}`, created: new Date()}, 
+      this.onNewTaskAdded);
   }
 
   isAdmin() {

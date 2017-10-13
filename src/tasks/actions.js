@@ -15,9 +15,9 @@ import {
 } from './action-types';
 
 
-export function createTask(task) {
+export function createTask(task, cb = (t)=>{console.log(t)}) {
   return dispatch => {
-    taskList.push(task)
+    taskList.push(task).then(cb)
       .catch(error => dispatch(createTaskError(error)));
   };
 }
