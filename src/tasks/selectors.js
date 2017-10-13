@@ -39,15 +39,3 @@ export const taskFilters = {
       });
   }
 }
-/*
-export const getVisibleTasks = createSelector(
-  getTaskList,
-  getTaskFilter,
-  getAuth,
-  (tasks, filter, auth) => {
-      if (taskFilters[filter.name] != null)
-        return taskFilters[filter.name](tasks, filter, auth)
-
-      return tasks;
-    }
-); */

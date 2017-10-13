@@ -26,6 +26,7 @@ export class TasksPage extends Component {
     this.assignTaskToSignedUser = this.assignTaskToSignedUser.bind(this);
     this.goToTask = this.goToTask.bind(this);
     this.onLabelChanged = this.onLabelChanged.bind(this);
+    this.onNewTaskAdded = this.onNewTaskAdded.bind(this);
     
     this.state = {
       tasks: this.props.tasks,
@@ -69,20 +70,20 @@ export class TasksPage extends Component {
       }
     } else {
       this.setState({
-        selectedTask: this.props.tasks.first()
+        selectedTask: this.state.tasks.first()
       })
     }
 
     // prepare filter if exists
-    let curTasks = this.props.tasks;
-    
+    let curTasks = nextProps.tasks;
     const params = new URLSearchParams(nextProps.location.search);
     const filterType = params.get('filter');
-    if (nextProps.match != null && filterType) {      
+    
+    if (filterType) {      
       const filter = this.props.buildFilter(this.props.auth, filterType);
-      curTasks = this.props.filters["user"](curTasks, filter);
+      curTasks = this.props.filters[filter.type](curTasks, filter);
     }
-
+    
     this.setState({tasks: curTasks});      
   }
 
@@ -94,8 +95,7 @@ export class TasksPage extends Component {
         curTasks = this.props.filters["label"](curTasks, filter, this.state.lables);
       }
       this.setState({tasks: curTasks});  
-    }
-       
+    } 
   }
 
   componentWillUnmount() {
@@ -119,7 +119,21 @@ export class TasksPage extends Component {
     );
   }
 
+  onNewTaskAdded(task) {
+    const taskObj = this.props.tasks.find((t)=>( t.get('id') == task.id ))
+    this.goToTask(taskObj);
+  }
+
   createNewTask() {
+    const filter = this.props.buildFilter(this.props.auth, "mine");
+    const myTasks = this.props.filters[filter.type](this.props.tasks, filter);
+
+    // TODO: Move to a better place
+    if (myTasks.size >= 8) {
+      console.warn("DOOCRATE: MAX TASKS FOR USERS REACHED")
+      return;
+    }
+
     let creator = {
       id: this.props.auth.id,
       name: this.props.auth.name,
@@ -127,8 +141,9 @@ export class TasksPage extends Component {
       photoURL: this.props.auth.photoURL,
     }
     
-    this.props.createTask({creator , title: `משימה חדשה של ${creator.name}`, created: new Date()});
-    // TODO Select the new created task
+    this.props.createTask(
+      {creator , title: `משימה חדשה של ${creator.name}`, created: new Date()}, 
+      this.onNewTaskAdded);
   }
 
   isAdmin() {
@@ -136,6 +151,14 @@ export class TasksPage extends Component {
   }
 
   assignTaskToSignedUser(task) {
+    const myAssignedTasks = this.props.tasks.filter((t)=>{return t.get("assignee") != null && t.get("assignee").id == this.props.auth.id});
+
+    // TODO: Move to a better place
+    if(myAssignedTasks.size >= 4) {
+      return console.warn("DOOCRATE: TOO MANY TASKS ASSIGNED TO USER")
+    }
+    
+
     this.props.assignTask(task, this.props.auth);
   }
 
@@ -195,6 +218,7 @@ export class TasksPage extends Component {
             <TaskList
               tasks={this.state.tasks}
               selectTask={this.goToTask}
+              selectedTaskId={this.state.selectedTask? this.state.selectedTask.get("id") : ""}
             />
           </div>
 

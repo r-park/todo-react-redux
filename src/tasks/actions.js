@@ -15,14 +15,15 @@ import {
 } from './action-types';
 
 
-export function createTask(task) {
+export function createTask(task, cb = (t)=>{}) {
   return dispatch => {
-    taskList.push(task)
+    return taskList.push(task).then(cb)
       .catch(error => dispatch(createTaskError(error)));
   };
 }
 
 export function createTaskError(error) {
+  console.warn(`task error: ${error}`)
   return {
     type: CREATE_TASK_ERROR,
     payload: error
@@ -31,7 +32,7 @@ export function createTaskError(error) {
 
 export function createTaskSuccess(task, isLocallyCreated) {
   return {
-    type: CREATE_TASK_SUCCESS,
+    type: "CREATE_TASK_SUCCESS",
     payload: task
   };
 }
