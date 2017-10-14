@@ -4,21 +4,34 @@
 .task-item {
   display: flex;
   outline: none;
-  border-bottom: 1px dotted #666;
-  height: 60px;
+  border-bottom: 1px solid #e0e6e9;
+  height: 45px;
   overflow: hidden;
-  color: #fff;
-  font-size: rem(18px);
+  color: #151b28;
   font-weight: 300;
-
+  border-top: 0px solid transparent;
+  padding:1px;
   @include media-query(540) {
-    font-size: rem(24px);
+    font-size: rem(18px);
+  }
+
+  &:hover {
+    border-top: 1px solid #e0e6e9;
+    padding-top: 0;
+  }
+
+  .avatar {
+    margin: 0 10px; 
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
   }
 }
-
-.task-item--editing {
-  border-bottom: 1px dotted #ccc;
+.task-item.is-active{
+  border: 1px solid rgba(#bbb, 0.1);
+  padding: 0;
 }
+
 
 
 //=====================================
@@ -33,40 +46,16 @@
   }
 
   &:first-child {
-    padding-right: 20px;
+    padding-right: 10px;
+    
   }
 
   &:nth-child(2) {
     flex: 1;
-    padding-right: 30px;
+    padding-right: 10px;
     overflow: hidden;
-  }
-}
-
-
-//=====================================
-//  Buttons
-//-------------------------------------
-.task-item__button {
-  margin-left: 5px;
-  background: #2a2a2a;
-
-  &:first-child {
-    margin: 0;
-  }
-
-  color: #555;
-
-  &:hover {
-    color: #999;
-  }
-
-  &:active {
-    background: #262626;
-  }
-
-  &.active {
-    color: #85bf6b;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -74,11 +63,11 @@
 //=====================================
 //  Title (static)
 //-------------------------------------
-.task-item__title {
+.task-item-title {
   display: inline-block;
   position: relative;
   max-width: 100%;
-  line-height: 60px;
+  line-height: 40px;
   outline: none;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -93,32 +82,14 @@
     height: 46%;
     content: '';
   }
-
-  .task-item--completed & {
-    color: #666;
-  }
-
-  .task-item--completed &:after {
-    width: 100%;
-  }
 }
 
+.label-default {
+  margin: 0 3px;
+}
 
-//=====================================
-//  Title (input)
-//-------------------------------------
-.task-item__input {
-  outline: none;
-  border: 0;
-  padding: 0;
-  width: 100%;
-  height: 60px;
-  color: inherit;
-  font: inherit;
-  background: transparent;
-
-  // hide `x`
-  &::-ms-clear {
-    display: none;
-  }
+.task-item-assignee {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

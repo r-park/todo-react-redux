@@ -8,7 +8,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { initAuth } from './auth';
 import history from './history';
 import configureStore from './store';
-import registerServiceWorker from './utils/register-service-worker';
+import registerServiceWorker, { unregister } from './utils/register-service-worker';
 import App from './views/app';
 
 
@@ -37,7 +37,8 @@ if (module.hot) {
 }
 
 
-registerServiceWorker();
+//registerServiceWorker();
+unregister();
 
 
 initAuth(store.dispatch)

@@ -1,0 +1,100 @@
+@import 'views/styles/shared';
+
+.task-view-container {
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  background: white;
+  line-height: 1.1em;
+  margin-bottom: 2em;
+  z-index: 10;
+  font-size: 1.1em;
+}
+
+@media (max-width: 700px) {
+  .task-view-container {
+    height: 87%;
+    width: 94%;
+  }
+}
+
+.task-view {
+  padding: 10px 20px;
+  max-height: 17em;
+  overflow-y: auto;
+  
+  textarea {
+    resize:none;
+  }
+
+  input:disabled, select:disabled, textarea:disabled {
+    background-color: none;
+  }
+
+  .Select {
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  .Select-value {
+    background-color: white;
+  }
+
+  .Select-control {
+    width: 200px !important;
+    border: none !important;
+    font-size: 1.1em;
+
+  
+    &:hover {
+      border: 1px solid #ccc !important;
+    }
+
+  }
+  
+  .Select-menu-outer {
+    width: 200px !important;
+  }
+
+  .button-save {
+    margin: 10px 6px;
+  }
+
+  .label {
+    vertical-align: top;
+    margin-top: .7em;
+  }
+  
+}
+
+.changing-input {
+  width: 100%; //TODO
+  transition: border-color 100ms;
+  font-size: 1.1em;
+  padding: 5px;
+  border: none;
+  text-rendering: optimizeSpeed;
+  vertical-align: top;
+  border-color: white;
+  overflow: hidden;
+}
+
+.editable {
+  &:hover {
+    border: 1px solid #d5dce0;
+    padding: 4px;
+  }
+}
+
+.react-tagsinput-changing {
+  border: none;
+  overflow: hidden;
+  padding: 5px 1px 1px 1px;
+  width: calc(100% - 60px);
+  display: inline-block;
+  font-family: '"aktiv-grotesk-std", Helvetica Neue, Arial, sans-serif';
+  
+  input {
+    font-size: 1.1em;
+    width: calc( 100% - 130px);
+  }
+}

@@ -6,7 +6,7 @@ import './button.css';
 
 
 const Button = ({children, className, onClick, type = 'button'}) => {
-  const cssClasses = classNames('btn', className);
+  const cssClasses = classNames('button', className);
   return (
     <button className={cssClasses} onClick={onClick} type={type}>
       {children}

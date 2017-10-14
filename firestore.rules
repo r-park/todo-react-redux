@@ -1,0 +1,51 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isAdmin() {
+      return exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    
+    function isUserAssigneeOrCreator() {
+    	return isUserAssignee() || isCreator();
+    }
+    
+    function isUserAssignee() {
+    	return resource.data.assignee != null && request.auth.uid == resource.data.assignee.id;
+    }
+
+    function isCreator() {
+      return request.auth.uid == resource.data.creator.id;
+    }
+
+    function isTaskUnassigned() {
+      return (request.resource.data.keys().hasAll(['assignee'])
+      && !resource.data.keys().hasAll(['assignee']));
+    }
+
+    match /tasks/{anyTask} {
+    	allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null && (isAdmin() || isUserAssigneeOrCreator() || isTaskUnassigned());
+      allow delete: if request.auth != null && (isAdmin() || isCreator());
+    }
+  
+
+    match /comments/{anyComment} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null
+        && isCreator();
+      allow delete: if request.auth != null
+        && isCreator();
+    }
+
+    match /users/{userId} {
+      allow read: if request.auth != null; // Auth users can read
+      allow write: if userId == request.auth.uid;
+    }
+    
+    match /admins/{anyAdmin} {
+      allow read: if false;
+    }
+  }
+}
