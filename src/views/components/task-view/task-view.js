@@ -97,13 +97,6 @@ export class TaskView extends Component {
 
   componentWillReceiveProps(nextProps) {
     // TODO - check this maybe called several times now that we use comments
-
-    // TODO: On mobile scroll to top - hackish - 
-    // TODO: should move this to a window resize event...
-    if(window.innerWidth < 768) {
-      window.scrollTo(0, 150);
-    }
-
     this.updateStateByProps(nextProps);
   }
 

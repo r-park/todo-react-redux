@@ -31,7 +31,7 @@ class TaskList extends Component {
   else{
       return (
         <div>
-          אין משימות להציג
+          
         </div>
       );
     }
