@@ -137,7 +137,6 @@ export class TaskView extends Component {
             <div><span>אנשי קשר רלוונטיים</span> {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים', isCreatorOrAssignee)}</div>
             { this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה', isCreatorOrAssignee) }
             <span>סטטוס</span> {this.renderTextArea(task, 'status', 'סטטוס המשימה', isCreatorOrAssignee)}
-            {isCreatorOrAssignee ? <input className='button button-small button-save' type="submit" value="שמור" /> : ''}
           </form>
           { this.props.comments ?
           <CommentList
