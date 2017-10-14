@@ -11,6 +11,7 @@ export class AddComment extends Component {
   constructor() {
     super(...arguments);
     this.state = {
+      showHideSideSubmit: 'hidden'
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);

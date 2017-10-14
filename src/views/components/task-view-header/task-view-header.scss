@@ -1,0 +1,32 @@
+@import 'views/styles/shared';
+
+.task-view-header {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e0e6e8;
+
+  .close-bottom {
+    padding-bottom: 15px;
+  }
+  .close-icon {
+    color: #ccd1d6;
+    
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  
+  .action-button {
+    margin: 0 20px;
+  }
+
+  .avatar-container {
+    display: inline-block;
+  }
+
+  .avatar {
+    margin: 0 10px; 
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+  }
+}

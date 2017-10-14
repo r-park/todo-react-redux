@@ -18,7 +18,8 @@ import 'react-tagsinput/react-tagsinput.css';
 import Select from 'react-select';
 import Button from '../button';
 import CommentList from '../comment-list';
-
+import AddComment from '../add-comment/add-comment';
+import TaskViewHeader from '../task-view-header/task-view-header';
 
 export class TaskView extends Component {
   constructor() {
@@ -112,58 +113,50 @@ export class TaskView extends Component {
       );
     }
 
-    const isTaskEmpty = !task.description &&
-        !task.circle && !task.status;
-    
     const isUserCreator = task.creator && task.creator.id == this.props.auth.id;
     const isUserAssignee = task.assignee && task.assignee.id == this.props.auth.id;
     const isCreatorOrAssignee = isUserCreator || isUserAssignee;
 
     return (
       <div className='task-view-container'>
-        <div className='task-view-header' name='task-view-header'>
-
-        <Button className='button-no-border close-button' onClick={ () => this.props.selectTask() }><Icon name='close' className='close-icon grow' /></Button>
-        
-        {!task.assignee ? <Button
-          className='button button-small action-button assign_task'
-          onClick={()=>this.props.assignTask(task)}
-          type='button'>קח אחריות על משימה זו</Button> : 
-          
-          <div className='avatar-container'>
-            <Img className='avatar' src={task.assignee.photoURL}/>
-            <span>{task.assignee.name}</span>
-          </div>}
-            
-          { isTaskEmpty && isUserCreator ?
-          <Button
-            className='action-button delete_task'
-            onClick={()=> { this.props.removeTask(task); this.props.selectTask(); }}
-            type='button'>מחק משימה</Button> : '' }
-          
-        </div>
+        <TaskViewHeader
+        task={ this.props.selectedTask }
+        isUserCreator={isUserCreator}
+        selectTask={this.props.selectTask}
+        assignTask={this.props.assignTask}
+        removeTask={this.props.removeTask}
+        />
         <div className='task-view'>
           <form onSubmit={this.handleSubmit} noValidate>
             {this.renderInput(task, 'title', 'שם המשימה', isCreatorOrAssignee)}
             {this.renderInput(task, 'projectName', 'שם הפרוייקט (במידה ומדובר במחנה נושא או מיצב אמנות)', isCreatorOrAssignee)}
             {this.renderTextArea(task, 'description', 'תאור המשימה', isCreatorOrAssignee)}
-            {this.renderSelect(task, 'circle', 'מעגל', this.state.defaultCircle, isCreatorOrAssignee)}
+            <span>תומכ.ת</span> { this.renderSelect(task, 'circle', 'תומכ.ת', this.state.defaultCircle, isCreatorOrAssignee)}
             <div><Icon className='label' name='label_outline' /> {this.renderLabel(isCreatorOrAssignee)} </div>
             { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType, isCreatorOrAssignee)}
-            {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים', isCreatorOrAssignee)}
-            {this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה', isCreatorOrAssignee)}
-            {this.renderTextArea(task, 'status', 'סטטוס המשימה', isCreatorOrAssignee)}
+            <div><span>אנשי קשר רלוונטיים</span> {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים', isCreatorOrAssignee)}</div>
+            { this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה', isCreatorOrAssignee) }
+            <span>סטטוס</span> {this.renderTextArea(task, 'status', 'סטטוס המשימה', isCreatorOrAssignee)}
             {isCreatorOrAssignee ? <input className='button button-small button-save' type="submit" value="שמור" /> : ''}
           </form>
-        </div>
-        { this.props.comments ?
+          { this.props.comments ?
           <CommentList
           task={task}
           comments={this.props.comments}
-          auth={this.props.auth}
-          createComment={this.props.createComment}/> : ''}
+          auth={this.props.auth} /> : ''}
+        </div>
+        { this.renderAddComment() }
       </div>
     );
+  }
+
+  renderAddComment() {
+    return (
+      <AddComment
+      task={ this.props.selectedTask }
+      createComment={this.props.createComment }
+      auth={this.props.auth}
+      key='addComment' />)
   }
   
   renderSelect(task, fieldName, placeholder, options, isEditable) {
