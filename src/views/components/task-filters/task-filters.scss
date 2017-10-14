@@ -13,10 +13,6 @@
     list-style-type: none;
   }
 
-  @include media-query(540) {
-    margin-bottom: 25px;
-  }
-
   .react-tagsinput-custom {
     overflow: hidden;
     padding: 5px 1px 1px 1px;

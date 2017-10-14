@@ -57,13 +57,11 @@ export class TaskItem extends Component {
 
   renderAssignee(task) {
     if (!task.assignee) return;
-    const name = task.assignee.name? task.assignee.name.split(' ')[0] : ''
     const avatar = task.assignee.photoURL ? <Img className='avatar' src={task.assignee.photoURL} alt={task.assignee.name}/> : '';
     return (
       <div className='task-item-assignee' data-tip={task.assignee.name}>
         <ReactTooltip type='light' effect='solid'/>
         { avatar }
-        <span>{ name }</span>
       </div>
     );
   }

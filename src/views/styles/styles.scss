@@ -9,10 +9,6 @@ html {
   overflow-y: scroll;
 }
 
-body {
-  padding-bottom: 120px;
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -88,4 +84,8 @@ label:focus,
 {
     outline:0px !important;
     -webkit-appearance:none;
+}
+
+main {
+  margin-top: -20px;
 }

@@ -12,7 +12,6 @@ import Notification from '../../components/notification';
 import TaskFilters from '../../components/task-filters';
 import TaskList from '../../components/task-list';
 import TaskView from '../../components/task-view/task-view';
-import Button from '../../components/button';
 import classNames from 'classnames';
 import LoaderUnicorn from '../../components/loader-unicorn/loader-unicorn';
 
@@ -31,7 +30,8 @@ export class TasksPage extends Component {
     this.state = {
       tasks: this.props.tasks,
       selectedTask: null,
-      labels: null
+      labels: null,
+      isLoadedComments: false
     };
   }
 
@@ -64,14 +64,19 @@ export class TasksPage extends Component {
       this.setState({
         selectedTask: this.props.tasks.find((task)=>( task.get('id') == tid ))
       })
-      if(this.state.selectedTask && tid != this.state.selectedTask.id) {
-        this.props.unloadComments();
-        this.props.loadComments(tid);
+
+      if(!this.state.selectedTask) {
+        this.setState({ isLoadedComments: false });
+      }
+
+      if(!this.state.isLoadedComments || 
+        this.state.selectedTask && tid != this.state.selectedTask.id) {
+          this.setState({ isLoadedComments: true });
+          this.props.unloadComments();
+          this.props.loadComments(tid);
       }
     } else {
-      this.setState({
-        selectedTask: this.state.tasks.first()
-      })
+      this.setState({ isLoadedComments: false });
     }
 
     // prepare filter if exists
@@ -202,11 +207,6 @@ export class TasksPage extends Component {
       <div>
           <div className="g-col">
             { <TaskFilters filter={this.props.filterType} onLabelChange= {this.onLabelChanged}/> }
-            <Button
-              className="button button-small add-task-button"
-              onClick={ this.createNewTask }>
-              הוסף משימה
-            </Button>
           </div>
       
         <div className="g-row">
@@ -218,6 +218,7 @@ export class TasksPage extends Component {
             <TaskList
               tasks={this.state.tasks}
               selectTask={this.goToTask}
+              createTask={this.createNewTask}
               selectedTaskId={this.state.selectedTask? this.state.selectedTask.get("id") : ""}
             />
           </div>
