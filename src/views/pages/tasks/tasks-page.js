@@ -31,7 +31,8 @@ export class TasksPage extends Component {
     this.state = {
       tasks: this.props.tasks,
       selectedTask: null,
-      labels: null
+      labels: null,
+      isLoadedComments: false
     };
   }
 
@@ -64,14 +65,19 @@ export class TasksPage extends Component {
       this.setState({
         selectedTask: this.props.tasks.find((task)=>( task.get('id') == tid ))
       })
-      if(this.state.selectedTask && tid != this.state.selectedTask.id) {
-        this.props.unloadComments();
-        this.props.loadComments(tid);
+
+      if(!this.state.selectedTask) {
+        this.setState({ isLoadedComments: false });
+      }
+
+      if(!this.state.isLoadedComments || 
+        this.state.selectedTask && tid != this.state.selectedTask.id) {
+          this.setState({ isLoadedComments: true });
+          this.props.unloadComments();
+          this.props.loadComments(tid);
       }
     } else {
-      this.setState({
-        selectedTask: this.state.tasks.first()
-      })
+      this.setState({ isLoadedComments: false });
     }
 
     // prepare filter if exists
