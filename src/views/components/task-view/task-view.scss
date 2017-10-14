@@ -26,9 +26,17 @@
     resize:none;
   }
 
+  input:disabled, select:disabled, textarea:disabled {
+    background-color: none;
+  }
+
   .Select {
     vertical-align: middle;
     display: inline-block;
+  }
+
+  .Select-value {
+    background-color: white;
   }
 
   .Select-control {
@@ -40,6 +48,7 @@
     &:hover {
       border: 1px solid #ccc !important;
     }
+
   }
   
   .Select-menu-outer {
