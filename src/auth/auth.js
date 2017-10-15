@@ -6,10 +6,13 @@ export function initAuth(dispatch) {
   return new Promise((resolve, reject) => {
     const unsubscribe = firebaseAuth.onAuthStateChanged(
       authUser => {
-        dispatch(authActions.initAuth(authUser));
-        updateUserData(authUser);
-        unsubscribe();
-        resolve();
+        getIsAdmin(authUser).then(isAdmin => {
+          authUser.role = isAdmin.exists? 'admin': 'user';
+          dispatch(authActions.initAuth(authUser));
+          updateUserData(authUser);
+          unsubscribe();
+          resolve();
+        })
       },
       error => reject(error)
     );
@@ -30,4 +33,10 @@ function updateUserData(authUser) {
     created: new Date()
     })
   }
+}
+
+// TODO - instead of await that waits for all users
+// We should load the interface and then make another call - for faster loading
+function getIsAdmin(authUser) {
+  return firebaseDb.collection('admins').doc(authUser.uid).get();
 }

@@ -8,7 +8,8 @@ export const AuthState = new Record({
   name: null,
   email: null,
   photoURL: null,
-  phoneNumber: null
+  phoneNumber: null,
+  role: 'user'
 });
 
 
@@ -22,7 +23,8 @@ export function authReducer(state = new AuthState(), {payload, type}) {
         name: payload? payload.displayName : null,
         email: payload? payload.email : null,
         photoURL: payload? payload.photoURL : null,
-        phoneNumber: payload? payload.phoneNumber : null
+        phoneNumber: payload? payload.phoneNumber : null,
+        role: payload? payload.role : null
       });
 
     case SIGN_OUT_SUCCESS:
