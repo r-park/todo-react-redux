@@ -45,7 +45,7 @@ service cloud.firestore {
     }
     
     match /admins/{anyAdmin} {
-      allow read: if false;
+      allow read: if request.auth != null;
     }
   }
 }

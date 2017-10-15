@@ -152,7 +152,7 @@ export class TasksPage extends Component {
   }
 
   isAdmin() {
-    return false; //TODO
+    return this.props.auth.role == 'admin';
   }
 
   assignTaskToSignedUser(task) {
@@ -192,7 +192,7 @@ export class TasksPage extends Component {
         updateTask={this.props.updateTask}
         selectTask={this.goToTask}
         selectedTask={this.state.selectedTask.toJS()}
-        isAdmin={false}
+        isAdmin={this.isAdmin()}
         assignTask={this.assignTaskToSignedUser}
         unloadComments={this.props.unloadComments}
         createComment={this.props.createComment}
