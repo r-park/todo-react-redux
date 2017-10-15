@@ -11,7 +11,9 @@
   .textarea-body {
     width: calc(100% - 80px);
     transition: border-color 100ms;
-    font-size: 1em;
+    font-size: $base-font-size;
+    font-family: $base-font-family;
+    line-height: 1.2em;
     padding: 5px;
     text-rendering: optimizeSpeed;
     vertical-align: top;

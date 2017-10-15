@@ -2,15 +2,32 @@
 
 
 .sign-in {
-  margin-top: 90px;
-  max-width: 300px;
+  margin-top: 10px;
+
+  h3 {
+    font-weight: normal;
+  }
+
+  .sign-in-buttons {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .done {
+    font-size: 30px;
+    color: $primary-color;
+  }
 }
 
 .sign-in__heading {
-  margin-bottom: 36px;
+  margin-bottom: 10px;
   font-size: 30px;
   font-weight: 300;
   text-align: center;
+}
+
+.sign-in__content {
+  margin-top: 40px;
 }
 
 .sign-in__button {

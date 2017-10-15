@@ -7,7 +7,7 @@
   line-height: 1.1em;
   margin-bottom: 2em;
   z-index: 10;
-  font-size: 1.1em;
+  font-size: 18px;
 }
 
 @media (max-width: 700px) {
@@ -19,11 +19,12 @@
 
 .task-view {
   padding: 10px 20px;
-  max-height: 17em;
+  max-height: 19.35em;
   overflow-y: auto;
   
   textarea {
     resize:none;
+    font-family: $base-font-family;
   }
 
   input:disabled, select:disabled, textarea:disabled {
@@ -32,17 +33,17 @@
 
   .Select {
     vertical-align: middle;
-    display: inline-block;
   }
 
   .Select-value {
     background-color: white;
+    padding-right: 0 !important;
   }
 
   .Select-control {
     width: 200px !important;
     border: none !important;
-    font-size: 1.1em;
+    font-size: 18px;
 
   
     &:hover {
@@ -63,13 +64,17 @@
     vertical-align: top;
     margin-top: .7em;
   }
+
+  .is-critical {
+    margin-bottom: 10px;
+  }
   
 }
 
 .changing-input {
   width: 100%; //TODO
   transition: border-color 100ms;
-  font-size: 1.1em;
+  font-size: 18px;
   padding: 5px;
   border: none;
   text-rendering: optimizeSpeed;
@@ -91,10 +96,10 @@
   padding: 5px 1px 1px 1px;
   width: calc(100% - 60px);
   display: inline-block;
-  font-family: '"aktiv-grotesk-std", Helvetica Neue, Arial, sans-serif';
   
   input {
-    font-size: 1.1em;
+    font-size: 18px;
+    font-family: $base-font-family;
     width: calc( 100% - 130px);
   }
 }

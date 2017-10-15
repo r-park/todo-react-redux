@@ -7,8 +7,9 @@ import Img from 'react-image';
 import './task-view-header.css';
 
 const TaskViewHeader = ({ task, isUserCreator, selectTask, assignTask, removeTask}) => {
-  const isTaskEmpty = !task.description &&
-  !task.circle && !task.status;
+  const isTaskEmpty = (!task.description || task.description == '') &&
+  (!task.circle || task.circle == '') && (!task.status || task.status == '');
+
   return (
     <div className='task-view-header' name='task-view-header'>
     
@@ -19,7 +20,7 @@ const TaskViewHeader = ({ task, isUserCreator, selectTask, assignTask, removeTas
       {!task.assignee ? <Button
         className='button button-small action-button assign_task'
         onClick={()=>assignTask(task)}
-        type='button'>קח אחריות על משימה זו</Button> : 
+        type='button'>קחי אחראיות על משימה זו</Button> : 
         
         <div className='avatar-container'>
           <Img className='avatar' src={task.assignee.photoURL}/>
