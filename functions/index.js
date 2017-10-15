@@ -7,7 +7,7 @@ const functions = require('firebase-functions');
 //admin.initializeApp(functions.config().firebase);
 
 // Max number of tasks per creator
-const MAX_TASK_PER_CREATOR = 5;
+const MAX_TASK_PER_CREATOR = 500;
 
 // Limit the number of tasks by creator
 exports.limitTasksPerCreatorFirestore = functions.firestore.document('/tasks/{taskId}').onCreate(event => {

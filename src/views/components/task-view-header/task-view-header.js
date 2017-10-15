@@ -32,6 +32,14 @@ const TaskViewHeader = ({ task, isUserCreator, selectTask, assignTask, removeTas
           onClick={()=> { removeTask(task); selectTask(); }}
           type='button'>מחק משימה</Button> : '' }
         
+        { task && task.isCritical ? 
+          <span>
+            <Icon name='warning' className='warning grow' />
+            משימה קריטית לקיום הארוע
+          </span>
+        : ''
+        }
+        
     </div>
   )
 };

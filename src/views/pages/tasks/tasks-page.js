@@ -134,7 +134,7 @@ export class TasksPage extends Component {
     const myTasks = this.props.filters[filter.type](this.props.tasks, filter);
 
     // TODO: Move to a better place
-    if (myTasks.size >= 8) {
+    if (myTasks.size >= 500) {
       console.warn("DOOCRATE: MAX TASKS FOR USERS REACHED")
       return;
     }

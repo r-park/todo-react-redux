@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import './task-item.css';
 import Img from 'react-image';
 import ReactTooltip from 'react-tooltip'
+import Icon from '../icon';
 
 export class TaskItem extends Component {
   constructor() {
@@ -31,6 +32,12 @@ export class TaskItem extends Component {
       <div className={containerClasses} tabIndex={this.props.taskNumber+1}
         onClick={this.select}
         onKeyUp={this.select}>
+        { task && task.isCritical ? 
+          <div className='cell'>
+            <Icon name='warning' className='warning grow' />
+          </div>
+        : ''
+        }
         <div className="cell">
           {this.renderTitle(task)}
         </div>
