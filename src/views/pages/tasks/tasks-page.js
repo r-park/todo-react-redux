@@ -134,8 +134,8 @@ export class TasksPage extends Component {
     const myTasks = this.props.filters[filter.type](this.props.tasks, filter);
 
     // TODO: Move to a better place
-    if (myTasks.size >= 500) {
-      console.warn("DOOCRATE: MAX TASKS FOR USERS REACHED")
+    if (!this.isAdmin() && myTasks.size >= 8) {
+      this.props.showError('הגעת למכסת המשימות שניתן לייצר');
       return;
     }
 
@@ -160,9 +160,9 @@ export class TasksPage extends Component {
 
     // TODO: Move to a better place
     if(myAssignedTasks.size >= 4) {
-      return console.warn("DOOCRATE: TOO MANY TASKS ASSIGNED TO USER")
+      this.props.showError('הגעת למכסת המשימות לאדם. לא ניתן לקחת משימות נוספות כרגע');
+      return;
     }
-    
 
     this.props.assignTask(task, this.props.auth);
   }

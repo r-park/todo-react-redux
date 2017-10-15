@@ -47,7 +47,7 @@ export function assignTask(task, assignee) {
         photoURL: assignee.photoURL
       }
     })
-      .catch(error => dispatch(updateTaskError(error)));
+    .catch(error => dispatch(updateTaskError(error)));
   };
 }
 
