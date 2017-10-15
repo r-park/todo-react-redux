@@ -7,7 +7,9 @@ export function initAuth(dispatch) {
     const unsubscribe = firebaseAuth.onAuthStateChanged(
       authUser => {
         getIsAdmin(authUser).then(isAdmin => {
-          authUser.role = isAdmin.exists? 'admin': 'user';
+          if(authUser) {
+            authUser.role = isAdmin.exists? 'admin': 'user';
+          }
           dispatch(authActions.initAuth(authUser));
           updateUserData(authUser);
           unsubscribe();
@@ -38,5 +40,10 @@ function updateUserData(authUser) {
 // TODO - instead of await that waits for all users
 // We should load the interface and then make another call - for faster loading
 function getIsAdmin(authUser) {
+  if(!authUser) {
+    return new Promise( (resolve, reject) => {
+      resolve('guest');
+    })
+  }
   return firebaseDb.collection('admins').doc(authUser.uid).get();
 }
