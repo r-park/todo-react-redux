@@ -183,7 +183,10 @@ export class TasksPage extends Component {
   }
 
   renderTaskView() {
-    if (this.state.selectedTask == null) return <div>&nbsp;</div>; 
+    const isLoading = (!this.state.tasks || this.props.tasks.size <= 0);
+    if (this.state.selectedTask == null) {
+      return (<div>&nbsp;</div>);
+    }
     
     return (
       <TaskView 

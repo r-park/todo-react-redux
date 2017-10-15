@@ -36,16 +36,18 @@ class TaskFilters extends Component {
         <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'mine'} to={{ pathname: '/', search: 'filter=mine'}}>המשימות שלי</NavLink></li>
         <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'unassigned'} to={{ pathname: '/', search: 'filter=unassigned'}}>משימות פנויות</NavLink></li>
         <li><NavLink isActive={(match, location) => this.getFilterQuery(location) === 'label'} to={{ pathname: '/', search: 'filter=label'}}>משימות לפי תגית</NavLink></li>
+        <li>
+          <TagsInput
+            value={this.state.label}
+            onChange={this.handleLabelChange}
+            onlyUnique={true}
+            className={'react-tagsinput-custom'}
+            addOnBlur={true}
+            renderInput={ this.autosizingRenderInput }
+            inputProps={{ placeholder: showPlaceholder ? 'חפשי משימה לפי תגיות' : ''}}
+        />
+      </li>
       </ul>
-      <TagsInput
-        value={this.state.label}
-        onChange={this.handleLabelChange}
-        onlyUnique={true}
-        className={'react-tagsinput-custom'}
-        addOnBlur={true}
-        renderInput={ this.autosizingRenderInput }
-        inputProps={{ placeholder: showPlaceholder ? 'חפשי לפי תגית' : ''}}
-      />
       </div>
     );
   }

@@ -37,7 +37,7 @@ export class AddComment extends Component {
       className='textarea-body'
       name='body'
       value={this.state['body']}
-      placeholder={'כתוב הארה... האם יש מישהו שאתה חושב שממלא המשימה צריך לדבר איתו? האם יש משהו שאתה חושב שכדאי שממלא המשימה צריך לדעת?'}
+      placeholder={'זה המקום לכתוב משהו. האם יש מישהו שאתה חושב שממלא המשימה צריך לדבר איתו? האם יש משהו שכדאי שממלא המשימה יידע?'}
       ref={e => this['bodyInput'] = e}
       onChange={this.handleChange}
       onFocus={() => this.toggleShowHideSubmit(true) }

@@ -131,14 +131,14 @@ export class TaskView extends Component {
         <div className='task-view'>
           <form onSubmit={this.handleSubmit} noValidate>
             {this.renderInput(task, 'title', 'שם המשימה', canEditTask)}
-            {this.renderInput(task, 'projectName', 'שם הפרוייקט (במידה ומדובר במחנה נושא או מיצב אמנות)', canEditTask)}
+            {this.renderInput(task, 'projectName', 'שם הפרויקט (במידה ומדובר במחנה נושא או מיצב אמנות)', canEditTask)}
             {this.renderTextArea(task, 'description', 'תאור המשימה', canEditTask)}
             <span>תומכ.ת</span> { this.renderSelect(task, 'circle', 'תומכ.ת', this.state.defaultCircle, canEditTask)}
-            <div><Icon className='label' name='label_outline' /> {this.renderLabel(canEditTask)} </div>
-            { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType, canEditTask)}
+            <div><Icon className='label' name='loyalty' /> {this.renderLabel(canEditTask)} </div>
+            <div><span>סוג המשימה</span> { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType, canEditTask)}</div>
             <div><span>אנשי קשר רלוונטיים</span> {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים', canEditTask)}</div>
             <div><span>טלפון ממלא המשימה</span>{ this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה', canEditTask) }</div>
-            { this.renderCheckbox(task, 'isCritical', 'האם המשימה קריטית לקיום הארוע?', canEditTask) }
+            <div className='is-critical'>{ this.renderCheckbox(task, 'isCritical', 'האם המשימה קריטית לקיום הארוע?', canEditTask) }</div>
             <span>סטטוס</span> {this.renderTextArea(task, 'status', 'סטטוס המשימה', canEditTask)}
           </form>
           { this.props.comments ?
@@ -228,19 +228,17 @@ export class TaskView extends Component {
   renderCheckbox(task, fieldName, placeholder, isEditable) {
     const classNames = isEditable ? ' editable' : ''
     return (
-      <div>
-        <label>
-          <input
-          type = 'checkbox'
-          checked = { this.state[fieldName] }
-          value = { placeholder }
-          onChange={e => { this.setState({ [fieldName]: !this.state[fieldName]}) }}
-          disabled = { !isEditable }
-          onBlur={this.handleSubmit}
-          />
-          { placeholder }
-        </label>
-      </div>
+      <label>
+        <input
+        type = 'checkbox'
+        checked = { this.state[fieldName] }
+        value = { placeholder }
+        onChange={e => { this.setState({ [fieldName]: !this.state[fieldName]}) }}
+        disabled = { !isEditable }
+        onBlur={this.handleSubmit}
+        />
+        { placeholder }
+      </label>
     );
   }
 
