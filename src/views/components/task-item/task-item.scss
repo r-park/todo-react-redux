@@ -1,6 +1,5 @@
 @import 'views/styles/shared';
 
-
 .task-item {
   display: flex;
   outline: none;
@@ -25,6 +24,10 @@
     width: 40px;
     height: 40px;
     border-radius: 40px;
+  }
+
+  .warning {
+    color: $primary-color;
   }
 }
 .task-item.is-active{

@@ -18,4 +18,5 @@ export const Task = new Record({
   relevantContacts: null,
   assigneePhone: null, //TODO: might be better to put under user
   status: null,
+  isCritical: false
 });

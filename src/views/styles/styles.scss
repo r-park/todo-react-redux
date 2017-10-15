@@ -86,6 +86,11 @@ label:focus,
     -webkit-appearance:none;
 }
 
+input[type='checkbox']
+{
+  -webkit-appearance:checkbox !important;
+}
+
 main {
   margin-top: -20px;
 }

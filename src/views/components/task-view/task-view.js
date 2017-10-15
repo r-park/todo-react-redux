@@ -46,7 +46,8 @@ export class TaskView extends Component {
       label: [],
       relevantContacts: '',
       assigneePhone: '',
-      status: ''
+      status: '',
+      isCritical: false
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -72,7 +73,7 @@ export class TaskView extends Component {
     let nextSelectedTask = props.selectedTask || {};
     let { id, title, description, circle, type, projectName,
       label, relevantContacts,
-      assigneePhone, status, dueDate, createdDate } = nextSelectedTask;
+      assigneePhone, status, isCritical, dueDate, createdDate } = nextSelectedTask;
     
       // this checks if we got another task, or we're updating the same one
       if (id != this.state.id) {
@@ -88,6 +89,7 @@ export class TaskView extends Component {
           relevantContacts:relevantContacts || '',
           assigneePhone:assigneePhone || '',
           status: status || '',
+          isCritical: isCritical || false,
           createdDate: createdDate || '',
           dueDate: dueDate || null,
           type: type || '',
@@ -135,7 +137,8 @@ export class TaskView extends Component {
             <div><Icon className='label' name='label_outline' /> {this.renderLabel(isCreatorOrAssignee)} </div>
             { this.renderSelect(task, 'type', 'סוג המשימה', this.state.defaultType, isCreatorOrAssignee)}
             <div><span>אנשי קשר רלוונטיים</span> {this.renderTextArea(task, 'relevantContacts', 'אנשי קשר רלוונטיים', isCreatorOrAssignee)}</div>
-            { this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה', isCreatorOrAssignee) }
+            <div><span>טלפון ממלא המשימה</span>{ this.renderInput(task, 'assigneePhone', 'טלפון ממלא המשימה', isCreatorOrAssignee) }</div>
+            { this.renderCheckbox(task, 'isCritical', 'האם המשימה קריטית לקיום הארוע?', isCreatorOrAssignee) }
             <span>סטטוס</span> {this.renderTextArea(task, 'status', 'סטטוס המשימה', isCreatorOrAssignee)}
           </form>
           { this.props.comments ?
@@ -222,6 +225,25 @@ export class TaskView extends Component {
     )
   }
 
+  renderCheckbox(task, fieldName, placeholder, isEditable) {
+    const classNames = isEditable ? ' editable' : ''
+    return (
+      <div>
+        <label>
+          <input
+          type = 'checkbox'
+          checked = { this.state[fieldName] }
+          value = { placeholder }
+          onChange={e => { this.setState({ [fieldName]: !this.state[fieldName]}) }}
+          disabled = { !isEditable }
+          onBlur={this.handleSubmit}
+          />
+          { placeholder }
+        </label>
+      </div>
+    );
+  }
+
   handleChange(e) {
     let fieldName = e.target.name;
     this.setState({
@@ -250,6 +272,7 @@ export class TaskView extends Component {
       relevantContacts: this.state.relevantContacts,
       assigneePhone: this.state.assigneePhone,
       status: this.state.status,
+      isCritical: this.state.isCritical,
       type: this.state.type,
       projectName: this.state.projectName
     };
