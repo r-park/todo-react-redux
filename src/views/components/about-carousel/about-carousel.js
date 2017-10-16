@@ -33,6 +33,9 @@ class AboutCarousel extends React.Component {
     },{
       name:'רותם בונדר',
       img:'http://placekitten.com/550/350?image=14'
+    },{
+      name:'טל לותן',
+      img:'http://placekitten.com/550/350?image=15'
     }
     ]
 
