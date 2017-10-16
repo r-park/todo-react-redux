@@ -40,7 +40,7 @@
 }
 
 .task-list {
-  max-height: 26em;
+  max-height: 25em;
   overflow-y: auto;
   border-radius: 3px 3px 0 0;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
@@ -49,4 +49,10 @@
 
 .task-list-loader {
   min-height: 29.23em;
+}
+
+@media (max-width: 767px) {
+  .task-list-loader {
+    min-height: 25.23em;
+  }
 }

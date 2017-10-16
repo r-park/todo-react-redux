@@ -185,7 +185,7 @@ export class TasksPage extends Component {
   renderTaskView() {
     const isLoading = (!this.state.tasks || this.props.tasks.size <= 0);
     if (this.state.selectedTask == null) {
-      return (<div>&nbsp;</div>);
+      return (<div className='task-view-loader'>&nbsp;</div>);
     }
     
     return (
@@ -225,6 +225,10 @@ export class TasksPage extends Component {
               selectedTaskId={this.state.selectedTask? this.state.selectedTask.get("id") : ""}
             />
           </div>
+
+          { (this.state.selectedTask == null) ? 
+            <div className='task-view-bottom-loader'>&nbsp;</div>: ''
+          }
 
           {this.props.notification.display ? this.renderNotification() : null}
         </div>

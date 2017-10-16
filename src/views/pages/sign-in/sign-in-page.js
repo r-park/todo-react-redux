@@ -59,6 +59,8 @@ const SignInPage = ({signInWithFacebook, signInWithGoogle}) => {
             <Button className="sign-in__button" onClick={signInWithGoogle}>התחברי עם גוגל</Button>
             <Button className="sign-in__button" onClick={signInWithFacebook}>התחברי עם פייסבוק</Button>
         </div>
+        <br/>
+        <br/>
         </div>
       </div>
     </div>
