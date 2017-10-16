@@ -26,7 +26,7 @@ const SignInPage = ({signInWithFacebook, signInWithGoogle}) => {
           בהרשמה כאן תכנסו למערכת ניהול המשימות השיתופי של מידברנרות 
           </h3>
           <h5 className='about-header'>
-            <NavLink to='/about'> (קצת על המערכת > )</NavLink>
+          (<NavLink to='/about'> קצת על המערכת ></NavLink>)
           </h5>
           <br />
           <h3>
