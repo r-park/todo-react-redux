@@ -14,6 +14,7 @@ import TaskList from '../../components/task-list';
 import TaskView from '../../components/task-view/task-view';
 import classNames from 'classnames';
 import LoaderUnicorn from '../../components/loader-unicorn/loader-unicorn';
+import {debounce} from 'lodash';
 
 import './tasks-page.css';
 
@@ -33,6 +34,8 @@ export class TasksPage extends Component {
       labels: null,
       isLoadedComments: false
     };
+
+    this.debouncedFilterTasksFromProps = debounce(this.filterTasksFromProps, 50);
   }
 
   static propTypes = {
@@ -80,6 +83,10 @@ export class TasksPage extends Component {
     }
 
     // prepare filter if exists
+    this.debouncedFilterTasksFromProps(nextProps);
+  }
+
+  filterTasksFromProps(nextProps) {
     let curTasks = nextProps.tasks;
     const params = new URLSearchParams(nextProps.location.search);
     const filterType = params.get('filter');
@@ -89,7 +96,7 @@ export class TasksPage extends Component {
       curTasks = this.props.filters[filter.type](curTasks, filter);
     }
     
-    this.setState({tasks: curTasks});      
+    this.setState({tasks: curTasks});  
   }
 
   componentDidUpdate(prevProps, prevState) {    
