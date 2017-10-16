@@ -1,136 +1,98 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import Button from '../button';
-import Icon from '../icon';
 
 import './task-item.css';
-
+import Img from 'react-image';
+import ReactTooltip from 'react-tooltip'
+import Icon from '../icon';
 
 export class TaskItem extends Component {
   constructor() {
     super(...arguments);
 
-    this.state = {editing: false};
+    this.state = {};
 
-    this.edit = this.edit.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.remove = this.remove.bind(this);
-    this.save = this.save.bind(this);
-    this.stopEditing = this.stopEditing.bind(this);
-    this.toggleStatus = this.toggleStatus.bind(this);
+    this.select = this.select.bind(this);
   }
 
-  edit() {
-    this.setState({editing: true});
+  select() {
+    this.props.selectTask(this.props.task);
   }
 
-  handleKeyUp(event) {
-    if (event.keyCode === 13) {
-      this.save(event);
-    }
-    else if (event.keyCode === 27) {
-      this.stopEditing();
-    }
-  }
-
-  remove() {
-    this.props.removeTask(this.props.task);
-  }
-
-  save(event) {
-    if (this.state.editing) {
-      const { task } = this.props;
-      const title = event.target.value.trim();
-
-      if (title.length && title !== task.title) {
-        this.props.updateTask(task, {title});
-      }
-
-      this.stopEditing();
-    }
-  }
-
-  stopEditing() {
-    this.setState({editing: false});
-  }
-
-  toggleStatus() {
+  render() {
     const { task } = this.props;
-    this.props.updateTask(task, {completed: !task.completed});
+    
+    let containerClasses = classNames('task-item', {
+      'task-item--completed': task.completed,
+    }, {'is-active': this.props.isActive});
+   
+
+    return (
+      <div className={containerClasses} tabIndex={this.props.taskNumber+1}
+        onClick={this.select}
+        onKeyUp={this.select}>
+        { task && task.isCritical ? 
+          <div className='cell'>
+            <Icon name='warning' className='warning grow' />
+          </div>
+        : ''
+        }
+        <div className="cell">
+          {this.renderTitle(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderAssignee(task)}
+        </div>
+
+        <div className="cell">
+          {this.renderLabel(task)}
+        </div>
+      </div>
+    );
   }
+
 
   renderTitle(task) {
     return (
-      <div className="task-item__title" tabIndex="0">
+      <div className="task-item-title">
         {task.title}
       </div>
     );
   }
 
-  renderTitleInput(task) {
+  renderAssignee(task) {
+    if (!task.assignee) return;
+    const avatar = task.assignee.photoURL ? <Img className='avatar' src={task.assignee.photoURL} alt={task.assignee.name}/> : '';
     return (
-      <input
-        autoComplete="off"
-        autoFocus
-        className="task-item__input"
-        defaultValue={task.title}
-        maxLength="64"
-        onKeyUp={this.handleKeyUp}
-        type="text"
-      />
+      <div className='task-item-assignee' data-tip={task.assignee.name}>
+        <ReactTooltip type='light' effect='solid'/>
+        { avatar }
+      </div>
     );
   }
 
-  render() {
-    const { editing } = this.state;
-    const { task } = this.props;
-
-    let containerClasses = classNames('task-item', {
-      'task-item--completed': task.completed,
-      'task-item--editing': editing
-    });
-
+  renderLabel(task) {
+    if(!task.label || Object.keys(task.label).length === 0 && task.label.constructor === Object) {
+      return null;
+    }
+    
     return (
-      <div className={containerClasses} tabIndex="0">
-        <div className="cell">
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'active': task.completed, 'hide': editing})}
-            onClick={this.toggleStatus}>
-            <Icon name="done" />
-          </Button>
-        </div>
-
-        <div className="cell">
-          {editing ? this.renderTitleInput(task) : this.renderTitle(task)}
-        </div>
-
-        <div className="cell">
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
-            onClick={this.edit}>
-            <Icon name="mode_edit" />
-          </Button>
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': !editing})}
-            onClick={this.stopEditing}>
-            <Icon name="clear" />
-          </Button>
-          <Button
-            className={classNames('btn--icon', 'task-item__button', {'hide': editing})}
-            onClick={this.remove}>
-            <Icon name="delete" />
-          </Button>
-        </div>
+      <div>
+        { 
+          Object.keys(task.label).map((label) => {
+            return (<span key={label} className="label-default">{label}</span>)
+          }) }
       </div>
     );
   }
 }
 
 TaskItem.propTypes = {
-  removeTask: PropTypes.func.isRequired,
   task: PropTypes.object.isRequired,
-  updateTask: PropTypes.func.isRequired
+  selectTask: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired
 };
 
 

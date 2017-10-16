@@ -1,0 +1,15 @@
+.loader-unicorn {
+  transition: opacity 500ms 0ms;
+  opacity: 1.0;
+  height: 218px;
+  width: 319px;
+  position: absolute;
+  pointer-events: none;
+  left: calc(50% - 160px);
+  top: 12.5em;
+}
+
+.loader-unicorn.hideme {
+  transition: opacity 300ms 0ms;
+  opacity: 0.0;
+}

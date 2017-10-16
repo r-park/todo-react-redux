@@ -1,0 +1,12 @@
+@import 'views/styles/shared';
+
+.about-carousel {
+  .slick-slider {
+    direction:ltr !important;
+  }
+
+  .person-name {
+    text-align: center;
+    color: $primary-color;
+  }
+}

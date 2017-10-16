@@ -1,13 +1,8 @@
 [![CircleCI](https://circleci.com/gh/r-park/todo-react-redux.svg?style=shield&circle-token=6caf8c493bd66544717ff9a47ae01d8be036e53c)](https://circleci.com/gh/r-park/todo-react-redux)
 
 
-# Todo app with Create React App, React Redux, and Firebase
-A simple Todo app example with **undelete** capability — built with [Create React App](https://github.com/facebookincubator/create-react-app), [React Redux](https://github.com/reactjs/react-redux), and [Firebase](https://firebase.google.com/).
-
-Try the demo at https://todo-react-redux.firebaseapp.com. 
-
-A version of this app built with [redux-saga middleware](https://github.com/yelouafi/redux-saga) is available [here](https://github.com/r-park/todo-redux-saga).
-
+# Teal Doocrate
+Try the demo at https://doocrate.firebaseapp.com. 
 
 ## Stack
 
@@ -27,11 +22,19 @@ Quick Start
 -----------
 
 ```shell
-$ git clone https://github.com/r-park/todo-react-redux.git
-$ cd todo-react-redux
+$ git clone https://github.com/metaburn/doocrate.git
+$ cd doocrate
 $ npm install
 $ npm start
 ```
+
+Admins
+-----
+Import the file under
+`assets/database-example.json`
+and add the uid of the app admins
+
+Only admins can write new tasks at the moment
 
 ## Deploying to Firebase
 #### Prerequisites:
@@ -61,6 +64,20 @@ export const firebaseConfig = {
 };
 ```
 
+## Deploy command
+`deploy:staging`
+OR 
+`deploy:production`
+Will build - use the correct config file and deploy
+
+#### Staging
+You can also set staging env and use:
+`firebase use --add` to add your staging site
+Then run like
+`npm run build-staging`
+`firebase use` and choose staging
+`firebase deploy`
+
 #### Install firebase-tools:
 ```shell
 $ npm install -g firebase-tools
@@ -72,6 +89,20 @@ $ npm run build
 $ firebase login
 $ firebase use default
 $ firebase deploy
+```
+
+## Setting up mail
+We send emails on task comments to assignee
+We've used mailgun since it allows 1000 messages free per day.
+You need to make sure you set up Blaze-pay-as-you-go plan on firestore
+Don't worry on normal use cases (800 users) you probably won't pay anything
+Register here - https://www.mailgun.com/google
+
+Run:
+```
+firebase functions:config:set email.send_notifications="true"
+firebase functions:config:set email.from='"Doocrate" <noreply@doocrate.midburnerot.com>'
+firebase functions:config:set email.apikey="Your-MailGun-Api-Key"
 ```
 
 

@@ -1,0 +1,14 @@
+@import 'views/styles/shared';
+
+.footer {
+  padding: 10px 37px 15px 37px;
+
+  position: relative;
+  bottom: 0;
+  height: 60px;
+  z-index: 0;
+
+  a {
+    color: $primary-color;
+  }
+}

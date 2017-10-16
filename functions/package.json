@@ -1,0 +1,10 @@
+{
+  "name": "limit-posts-functions",
+  "description": "Limit number of posts Firebase Functions sample",
+  "dependencies": {
+    "@google-cloud/firestore": "0.8.1",
+    "firebase-admin": "^5.4.1",
+    "firebase-functions": "0.7.1",
+    "nodemailer": "4.2.0"
+  }
+}

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "firebase-todo-react-redux"
+    "default": "doocrate",
+    "staging": "doocrate2"
   }
 }
