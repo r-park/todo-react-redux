@@ -10,8 +10,10 @@ import RequireUnauthRoute from '../components/require-unauth-route';
 import SignInPage from '../pages/sign-in';
 import TasksPage from '../pages/tasks';
 import NotFound from '../pages/not-found/';
+import AboutPage from '../pages/about';
 import 'react-select/dist/react-select.css';
 
+import './app.css';
 
 const App = ({authenticated, signOut}) => (
   <div>
@@ -25,9 +27,16 @@ const App = ({authenticated, signOut}) => (
         <RequireAuthRoute authenticated={authenticated} exact path="/" component={TasksPage}/>      
         <RequireAuthRoute authenticated={authenticated} path="/task/:id" component={TasksPage} />
         <RequireUnauthRoute authenticated={authenticated} path="/sign-in" component={SignInPage}/>
+        <Route authenticated={authenticated} path="/about" component={AboutPage}/>
         <Route component={NotFound}/>
       </Switch>
     </main>
+    <div className='bottom'>
+      המערכת נכתבה 
+      <a href='https://github.com/metaburn/doocrate'>&nbsp;בקוד פתוח</a>
+      &nbsp;ומוגשת ב ❤ מאת
+       <a href='/about'>&nbsp;האנשים שיצרו את המערכת</a>
+    </div>
   </div>
 );
 

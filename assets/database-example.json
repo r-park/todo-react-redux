@@ -4,6 +4,12 @@
       "name": "Gal"
     }
   },
+  "users": {
+    "4PmgNalTqzNR8mqYgqnoEa89wjz1": {
+      "email": "email@example.com",
+      "subscribeToNotifications": true 
+    }
+  },
   "tasks" : {
     "-KuzTQLjK2aHDzlFZxfa" : {
       "title" : "Testing 1"

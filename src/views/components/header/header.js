@@ -14,7 +14,7 @@ const Header = ({authenticated, signOut}) => (
           <li>
           </li>
         </ul>
-        <h1 className="header-title">Doocrate</h1>
+        <h1 className="header-title"><a href='/'>Doocrate</a></h1>
       </div>
     </div>
   </header>

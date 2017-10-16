@@ -91,6 +91,20 @@ $ firebase use default
 $ firebase deploy
 ```
 
+## Setting up mail
+We send emails on task comments to assignee
+We've used mailgun since it allows 1000 messages free per day.
+You need to make sure you set up Blaze-pay-as-you-go plan on firestore
+Don't worry on normal use cases (800 users) you probably won't pay anything
+Register here - https://www.mailgun.com/google
+
+Run:
+```
+firebase functions:config:set email.send_notifications="true"
+firebase functions:config:set email.from='"Doocrate" <noreply@doocrate.midburnerot.com>'
+firebase functions:config:set email.apikey="Your-MailGun-Api-Key"
+```
+
 
 ## NPM Commands
 
