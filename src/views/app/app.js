@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, withRouter, Switch } from 'react-router-
 
 import { authActions, getAuth } from 'src/auth';
 import Header from '../components/header';
+import Footer from '../components/footer';
 import RequireAuthRoute from '../components/require-auth-route';
 import RequireUnauthRoute from '../components/require-unauth-route';
 import SignInPage from '../pages/sign-in';
@@ -12,8 +13,6 @@ import TasksPage from '../pages/tasks';
 import NotFound from '../pages/not-found/';
 import AboutPage from '../pages/about';
 import 'react-select/dist/react-select.css';
-
-import './app.css';
 
 const App = ({authenticated, signOut}) => (
   <div>
@@ -31,12 +30,7 @@ const App = ({authenticated, signOut}) => (
         <Route component={NotFound}/>
       </Switch>
     </main>
-    <div className='bottom'>
-      המערכת נכתבה 
-      <a href='https://github.com/metaburn/doocrate'>&nbsp;בקוד פתוח</a>
-      &nbsp;ומוגשת ב ❤ מאת
-       <a href='/about'>&nbsp;האנשים שיצרו את המערכת</a>
-    </div>
+    <Footer />
   </div>
 );
 

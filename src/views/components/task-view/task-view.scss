@@ -10,11 +10,25 @@
   font-size: 18px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 767px) {
   .task-view-container {
     height: 87%;
     width: 94%;
   }
+}
+
+.task-view-loader {
+  min-height: 18.35em;
+}
+
+@media (max-width: 767px) {
+  .task-view-loader {
+    min-height: auto;
+  }
+}
+
+.task-view-bottom-loader {
+  min-height: 23.35em;
 }
 
 .task-view {
