@@ -6,7 +6,7 @@ import LoaderUnicorn from '../../components/loader-unicorn/loader-unicorn';
 import Button from '../../components/button';
 
 const NotFound = ({authenticated, signOut}) => (
-  <div className='g-row'>
+  <div className='g-row not-found'>
     <br/>
     <h1>404 - איבדת את הדרך. לא מצאנו את הדף הזה.</h1>
     <br/>

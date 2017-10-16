@@ -1,7 +1,13 @@
+@import 'views/styles/shared';
+
 .bottom {
   padding: 30px 15px 15px 15px;
   margin-top: 30px;
   position: fixed;
   bottom: 0;
   z-index: -1;
+
+  a {
+    color: $primary-color;
+  }
 }
