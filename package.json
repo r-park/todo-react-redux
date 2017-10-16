@@ -44,6 +44,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-image": "1.0.1",
+    "react-linkify": "0.2.1",
     "react-moment": "0.6.5",
     "react-redux": "^5.0.5",
     "react-router": "^4.2.0",

@@ -7,6 +7,7 @@ import Img from 'react-image';
 import Moment from 'react-moment';
 import 'moment/locale/he';
 import 'moment-timezone';
+import Linkify from 'react-linkify';
 
 export class CommentItem extends Component {
   constructor() {
@@ -39,7 +40,9 @@ export class CommentItem extends Component {
   renderBody(comment) {
     return (
       <div className='comment-body'>
-        {comment.body}
+        <Linkify>
+          {comment.body}
+        </Linkify>
       </div>
     );
   }

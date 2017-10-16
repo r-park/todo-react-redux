@@ -1,3 +1,4 @@
+@import 'views/styles/shared';
 
 .comment-item {
   margin-bottom: 1em;
@@ -9,6 +10,14 @@
 
   .comment-body {
     padding: 0 3em;
+
+    a {
+      color: $primary-color;
+      transition: .2s ease all;
+      &:hover {
+        border-bottom: 1px solid $primary-color;
+      }
+    }
   }
 
   .avatar {
