@@ -48,7 +48,6 @@ const emailAuth = {
  }
 
 const mailTransport = nodemailer.createTransport(emailAuth);
-
 const firestore = new Firestore();
 
 exports.sendEmail = functions.firestore.document('/comments/{commentId}').onWrite(event => {
@@ -65,24 +64,32 @@ exports.sendEmail = functions.firestore.document('/comments/{commentId}').onWrit
     return
   }
 
-  firestore.collection('tasks').document(comment.taskId).get().then( task => {
-      console.log(task.creator.id);
-      const toEmail = task.creator.id;
-        const mailOptions = {
-          from: fromEmail,
-          to: toEmail
-        };
-      
-        const shortTitle = task.title.substr(0, 15);
-        mailOptions.subject = `New comment - [${shortTitle}]`;
-        mailOptions.text = `Comment. From: ${comment.creator.name}. Body: ${comment.body}`;
-        return mailTransport.sendMail(mailOptions).then(() => {
-          console.log('email sent to:', toEmail);
-        }).catch(error => {
-          console.error('error sending mail:', error);  
-        });
+  return firestore.collection('tasks').doc(comment.taskId).get().then( taskSnapshot => {
+    const task = taskSnapshot.data();
+    if(!task || !task.creator || !task.creator.email) {
+      console.log('No email found');
+      return;
     }
-  )
 
-  
-});
+    const toEmail = task.creator.email;
+    const mailOptions = {
+      from: fromEmail,
+      to: toEmail
+    };
+    
+    const emailTemplate = `<h1>Comment updated</h1>.
+      From: ${comment.creator.name}(${comment.creator.email}) <img src='${comment.creator.photoURL}'/><br/> 
+      Body: ${comment.body} <br/>
+      <a href='https://doocrate.midburnerot.com/task/${task.id}'>Click here to see the full task</a>
+    `;
+    
+    const shortTitle = task.title.substr(0, 15);
+    mailOptions.subject = `New comment - [${shortTitle}]`;
+    mailOptions.text = emailTemplate;
+    return mailTransport.sendMail(mailOptions).then(() => {
+      console.log('email sent to:', toEmail);
+    }).catch(error => {
+      console.error('error sending mail:', error);  
+    });
+  }
+)});

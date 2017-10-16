@@ -31,12 +31,13 @@ class TaskList extends Component {
     });    
   }
   else{
-      return (
-        <div>
-          
-        </div>
-      );
-    }
+    return (
+      <div className='task-list-loader'>
+        
+      </div>
+    );
+  }
+
     return (
       <div className='task-list-container'>
         <div className='task-list-header' name='task-list-header'>

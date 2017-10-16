@@ -51,13 +51,15 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "react-scripts": "1.0.10",
     "react-select": "1.0.0-rc.10",
+    "react-slick": "0.15.4",
     "react-tagsinput": "3.18.0",
     "react-textarea-autosize": "5.1.0",
     "react-tooltip": "3.3.1",
     "react-transition-group": "1.2.1",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "slick-carousel": "1.8.1"
   },
   "devDependencies": {
     "cross-env": "^5.0.1",

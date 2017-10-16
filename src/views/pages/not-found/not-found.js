@@ -2,10 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import './not-found.css';
-
+import LoaderUnicorn from '../../components/loader-unicorn/loader-unicorn';
+import Button from '../../components/button';
 
 const NotFound = ({authenticated, signOut}) => (
-  <h1> 404 - Page not found </h1>
+  <div className='g-row'>
+    <br/>
+    <h1>404 - איבדת את הדרך. לא מצאנו את הדף הזה.</h1>
+    <br/>
+    <Button className='button-small'><a href='/'>חזור לדרך המרכזית</a></Button>
+    <LoaderUnicorn isShow={ true }/>
+  </div>
 );
 
 NotFound.propTypes = {

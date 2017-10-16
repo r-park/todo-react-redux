@@ -4,12 +4,12 @@
 .task-list-container {
   border-radius: 3px 3px 0 0;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
-  background: white;
   z-index: 10;
 
   .task-list-header {
     padding: 8px 10px;
     border-bottom: 1px solid #e0e6e8;
+    background: white;
   
     .close-bottom {
       padding-bottom: 15px;
@@ -45,4 +45,8 @@
   border-radius: 3px 3px 0 0;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.15);
   background: white;
+}
+
+.task-list-loader {
+  min-height: 12em;
 }

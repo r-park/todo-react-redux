@@ -6,6 +6,7 @@ import { authActions } from 'src/auth';
 import Button from 'src/views/components/button';
 import Img from 'react-image';
 import Icon from 'src/views/components/icon';
+import { NavLink } from 'react-router-dom';
 
 import './sign-in-page.css';
 
@@ -21,8 +22,14 @@ const SignInPage = ({signInWithFacebook, signInWithGoogle}) => {
 מערכת לניהול ארועי יצירה משותפת
         </h3>
         <div className='sign-in__content'>
+          <h3 className='before-about'>
+          בהרשמה כאן תכנסו למערכת ניהול המשימות השיתופי של מידברנרות 
+          </h3>
+          <h5 className='about-header'>
+            <NavLink to='/about'> (קצת על המערכת > )</NavLink>
+          </h5>
+          <br />
           <h3>
-          בהרשמה כאן תכנסו למערכת ניהול המשימות השיתופי של מידברנרות
   כמה נקודות חשובות לפי שמתחילים:
           </h3>
           <h3>

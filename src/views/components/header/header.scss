@@ -29,6 +29,20 @@
     width: 16px;
     content: ' ';
   }
+
+  a {
+    color: black;
+    transition: all .2s ease;
+
+    &:hover {
+      color: $primary-color;
+    }
+
+    &.active {
+      color: $primary-color;
+      border-bottom: 4px solid $primary-color;
+    }
+  }
 }
 
 .header-actions {
