@@ -96,17 +96,24 @@ export class TasksPage extends Component {
       curTasks = this.props.filters[filter.type](curTasks, filter);
     }
     
+    curTasks = this.filterTaskFromLabel(curTasks)  
+
     this.setState({tasks: curTasks});  
+  }
+
+  filterTaskFromLabel(tasks) {
+    let curTasks = tasks;
+    if ( this.state.labels != null && this.state.labels.length > 0) {
+      const filter = this.props.buildFilter(this.props.auth, "label", this.state.labels);
+      curTasks = this.props.filters["label"](curTasks, filter, this.state.lables);
+    }
+
+    return curTasks;
   }
 
   componentDidUpdate(prevProps, prevState) {    
     if (prevState.labels != this.state.labels) {
-      let curTasks = this.props.tasks;
-      if ( this.state.labels != null && this.state.labels.length > 0) {
-        const filter = this.props.buildFilter(this.props.auth, "label", this.state.labels);
-        curTasks = this.props.filters["label"](curTasks, filter, this.state.lables);
-      }
-      this.setState({tasks: curTasks});  
+      this.setState({tasks: this.filterTaskFromLabel(this.props.tasks)});  
     } 
   }
 
