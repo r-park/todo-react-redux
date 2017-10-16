@@ -1,8 +1,105 @@
-.g-row {
-  @include grid-row;
+@media only screen and (min-width: 768px)  {
+  .g-row {
+    @include grid-row;
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  .g-col {
+    @include grid-column;
+    width: 100%;
+  }
+
+  .g-col-40 {
+    @include grid-column;
+    width: 40%;
+  }
+
+  .g-col-30 {
+    @include grid-column;
+    width: 30%;
+  }
+
+  .g-col-50 {
+    @include grid-column;
+    width: 50%;
+  }
+  
+  .g-col-60 {
+    @include grid-column;
+    width: 60%;
+  }
+  
+  .g-col-70 {
+    @include grid-column;
+    width: 70%;
+  }
+
+  .g-col-80 {
+    @include grid-column;
+    width: 80%;
+  }
+
+  .g-col-90 {
+    @include grid-column;
+    width: 90%;
+  }
 }
 
-.g-col {
-  @include grid-column;
-  width: 100%;
+@media (max-width: 700px)  {
+  .g-row {
+    @include grid-row;
+    max-width: 100%;
+    padding: 0 5px;
+  }
+
+  .g-col-xs-100 {
+    width: 100%;
+    @include grid-column;
+  }
+
+  .g-col-10-xs {
+    width: 10%;
+    @include grid-column;
+  }
+
+  .g-col-20-xs {
+    width: 20%;
+    @include grid-column;
+  }
+
+  .g-col-30-xs {
+      width: 30%;
+      @include grid-column;
+  }
+
+  .g-col-40-xs {
+    width: 40%;
+    @include grid-column;
+  }
+
+  .g-col-50-xs {
+    @include grid-column;
+    width: 50%;
+  }
+
+  .g-col-60-xs {
+    @include grid-column;
+    width: 60%;
+  }
+
+  .g-col-70-xs {
+    @include grid-column;
+    width: 70%;
+  }
+  
+  .g-col-80-xs {
+    @include grid-column;
+    width: 80%;
+  }
+
+  .g-col-90-xs {
+    @include grid-column;
+    width: 90%;
+  }
 }

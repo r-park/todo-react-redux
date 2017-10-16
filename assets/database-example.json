@@ -1,0 +1,36 @@
+{
+  "admins" : {
+    "4PmgNalTqzNR8mqYgqnoEa89wjz1" : {
+      "name": "Gal"
+    }
+  },
+  "users": {
+    "4PmgNalTqzNR8mqYgqnoEa89wjz1": {
+      "email": "email@example.com",
+      "subscribeToNotifications": true 
+    }
+  },
+  "tasks" : {
+    "-KuzTQLjK2aHDzlFZxfa" : {
+      "title" : "Testing 1"
+    },
+    "-KuzTQyK262V2YzvLqFK" : {
+      "title" : "Testing 2"
+    },
+    "-KuzTVy1vn7ywBsM0MOM" : {
+      "title" : "Testing 3",
+      "assignee": "kjaGzPx1flXTCfrTXzH7J16zcip2",
+      "circle":"or",
+      "label": {
+        "art": "true"
+      },
+      "creator": "kjaGzPx1flXTCfrTXzH7J16zcip2",
+      "description": "Description",
+      "creatorSpecialComments": "From the creator",
+      "communitySpecialComments": "Special comments community",
+      "relevantContacts": "",
+      "assigneePhone":"+972532221111",
+      "status": "Getting there slowly"
+    }
+  }
+}

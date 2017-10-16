@@ -24,14 +24,14 @@ describe('Button', () => {
     const wrapper = render(<Button />);
     const button = wrapper.find('button');
 
-    expect(button.hasClass('btn')).toBe(true);
+    expect(button.hasClass('button')).toBe(true);
   });
 
   it('should add provided props.className', () => {
     const wrapper = render(<Button className="foo bar" />);
     const button = wrapper.find('button');
 
-    expect(button.hasClass('btn foo bar')).toBe(true);
+    expect(button.hasClass('button foo bar')).toBe(true);
   });
 
   it('should set type=button by default', () => {

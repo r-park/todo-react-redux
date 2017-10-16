@@ -9,10 +9,6 @@ html {
   overflow-y: scroll;
 }
 
-body {
-  padding-bottom: 120px;
-}
-
 a {
   color: inherit;
   text-decoration: none;
@@ -24,4 +20,77 @@ a {
 
 ::selection {
   background: rgba(200,200,255,.1);
+}
+
+button:focus {
+  outline:0;
+}
+
+div:focus {
+  outline:0;
+}
+
+.label-default {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  
+  background-color: #999;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #c0c1c1;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #c0c1c1;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #c0c1c1;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #c0c1c1;
+}
+
+.grow {
+  transition: all 0.3s ease;
+}
+.grow:hover
+{
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+}
+
+input[type='checkbox']
+{
+  -webkit-appearance:checkbox !important;
+}
+
+main {
+  margin-top: -20px;
 }

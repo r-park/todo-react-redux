@@ -1,15 +1,15 @@
 {
-  "name": "todo-react-redux",
-  "version": "0.6.0",
-  "description": "Todo app with Create React App, React Redux, and Firebase",
-  "homepage": "https://todo-react-redux.firebaseapp.com",
+  "name": "doocrate",
+  "version": "0.6.1",
+  "description": "Teal based task webapp",
+  "homepage": "https://doocrate.firebaseapp.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/r-park/todo-react-redux.git"
+    "url": "https://github.com/metaburn/doocrate.git"
   },
   "author": {
-    "name": "Richard Park",
-    "email": "objectiv@gmail.com"
+    "name": "Metaburn",
+    "email": "galbra@gmail.com"
   },
   "license": "MIT",
   "private": true,
@@ -18,31 +18,48 @@
   },
   "scripts": {
     "eject": "react-scripts eject",
-    "build": "run-s build:css build:js",
+    "build": "run-s copy-production build:css build:js",
+    "build-staging": "run-s copy-staging build:css build:js",
     "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "build:js": "cross-env NODE_PATH=. react-scripts build",
+    "deploy:staging": "run-s build-staging deploy-firebase-staging",
+    "deploy-firebase-staging": "firebase use staging && firebase deploy",
+    "deploy:production": "run-s build deploy-firebase-production",
+    "deploy-firebase-production": "firebase use default && firebase deploy",
     "start": "run-p start:css start:js",
     "start:css": "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start:js": "cross-env NODE_PATH=. react-scripts start",
     "test": "cross-env NODE_PATH=. react-scripts test --env=jsdom",
-    "test:ci": "cross-env CI=true NODE_PATH=. react-scripts test --env=jsdom"
+    "test:ci": "cross-env CI=true NODE_PATH=. react-scripts test --env=jsdom",
+    "copy-staging": "cp -R src/firebase/config.staging.js src/firebase/config.js",
+    "copy-production": "cp -R src/firebase/config.production.js src/firebase/config.js"
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "firebase": "^4.1.3",
+    "firebase": "4.5.0",
     "history": "^4.6.3",
     "immutable": "^3.8.1",
+    "moment-timezone": "0.5.13",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-image": "1.0.1",
+    "react-moment": "0.6.5",
     "react-redux": "^5.0.5",
-    "react-router": "^4.1.1",
+    "react-router": "^4.2.0",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-scripts": "1.0.10",
+    "react-select": "1.0.0-rc.10",
+    "react-slick": "0.15.4",
+    "react-tagsinput": "3.18.0",
+    "react-textarea-autosize": "5.1.0",
+    "react-tooltip": "3.3.1",
+    "react-transition-group": "1.2.1",
     "redux": "^3.7.1",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "slick-carousel": "1.8.1"
   },
   "devDependencies": {
     "cross-env": "^5.0.1",
