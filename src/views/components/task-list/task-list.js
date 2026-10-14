@@ -5,10 +5,10 @@ import TaskItem from '../task-item/task-item';
 
 
 function TaskList({removeTask, tasks, updateTask}) {
-  let taskItems = tasks.map((task, index) => {
+  let taskItems = tasks.map((task) => {
     return (
       <TaskItem
-        key={index}
+        key={task.key}
         task={task}
         removeTask={removeTask}
         updateTask={updateTask}
