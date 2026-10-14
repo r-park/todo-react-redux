@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Task } from 'src/tasks';
 import { createTestComponent } from 'src/utils/create-test-component';
@@ -122,6 +122,27 @@ describe('TaskItem', () => {
         });
       });
     });
+  });
+
+  it('should not re-render when its props are unchanged', () => {
+    const wrapper = shallow(<TaskItem {...props} />);
+    const render = sinon.spy(wrapper.instance(), 'render');
+
+    wrapper.setProps({...props});
+
+    expect(render.callCount).toBe(0);
+  });
+
+  it('should re-render when its task changes', () => {
+    const wrapper = shallow(<TaskItem {...props} />);
+    const render = sinon.spy(wrapper.instance(), 'render');
+
+    wrapper.setProps({
+      ...props,
+      task: task.set('title', 'updated')
+    });
+
+    expect(render.callCount).toBe(1);
   });
 
 

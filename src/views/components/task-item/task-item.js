@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Button from '../button';
@@ -7,7 +7,7 @@ import Icon from '../icon';
 import './task-item.css';
 
 
-export class TaskItem extends Component {
+export class TaskItem extends PureComponent {
   constructor() {
     super(...arguments);
 
