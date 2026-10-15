@@ -110,6 +110,18 @@ describe('Tasks reducer', () => {
       expect(nextState.list.get(0)).toBe(task1);
       expect(nextState.list.get(1)).toBe(changedTask);
     });
+
+    it('should preserve the list when the task is not found', () => {
+      let state = new TasksState({list: new List([task1, task2])});
+      let missingTask = new Task({completed: false, key: 'missing', title: 'missing'});
+
+      let nextState = tasksReducer(state, {
+        type: UPDATE_TASK_SUCCESS,
+        payload: missingTask
+      });
+
+      expect(nextState.list).toBe(state.list);
+    });
   });
 
 
