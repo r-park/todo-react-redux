@@ -1,26 +1,27 @@
-import React  from 'react';
+import React, { PureComponent } from 'react';
 import { List } from 'immutable';
 import PropTypes from 'prop-types';
 import TaskItem from '../task-item/task-item';
 
 
-function TaskList({removeTask, tasks, updateTask}) {
-  let taskItems = tasks.map((task, index) => {
-    return (
+class TaskList extends PureComponent {
+  render() {
+    const {removeTask, tasks, updateTask} = this.props;
+    const taskItems = tasks.map(task => (
       <TaskItem
-        key={index}
+        key={task.key}
         task={task}
         removeTask={removeTask}
         updateTask={updateTask}
       />
-    );
-  });
+    ));
 
-  return (
-    <div className="task-list">
-      {taskItems}
-    </div>
-  );
+    return (
+      <div className="task-list">
+        {taskItems}
+      </div>
+    );
+  }
 }
 
 TaskList.propTypes = {
