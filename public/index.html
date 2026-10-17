@@ -11,10 +11,19 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      media="print"
+      onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    </noscript>
 
-    <script src="https://use.typekit.net/kmv5qdr.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <script
+      async
+      src="https://use.typekit.net/kmv5qdr.js"
+      onload="try{Typekit.load({ async: true });}catch(e){}"></script>
   </head>
 
   <body>
