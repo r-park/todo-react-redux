@@ -28,12 +28,14 @@ export function tasksReducer(state = new TasksState(), {payload, type}) {
               state.list.unshift(payload)
       });
 
-    case REMOVE_TASK_SUCCESS:
+    case REMOVE_TASK_SUCCESS: {
+      const taskIndex = state.list.findIndex(task => task.key === payload.key);
       return state.merge({
         deleted: payload,
         previous: state.list,
-        list: state.list.filter(task => task.key !== payload.key)
+        list: taskIndex < 0 ? state.list : state.list.delete(taskIndex)
       });
+    }
 
     case FILTER_TASKS:
       return state.set('filter', payload.filterType || '');
